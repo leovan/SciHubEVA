@@ -1,0 +1,27 @@
+{
+    "title": "Sci-Hub EVA",
+    "icon": "images/SciHubEVA.icns",
+    "icon-size": 100,
+    "background": "images/SciHubEVA-dmg-backgroud.png",
+    "format": "UDZO",
+    "window": {
+        "size": {
+            "width": 600,
+            "height": 400
+        }
+    },
+    "contents": [
+        {
+            "x": 100,
+            "y": 150,
+            "type": "file",
+            "path": "dist/SciHubEVA.app"
+        },
+        {
+            "x": 300,
+            "y": 150,
+            "type": "link",
+            "path": "/Applications"
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import json
+
+from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
+from PyQt5.QtQml import QQmlApplicationEngine
+
+class SciHubAddSciHubURL(QObject):
+    showWindowAddSciHubURL = pyqtSignal()
+
+    def __init__(self, conf, parent):
+        super(SciHubAddSciHubURL, self).__init__()
+
+        self._conf = conf
+        self._parent = parent
+
+        self._engine = QQmlApplicationEngine()
+        self._engine.load('qrc:/ui/SciHubEVAAddSciHubURL.qml')
+        self._window = self._engine.rootObjects()[0]
+        self._connect()
+
+    def _connect(self):
+        # Connect QML signals to PyQt slots
+        self._window.addSciHubURL.connect(self.addSciHubURL)
+
+        # Connect PyQt signals to QML slots
+        self.showWindowAddSciHubURL.connect(self._window.showWindowAddSciHubURL)
+
+    @pyqtSlot(str)
+    def addSciHubURL(self, url):
+        scihub_available_urls = json.loads(self._conf.get('network', 'scihub_available_urls'))
+
+        if not url in scihub_available_urls:
+            scihub_available_urls.append(url)
+
+        self._conf.set('network', 'scihub_available_urls', json.dumps(scihub_available_urls))
+        self._parent.loadFromConf()
+
+
+if __name__ == '__main__':
+    pass

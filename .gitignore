@@ -1,0 +1,23 @@
+# Idea
+.idea
+
+# VS Code
+.vscode
+
+# Qt
+build-*
+*.pro.user
+*.qm
+*.qmlc
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.hypothesis
+.pytest_cache
+
+# Others
+design
+build
+dist

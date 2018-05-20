@@ -18,6 +18,8 @@ __pycache__/
 .pytest_cache
 
 # Others
+*.spec
 design
 build
 dist
+

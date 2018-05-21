@@ -76,52 +76,52 @@
 <context>
     <name>SciHubEVA</name>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="124"/>
+        <location filename="../ui/SciHubEVA.qml" line="121"/>
         <source>Query: </source>
         <translation>搜索: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="131"/>
+        <location filename="../ui/SciHubEVA.qml" line="128"/>
         <source>Anything, let me guess!</source>
         <translation>随意，让我猜猜看！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="137"/>
+        <location filename="../ui/SciHubEVA.qml" line="134"/>
         <source>RAMPAGE</source>
         <translation>暴走</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="143"/>
+        <location filename="../ui/SciHubEVA.qml" line="140"/>
         <source>Please choose save to directory first!</source>
         <translation>请先选择保存路径！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="145"/>
+        <location filename="../ui/SciHubEVA.qml" line="142"/>
         <source>Please specify query!</source>
         <translation>请指定搜索内容！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="154"/>
+        <location filename="../ui/SciHubEVA.qml" line="151"/>
         <source>Save to: </source>
         <translation>保存至: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="167"/>
+        <location filename="../ui/SciHubEVA.qml" line="164"/>
         <source>Open ...</source>
         <translation>打开 ...</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="177"/>
+        <location filename="../ui/SciHubEVA.qml" line="174"/>
         <source>Logs: </source>
         <translation>日志: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="201"/>
+        <location filename="../ui/SciHubEVA.qml" line="198"/>
         <source>Welcome to Sci-Hub EVA</source>
         <translation>欢迎使用 Sci-Hub EVA</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="145"/>
+        <location filename="../ui/SciHubEVA.qml" line="142"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
@@ -255,7 +255,7 @@
     <message>
         <location filename="../ui/SciHubEVAPreferences.qml" line="208"/>
         <source>Primary SciHub URL: </source>
-        <translation>优先使用 SciHub 网址: </translation>
+        <translation>优先使用的 SciHub 网址: </translation>
     </message>
     <message>
         <location filename="../ui/SciHubEVAPreferences.qml" line="234"/>
@@ -276,6 +276,11 @@
         <location filename="../ui/SciHubEVAPreferences.qml" line="254"/>
         <source>Timeout: </source>
         <translation>超时: </translation>
+    </message>
+    <message>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="278"/>
+        <source>Retry Times: </source>
+        <translation>重试次数: </translation>
     </message>
     <message>
         <location filename="../ui/SciHubEVAPreferences.qml" line="298"/>

@@ -82,8 +82,8 @@
     </message>
     <message>
         <location filename="../ui/SciHubEVA.qml" line="128"/>
-        <source>Anything, let me guess!</source>
-        <translation>随意，让我猜猜看！</translation>
+        <source>URL / DOI / PMID</source>
+        <translation>URL / DOI / PMID</translation>
     </message>
     <message>
         <location filename="../ui/SciHubEVA.qml" line="134"/>

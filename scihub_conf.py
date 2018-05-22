@@ -5,7 +5,7 @@ import os
 from configparser import ConfigParser
 
 class SciHubConf(ConfigParser):
-    def __init__(self, conf_filename = None):
+    def __init__(self, conf_filename=None):
         super(SciHubConf, self).__init__()
 
         conf_filename_ = conf_filename if conf_filename else 'SciHubEVA.conf'

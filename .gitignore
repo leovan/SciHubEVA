@@ -16,10 +16,11 @@ __pycache__/
 *$py.class
 .hypothesis
 .pytest_cache
+scihub_resources.py
 
 # Others
 *.spec
 design
 build
 dist
-
+*.bak

@@ -1,4 +1,4 @@
-# OSX
+# macOS
 
 1. Create a python environment
 

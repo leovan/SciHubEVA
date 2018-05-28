@@ -107,7 +107,7 @@
 
 4. Building with `pyinstaller`
 
-   ```{bat}
+   ```{dos}
    pip install PyInstaller
    
    rd /s /Q build
@@ -140,3 +140,12 @@
    ```
 
    `SciHubEVA.exe` installer will be in the `dist`.
+
+6. x86 version
+
+   If you need a x86 version, please make sure you have a x86 version python environment, and modify the `SciHubEVA.nsi` accordingly.
+
+   ```{text}
+   OutFile "dist\SciHubEVA-x64.exe" -> OutFile "dist\SciHubEVA-x86.exe"
+   InstallDir "$PROGRAMFILES64\${PRODUCT_NAME}" -> InstallDir "$PROGRAMFILES\${PRODUCT_NAME}"
+   ```

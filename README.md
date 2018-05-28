@@ -1,6 +1,8 @@
 # Sci-Hub EVA <img src="images/SciHubEVA.png" align="right" alt="logo" width="100" height = "100" style = "border: none; float: right;">
 ![Issues](https://img.shields.io/codeclimate/issues/leovan/SciHubEVA.svg)
 ![Downloads](https://img.shields.io/github/downloads/leovan/SciHubEVA/total.svg)
+![Release](https://img.shields.io/github/release/leovan/SciHubEVA.svg)
+![License](https://img.shields.io/github/license/leovan/SciHubEVA.svg)
 
 ---
 

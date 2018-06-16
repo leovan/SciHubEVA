@@ -93,17 +93,18 @@ class SciHubAPI(QObject, threading.Thread):
 
         pdf_parser = PDFParser(pdf_file_stream)
         pdf_doc = PDFDocument(pdf_parser)
+        pdf_metadata = pdf_doc.info[0]
 
-        author = make_pdf_metadata_str(pdf_doc.info[0]['Author'])
+        author = make_pdf_metadata_str(pdf_metadata['Author'] if 'Author' in pdf_metadata else '')
         if author and author != '':
             metadata['author'] = author
 
-        title = make_pdf_metadata_str(pdf_doc.info[0]['Title'])
+        title = make_pdf_metadata_str(pdf_metadata['Title'] if 'Title' in pdf_metadata else '')
         if title and title != '':
             metadata['title'] = title
 
         year = pdf_metadata_moddate_to_year(
-            make_pdf_metadata_str(pdf_doc.info[0]['ModDate']))
+            make_pdf_metadata_str(pdf_metadata['ModDate'] if 'ModDate' in pdf_metadata else ''))
         if year and year != '':
             metadata['year'] = year
 
@@ -120,7 +121,7 @@ class SciHubAPI(QObject, threading.Thread):
         elif query.startswith('doi:') or re.match(self._doi_pattern, query):
             query_type = 'doi'
         else:
-            query_type = 'unknown'
+            query_type = 'string'
 
         log_formater = self.tr('Query type: ') + '{query_type}'
         self.log(log_formater.format(query_type=query_type.upper()), 'INFO')
@@ -130,10 +131,6 @@ class SciHubAPI(QObject, threading.Thread):
     def fetch(self, query):
         query_type = self.guess_query_type(query)
         data = {}
-
-        if query_type == 'unknown':
-            data['error'] = self.tr('Unknown query type')
-            return data
 
         current_scihub_url = self._conf.get('network', 'scihub_url')
         scihub_available_urls = json.loads(self._conf.get('network', 'scihub_available_urls'))
@@ -152,13 +149,13 @@ class SciHubAPI(QObject, threading.Thread):
             pdf_url = query
 
             if query_type != 'pdf':
-                pdf_query_url = 'http://{scihub_url}/{query}'.format(scihub_url=scihub_url, query=query)
+                pdf_query_url = 'http://{scihub_url}'.format(scihub_url=scihub_url)
 
                 try:
                     self.log(self.tr('Fetching PDF URL ...'), 'INFO')
 
-                    pdf_url_response = self._sess.get(
-                        pdf_query_url, verify=False,
+                    pdf_url_response = self._sess.post(
+                        pdf_query_url, data={'request': query}, verify=False,
                         timeout=self._conf.getfloat('network', 'timeout') / 1000.0)
 
                     html = etree.HTML(pdf_url_response.content)

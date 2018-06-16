@@ -27,6 +27,9 @@
    ```{bash}
    lupdate SciHubEVA.pro
    pylupdate5 SciHubEVA.pro
+   
+   # Update translations
+   
    lrelease SciHubEVA.pro
    ```
 
@@ -100,6 +103,9 @@
    ```{bash}
    lupdate SciHubEVA.pro
    pylupdate5 SciHubEVA.pro
+   
+   # Update translations
+   
    lrelease SciHubEVA.pro
    ```
 

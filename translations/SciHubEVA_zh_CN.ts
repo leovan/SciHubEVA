@@ -8,67 +8,62 @@
         <translation>搜索类型: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="135"/>
-        <source>Unknown query type</source>
-        <translation>未知的搜索类型</translation>
-    </message>
-    <message>
-        <location filename="../scihub_api.py" line="148"/>
+        <location filename="../scihub_api.py" line="144"/>
         <source>Using Sci-Hub URL: </source>
         <translation>使用 Sci-Hub URL: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="158"/>
+        <location filename="../scihub_api.py" line="154"/>
         <source>Fetching PDF URL ...</source>
         <translation>获取 PDF URL 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="171"/>
+        <location filename="../scihub_api.py" line="167"/>
         <source>Got PDF URL: </source>
         <translation>获取到 PDF URL: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="174"/>
+        <location filename="../scihub_api.py" line="170"/>
         <source>No valide iframe!</source>
         <translation>没有有效的 iframe！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="175"/>
+        <location filename="../scihub_api.py" line="171"/>
         <source>Failed to get PDF URL!</source>
         <translation>获取 PDF URL 失败！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="208"/>
+        <location filename="../scihub_api.py" line="204"/>
         <source>Failed to get PDF!</source>
         <translation>获取 PDF 失败！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="186"/>
+        <location filename="../scihub_api.py" line="182"/>
         <source>Fetching PDF ...</source>
         <translation>获取 PDF 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="203"/>
+        <location filename="../scihub_api.py" line="199"/>
         <source>Unknown Content-Type</source>
         <translation>未知的 Content-Type</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="217"/>
+        <location filename="../scihub_api.py" line="213"/>
         <source>Changing Sci-Hub URL ...</source>
         <translation>更换 Sci-Hub URL 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="223"/>
+        <location filename="../scihub_api.py" line="219"/>
         <source>Dealing with query: </source>
         <translation>正在处理搜索: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="236"/>
+        <location filename="../scihub_api.py" line="232"/>
         <source>Saved PDF as: </source>
         <translation>保存 PDF 为: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="215"/>
+        <location filename="../scihub_api.py" line="211"/>
         <source>Failed with all Sci-Hub URLs!</source>
         <translation>尝试所有 Sci-Hub URL 失败！</translation>
     </message>
@@ -82,8 +77,8 @@
     </message>
     <message>
         <location filename="../ui/SciHubEVA.qml" line="128"/>
-        <source>URL / DOI / PMID</source>
-        <translation>URL / DOI / PMID</translation>
+        <source>URL, PMID / DOI or search string</source>
+        <translation>URL, PMID / DOI 或标题</translation>
     </message>
     <message>
         <location filename="../ui/SciHubEVA.qml" line="134"/>

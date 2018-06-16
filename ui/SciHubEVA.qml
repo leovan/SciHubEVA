@@ -125,7 +125,7 @@ ApplicationWindow {
             TextField {
                 id: textFieldQuery
                 selectByMouse: true
-                placeholderText: qsTr("URL / DOI / PMID")
+                placeholderText: qsTr("URL, PMID / DOI or search string")
                 Layout.fillWidth: true
             }
 

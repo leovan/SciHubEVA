@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+	<id>SciHubEVA</id>
+	<metadata_license>CC-BY-SA-4.0</metadata_license>
+	<project_license>MIT</project_license>
+	<name>Sci-Hub EVA</name>
+	<summary>A Cross Platform Sci-Hub GUI Application</summary>
+	<description>
+		<p>A Cross Platform Sci-Hub GUI Application</p>
+	</description>
+	<launchable type="desktop-id">SciHubEVA.desktop</launchable>
+	<url type="homepage">https://github.com/leovan/SciHubEVA</url>
+	<screenshots>
+		<screenshot type="default">
+			<image>https://github.com/leovan/SciHubEVA/blob/master/docs/scihub-eva-application-linux-en.png</image>
+		</screenshot>
+	</screenshots>
+	<provides>
+		<id>SciHubEVA.desktop</id>
+	</provides>
+</component>

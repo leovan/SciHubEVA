@@ -3,67 +3,67 @@
 <context>
     <name>SciHubAPI</name>
     <message>
-        <location filename="../scihub_api.py" line="125"/>
+        <location filename="../scihub_api.py" line="126"/>
         <source>Query type: </source>
         <translation>搜索类型: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="144"/>
+        <location filename="../scihub_api.py" line="145"/>
         <source>Using Sci-Hub URL: </source>
         <translation>使用 Sci-Hub URL: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="154"/>
+        <location filename="../scihub_api.py" line="155"/>
         <source>Fetching PDF URL ...</source>
         <translation>获取 PDF URL 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="167"/>
+        <location filename="../scihub_api.py" line="168"/>
         <source>Got PDF URL: </source>
         <translation>获取到 PDF URL: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="170"/>
+        <location filename="../scihub_api.py" line="171"/>
         <source>No valide iframe!</source>
         <translation>没有有效的 iframe！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="171"/>
+        <location filename="../scihub_api.py" line="172"/>
         <source>Failed to get PDF URL!</source>
         <translation>获取 PDF URL 失败！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="204"/>
+        <location filename="../scihub_api.py" line="205"/>
         <source>Failed to get PDF!</source>
         <translation>获取 PDF 失败！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="182"/>
+        <location filename="../scihub_api.py" line="183"/>
         <source>Fetching PDF ...</source>
         <translation>获取 PDF 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="199"/>
+        <location filename="../scihub_api.py" line="200"/>
         <source>Unknown Content-Type</source>
         <translation>未知的 Content-Type</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="213"/>
+        <location filename="../scihub_api.py" line="214"/>
         <source>Changing Sci-Hub URL ...</source>
         <translation>更换 Sci-Hub URL 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="219"/>
+        <location filename="../scihub_api.py" line="220"/>
         <source>Dealing with query: </source>
         <translation>正在处理搜索: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="232"/>
+        <location filename="../scihub_api.py" line="233"/>
         <source>Saved PDF as: </source>
         <translation>保存 PDF 为: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="211"/>
+        <location filename="../scihub_api.py" line="212"/>
         <source>Failed with all Sci-Hub URLs!</source>
         <translation>尝试所有 Sci-Hub URL 失败！</translation>
     </message>
@@ -71,52 +71,52 @@
 <context>
     <name>SciHubEVA</name>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="121"/>
+        <location filename="../ui/SciHubEVA.qml" line="126"/>
         <source>Query: </source>
         <translation>搜索: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="128"/>
+        <location filename="../ui/SciHubEVA.qml" line="133"/>
         <source>URL, PMID / DOI or search string</source>
         <translation>URL, PMID / DOI 或标题</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="134"/>
+        <location filename="../ui/SciHubEVA.qml" line="139"/>
         <source>RAMPAGE</source>
         <translation>暴走</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="140"/>
+        <location filename="../ui/SciHubEVA.qml" line="145"/>
         <source>Please choose save to directory first!</source>
         <translation>请先选择保存路径！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="142"/>
+        <location filename="../ui/SciHubEVA.qml" line="147"/>
         <source>Please specify query!</source>
         <translation>请指定搜索内容！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="151"/>
+        <location filename="../ui/SciHubEVA.qml" line="165"/>
         <source>Save to: </source>
         <translation>保存至: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="164"/>
+        <location filename="../ui/SciHubEVA.qml" line="178"/>
         <source>Open ...</source>
         <translation>打开 ...</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="174"/>
+        <location filename="../ui/SciHubEVA.qml" line="197"/>
         <source>Logs: </source>
         <translation>日志: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="198"/>
+        <location filename="../ui/SciHubEVA.qml" line="221"/>
         <source>Welcome to Sci-Hub EVA</source>
         <translation>欢迎使用 Sci-Hub EVA</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="142"/>
+        <location filename="../ui/SciHubEVA.qml" line="147"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>

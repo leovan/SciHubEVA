@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=SciHubEVA
+Comment=A Cross Platform Sci-Hub GUI Application
+Comment[zh_CN]=一个跨平台的 Sci-Hub 界面化应用
+Exec=SciHubEVA
+Icon=SciHubEVA
+Terminal=false
+Type=Application
+Categories=Office;

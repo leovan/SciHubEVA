@@ -6,5 +6,6 @@
         <file>ui/SciHubEVAPreferences.qml</file>
         <file>ui/SciHubEVAAddSciHubURL.qml</file>
         <file>images/about.png</file>
+        <file>fonts/MaterialIcons-Regular.ttf</file>
     </qresource>
 </RCC>

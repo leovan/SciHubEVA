@@ -64,6 +64,11 @@ ApplicationWindow {
         textAreaLogs.append(log)
     }
 
+    FontLoader {
+        id: materialDesignIconFont
+        source: "qrc:/fonts/MaterialIcons-Regular.ttf"
+    }
+
     Ui.SciHubEVAMenuBar {
         id: menuBar
     }
@@ -114,7 +119,7 @@ ApplicationWindow {
             Layout.fillHeight: true
             Layout.fillWidth: true
             rows: 2
-            columns: 3
+            columns: 4
 
             Label {
                 id: labelQuery
@@ -146,6 +151,15 @@ ApplicationWindow {
                 }
             }
 
+            Button {
+                id: buttonAbout
+                font.family: materialDesignIconFont.name
+                font.pointSize: 16
+                text: "\ue88e"
+
+                onClicked: windowAbout.show()
+            }
+
             Label {
                 id: labelSaveTo
                 text: qsTr("Save to: ")
@@ -166,6 +180,15 @@ ApplicationWindow {
                 Layout.minimumWidth: 100
 
                 onClicked: folderDialogSaveTo.open()
+            }
+
+            Button {
+                id: buttonPreferences
+                font.family: materialDesignIconFont.name
+                font.pointSize: 16
+                text: "\ue8b8"
+
+                onClicked: applicationWindow.showWindowPreference()
             }
         }
 

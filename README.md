@@ -27,6 +27,15 @@ You may want to change some settings through the `Preferences` menu.
 
 See [`BUILDING.md`](BUILDING.md)
 
+## License
+
+[SciHubEVA](https://github.com/leovan/SciHubEVA): 
+The MIT License (MIT)
+
+[PyQt5](https://www.riverbankcomputing.com/news): GNU GPL
+
+[material-design-icons](https://github.com/google/material-design-icons): Apache License 2.0
+
 ---
 
 ## 简介
@@ -48,6 +57,15 @@ See [`BUILDING.md`](BUILDING.md)
 ## 构建
 
 见 [`BUILDING.md`](BUILDING.md)
+
+## 许可
+
+[SciHubEVA](https://github.com/leovan/SciHubEVA): 
+The MIT License (MIT)
+
+[PyQt5](https://www.riverbankcomputing.com/news): GNU GPL
+
+[material-design-icons](https://github.com/google/material-design-icons): Apache License 2.0
 
 ---
 

@@ -48,6 +48,7 @@
    pyrcc5 SciHubEVA.qrc -o scihub_resources.py
    
    pyinstaller -w scihub_eva.py \
+     --hidden-import "PyQt5.sip" \
      --hidden-import "PyQt5.Qt" \
      --hidden-import "PyQt5.QtQuick" \
      --add-data "LICENSE:." \
@@ -55,7 +56,8 @@
      --add-data "images/SciHubEVA.png:images" \
      --add-data "translations/SciHubEVA_zh_CN.qm:translations" \
      --name "SciHubEVA" \
-     --icon "images/SciHubEVA.icns"
+     --icon "images/SciHubEVA.icns" \
+     --noupx
    
    cp Info.plist dist/SciHubEVA.app/Contents
    ```
@@ -124,6 +126,7 @@
    pyrcc5 SciHubEVA.qrc -o scihub_resources.py
    
    pyinstaller -w scihub_eva.py ^
+     --hidden-import "PyQt5.sip" ^
      --hidden-import "PyQt5.Qt" ^
      --hidden-import "PyQt5.QtQuick" ^
      --add-data "LICENSE;." ^
@@ -132,7 +135,8 @@
      --add-data "translations/SciHubEVA_zh_CN.qm;translations" ^
      --name "SciHubEVA" ^
      --icon "images/SciHubEVA.ico" ^
-     --version-file "SciHubEVA.win.version"
+     --version-file "SciHubEVA.win.version" ^
+     --noupx
    ```
 
    All compiled files will be in `dist\SciHubEVA`.
@@ -212,13 +216,15 @@
    pyrcc5 SciHubEVA.qrc -o scihub_resources.py
    
    pyinstaller -w scihub_eva.py \
+     --hidden-import "PyQt5.sip" \
      --hidden-import "PyQt5.Qt" \
      --hidden-import "PyQt5.QtQuick" \
      --add-data "LICENSE:." \
      --add-data "SciHubEVA.conf:." \
      --add-data "images/SciHubEVA.png:images" \
      --add-data "translations/SciHubEVA_zh_CN.qm:translations" \
-     --name "SciHubEVA"
+     --name "SciHubEVA" \
+     --noupx
    ```
 
    All compiled files will be in `dist\SciHubEVA`.

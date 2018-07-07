@@ -11,17 +11,15 @@ from PyQt5.QtQml import QQmlApplicationEngine
 
 from scihub_conf import SciHubConf
 from scihub_preferences import SciHubPreferences
-from scihub_api import SciHubAPI
+from scihub_captcha import SciHubCaptcha
+from scihub_api import SciHubAPI, SciHubRampageType, SciHubError
+import scihub_resources
 
 if hasattr(Qt, 'AA_EnableHighDpiScaling'):
     QGuiApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
 if hasattr(Qt, 'AA_UseHighDpiPixmaps'):
     QGuiApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
 
-try:
-    import scihub_resources
-except:
-    pass
 
 class SciHubEVA(QObject):
     beforeRampage = pyqtSignal()
@@ -44,6 +42,8 @@ class SciHubEVA(QObject):
         self._connect()
 
         self._scihub_preferences = SciHubPreferences(self._conf)
+        self._scihub_captcha = SciHubCaptcha(self, log=self.log)
+        self._captcha_query = None
 
         save_to_dir = self._conf.get('common', 'save_to_dir')
         if not save_to_dir or save_to_dir.strip() == '':
@@ -83,24 +83,68 @@ class SciHubEVA(QObject):
         self._scihub_preferences.showWindowPreferences.emit()
 
     @pyqtSlot(str)
-    def rampage(self, query):
-        scihub_api = SciHubAPI(query, callback=self._afterRampage, conf=self._conf, log=self._log)
-        self._beforeRampage()
+    def rampage(self, input_query):
+        """Download PDF with query of input
+
+        Args:
+            input_query: Query of input
+
+        """
+
+        scihub_api = SciHubAPI(input_query, callback=self.rampage_callback,
+                               rampage_type=SciHubRampageType.INPUT,
+                               conf=self._conf, log=self.log)
+        self.beforeRampage.emit()
         scihub_api.start()
 
-    def _beforeRampage(self):
+    def rampageWithCaptchar(self, captcha_answer):
+        """ Download PDF with captcha query (self._captcha_query) and captcha answer
+
+        Args:
+            captcha_answer: Captcha answer
+
+        """
+
+        scihub_api = SciHubAPI(self._captcha_query, callback=self.rampage_callback,
+                               rampage_type=SciHubRampageType.PDF_CAPTCHA_RESPONSE,
+                               conf=self._conf, log=self.log, captcha_answer=captcha_answer)
+
         self.beforeRampage.emit()
+        scihub_api.start()
 
-    def _afterRampage(self):
-        self.afterRampage.emit()
+    def rampage_callback(self, res, err):
+        """Callback function
 
-    def _log(self, message, type = None):
-        if type:
-            log_formater = '[{type}] - {message}'
+        Args:
+            res: Result from last round rampage
+            err: Error
+
+        """
+
+        if err == SciHubError.BLOCKED_BY_CAPTCHA:
+            self.captcha_callback(res)
+        else:
+            self.afterRampage.emit()
+
+    def captcha_callback(self, pdf_captcha_response):
+        """Callback function for PDF captcha response
+
+        Args:
+            pdf_captcha_response: PDF captcha response
+
+        """
+
+        self._captcha_query = pdf_captcha_response
+        _, captcha_img_url = SciHubAPI.get_captcha_info(pdf_captcha_response)
+        self._scihub_captcha.showWindowCaptcha.emit(captcha_img_url)
+
+    def log(self, message, level=None):
+        if level:
+            log_formater = '[{level}] - {message}'
         else:
             log_formater = '{message}'
 
-        self.appendLogs.emit(log_formater.format(type=type, message=message))
+        self.appendLogs.emit(log_formater.format(level=level, message=message))
 
 
 if __name__ == '__main__':

@@ -3,69 +3,82 @@
 <context>
     <name>SciHubAPI</name>
     <message>
-        <location filename="../scihub_api.py" line="126"/>
+        <location filename="../scihub_api.py" line="182"/>
         <source>Query type: </source>
         <translation>搜索类型: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="145"/>
+        <location filename="../scihub_api.py" line="287"/>
         <source>Using Sci-Hub URL: </source>
         <translation>使用 Sci-Hub URL: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="155"/>
+        <location filename="../scihub_api.py" line="298"/>
         <source>Fetching PDF URL ...</source>
         <translation>获取 PDF URL 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="168"/>
+        <location filename="../scihub_api.py" line="309"/>
         <source>Got PDF URL: </source>
         <translation>获取到 PDF URL: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="171"/>
+        <location filename="../scihub_api.py" line="314"/>
         <source>No valide iframe!</source>
         <translation>没有有效的 iframe！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="172"/>
+        <location filename="../scihub_api.py" line="313"/>
         <source>Failed to get PDF URL!</source>
         <translation>获取 PDF URL 失败！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="205"/>
+        <location filename="../scihub_api.py" line="317"/>
         <source>Failed to get PDF!</source>
         <translation>获取 PDF 失败！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="183"/>
+        <location filename="../scihub_api.py" line="255"/>
         <source>Fetching PDF ...</source>
         <translation>获取 PDF 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="200"/>
-        <source>Unknown Content-Type</source>
-        <translation>未知的 Content-Type</translation>
-    </message>
-    <message>
-        <location filename="../scihub_api.py" line="214"/>
-        <source>Changing Sci-Hub URL ...</source>
-        <translation>更换 Sci-Hub URL 中 ...</translation>
-    </message>
-    <message>
-        <location filename="../scihub_api.py" line="220"/>
+        <location filename="../scihub_api.py" line="358"/>
         <source>Dealing with query: </source>
         <translation>正在处理搜索: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="233"/>
+        <location filename="../scihub_api.py" line="339"/>
         <source>Saved PDF as: </source>
         <translation>保存 PDF 为: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="212"/>
-        <source>Failed with all Sci-Hub URLs!</source>
-        <translation>尝试所有 Sci-Hub URL 失败！</translation>
+        <location filename="../scihub_api.py" line="266"/>
+        <source>Angel [CAPTCHA] is coming!</source>
+        <translation>使徒 [CAPTCHA] 来袭！</translation>
+    </message>
+    <message>
+        <location filename="../scihub_api.py" line="270"/>
+        <source>Unknown PDF Content-Type!</source>
+        <translation>未知的 PDF 数据类型！</translation>
+    </message>
+    <message>
+        <location filename="../scihub_api.py" line="383"/>
+        <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
+        <translation>验证码错误，使徒 [CAPTCHA] 消灭失败！</translation>
+    </message>
+    <message>
+        <location filename="../scihub_api.py" line="236"/>
+        <source>Angel [CAPTCHA] down!</source>
+        <translation>使徒 [CAPTCHA] 已消灭！</translation>
+    </message>
+</context>
+<context>
+    <name>SciHubCaptcha</name>
+    <message>
+        <location filename="../scihub_captcha.py" line="34"/>
+        <source>Battle canceled, rampage again?</source>
+        <translation>战斗取消，再次暴走？</translation>
     </message>
 </context>
 <context>
@@ -111,7 +124,7 @@
         <translation>日志: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="221"/>
+        <location filename="../ui/SciHubEVA.qml" line="223"/>
         <source>Welcome to Sci-Hub EVA</source>
         <translation>欢迎使用 Sci-Hub EVA</translation>
     </message>
@@ -188,6 +201,29 @@
     </message>
 </context>
 <context>
+    <name>SciHubEVACaptcha</name>
+    <message>
+        <location filename="../ui/SciHubEVACaptcha.qml" line="8"/>
+        <source>Captcha</source>
+        <translation>验证码</translation>
+    </message>
+    <message>
+        <location filename="../ui/SciHubEVACaptcha.qml" line="41"/>
+        <source>Enter captcha: </source>
+        <translation>请输入验证码: </translation>
+    </message>
+    <message>
+        <location filename="../ui/SciHubEVACaptcha.qml" line="52"/>
+        <source>Confirm</source>
+        <translation>确定</translation>
+    </message>
+    <message>
+        <location filename="../ui/SciHubEVACaptcha.qml" line="62"/>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+</context>
+<context>
     <name>SciHubEVAMenuBar</name>
     <message>
         <location filename="../ui/SciHubEVAMenuBar.qml" line="7"/>
@@ -249,8 +285,8 @@
     </message>
     <message>
         <location filename="../ui/SciHubEVAPreferences.qml" line="208"/>
-        <source>Primary SciHub URL: </source>
-        <translation>优先使用的 SciHub 网址: </translation>
+        <source>SciHub URL: </source>
+        <translation>SciHub URL: </translation>
     </message>
     <message>
         <location filename="../ui/SciHubEVAPreferences.qml" line="234"/>

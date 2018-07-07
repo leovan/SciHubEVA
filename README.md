@@ -23,6 +23,12 @@ You may want to change some settings through the `Preferences` menu.
 
 ![Preferences_MACOS_EN](docs/scihub-eva-preferences-macos-en.png)
 
+Due to the unstable Sci-Hub host accessibility, it may file to download PDFs. You can change or add Sci-Hub URL in preferences.
+
+Sometimes, you need enter the captcha to continue the download.
+
+![Captcha_MACOS_EN](docs/scihub-eva-captcha-macos-en.png)
+
 ## Building
 
 See [`BUILDING.md`](BUILDING.md)
@@ -46,13 +52,19 @@ The MIT License (MIT)
 
 启动程序后，按 `打开 ...` 选择文件的保存路径。填入搜索内容后，按 `暴走` 开始搜索并下载。
 
-![Application_MACOS_CN](docs/scihub-eva-application-macos-zh.png)
+![Application_MACOS_ZH](docs/scihub-eva-application-macos-zh.png)
 
 目前，支持的搜索类型有 `URL`，`DOI` / `PMID` 和标题搜索。
 
-通过 `Preferences` 菜单可以修改程序的相关配置。
+通过 `配置` 菜单可以修改程序的相关配置。
 
-![Preferences_MACOS_CN](docs/scihub-eva-preferences-macos-zh.png)
+![Preferences_MACOS_ZH](docs/scihub-eva-preferences-macos-zh.png)
+
+由于 Sci-Hub 服务的不稳定性，下载可能失败。你可以在 `配置` 中修改或添加 Sci-Hub 网址。
+
+有时，你需要输入验证码方可继续下载。
+
+![Captcha_MACOS_ZH](docs/scihub-eva-captcha-macos-zh.png)
 
 ## 构建
 

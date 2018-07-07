@@ -7,5 +7,6 @@
         <file>ui/SciHubEVAAddSciHubURL.qml</file>
         <file>images/about.png</file>
         <file>fonts/MaterialIcons-Regular.ttf</file>
+        <file>ui/SciHubEVACaptcha.qml</file>
     </qresource>
 </RCC>

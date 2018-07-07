@@ -14,8 +14,8 @@ class SciHubPreferences(QObject):
 
     setFilenamePrefixFormat = pyqtSignal(str)
 
-    setNetworkPrimarySciHubURLModel = pyqtSignal(list)
-    setNetworkPrimarySciHubURLCurrentIndex = pyqtSignal(int)
+    setNetworkSciHubURLModel = pyqtSignal(list)
+    setNetworkSciHubURLCurrentIndex = pyqtSignal(int)
     setNetworkTimeout = pyqtSignal(int)
     setNetworkRetryTimes = pyqtSignal(int)
 
@@ -47,7 +47,7 @@ class SciHubPreferences(QObject):
 
         self._window.saveFilenamePrefixFormat.connect(self.saveFilenamePrefixFormat)
 
-        self._window.saveNetworkPrimarySciHubURLCurrentIndex.connect(self.saveNetworkPrimarySciHubURLCurrentIndex)
+        self._window.saveNetworkSciHubURLCurrentIndex.connect(self.saveNetworkSciHubURLCurrentIndex)
         self._window.saveNetworkTimeout.connect(self.saveNetworkTimeout)
         self._window.saveNetworkRetryTimes.connect(self.saveNetworkRetryTimes)
 
@@ -63,8 +63,8 @@ class SciHubPreferences(QObject):
         
         self.setFilenamePrefixFormat.connect(self._window.setFilenamePrefixFormat)
 
-        self.setNetworkPrimarySciHubURLModel.connect(self._window.setNetworkPrimarySciHubURLModel)
-        self.setNetworkPrimarySciHubURLCurrentIndex.connect(self._window.setNetworkPrimarySciHubURLCurrentIndex)
+        self.setNetworkSciHubURLModel.connect(self._window.setNetworkSciHubURLModel)
+        self.setNetworkSciHubURLCurrentIndex.connect(self._window.setNetworkSciHubURLCurrentIndex)
         self.setNetworkTimeout.connect(self._window.setNetworkTimeout)
         self.setNetworkRetryTimes.connect(self._window.setNetworkRetryTimes)
 
@@ -79,9 +79,9 @@ class SciHubPreferences(QObject):
         self.setFilenamePrefixFormat.emit(self._conf.get('common', 'filename_prefix_format'))
 
         scihub_available_urls = json.loads(self._conf.get('network', 'scihub_available_urls'))
-        self.setNetworkPrimarySciHubURLModel.emit(scihub_available_urls)
+        self.setNetworkSciHubURLModel.emit(scihub_available_urls)
         scihub_url = self._conf.get('network', 'scihub_url')
-        self.setNetworkPrimarySciHubURLCurrentIndex.emit(scihub_available_urls.index(scihub_url))
+        self.setNetworkSciHubURLCurrentIndex.emit(scihub_available_urls.index(scihub_url))
         self.setNetworkTimeout.emit(self._conf.getint('network', 'timeout'))
         self.setNetworkRetryTimes.emit(self._conf.getint('network', 'retry_times'))
 
@@ -97,22 +97,22 @@ class SciHubPreferences(QObject):
         self._scihub_add_scihub_url.showWindowAddSciHubURL.emit()
 
     @pyqtSlot(int)
-    def removeSciHubURL(self, network_primary_scihub_url_current_index):
+    def removeSciHubURL(self, network__scihub_url_current_index):
         scihub_available_urls = json.loads(self._conf.get('network', 'scihub_available_urls'))
-        del scihub_available_urls[network_primary_scihub_url_current_index]
+        del scihub_available_urls[network__scihub_url_current_index]
 
         self._conf.set('network', 'scihub_available_urls', json.dumps(scihub_available_urls))
         self._conf.set('network', 'scihub_url', scihub_available_urls[0])
-        self.setNetworkPrimarySciHubURLCurrentIndex.emit(0)
+        self.setNetworkSciHubURLCurrentIndex.emit(0)
 
     @pyqtSlot(str)
     def saveFilenamePrefixFormat(self, filename_prefix_format):
         self._conf.set('common', 'filename_prefix_format', filename_prefix_format)
 
     @pyqtSlot(int)
-    def saveNetworkPrimarySciHubURLCurrentIndex(self, primary_scihub_url_current_index):
+    def saveNetworkSciHubURLCurrentIndex(self, _scihub_url_current_index):
         scihub_available_urls = json.loads(self._conf.get('network', 'scihub_available_urls'))
-        self._conf.set('network', 'scihub_url', scihub_available_urls[primary_scihub_url_current_index])
+        self._conf.set('network', 'scihub_url', scihub_available_urls[_scihub_url_current_index])
 
     @pyqtSlot(int)
     def saveNetworkTimeout(self, timeout):

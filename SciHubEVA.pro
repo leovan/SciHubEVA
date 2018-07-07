@@ -16,6 +16,8 @@ SOURCES += \
     ui/SciHubEVAMenuBar.qml \
     ui/SciHubEVAPreferences.qml \
     ui/SciHubEVAAddSciHubURL.qml \
+    ui/SciHubEVACaptcha.qml \
+    scihub_captcha.py \
     scihub_api.py
 }
 

@@ -18,11 +18,11 @@ Window {
     minimumHeight: columnLayoutPreferences.Layout.minimumHeight + 2 * margin
 
     signal showWindowAddSciHubURL()
-    signal removeSciHubURL(int networkPrimarySciHubURLCurrentIndex)
+    signal removeSciHubURL(int networkSciHubURLCurrentIndex)
 
     signal saveFilenamePrefixFormat(string filenamePrefixFormat)
 
-    signal saveNetworkPrimarySciHubURLCurrentIndex(int networkPrimarySciHubURLCurrentIndex)
+    signal saveNetworkSciHubURLCurrentIndex(int networkSciHubURLCurrentIndex)
     signal saveNetworkTimeout(int networkTimeout)
     signal saveNetworkRetryTimes(int networkRetryTimes)
 
@@ -40,7 +40,7 @@ Window {
     function saveAllPreference() {
         saveFilenamePrefixFormat(textFieldPreferencesFilenamePrefixFormat.text.trim())
 
-        saveNetworkPrimarySciHubURLCurrentIndex(comboBoxPreferencesNetworkPrimarySciHubURL.currentIndex)
+        saveNetworkSciHubURLCurrentIndex(comboBoxPreferencesNetworkSciHubURL.currentIndex)
         saveNetworkTimeout(textFieldPreferencesNetworkTimeout.text)
 
         saveProxyEnabled(checkBoxPreferencesProxyEnabled.checked)
@@ -63,12 +63,12 @@ Window {
         textFieldPreferencesFilenamePrefixFormat.text = filenameFormat
     }
 
-    function setNetworkPrimarySciHubURLModel(model) {
-        comboBoxPreferencesNetworkPrimarySciHubURL.model = model
+    function setNetworkSciHubURLModel(model) {
+        comboBoxPreferencesNetworkSciHubURL.model = model
     }
 
-    function setNetworkPrimarySciHubURLCurrentIndex(currentIndex) {
-        comboBoxPreferencesNetworkPrimarySciHubURL.currentIndex = currentIndex
+    function setNetworkSciHubURLCurrentIndex(currentIndex) {
+        comboBoxPreferencesNetworkSciHubURL.currentIndex = currentIndex
     }
 
     function setNetworkTimeout(networkTimeout) {
@@ -143,7 +143,7 @@ Window {
         standardButtons: StandardButton.Yes | StandardButton.No
 
         onYes: {
-            removeSciHubURL(comboBoxPreferencesNetworkPrimarySciHubURL.currentIndex)
+            removeSciHubURL(comboBoxPreferencesNetworkSciHubURL.currentIndex)
         }
     }
 
@@ -200,22 +200,22 @@ Window {
                 anchors.fill: parent
 
                 RowLayout {
-                    id: rowLayoutPreferencesNetworkPrimarySciHubURL
+                    id: rowLayoutPreferencesNetworkSciHubURL
                     Layout.fillWidth: true
 
                     Label {
-                        id: labelPreferencesNetworkPrimarySciHubURL
-                        text: qsTr("Primary SciHub URL: ")
+                        id: labelPreferencesNetworkSciHubURL
+                        text: qsTr("SciHub URL: ")
                     }
 
                     ComboBox {
-                        id: comboBoxPreferencesNetworkPrimarySciHubURL
+                        id: comboBoxPreferencesNetworkSciHubURL
                         Layout.minimumWidth: 200
                         Layout.fillWidth: true
                     }
 
                     RoundButton {
-                        id: roundButtonPreferencesNetworkPrimarySciHubURLAdd
+                        id: roundButtonPreferencesNetworkSciHubURLAdd
                         text: "+"
 
                         onClicked: {
@@ -224,19 +224,19 @@ Window {
                     }
 
                     RoundButton {
-                        id: roundButtonPreferencesNetworkPrimarySciHubURLRemove
+                        id: roundButtonPreferencesNetworkSciHubURLRemove
                         text: "-"
 
                         onClicked: {
                             var text = ""
 
-                            if (comboBoxPreferencesNetworkPrimarySciHubURL.count <= 1) {
+                            if (comboBoxPreferencesNetworkSciHubURL.count <= 1) {
                                 text = qsTr("Cannot remove the last Sci-Hub URL!")
                                 var title = qsTr("Error")
                                 showErrorMessage(title, text)
                             } else {
                                 text = qsTr("Delete Sci-Hub URL: ") +
-                                        comboBoxPreferencesNetworkPrimarySciHubURL.currentText + " ?"
+                                        comboBoxPreferencesNetworkSciHubURL.currentText + " ?"
                                 messageDialogPreferencesWindowRemoveSciHubURL.setText(text)
 
                                 messageDialogPreferencesWindowRemoveSciHubURL.open()

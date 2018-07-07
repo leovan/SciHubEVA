@@ -203,6 +203,8 @@ ApplicationWindow {
             Flickable {
                 id: flickableLogs
                 anchors.fill: parent
+                flickableDirection: Flickable.VerticalFlick
+
                 Layout.minimumWidth: 600
                 Layout.maximumWidth: 600
                 Layout.preferredWidth: 600

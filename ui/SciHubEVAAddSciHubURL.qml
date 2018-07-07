@@ -86,7 +86,7 @@ Window {
             }
 
             Button {
-                id: buttonAddSciHubURLCancle
+                id: buttonAddSciHubURLCancel
                 text: qsTr("Cancel")
 
                 onClicked: close()

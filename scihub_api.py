@@ -355,6 +355,8 @@ class SciHubAPI(QObject, threading.Thread):
         """
 
         if rampage_type == SciHubRampageType.INPUT:
+            # Query is user input
+
             log_formater = self.tr('Dealing with query: ') + '{query}'
             self.log('\n')
             self.log(log_formater.format(query=query), 'INFO')
@@ -375,7 +377,7 @@ class SciHubAPI(QObject, threading.Thread):
             filename = urlparse(pdf_url).path[1:].split('/')[-1]
             self.save_pdf(pdf, filename)
         elif rampage_type == SciHubRampageType.PDF_CAPTCHA_RESPONSE:
-            # Query is
+            # Query is PDF captcha response (with answer)
 
             # Fetch PDF with Captcha
             pdf, err = self.fetch_pdf_with_captcha(query)

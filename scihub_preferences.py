@@ -8,6 +8,7 @@ from PyQt5.QtQml import QQmlApplicationEngine
 
 from scihub_add_scihub_url import SciHubAddSciHubURL
 
+
 class SciHubPreferences(QObject):
     showWindowPreferences = pyqtSignal()
 
@@ -143,7 +144,3 @@ class SciHubPreferences(QObject):
     @pyqtSlot(str)
     def saveProxyPassword(self, password):
         self._conf.set('proxy', 'password', password)
-
-
-if __name__ == '__main__':
-    pass

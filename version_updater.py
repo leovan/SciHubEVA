@@ -57,6 +57,7 @@ VERSION_REPLACE_FORMATER = [
     '"FileVersion" "{major}.{minor}.{patch}.{build}"'
 ]
 
+
 def version_checker(version):
     if re.match(VERSION_PATTERN, version):
         version_ = version.split('.')
@@ -66,9 +67,10 @@ def version_checker(version):
             'patch': version_[2],
             'build': version_[3]
         }
-        return (version_dict, True)
+        return version_dict, True
     else:
-        return (None, False)
+        return None, False
+
 
 def replace_version(text, version):
     for replace_pattern, replace_formater in \
@@ -80,6 +82,7 @@ def replace_version(text, version):
             return re.sub(replace_pattern, replace_str, text)
 
     return text
+
 
 def update_version(version):
     for file, encoding in zip(VERSION_FILES, VERSION_FILES_ENCODING):
@@ -95,6 +98,7 @@ def update_version(version):
                 if newline != line:
                     print('{file}: \n{line} => \n{newline}'.format(
                         file=file, line=line, newline=newline))
+
 
 if __name__ == '__main__':
     args = docopt(__doc__)

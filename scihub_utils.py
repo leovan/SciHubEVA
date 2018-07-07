@@ -3,6 +3,7 @@
 
 from pdfminer.psparser import PSLiteral, PSKeyword
 
+
 def make_pdf_metadata_str(value):
     if isinstance(value, bytes):
         metadata_str = value.decode('utf-8')
@@ -15,6 +16,7 @@ def make_pdf_metadata_str(value):
 
     return metadata_str
 
+
 def pdf_metadata_moddate_to_year(moddate: str):
     if moddate.startswith('D:'):
         year = moddate[2:6]
@@ -22,6 +24,3 @@ def pdf_metadata_moddate_to_year(moddate: str):
         year = moddate[:4]
 
     return year
-
-if __name__ == '__main__':
-    pass

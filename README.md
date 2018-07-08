@@ -62,7 +62,7 @@ The MIT License (MIT)
 
 由于 Sci-Hub 服务的不稳定性，下载可能失败。你可以在 `配置` 中修改或添加 Sci-Hub 网址。
 
-有时，你需要输入验证码方可继续下载。
+有时，你需要输入验证码方可继续下载。
 
 ![Captcha_MACOS_ZH](docs/scihub-eva-captcha-macos-zh.png)
 

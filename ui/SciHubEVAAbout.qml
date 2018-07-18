@@ -59,6 +59,7 @@ Window {
             Button {
                 id: aboutOKButton
                 text: qsTr("OK")
+                isDefault: true
 
                 onClicked: close()
             }

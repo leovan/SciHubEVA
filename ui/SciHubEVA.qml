@@ -139,6 +139,7 @@ ApplicationWindow {
                 text: qsTr("RAMPAGE")
                 font.bold: false
                 Layout.minimumWidth: 100
+                isDefault: true
 
                 onClicked: {
                     if (textFieldSaveToDir.text.trim() === '') {

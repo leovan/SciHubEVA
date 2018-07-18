@@ -392,6 +392,7 @@ Window {
             Button {
                 id: buttonPreferencesConfirm
                 text: qsTr("Confirm")
+                isDefault: true
 
                 onClicked: saveAllPreference()
             }

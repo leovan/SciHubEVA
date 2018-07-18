@@ -74,6 +74,7 @@ Window {
             Button {
                 id: buttonAddSciHubURLConfirm
                 text: qsTr("Confirm")
+                isDefault: true
 
                 onClicked: {
                     if (textFieldAddSciHubURL.text.trim() === '') {

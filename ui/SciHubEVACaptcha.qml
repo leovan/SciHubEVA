@@ -50,6 +50,7 @@ Window {
             Button {
                 id: buttonCaptchaConfirm
                 text: qsTr("Confirm")
+                isDefault: true
 
                 onClicked: {
                     close()

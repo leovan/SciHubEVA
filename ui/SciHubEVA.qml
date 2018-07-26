@@ -1,9 +1,9 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.3
-import QtQuick.Dialogs 1.2
-import QtQuick.Controls 2.3
+import QtQuick 2.11
+import QtQuick.Layouts 1.4
+import QtQuick.Dialogs 1.3
+import QtQuick.Controls 2.4
 import QtQuick.Controls.Styles 1.4
-import QtQuick.Controls.Material 2.3
+import QtQuick.Controls.Material 2.4
 
 import Qt.labs.settings 1.0
 import Qt.labs.platform 1.0 as Plotform
@@ -139,7 +139,6 @@ ApplicationWindow {
                 text: qsTr("RAMPAGE")
                 font.bold: false
                 Layout.minimumWidth: 100
-                isDefault: true
 
                 onClicked: {
                     if (textFieldSaveToDir.text.trim() === '') {

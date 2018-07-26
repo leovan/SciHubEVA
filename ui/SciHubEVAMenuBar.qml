@@ -1,4 +1,4 @@
-import QtQuick 2.9
+import QtQuick 2.11
 import Qt.labs.platform 1.0 as Platform
 
 Platform.MenuBar {

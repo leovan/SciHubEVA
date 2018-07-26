@@ -1,8 +1,8 @@
-import QtQuick 2.9
-import QtQuick.Layouts 1.3
-import QtQuick.Dialogs 1.2
-import QtQuick.Controls 2.3
-import QtQuick.Window 2.3
+import QtQuick 2.11
+import QtQuick.Layouts 1.4
+import QtQuick.Dialogs 1.3
+import QtQuick.Controls 2.4
+import QtQuick.Window 2.4
 
 Window {
     title: qsTr("Add Sci-Hub URL")
@@ -74,7 +74,6 @@ Window {
             Button {
                 id: buttonAddSciHubURLConfirm
                 text: qsTr("Confirm")
-                isDefault: true
 
                 onClicked: {
                     if (textFieldAddSciHubURL.text.trim() === '') {

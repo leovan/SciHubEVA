@@ -5,6 +5,5 @@ pdfminer.six==20170720
 pycryptodome==3.6.1
 PyQt5==5.11.2
 requests==2.18.4
-sip==4.19.8
 six==1.11.0
 urllib3==1.22

@@ -44,7 +44,7 @@ VERSION_REPLACE_PATTERN = [
     r'"FileVersion" "\d+.\s*\d+.\s*\d+.\s*\d+"'
 ]
 
-VERSION_REPLACE_FORMATER = [
+VERSION_REPLACE_FORMATTER = [
     '<string>{major}.{minor}.{patch}</string>',
     'filevers=({major}, {minor}, {patch}, {build})',
     'prodvers=({major}, {minor}, {patch}, {build})',
@@ -73,10 +73,10 @@ def version_checker(version):
 
 
 def replace_version(text, version):
-    for replace_pattern, replace_formater in \
-            zip(VERSION_REPLACE_PATTERN, VERSION_REPLACE_FORMATER):
+    for replace_pattern, replace_formatter in \
+            zip(VERSION_REPLACE_PATTERN, VERSION_REPLACE_FORMATTER):
         match_str = re.search(replace_pattern, text)
-        replace_str = replace_formater.format(**version)
+        replace_str = replace_formatter.format(**version)
 
         if match_str:
             return re.sub(replace_pattern, replace_str, text)

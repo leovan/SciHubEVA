@@ -140,11 +140,11 @@ class SciHubEVA(QObject):
 
     def log(self, message, level=None):
         if level:
-            log_formater = '[{level}] - {message}'
+            log_formatter = '[{level}] - {message}'
         else:
-            log_formater = '{message}'
+            log_formatter = '{message}'
 
-        self.appendLogs.emit(log_formater.format(level=level, message=message))
+        self.appendLogs.emit(log_formatter.format(level=level, message=message))
 
 
 if __name__ == '__main__':

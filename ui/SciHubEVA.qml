@@ -6,7 +6,7 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls.Material 2.4
 
 import Qt.labs.settings 1.0
-import Qt.labs.platform 1.0 as Plotform
+import Qt.labs.platform 1.0 as Platform
 
 import "." as Ui
 
@@ -81,9 +81,9 @@ ApplicationWindow {
         id: windowAbout
     }
 
-    Plotform.FolderDialog {
+    Platform.FolderDialog {
         id: folderDialogSaveTo
-        options: Plotform.FolderDialog.ShowDirsOnly
+        options: Platform.FolderDialog.ShowDirsOnly
 
         onAccepted: {
             var folderURI = folderDialogSaveTo.folder.toString()
@@ -229,6 +229,7 @@ ApplicationWindow {
                     selectByMouse: true
 
                     onTextChanged: flickableLogs.scrollToBottom()
+                    onLinkActivated: Qt.openUrlExternally(link)
                 }
             }
         }

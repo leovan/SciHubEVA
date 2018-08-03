@@ -3,74 +3,89 @@
 <context>
     <name>SciHubAPI</name>
     <message>
-        <location filename="../scihub_api.py" line="182"/>
+        <location filename="../scihub_api.py" line="181"/>
         <source>Query type: </source>
         <translation>搜索类型: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="287"/>
+        <location filename="../scihub_api.py" line="285"/>
         <source>Using Sci-Hub URL: </source>
         <translation>使用 Sci-Hub URL: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="298"/>
+        <location filename="../scihub_api.py" line="295"/>
         <source>Fetching PDF URL ...</source>
         <translation>获取 PDF URL 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="309"/>
+        <location filename="../scihub_api.py" line="308"/>
         <source>Got PDF URL: </source>
         <translation>获取到 PDF URL: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="314"/>
-        <source>No valide iframe!</source>
-        <translation>没有有效的 iframe！</translation>
-    </message>
-    <message>
-        <location filename="../scihub_api.py" line="313"/>
+        <location filename="../scihub_api.py" line="316"/>
         <source>Failed to get PDF URL!</source>
         <translation>获取 PDF URL 失败！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="317"/>
+        <location filename="../scihub_api.py" line="324"/>
         <source>Failed to get PDF!</source>
         <translation>获取 PDF 失败！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="255"/>
+        <location filename="../scihub_api.py" line="253"/>
         <source>Fetching PDF ...</source>
         <translation>获取 PDF 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="358"/>
+        <location filename="../scihub_api.py" line="367"/>
         <source>Dealing with query: </source>
         <translation>正在处理搜索: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="339"/>
+        <location filename="../scihub_api.py" line="346"/>
         <source>Saved PDF as: </source>
         <translation>保存 PDF 为: </translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="266"/>
+        <location filename="../scihub_api.py" line="264"/>
         <source>Angel [CAPTCHA] is coming!</source>
         <translation>使徒 [CAPTCHA] 来袭！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="270"/>
+        <location filename="../scihub_api.py" line="268"/>
         <source>Unknown PDF Content-Type!</source>
         <translation>未知的 PDF 数据类型！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="383"/>
+        <location filename="../scihub_api.py" line="390"/>
         <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
         <translation>验证码错误，使徒 [CAPTCHA] 消灭失败！</translation>
     </message>
     <message>
-        <location filename="../scihub_api.py" line="236"/>
+        <location filename="../scihub_api.py" line="234"/>
         <source>Angel [CAPTCHA] down!</source>
         <translation>使徒 [CAPTCHA] 已消灭！</translation>
+    </message>
+    <message>
+        <location filename="../scihub_api.py" line="317"/>
+        <source>No valid &amp;lt;iframe&amp;gt;!</source>
+        <translation>无有效的 &amp;lt;iframe&amp;gt; ！</translation>
+    </message>
+    <message>
+        <location filename="../scihub_api.py" line="318"/>
+        <source>You may need handle it manually.</source>
+        <translation>你可能需要手动处理。</translation>
+    </message>
+    <message>
+        <location filename="../scihub_api.py" line="319"/>
+        <source>Request URL: </source>
+        <translation>请求 URL: </translation>
+    </message>
+    <message>
+        <location filename="../scihub_api.py" line="320"/>
+        <source>Response URL: </source>
+        <translation>响应 URL: </translation>
     </message>
 </context>
 <context>

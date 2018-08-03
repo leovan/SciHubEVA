@@ -85,11 +85,11 @@ class SciHubAPI(QObject, threading.Thread):
 
     def log(self, message, level=None):
         if level:
-            log_formater = '[{level}] - {message}'
+            log_formatter = '[{level}] - {message}'
         else:
-            log_formater = '{message}'
+            log_formatter = '{message}'
 
-        print(log_formater.format(level=level, message=message))
+        print(log_formatter.format(level=level, message=message))
 
     def _set_http_proxy(self):
         if self._conf.getboolean('proxy', 'enabled'):
@@ -139,16 +139,15 @@ class SciHubAPI(QObject, threading.Thread):
         pdf_doc = PDFDocument(pdf_parser)
         pdf_metadata = pdf_doc.info[0]
 
-        author = make_pdf_metadata_str(pdf_metadata['Author'] if 'Author' in pdf_metadata else '')
+        author = make_pdf_metadata_str(pdf_metadata.get('Author', ''))
         if author and author != '':
             metadata['author'] = author
 
-        title = make_pdf_metadata_str(pdf_metadata['Title'] if 'Title' in pdf_metadata else '')
+        title = make_pdf_metadata_str(pdf_metadata.get('Title', ''))
         if title and title != '':
             metadata['title'] = title
 
-        year = pdf_metadata_moddate_to_year(
-            make_pdf_metadata_str(pdf_metadata['ModDate'] if 'ModDate' in pdf_metadata else ''))
+        year = pdf_metadata_moddate_to_year(make_pdf_metadata_str(pdf_metadata.get('ModDate', '')))
         if year and year != '':
             metadata['year'] = year
 
@@ -179,8 +178,7 @@ class SciHubAPI(QObject, threading.Thread):
         else:
             query_type = 'string'
 
-        log_formater = self.tr('Query type: ') + '{query_type}'
-        self.log(log_formater.format(query_type=query_type.upper()), 'INFO')
+        self.log(self.tr('Query type: ') + query_type.upper(), 'INFO')
 
         return query_type
 
@@ -284,8 +282,7 @@ class SciHubAPI(QObject, threading.Thread):
         """
 
         scihub_url = self._conf.get('network', 'scihub_url')
-        log_formater = self.tr('Using Sci-Hub URL: ') + '{scihub_url}'
-        self.log(log_formater.format(scihub_url=scihub_url), 'INFO')
+        self.log(self.tr('Using Sci-Hub URL: ') + scihub_url, 'INFO')
 
         query_type = self.guess_query_type(query)
         pdf_url = query
@@ -302,18 +299,28 @@ class SciHubAPI(QObject, threading.Thread):
                     timeout=self._conf.getfloat('network', 'timeout') / 1000.0)
 
                 html = etree.HTML(pdf_url_response.content)
-                iframes = html.xpath('//iframe')
+                iframes = html.xpath('//iframe[@id="pdf"]')
 
                 if len(iframes) > 0:
                     pdf_url = iframes[0].attrib['src']
-                    log_formater = self.tr('Got PDF URL: ') + '{pdf_url}'
-                    self.log(log_formater.format(pdf_url=pdf_url), 'INFO')
+                    pdf_url_html = '<a href="{pdf_url}">{pdf_url}</a>'.format(pdf_url=pdf_url)
+
+                    self.log(self.tr('Got PDF URL: ') + pdf_url_html, 'INFO')
                 else:
                     err = SciHubError.NO_VALID_IFRAME
+                    request_url = 'http://{scihub_url}/{query}'.format(scihub_url=scihub_url, query=query)
+                    request_url_html = '<a href="{request_url}">{request_url}</a>'.format(request_url=request_url)
+                    response_url = pdf_url_response.url
+                    response_url_html = '<a href="{response_url}">{response_url}</a>'.format(response_url=response_url)
+
                     self.log(self.tr('Failed to get PDF URL!'), 'ERROR')
-                    self.log(self.tr('No valide iframe!'), 'ERROR')
+                    self.log(self.tr('No valid &lt;iframe&gt;!'), 'ERROR')
+                    self.log(self.tr('You may need handle it manually.'), 'INFO')
+                    self.log(self.tr('Request URL: ') + request_url_html, 'INFO')
+                    self.log(self.tr('Response URL: ') + response_url_html, 'INFO')
             except Exception as e:
                 err = SciHubError.UNKNOWN
+
                 self.log(self.tr('Failed to get PDF!'), 'ERROR')
                 self.log(str(e), 'ERROR')
 
@@ -328,16 +335,15 @@ class SciHubAPI(QObject, threading.Thread):
 
         """
 
-        pdf_name_formater = self._conf.get('common', 'filename_prefix_format') + '_' + filename
+        pdf_name_formatter = self._conf.get('common', 'filename_prefix_format') + '_' + filename
         pdf_metadata = self.get_pdf_metadata(pdf)
-        pdf_name = pdf_name_formater.format(**pdf_metadata)
+        pdf_name = pdf_name_formatter.format(**pdf_metadata)
         pdf_path = os.path.join(self._conf.get('common', 'save_to_dir'), pdf_name)
 
         with open(pdf_path, 'wb') as fp:
             fp.write(pdf)
 
-        log_formater = self.tr('Saved PDF as: ') + '{pdf_name}'
-        self.log(log_formater.format(pdf_name=pdf_name), 'INFO')
+        self.log(self.tr('Saved PDF as: ') + pdf_name, 'INFO')
 
     def rampage(self, query, rampage_type):
         """Main process of downloading PDF
@@ -357,9 +363,8 @@ class SciHubAPI(QObject, threading.Thread):
         if rampage_type == SciHubRampageType.INPUT:
             # Query is user input
 
-            log_formater = self.tr('Dealing with query: ') + '{query}'
-            self.log('\n')
-            self.log(log_formater.format(query=query), 'INFO')
+            self.log('')
+            self.log(self.tr('Dealing with query: ') + query, 'INFO')
 
             # Fetch PDF URL
             pdf_url, err = self.fetch_pdf_url(query)

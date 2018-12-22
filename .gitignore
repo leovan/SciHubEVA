@@ -20,7 +20,10 @@ scihub_resources.py
 
 # Others
 *.spec
-design
-build
-dist
+design/**
+!design/*.psd
+build/**
+dist/**
+translations/*_zh_HK.ts
+translations/*_zh_TW.ts
 *.bak

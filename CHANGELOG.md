@@ -73,7 +73,7 @@
 
 ---
 
-- 修复获取 PDF 元信息时错误。([#2](https://github.com/leovan/SciHubEVA/issues/2))
+- 修复获取 PDF 元信息时错误。([#2](https://github.com/leovan/SciHubEVA/issues/2))
 
 ## [1.0.1](https://github.com/leovan/SciHubEVA/compare/v1.0.0...v1.0.1) (2018-05-28)
 

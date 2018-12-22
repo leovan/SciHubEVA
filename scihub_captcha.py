@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
-from PyQt5.QtQml import QQmlApplicationEngine
+from PySide2.QtCore import QObject, Slot, Signal
+from PySide2.QtQml import QQmlApplicationEngine
 
 
 class SciHubCaptcha(QObject):
-    showWindowCaptcha = pyqtSignal(str)
+    showWindowCaptcha = Signal(str)
 
     def __init__(self, parent, log=None):
         super(SciHubCaptcha, self).__init__()
@@ -26,7 +26,7 @@ class SciHubCaptcha(QObject):
         # Connect PyQt signals to QML slots
         self.showWindowCaptcha.connect(self._window.showWindowCaptcha)
 
-    @pyqtSlot(bool, str)
+    @Slot(bool, str)
     def killCaptcha(self, kill, captcha):
         if kill:
             self._parent.rampageWithCaptchar(captcha)

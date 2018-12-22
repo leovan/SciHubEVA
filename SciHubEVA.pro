@@ -13,12 +13,11 @@ lupdate_only {
 SOURCES += \
     ui/SciHubEVA.qml \
     ui/SciHubEVAAbout.qml \
-    ui/SciHubEVAMenuBar.qml \
-    ui/SciHubEVAPreferences.qml \
     ui/SciHubEVAAddSciHubURL.qml \
     ui/SciHubEVACaptcha.qml \
-    scihub_captcha.py \
-    scihub_api.py
+    ui/SciHubEVAMenuBar.qml \
+    ui/SciHubEVAMessage.qml \
+    ui/SciHubEVAPreferences.qml
 }
 
 TRANSLATIONS += \

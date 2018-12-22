@@ -1,66 +1,50 @@
-import QtQuick 2.11
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.4
-import QtQuick.Window 2.4
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.12
+import QtQuick.Window 2.12
+import QtQuick.Controls.Material 2.12
 
-Window {
-    title: qsTr("About")
-    modality: Qt.WindowModal
+Dialog {
+    x: (parent.width - width) / 2
+    y: (parent.height - height) / 2
 
-    property int margin: 10
-
-    width: columnLayoutAbout.implicitWidth + 2 * margin
-    height: columnLayoutAbout.implicitHeight + 2 * margin
-    minimumWidth: columnLayoutAbout.Layout.minimumWidth + 2 * margin
-    minimumHeight: columnLayoutAbout.Layout.minimumHeight + 2 * margin
+    modal: true
 
     ColumnLayout {
         id: columnLayoutAbout
+
         anchors.fill: parent
-        anchors.margins: margin
 
         RowLayout {
             id: rowLayoutAboutText
-            spacing: 10
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+
+            spacing: 20
 
             Image {
                 id: imageAboutLogo
+
                 Layout.alignment: Qt.AlignTop
+
                 sourceSize.height: 89
                 sourceSize.width: 43
                 source: "qrc:/images/about.png"
             }
 
-            TextArea {
-                id: textAreaAboutText
-                font.pointSize: 12
-                Layout.fillWidth: true
-                Layout.minimumWidth: 300
+            Label {
+                id: labelAboutText
+                text: "<style>a { color: " + Material.accent + "; }</style>" +
+                      "<p><b>Sci-Hub EVA</b></p>" +
+                      "<p>" + qsTr("Sci-Hub EVA is a cross-platform Sci-Hub GUI Application written with Python and Qt.") + "</p>" +
+                      "<p>" + qsTr("Author: ") + "<a href=\"https://leovan.me\">" + qsTr("Leo Van") + "</a></p>" +
+                      "<p>" + qsTr("License: ") +
+                      "<a href=\"https://github.com/leovan/SciHubEVA\">The MIT License</a></p>"
+
+                Layout.preferredWidth: 300
+                Layout.maximumWidth: 300
+
                 onLinkActivated: Qt.openUrlExternally(link)
-                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
                 textFormat: Text.RichText
                 wrapMode: Text.WordWrap
-                readOnly: true
-                text: "<p><b>Sci-Hub EVA</b></p>" +
-                      "<p>" + qsTr("Sci-Hub EVA is a cross-plotform Sci-Hub GUI Application.") + "</p>" +
-                      "<p>" + qsTr("Author: ") + "<a href=\"https://leovan.me\">" + qsTr("Leo Van") + "</a></p>" +
-                      "<p>" + qsTr("This application is licensed to you under ") +
-                      "<a href=\"https://github.com/leovan/SciHubEVA\">The MIT License</a></p>"
-            }
-        }
-
-        RowLayout {
-            id: rowLayoutAboutButtons
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignRight | Qt.AlignTop
-
-            Button {
-                id: aboutOKButton
-                text: qsTr("OK")
-
-                onClicked: close()
             }
         }
     }

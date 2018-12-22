@@ -1,27 +1,26 @@
-import QtQuick 2.11
-import QtQuick.Layouts 1.4
-import QtQuick.Dialogs 1.3
-import QtQuick.Controls 2.4
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Controls.Material 2.4
-
-import Qt.labs.settings 1.0
-import Qt.labs.platform 1.0 as Platform
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.12
+import QtQuick.Controls.Material 2.12
+import Qt.labs.settings 1.1
+import Qt.labs.platform 1.1 as Platform
 
 import "." as Ui
 
 ApplicationWindow {
     id: applicationWindow
-    objectName: "applicationWindow"
-    visible: true
     title: "Sci-Hub EVA"
+
+    visible: true
 
     property int margin: 10
 
-    width: columnLayoutMain.implicitWidth + 2 * margin
-    height: columnLayoutMain.implicitHeight + 2 * margin
-    minimumWidth: columnLayoutMain.Layout.minimumWidth + 2 * margin
-    minimumHeight: columnLayoutMain.Layout.minimumHeight + 2 * margin
+    width: columnLayoutApplication.implicitWidth + 2 * margin
+    height: columnLayoutApplication.implicitHeight + 2 * margin
+    minimumWidth: columnLayoutApplication.Layout.minimumWidth + 2 * margin
+    minimumHeight: columnLayoutApplication.Layout.minimumHeight + 2 * margin
+    maximumWidth: columnLayoutApplication.Layout.maximumWidth + 2 * margin
+    maximumHeight: columnLayoutApplication.Layout.maximumHeight + 2 * margin
 
     signal saveToDir(string directory)
     signal showWindowPreference()
@@ -39,38 +38,17 @@ ApplicationWindow {
         buttonSaveToOpen.enabled = true
     }
 
-    function showMessage(title, text, icon, standardButtons) {
-        messageDialogApplicationWindow.setTitle(title)
-        messageDialogApplicationWindow.setText(text)
-        messageDialogApplicationWindow.setIcon(icon)
-        messageDialogApplicationWindow.setStandardButtons(standardButtons)
-
-        messageDialogApplicationWindow.open()
-    }
-
-    function showInfoMessage(title, text) {
-        showMessage(title, text, StandardIcon.Information, StandardButton.Ok)
-    }
-
-    function showErrorMessage(title, text) {
-        showMessage(title, text, StandardIcon.Critical, StandardButton.Ok)
-    }
-
     function setSaveToDir(directory) {
         textFieldSaveToDir.text = directory
     }
 
     function appendLogs(log) {
-        textAreaLogs.append(log)
+        textAreaLogs.append("<style>a { color: " + Material.accent + "; }</style>" + log)
     }
 
     FontLoader {
-        id: materialDesignIconFont
-        source: "qrc:/fonts/MaterialIcons-Regular.ttf"
-    }
-
-    Ui.SciHubEVAMenuBar {
-        id: menuBar
+        id: fontMDI
+        source: "qrc:/fonts/materialdesignicons-webfont.ttf"
     }
 
     Ui.SciHubEVAPreferences {
@@ -81,8 +59,24 @@ ApplicationWindow {
         id: windowAbout
     }
 
+    Ui.SciHubEVAMessage {
+        id: dialogMessage
+
+        modal: true
+
+        footer: DialogButtonBox {
+            Button {
+                id: buttonDialogMessageOK
+                text: qsTr("OK")
+
+                onClicked: dialogMessage.close()
+            }
+        }
+    }
+
     Platform.FolderDialog {
         id: folderDialogSaveTo
+
         options: Platform.FolderDialog.ShowDirsOnly
 
         onAccepted: {
@@ -102,49 +96,56 @@ ApplicationWindow {
         }
     }
 
-    MessageDialog {
-        id: messageDialogApplicationWindow
-        visible: false
-        icon: StandardIcon.Information
-        standardButtons: StandardButton.Ok
-    }
-
     ColumnLayout {
-        id: columnLayoutMain
+        id: columnLayoutApplication
+
         anchors.fill: parent
         anchors.margins: margin
 
         GridLayout {
             id: gridLayoutQuery
+
             Layout.fillHeight: true
             Layout.fillWidth: true
+
             rows: 2
             columns: 4
 
             Label {
                 id: labelQuery
                 text: qsTr("Query: ")
+
                 Layout.minimumWidth: 60
             }
 
             TextField {
                 id: textFieldQuery
-                selectByMouse: true
                 placeholderText: qsTr("URL, PMID / DOI or search string")
+
+                implicitWidth: 300
+                Layout.minimumWidth: 300
                 Layout.fillWidth: true
+
+                selectByMouse: true
             }
 
             Button {
                 id: buttonRampage
                 text: qsTr("RAMPAGE")
-                font.bold: false
+
                 Layout.minimumWidth: 100
+
+                font.bold: false
 
                 onClicked: {
                     if (textFieldSaveToDir.text.trim() === '') {
-                        showErrorMessage(qsTr("Error"), qsTr("Please choose save to directory first!"))
+                        dialogMessage.setIcon("\uf5de")
+                        dialogMessage.setText(qsTr("Please choose save to directory first!"))
+                        dialogMessage.open()
                     } else if (textFieldQuery.text.trim() === '') {
-                        showErrorMessage(qsTr("Error"), qsTr("Please specify query!"))
+                        dialogMessage.setIcon("\uf5de")
+                        dialogMessage.setText(qsTr("Please specify query!"))
+                        dialogMessage.open()
                     } else {
                         applicationWindow.rampage(textFieldQuery.text.trim())
                     }
@@ -153,22 +154,28 @@ ApplicationWindow {
 
             Button {
                 id: buttonAbout
-                font.family: materialDesignIconFont.name
-                font.pointSize: 16
-                text: "\ue88e"
+                text: "\uf2fc"
 
-                onClicked: windowAbout.show()
+                font.family: fontMDI.name
+                font.pointSize: buttonRampage.font.pointSize * 1.2
+
+                onClicked: windowAbout.open()
             }
 
             Label {
                 id: labelSaveTo
                 text: qsTr("Save to: ")
+
                 Layout.minimumWidth: 60
             }
 
             TextField {
                 id: textFieldSaveToDir
+
+                implicitWidth: 300
+                Layout.minimumWidth: 300
                 Layout.fillWidth: true
+
                 readOnly: true
                 selectByMouse: true
             }
@@ -176,19 +183,24 @@ ApplicationWindow {
             Button {
                 id: buttonSaveToOpen
                 text: qsTr("Open ...")
-                font.bold: false
+
                 Layout.minimumWidth: 100
+
+                font.bold: false
 
                 onClicked: folderDialogSaveTo.open()
             }
 
             Button {
                 id: buttonPreferences
-                font.family: materialDesignIconFont.name
-                font.pointSize: 16
-                text: "\ue8b8"
+                text: "\uf493"
 
-                onClicked: applicationWindow.showWindowPreference()
+                font.family: fontMDI.name
+                font.pointSize: buttonSaveToOpen.font.pointSize * 1.2
+
+                onClicked: {
+                    applicationWindow.showWindowPreference()
+                }
             }
         }
 
@@ -197,40 +209,32 @@ ApplicationWindow {
             text: qsTr("Logs: ")
         }
 
-        RowLayout {
-            id: rowLayoutLogs
+        Flickable {
+            id: flickableLogs
 
-            Flickable {
-                id: flickableLogs
-                anchors.fill: parent
-                flickableDirection: Flickable.VerticalFlick
+            flickableDirection: Flickable.VerticalFlick
 
-                Layout.minimumWidth: 600
-                Layout.maximumWidth: 600
-                Layout.preferredWidth: 600
-                Layout.minimumHeight: 200
-                Layout.maximumHeight: 200
-                Layout.preferredHeight: 200
+            Layout.minimumWidth: 600
+            Layout.minimumHeight: 200
 
-                function scrollToBottom() {
-                    if (contentHeight > height) {
-                        contentY = contentHeight - height
-                    }
+            function scrollToBottom() {
+                if (contentHeight > height) {
+                    contentY = contentHeight - height
                 }
+            }
 
-                TextArea.flickable: TextArea {
-                    id: textAreaLogs
-                    text: qsTr("Welcome to Sci-Hub EVA")
-                    font.pointSize: 12
-                    padding: 6
-                    textFormat: Text.RichText
-                    wrapMode: Text.WordWrap
-                    readOnly: true
-                    selectByMouse: true
+            TextArea.flickable: TextArea {
+                id: textAreaLogs
+                text: qsTr("Welcome to Sci-Hub EVA")
 
-                    onTextChanged: flickableLogs.scrollToBottom()
-                    onLinkActivated: Qt.openUrlExternally(link)
-                }
+                font.pointSize: labelLogs.font.pointSize
+                textFormat: Text.RichText
+                wrapMode: Text.WordWrap
+                readOnly: true
+                selectByMouse: true
+
+                onTextChanged: flickableLogs.scrollToBottom()
+                onLinkActivated: Qt.openUrlExternally(link)
             }
         }
     }

@@ -1,12 +1,12 @@
 <RCC>
     <qresource prefix="/">
         <file>ui/SciHubEVA.qml</file>
-        <file>ui/SciHubEVAMenuBar.qml</file>
         <file>ui/SciHubEVAAbout.qml</file>
-        <file>ui/SciHubEVAPreferences.qml</file>
         <file>ui/SciHubEVAAddSciHubURL.qml</file>
-        <file>images/about.png</file>
-        <file>fonts/MaterialIcons-Regular.ttf</file>
         <file>ui/SciHubEVACaptcha.qml</file>
+        <file>ui/SciHubEVAMessage.qml</file>
+        <file>ui/SciHubEVAPreferences.qml</file>
+        <file>images/about.png</file>
+        <file>fonts/materialdesignicons-webfont.ttf</file>
     </qresource>
 </RCC>

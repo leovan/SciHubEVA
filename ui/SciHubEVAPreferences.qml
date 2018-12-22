@@ -1,13 +1,14 @@
-import QtQuick 2.11
-import QtQuick.Layouts 1.4
-import QtQuick.Dialogs 1.3
-import QtQuick.Controls 2.4
-import QtQuick.Window 2.4
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.12
+import QtQuick.Window 2.12
 
 import "." as Ui
 
-Window {
+ApplicationWindow {
+    id: preferencesWindow
     title: qsTr("Preferences")
+
     modality: Qt.ApplicationModal
 
     property int margin: 10
@@ -21,6 +22,7 @@ Window {
     signal removeSciHubURL(int networkSciHubURLCurrentIndex)
 
     signal saveFilenamePrefixFormat(string filenamePrefixFormat)
+    signal saveThemeCurrentIndex(int themeCurrentIndex)
 
     signal saveNetworkSciHubURLCurrentIndex(int networkSciHubURLCurrentIndex)
     signal saveNetworkTimeout(int networkTimeout)
@@ -33,12 +35,15 @@ Window {
     signal saveProxyUsername(string proxyUsername)
     signal saveProxyPassword(string proxyPassword)
 
+    property int themeCurrentIndex
+
     function showWindowPreferences() {
         show()
     }
 
     function saveAllPreference() {
         saveFilenamePrefixFormat(textFieldPreferencesFilenamePrefixFormat.text.trim())
+        saveThemeCurrentIndex(comboBoxPreferencesTheme.currentIndex)
 
         saveNetworkSciHubURLCurrentIndex(comboBoxPreferencesNetworkSciHubURL.currentIndex)
         saveNetworkTimeout(textFieldPreferencesNetworkTimeout.text)
@@ -56,11 +61,26 @@ Window {
         saveProxyUsername(textFieldPreferencesProxyUsername.text.trim())
         saveProxyPassword(textFieldPreferencesProxyPassword.text.trim())
 
-        close()
+        if (comboBoxPreferencesTheme.currentIndex != themeCurrentIndex) {
+            dialogChangeThemeRestartMessage.setIcon("\uf17d")
+            dialogChangeThemeRestartMessage.setText(qsTr("A restart is required for the theme to take effect."))
+            dialogChangeThemeRestartMessage.open()
+        } else {
+            close()
+        }
     }
 
     function setFilenamePrefixFormat(filenameFormat) {
         textFieldPreferencesFilenamePrefixFormat.text = filenameFormat
+    }
+
+    function setThemeModel(model) {
+        comboBoxPreferencesTheme.model = model
+    }
+
+    function setThemeCurrentIndex(currentIndex) {
+        themeCurrentIndex = currentIndex
+        comboBoxPreferencesTheme.currentIndex = currentIndex
     }
 
     function setNetworkSciHubURLModel(model) {
@@ -107,59 +127,68 @@ Window {
         textFieldPreferencesProxyPassword.text = proxyPassword
     }
 
-    function showMessage(title, text, icon, standardButtons) {
-        messageDialogPreferencesWindow.setTitle(title)
-        messageDialogPreferencesWindow.setText(text)
-        messageDialogPreferencesWindow.setIcon(icon)
-        messageDialogPreferencesWindow.setStandardButtons(standardButtons)
-
-        messageDialogPreferencesWindow.open()
-    }
-
-    function showInfoMessage(title, text) {
-        showMessage(title, text, StandardIcon.Information, StandardButton.Ok)
-    }
-
-    function showErrorMessage(title, text) {
-        showMessage(title, text, StandardIcon.Critical, StandardButton.Ok)
+    FontLoader {
+        id: fontMDI
+        source: "qrc:/fonts/materialdesignicons-webfont.ttf"
     }
 
     Ui.SciHubEVAAddSciHubURL {
         id: windowAddSciHubURL
     }
 
-    MessageDialog {
-        id: messageDialogPreferencesWindow
-        visible: false
-        icon: StandardIcon.Information
-        standardButtons: StandardButton.Ok
+    Ui.SciHubEVAMessage {
+        id: dialogChangeThemeRestartMessage
+
+        modal: true
+
+        footer: DialogButtonBox {
+            Button {
+                id: buttonDialogChangeThemeRestartMessageOK
+                text: qsTr("OK")
+
+                onClicked: preferencesWindow.close()
+            }
+        }
     }
 
-    MessageDialog {
-        id: messageDialogPreferencesWindowRemoveSciHubURL
-        visible: false
-        title: qsTr("Confirm Delete")
-        icon: StandardIcon.Question
-        standardButtons: StandardButton.Yes | StandardButton.No
+    Ui.SciHubEVAMessage {
+        id: dialogRemoveSciHubURLConfirmMessage
 
-        onYes: {
-            removeSciHubURL(comboBoxPreferencesNetworkSciHubURL.currentIndex)
+        modal: true
+
+        footer: DialogButtonBox {
+            Button {
+                id: buttonDialogRemoveSciHubURLConfirmMessageYes
+                text: qsTr("Yes")
+
+                onClicked: removeSciHubURL(comboBoxPreferencesNetworkSciHubURL.currentIndex)
+            }
+
+            Button {
+                id: buttonDialogRemoveSciHubURLConfirmMessageNo
+                text: qsTr("No")
+
+                onClicked: dialogRemoveSciHubURLConfirmMessage.close()
+            }
         }
     }
 
     ColumnLayout {
         id: columnLayoutPreferences
+
         anchors.fill: parent
         anchors.margins: margin
 
         GroupBox {
             id: groupBoxPreferencesCommon
-            Layout.fillWidth: true
             title: qsTr("Common")
+
+            Layout.fillWidth: true
 
             GridLayout {
                 id: gridLayoutPreferencesFile
-                rows: 2
+
+                rows: 3
                 columns: 2
                 anchors.fill: parent
 
@@ -170,12 +199,15 @@ Window {
 
                 TextField {
                     id: textFieldPreferencesFilenamePrefixFormat
+
+                    implicitWidth: 200
+                    Layout.fillWidth: true
+
                     placeholderText: "{author}_{year}_{title}"
+                    selectByMouse: true
                     validator: RegExpValidator {
                         regExp: /.*[(\{author\})|(\{year\})|(\{title\})]+.*/
                     }
-                    Layout.fillWidth: true
-                    selectByMouse: true
                 }
 
                 Label {
@@ -187,20 +219,35 @@ Window {
                     id: labelPreferencesFilenameFormatSupportedKeywordsExplain
                     text: qsTr("{author}: Author, {year}: Year, {title}: Title")
                 }
+
+                Label {
+                    id: labelPreferencesTheme
+                    text: qsTr("Theme: ")
+                }
+
+                ComboBox {
+                    id: comboBoxPreferencesTheme
+
+                    Layout.minimumWidth: 200
+                    Layout.fillWidth: true
+                }
             }
         }
 
         GroupBox {
             id: groupBoxPreferencesNetwork
-            Layout.fillWidth: true
             title: qsTr("Network")
+
+            Layout.fillWidth: true
 
             ColumnLayout {
                 id: columnLayoutPreferencesNetwork
+
                 anchors.fill: parent
 
                 RowLayout {
                     id: rowLayoutPreferencesNetworkSciHubURL
+
                     Layout.fillWidth: true
 
                     Label {
@@ -210,13 +257,16 @@ Window {
 
                     ComboBox {
                         id: comboBoxPreferencesNetworkSciHubURL
+
                         Layout.minimumWidth: 200
                         Layout.fillWidth: true
                     }
 
                     RoundButton {
                         id: roundButtonPreferencesNetworkSciHubURLAdd
-                        text: "+"
+                        text: "\uf415"
+
+                        font.family: fontMDI.name
 
                         onClicked: {
                             showWindowAddSciHubURL()
@@ -225,21 +275,20 @@ Window {
 
                     RoundButton {
                         id: roundButtonPreferencesNetworkSciHubURLRemove
-                        text: "-"
+                        text: "\uf374"
+
+                        font.family: fontMDI.name
 
                         onClicked: {
-                            var text = ""
-
                             if (comboBoxPreferencesNetworkSciHubURL.count <= 1) {
-                                text = qsTr("Cannot remove the last Sci-Hub URL!")
-                                var title = qsTr("Error")
-                                showErrorMessage(title, text)
+                                dialogChangeThemeRestartMessage.setIcon("\uf5de")
+                                dialogChangeThemeRestartMessage.setText(qsTr("Cannot remove the last Sci-Hub URL!"))
+                                dialogChangeThemeRestartMessage.open()
                             } else {
-                                text = qsTr("Delete Sci-Hub URL: ") +
-                                        comboBoxPreferencesNetworkSciHubURL.currentText + " ?"
-                                messageDialogPreferencesWindowRemoveSciHubURL.setText(text)
-
-                                messageDialogPreferencesWindowRemoveSciHubURL.open()
+                                var text = qsTr("Delete Sci-Hub URL: ") + comboBoxPreferencesNetworkSciHubURL.currentText + " ?"
+                                dialogRemoveSciHubURLConfirmMessage.setIcon("\uf816")
+                                dialogRemoveSciHubURLConfirmMessage.setText(text)
+                                dialogRemoveSciHubURLConfirmMessage.open()
                             }
                         }
                     }
@@ -247,6 +296,7 @@ Window {
 
                 RowLayout {
                     id: rowLayoutPreferencesNetworkTimeoutAndRetryTimes
+
                     Layout.fillWidth: true
 
                     Label {
@@ -256,12 +306,15 @@ Window {
 
                     TextField {
                         id: textFieldPreferencesNetworkTimeout
+
+                        implicitWidth: 60
+                        Layout.fillWidth: true
+
                         horizontalAlignment: Text.AlignHCenter
-                        Layout.preferredWidth: 60
+                        selectByMouse: true
                         validator: RegExpValidator {
                             regExp: /[0-9]+/
                         }
-                        selectByMouse: true
                     }
 
                     Label {
@@ -280,12 +333,15 @@ Window {
 
                     TextField {
                         id: textFieldPreferencesNetworkRetryTimes
+
+                        implicitWidth: 60
+                        Layout.fillWidth: true
+
                         horizontalAlignment: Text.AlignHCenter
-                        Layout.preferredWidth: 60
+                        selectByMouse: true
                         validator: RegExpValidator {
                             regExp: /[0-9]+/
                         }
-                        selectByMouse: true
                     }
                 }
             }
@@ -293,16 +349,19 @@ Window {
 
         GroupBox {
             id: groupBoxPreferencesProxy
+            title: qsTr("Proxy")
+
             Layout.fillHeight: false
             Layout.fillWidth: true
-            title: qsTr("Proxy")
 
             ColumnLayout {
                 id: columnLayoutPreferencesProxy
+
                 anchors.fill: parent
 
                 RowLayout {
                     id: rowLayoutPreferencesProxyEnabledAndType
+
                     Layout.fillWidth: true
 
                     CheckBox {
@@ -332,6 +391,7 @@ Window {
 
                 GridLayout {
                     id: gridLayoutPreferencesProxy
+
                     columns: 2
 
                     Label {
@@ -341,7 +401,10 @@ Window {
 
                     TextField {
                         id: textFieldPreferencesProxyHost
+
+                        implicitWidth: 200
                         Layout.fillWidth: true
+
                         selectByMouse: true
                     }
 
@@ -352,11 +415,14 @@ Window {
 
                     TextField {
                         id: textFieldPreferencesProxyPort
+
+                        implicitWidth: 200
                         Layout.fillWidth: true
+
+                        selectByMouse: true
                         validator: RegExpValidator {
                             regExp: /[0-9]+/
                         }
-                        selectByMouse: true
                     }
 
                     Label {
@@ -366,7 +432,10 @@ Window {
 
                     TextField {
                         id: textFieldPreferencesProxyUsername
+
+                        implicitWidth: 200
                         Layout.fillWidth: true
+
                         selectByMouse: true
                     }
 
@@ -377,7 +446,10 @@ Window {
 
                     TextField {
                         id: textFieldPreferencesProxyPassword
+
+                        implicitWidth: 200
                         Layout.fillWidth: true
+
                         echoMode: TextInput.Password
                     }
                 }
@@ -386,6 +458,7 @@ Window {
 
         RowLayout {
             id: rowLayoutPreferencesButtons
+
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignRight | Qt.AlignTop
 

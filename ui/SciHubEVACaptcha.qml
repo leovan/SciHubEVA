@@ -1,11 +1,11 @@
-import QtQuick 2.11
-import QtQuick.Layouts 1.4
-import QtQuick.Dialogs 1.3
-import QtQuick.Controls 2.4
-import QtQuick.Window 2.4
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.12
+import QtQuick.Window 2.12
 
-Window {
+ApplicationWindow {
     title: qsTr("Captcha")
+
     modality: Qt.ApplicationModal
 
     property int margin: 10
@@ -24,6 +24,7 @@ Window {
 
     ColumnLayout {
         id: columnLayoutCaptcha
+
         anchors.fill: parent
         anchors.margins: margin
 
@@ -33,6 +34,7 @@ Window {
 
         RowLayout {
             id: rowLayoutCaptchaButtons
+
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
 
@@ -43,7 +45,9 @@ Window {
 
             TextField {
                 id: textFieldCaptcha
+
                 Layout.minimumWidth: 100
+
                 selectByMouse: true
             }
 

@@ -5,14 +5,15 @@ import sys
 import locale
 import os
 
-from PyQt5.QtCore import QObject, Qt, QTranslator, pyqtSlot, pyqtSignal
-from PyQt5.QtGui import QGuiApplication, QIcon, QFont
-from PyQt5.QtQml import QQmlApplicationEngine
+from PySide2.QtCore import QObject, Qt, QTranslator, Slot, Signal
+from PySide2.QtGui import QGuiApplication, QIcon, QFont
+from PySide2.QtQml import QQmlApplicationEngine
 
 from scihub_conf import SciHubConf
 from scihub_preferences import SciHubPreferences
 from scihub_captcha import SciHubCaptcha
 from scihub_api import SciHubAPI, SciHubRampageType, SciHubError
+
 import scihub_resources
 
 if hasattr(Qt, 'AA_EnableHighDpiScaling'):
@@ -22,26 +23,24 @@ if hasattr(Qt, 'AA_UseHighDpiPixmaps'):
 
 
 class SciHubEVA(QObject):
-    beforeRampage = pyqtSignal()
-    afterRampage = pyqtSignal()
+    beforeRampage = Signal()
+    afterRampage = Signal()
 
-    showErrorMessage = pyqtSignal(str, str)
-    showInfoMessage = pyqtSignal(str, str)
-
-    setSaveToDir = pyqtSignal(str)
-    appendLogs = pyqtSignal(str)
+    setSaveToDir = Signal(str)
+    appendLogs = Signal(str)
 
     def __init__(self):
         super(SciHubEVA, self).__init__()
 
-        self._conf = SciHubConf()
+        self._conf = SciHubConf('SciHubEVA.conf')
+        self._qt_quick_controls2_conf = SciHubConf('qtquickcontrols2.conf', space_around_delimiters=False)
 
         self._engine = QQmlApplicationEngine()
         self._engine.load('qrc:/ui/SciHubEVA.qml')
         self._window = self._engine.rootObjects()[0]
         self._connect()
 
-        self._scihub_preferences = SciHubPreferences(self._conf)
+        self._scihub_preferences = SciHubPreferences(self._conf, self._qt_quick_controls2_conf)
         self._scihub_captcha = SciHubCaptcha(self, log=self.log)
         self._captcha_query = None
 
@@ -62,9 +61,6 @@ class SciHubEVA(QObject):
         self.beforeRampage.connect(self._window.beforeRampage)
         self.afterRampage.connect(self._window.afterRampage)
 
-        self.showErrorMessage.connect(self._window.showErrorMessage)
-        self.showInfoMessage.connect(self._window.showInfoMessage)
-
         self.setSaveToDir.connect(self._window.setSaveToDir)
         self.appendLogs.connect(self._window.appendLogs)
 
@@ -72,17 +68,17 @@ class SciHubEVA(QObject):
     def conf(self):
         return self._conf
 
-    @pyqtSlot(str)
+    @Slot(str)
     def saveToDir(self, directory):
         self._save_to_dir = directory
         self._conf.set('common', 'save_to_dir', directory)
 
-    @pyqtSlot()
+    @Slot()
     def showWindowPreferences(self):
         self._scihub_preferences.loadFromConf()
         self._scihub_preferences.showWindowPreferences.emit()
 
-    @pyqtSlot(str)
+    @Slot(str)
     def rampage(self, input_query):
         """Download PDF with query of input
 
@@ -148,8 +144,9 @@ class SciHubEVA(QObject):
 
 
 if __name__ == '__main__':
-    sys.argv += ['--style', 'material']
     app_path = os.path.abspath(os.path.dirname(sys.argv[0]))
+    os.environ['QT_QUICK_CONTROLS_CONF'] = os.path.join(app_path, 'qtquickcontrols2.conf')
+
     app = QGuiApplication(sys.argv)
 
     lang = locale.getdefaultlocale()[0]

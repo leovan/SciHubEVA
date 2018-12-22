@@ -6,19 +6,16 @@ import os
 import re
 import tempfile
 import threading
+import requests
 
 from enum import Enum, unique
-import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
-
 from urllib.parse import urlparse
 from lxml import etree
-
 from pdfminer.pdfparser import PDFParser
 from pdfminer.pdfdocument import PDFDocument
-
-from PyQt5.QtCore import QObject
+from PySide2.QtCore import QObject
 
 from scihub_conf import SciHubConf
 from scihub_utils import make_pdf_metadata_str, pdf_metadata_moddate_to_year
@@ -64,7 +61,7 @@ class SciHubAPI(QObject, threading.Thread):
         if conf:
             self._conf = conf
         else:
-            self._conf = SciHubConf()
+            self._conf = SciHubConf('SciHubEVA.conf')
 
         if log:
             self.log = log
@@ -117,7 +114,8 @@ class SciHubAPI(QObject, threading.Thread):
 
             self._sess.proxies = {'http': proxy, 'https': proxy}
 
-    def get_pdf_metadata(self, pdf):
+    @staticmethod
+    def get_pdf_metadata(pdf):
         """Get PDF metadata with PDF content
 
         Args:
@@ -282,20 +280,19 @@ class SciHubAPI(QObject, threading.Thread):
         """
 
         scihub_url = self._conf.get('network', 'scihub_url')
-        self.log(self.tr('Using Sci-Hub URL: ') + scihub_url, 'INFO')
+        self.log(self.tr('Using Sci-Hub URL: ') +
+                 '<a href="{scihub_url}">{scihub_url}</a>'.format(scihub_url=scihub_url), 'INFO')
 
         query_type = self.guess_query_type(query)
         pdf_url = query
         err = None
 
         if query_type != 'pdf':
-            pdf_query_url = 'http://{scihub_url}'.format(scihub_url=scihub_url)
-
             try:
                 self.log(self.tr('Fetching PDF URL ...'), 'INFO')
 
                 pdf_url_response = self._sess.post(
-                    pdf_query_url, data={'request': query}, verify=False,
+                    scihub_url, data={'request': query}, verify=False,
                     timeout=self._conf.getfloat('network', 'timeout') / 1000.0)
 
                 html = etree.HTML(pdf_url_response.content)

@@ -20,15 +20,9 @@ from docopt import docopt
 VERSION_PATTERN = r'\d+.\d+.\d+.\d+'
 
 VERSION_FILES = [
-    'Info.plist',
-    'SciHubEVA.win.version',
-    'SciHubEVA.nsi'
-]
-
-VERSION_FILES_ENCODING = [
-    'utf-8',
-    'utf-8',
-    'gbk'
+    'macOS/Info.plist',
+    'Windows/SciHubEVA.win.version',
+    'Windows/SciHubEVA.iss'
 ]
 
 VERSION_REPLACE_PATTERN = [
@@ -37,11 +31,7 @@ VERSION_REPLACE_PATTERN = [
     r'prodvers=\(\d+,\s*\d+,\s*\d+,\s*\d+\)',
     r"StringStruct\(u'FileVersion', u'\d+.\s*\d+.\s*\d+.\s*\d+'\)",
     r"StringStruct\(u'ProductVersion', u'\d+.\s*\d+.\s*\d+.\s*\d+'\)",
-    r'PRODUCT_VERSION "\d+.\s*\d+.\s*\d+.\s*\d+"',
-    r'PRODUCT_SHORT_VERSION "\d+.\s*\d+"',
-    r'VIProductVersion "\d+.\s*\d+.\s*\d+.\s*\d+"',
-    r'"ProductVersion" "\d+.\s*\d+.\s*\d+.\s*\d+"',
-    r'"FileVersion" "\d+.\s*\d+.\s*\d+.\s*\d+"'
+    r'#define MyAppVersion "\d+.\d+.\d+"'
 ]
 
 VERSION_REPLACE_FORMATTER = [
@@ -50,11 +40,7 @@ VERSION_REPLACE_FORMATTER = [
     'prodvers=({major}, {minor}, {patch}, {build})',
     "StringStruct(u'FileVersion', u'{major}.{minor}.{patch}.{build}')",
     "StringStruct(u'ProductVersion', u'{major}.{minor}.{patch}.{build}')",
-    'PRODUCT_VERSION "{major}.{minor}.{patch}.{build}"',
-    'PRODUCT_SHORT_VERSION "{major}.{minor}"',
-    'VIProductVersion "{major}.{minor}.{patch}.{build}"',
-    '"ProductVersion" "{major}.{minor}.{patch}.{build}"',
-    '"FileVersion" "{major}.{minor}.{patch}.{build}"'
+    '#define MyAppVersion "{major}.{minor}.{patch}"'
 ]
 
 
@@ -85,12 +71,12 @@ def replace_version(text, version):
 
 
 def update_version(version):
-    for file, encoding in zip(VERSION_FILES, VERSION_FILES_ENCODING):
+    for file in VERSION_FILES:
         backup_file = '{file}.bak'.format(file=file)
         os.rename(file, backup_file)
 
-        with open(backup_file, 'r', encoding=encoding) as fi, \
-                open(file, 'w', encoding=encoding) as fo:
+        with open(backup_file, 'r', encoding='utf-8') as fi, \
+                open(file, 'w', encoding='utf-8') as fo:
             for line in fi:
                 newline = replace_version(line, version)
                 fo.write(newline)
@@ -108,4 +94,4 @@ if __name__ == '__main__':
         if valid:
             update_version(version)
         else:
-            print('Please specific version like A.B.C.D!')
+            print('Please input version like X.X.X.X!')

@@ -3,11 +3,12 @@
 
 import json
 
-from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal
-from PyQt5.QtQml import QQmlApplicationEngine
+from PySide2.QtCore import QObject, Slot, Signal
+from PySide2.QtQml import QQmlApplicationEngine
+
 
 class SciHubAddSciHubURL(QObject):
-    showWindowAddSciHubURL = pyqtSignal()
+    showWindowAddSciHubURL = Signal()
 
     def __init__(self, conf, parent):
         super(SciHubAddSciHubURL, self).__init__()
@@ -27,16 +28,12 @@ class SciHubAddSciHubURL(QObject):
         # Connect PyQt signals to QML slots
         self.showWindowAddSciHubURL.connect(self._window.showWindowAddSciHubURL)
 
-    @pyqtSlot(str)
+    @Slot(str)
     def addSciHubURL(self, url):
         scihub_available_urls = json.loads(self._conf.get('network', 'scihub_available_urls'))
 
-        if not url in scihub_available_urls:
+        if url not in scihub_available_urls:
             scihub_available_urls.append(url)
 
         self._conf.set('network', 'scihub_available_urls', json.dumps(scihub_available_urls))
         self._parent.loadFromConf()
-
-
-if __name__ == '__main__':
-    pass

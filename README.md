@@ -37,7 +37,7 @@ Sometimes, you need enter the captcha to continue the download.
 
 <table border="0">
   <tr align="center">
-    <td><img src="docs/scihub-eva-application-macos-en.png" /></td>
+    <td><img src="docs/scihub-eva-application-macos-en-light-theme.png" /></td>
     <td><img src="docs/scihub-eva-application-macos-en-dark-theme.png" /></td>
   </tr>
   <tr align="center">
@@ -51,7 +51,7 @@ Sometimes, you need enter the captcha to continue the download.
 
 <table border="0">
   <tr align="center">
-    <td><img src="docs/scihub-eva-application-windows-en.png" /></td>
+    <td><img src="docs/scihub-eva-application-windows-en-light-theme.png" /></td>
     <td><img src="docs/scihub-eva-application-windows-en-dark-theme.png" /></td>
   </tr>
   <tr align="center">

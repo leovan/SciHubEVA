@@ -202,8 +202,7 @@ class SciHubAPI(QObject, threading.Thread):
         if len(imgs) > 0 and len(ids) > 0:
             captcha_id = ids[0].attrib['value']
             captcha_img_src = imgs[0].attrib['src']
-            captcha_img_url = \
-                urlparse(pdf_captcha_response.url).scheme + '://' + \
+            captcha_img_url = 'http://' + \
                 urlparse(pdf_captcha_response.url).netloc + captcha_img_src
 
         return captcha_id, captcha_img_url
@@ -299,7 +298,7 @@ class SciHubAPI(QObject, threading.Thread):
                 iframes = html.xpath('//iframe[@id="pdf"]')
 
                 if len(iframes) > 0:
-                    pdf_url = iframes[0].attrib['src']
+                    pdf_url = urlparse(iframes[0].attrib['src'], scheme='http').geturl()
                     pdf_url_html = '<a href="{pdf_url}">{pdf_url}</a>'.format(pdf_url=pdf_url)
 
                     self.log(self.tr('Got PDF URL: ') + pdf_url_html, 'INFO')

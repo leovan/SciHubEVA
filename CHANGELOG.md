@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.1](https://github.com/leovan/SciHubEVA/compare/v2.0.0...v2.0.1) (2019-01-09)
+
+### Bug Fixes
+
+- Fix url without scheme error. ([#8](https://github.com/leovan/SciHubEVA/issues/8))
+- Add OpenGL libraries on Windows. ([#1](https://github.com/leovan/SciHubEVA/issues/1))
+
+---
+
+- 修复 URL 不包含协议的问题。([#8](https://github.com/leovan/SciHubEVA/issues/8))
+- 在 Windows 下添加 OpenGL 库。([#1](https://github.com/leovan/SciHubEVA/issues/1))
+
 ## [2.0.0](https://github.com/leovan/SciHubEVA/compare/v1.3.0...v2.0.0) (2018-12-22)
 
 ### Features

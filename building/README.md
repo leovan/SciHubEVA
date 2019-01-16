@@ -47,6 +47,9 @@
    ```bash
    # Install the latest develop version of PyInstaller
    
+   # You may need rebuild the bootloader of PyInstaller against 10.14 SDK to fully support dark theme
+   # See: https://pyinstaller.readthedocs.io/en/latest/bootloader-building.html
+   
    rm -rf build
    rm -rf dist
    rm -f SciHubEVA.spec
@@ -60,7 +63,7 @@
      --add-data "LICENSE:." \
      --add-data "SciHubEVA.conf:." \
      --add-data "qtquickcontrols2.conf:." \
-     --add-data "images/SciHubEVA.png:images" \
+     --add-data "images/SciHubEVA-icon.png:images" \
      --add-data "translations/*.qm:translations" \
      --name "SciHubEVA" \
      --icon "images/SciHubEVA.icns" \
@@ -94,7 +97,7 @@
 4. Build with `PyInstaller`.
 
    ```powershell
-   # Install the latest develop version of PyInstaller
+   :: Install the latest develop version of PyInstaller
    
    rd /s /Q build
    rd /s /Q dist
@@ -103,13 +106,13 @@
    del /Q scihub_resources.py
    pyside2-rcc SciHubEVA.qrc -o scihub_resources.py
    
-   # Need fix PyInstaller issue (https://github.com/pyinstaller/pyinstaller/pull/3875)
+   :: Need fix PyInstaller issue (https://github.com/pyinstaller/pyinstaller/pull/3875)
    
    pyinstaller -w scihub_eva.py ^
      --add-data "LICENSE;." ^
      --add-data "SciHubEVA.conf;." ^
      --add-data "qtquickcontrols2.conf;." ^
-     --add-data "images/SciHubEVA.png;images" ^
+     --add-data "images/SciHubEVA-icon.png;images" ^
      --add-data "translations/*.qm;translations" ^
      --name "SciHubEVA" ^
      --icon "images/SciHubEVA.ico" ^

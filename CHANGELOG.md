@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.1.0](https://github.com/leovan/SciHubEVA/compare/v2.0.1...v2.1.0) (2019-01-16)
+
+### Features
+
+- Fully support dark theme in macOS ("System" option now works).
+
+---
+
+- 全面支持暗色主题 ("System" 选项已可用)。
+
 ## [2.0.1](https://github.com/leovan/SciHubEVA/compare/v2.0.0...v2.0.1) (2019-01-09)
 
 ### Bug Fixes

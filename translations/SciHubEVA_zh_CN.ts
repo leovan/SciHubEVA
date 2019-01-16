@@ -87,47 +87,47 @@
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="116"/>
+        <location filename="../ui/SciHubEVA.qml" line="132"/>
         <source>Query: </source>
         <translation>搜索: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="123"/>
+        <location filename="../ui/SciHubEVA.qml" line="139"/>
         <source>URL, PMID / DOI or search string</source>
         <translation>URL, PMID / DOI 或标题</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="134"/>
+        <location filename="../ui/SciHubEVA.qml" line="150"/>
         <source>RAMPAGE</source>
         <translation>暴走</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="143"/>
+        <location filename="../ui/SciHubEVA.qml" line="159"/>
         <source>Please choose save to directory first!</source>
         <translation>请先选择保存路径！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="147"/>
+        <location filename="../ui/SciHubEVA.qml" line="163"/>
         <source>Please specify query!</source>
         <translation>请指定搜索内容！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="167"/>
+        <location filename="../ui/SciHubEVA.qml" line="183"/>
         <source>Save to: </source>
         <translation>保存至: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="185"/>
+        <location filename="../ui/SciHubEVA.qml" line="201"/>
         <source>Open ...</source>
         <translation>打开 ...</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="209"/>
+        <location filename="../ui/SciHubEVA.qml" line="225"/>
         <source>Logs: </source>
         <translation>日志: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="228"/>
+        <location filename="../ui/SciHubEVA.qml" line="244"/>
         <source>Welcome to Sci-Hub EVA</source>
         <translation>欢迎使用 Sci-Hub EVA</translation>
     </message>
@@ -175,10 +175,6 @@
         <location filename="../ui/SciHubEVAAddSciHubURL.qml" line="58"/>
         <source>Confirm</source>
         <translation>确定</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>错误</translation>
     </message>
     <message>
         <location filename="../ui/SciHubEVAAddSciHubURL.qml" line="70"/>
@@ -250,10 +246,6 @@
         <location filename="../ui/SciHubEVAPreferences.qml" line="285"/>
         <source>Cannot remove the last Sci-Hub URL!</source>
         <translation>无法删除最后一个 Sci-Hub 网址！</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>错误</translation>
     </message>
     <message>
         <location filename="../ui/SciHubEVAPreferences.qml" line="66"/>

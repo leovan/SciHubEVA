@@ -155,7 +155,7 @@ if __name__ == '__main__':
     translator.load(lang_file_path)
     app.installTranslator(translator)
 
-    icon_file_path = os.path.join(app_path, 'images/SciHubEVA.png')
+    icon_file_path = os.path.join(app_path, 'images/SciHubEVA-icon.png')
     app.setWindowIcon(QIcon(icon_file_path))
 
     if sys.platform == 'win32':

@@ -1,4 +1,4 @@
-# Sci-Hub EVA <img src="images/SciHubEVA.png" align="right" alt="logo" width="100" height = "100" style = "border: none; float: right;">
+# Sci-Hub EVA <img src="images/SciHubEVA-icon.png" align="right" alt="logo" width="100" height = "100" style = "border: none; float: right;">
 ![Release](https://img.shields.io/github/release/leovan/SciHubEVA.svg)
 ![License](https://img.shields.io/github/license/leovan/SciHubEVA.svg)
 ![Issues](https://img.shields.io/github/issues/leovan/SciHubEVA.svg)
@@ -71,18 +71,3 @@ See [`building/README.md`](building/README.md)
 [PySide2](https://doc.qt.io/qtforpython): GNU Lesser General Public License (LGPL)
 
 [Material design icons](https://github.com/templarian/MaterialDesign/): [SIL Open Font License 1.1](http://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web)
-
-## If You Like This, Buy Me a Coffee | 如果喜欢，请我喝杯咖啡吧
-
-<table border="0">
-  <tr>
-    <td align="center"><img src="docs/alipay.png" /></td>
-    <td align="center"><img src="docs/weichat.png" /></td>
-    <td align="center"><img src="docs/paypal.png" /></td>
-  </tr>
-  <tr>
-    <td align="center">支付宝</td>
-    <td align="center">微信</td>
-    <td align="center">Paypal</td>
-  </tr>
-</table>

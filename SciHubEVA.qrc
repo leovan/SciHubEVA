@@ -6,7 +6,10 @@
         <file>ui/SciHubEVACaptcha.qml</file>
         <file>ui/SciHubEVAMessage.qml</file>
         <file>ui/SciHubEVAPreferences.qml</file>
-        <file>images/about.png</file>
+        <file>images/SciHubEVA-about.png</file>
+        <file>images/SciHubEVA-background-dark.png</file>
+        <file>images/SciHubEVA-background-light.png</file>
+        <file>images/SciHubEVA-icon.png</file>
         <file>fonts/materialdesignicons-webfont.ttf</file>
     </qresource>
 </RCC>

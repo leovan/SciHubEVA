@@ -96,6 +96,22 @@ ApplicationWindow {
         }
     }
 
+    background: Image {
+        source: {
+            switch(Material.theme) {
+            case Material.Light:
+                "qrc:/images/SciHubEVA-background-light.png"
+                break
+            case Material.Dark:
+                "qrc:/images/SciHubEVA-background-dark.png"
+                break
+            default:
+                ""
+                break
+            }
+        }
+    }
+
     ColumnLayout {
         id: columnLayoutApplication
 

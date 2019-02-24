@@ -202,8 +202,8 @@ class SciHubAPI(QObject, threading.Thread):
         if len(imgs) > 0 and len(ids) > 0:
             captcha_id = ids[0].attrib['value']
             captcha_img_src = imgs[0].attrib['src']
-            captcha_img_url = 'http://' + \
-                urlparse(pdf_captcha_response.url).netloc + captcha_img_src
+            scheme, netloc, *_ = urlparse(pdf_captcha_response.url, scheme='http')
+            captcha_img_url = scheme + '://' + netloc + captcha_img_src
 
         return captcha_id, captcha_img_url
 
@@ -304,7 +304,7 @@ class SciHubAPI(QObject, threading.Thread):
                     self.log(self.tr('Got PDF URL: ') + pdf_url_html, 'INFO')
                 else:
                     err = SciHubError.NO_VALID_IFRAME
-                    request_url = 'http://{scihub_url}/{query}'.format(scihub_url=scihub_url, query=query)
+                    request_url = '{scihub_url}/{query}'.format(scihub_url=scihub_url, query=query)
                     request_url_html = '<a href="{request_url}">{request_url}</a>'.format(request_url=request_url)
                     response_url = pdf_url_response.url
                     response_url_html = '<a href="{response_url}">{response_url}</a>'.format(response_url=response_url)

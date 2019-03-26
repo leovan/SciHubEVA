@@ -57,7 +57,9 @@
    rm -f scihub_resources.py
    pyside2-rcc SciHubEVA.qrc -o scihub_resources.py
    
-   # Need fix PyInstaller issue first (https://github.com/pyinstaller/pyinstaller/pull/3875)
+   # Need fix PyInstaller issues 
+   # https://github.com/pyinstaller/pyinstaller/pull/3875
+   # https://github.com/pyinstaller/pyinstaller/issues/4040
    
    pyinstaller -w scihub_eva.py \
      --add-data "LICENSE:." \
@@ -65,6 +67,7 @@
      --add-data "qtquickcontrols2.conf:." \
      --add-data "images/SciHubEVA-icon.png:images" \
      --add-data "translations/*.qm:translations" \
+     --additional-hooks-dir "building/hooks" \
      --name "SciHubEVA" \
      --icon "images/SciHubEVA.icns" \
      --noupx
@@ -106,7 +109,9 @@
    del /Q scihub_resources.py
    pyside2-rcc SciHubEVA.qrc -o scihub_resources.py
    
-   :: Need fix PyInstaller issue (https://github.com/pyinstaller/pyinstaller/pull/3875)
+   :: Need fix PyInstaller issues
+   :: https://github.com/pyinstaller/pyinstaller/pull/3875
+   :: https://github.com/pyinstaller/pyinstaller/issues/4040
    
    pyinstaller -w scihub_eva.py ^
      --add-data "LICENSE;." ^
@@ -114,6 +119,7 @@
      --add-data "qtquickcontrols2.conf;." ^
      --add-data "images/SciHubEVA-icon.png;images" ^
      --add-data "translations/*.qm;translations" ^
+     --additional-hooks-dir "building/hooks" ^
      --name "SciHubEVA" ^
      --icon "images/SciHubEVA.ico" ^
      --version-file "building/Windows/SciHubEVA.win.version" ^

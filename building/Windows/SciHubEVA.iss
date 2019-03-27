@@ -14,7 +14,7 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 AppCopyright=Copyright (c) 2018-2019 Leo Van.
 AppReadmeFile=https://github.com/leovan/SciHubEVA
-DefaultDirName={pf64}\{#MyAppName}
+DefaultDirName={autopf64}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile=..\..\LICENSE
@@ -28,7 +28,7 @@ WizardImageFile=..\..\images\SciHubEVA-inno-installer-wizard.bmp
 WizardSmallImageFile=..\..\images\SciHubEVA-inno-installer-wizard-small.bmp
 ArchitecturesAllowed=x64
 UninstallDisplayIcon={app}\{#MyAppExeName}
-PrivilegesRequired=admin
+PrivilegesRequiredOverridesAllowed=dialog
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:\Default.isl"

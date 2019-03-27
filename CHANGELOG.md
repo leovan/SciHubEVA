@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.1.1](https://github.com/leovan/SciHubEVA/compare/v2.1.0...v2.1.1) (2019-03-26)
+## [2.1.1](https://github.com/leovan/SciHubEVA/compare/v2.1.0...v2.1.1) (2019-03-27)
 
 ### Bug Fixes
 

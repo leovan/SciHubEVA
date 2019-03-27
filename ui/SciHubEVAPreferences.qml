@@ -104,9 +104,9 @@ ApplicationWindow {
     }
 
     function setProxyType(proxyType) {
-        if (proxyType === 'http') {
+        if (proxyType === "http") {
             radioButtonPreferencesProxyTypeHTTP.checked = true
-        } else if (proxyType === 'socks') {
+        } else if (proxyType === "socks") {
             radioButtonPreferencesProxyTypeSocks.checked = true
         }
     }
@@ -146,7 +146,10 @@ ApplicationWindow {
                 id: buttonDialogChangeThemeRestartMessageOK
                 text: qsTr("OK")
 
-                onClicked: preferencesWindow.close()
+                onClicked: {
+                    dialogChangeThemeRestartMessage.close()
+                    preferencesWindow.close()
+                }
             }
         }
     }

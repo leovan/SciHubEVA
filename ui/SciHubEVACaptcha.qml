@@ -19,6 +19,7 @@ ApplicationWindow {
 
     function showWindowCaptcha(captchaImagePath) {
         imageCaptcha.source = captchaImagePath
+        textFieldCaptcha.text = ""
         show()
     }
 
@@ -67,7 +68,7 @@ ApplicationWindow {
 
                 onClicked: {
                     close()
-                    killCaptcha(false, '')
+                    killCaptcha(false, "")
                 }
             }
         }

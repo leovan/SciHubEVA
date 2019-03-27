@@ -58,7 +58,7 @@ ApplicationWindow {
                 text: qsTr("Confirm")
 
                 onClicked: {
-                    if (textFieldAddSciHubURL.text.trim() != '') {
+                    if (textFieldAddSciHubURL.text.trim() != "") {
                         addSciHubURL(textFieldAddSciHubURL.text.trim())
                         close()
                     }

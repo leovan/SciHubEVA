@@ -154,11 +154,11 @@ ApplicationWindow {
                 font.bold: false
 
                 onClicked: {
-                    if (textFieldSaveToDir.text.trim() === '') {
+                    if (textFieldSaveToDir.text.trim() === "") {
                         dialogMessage.setIcon("\uf5de")
                         dialogMessage.setText(qsTr("Please choose save to directory first!"))
                         dialogMessage.open()
-                    } else if (textFieldQuery.text.trim() === '') {
+                    } else if (textFieldQuery.text.trim() === "") {
                         dialogMessage.setIcon("\uf5de")
                         dialogMessage.setText(qsTr("Please specify query!"))
                         dialogMessage.open()

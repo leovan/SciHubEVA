@@ -1,5 +1,4 @@
-lxml==4.3.2
+lxml==4.3.3
 pdfminer.six==20181108
 PySide2==5.12.2
 requests==2.21.0
-urllib3==1.24.1

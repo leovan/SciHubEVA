@@ -164,7 +164,10 @@ ApplicationWindow {
                 id: buttonDialogRemoveSciHubURLConfirmMessageYes
                 text: qsTr("Yes")
 
-                onClicked: removeSciHubURL(comboBoxPreferencesNetworkSciHubURL.currentIndex)
+                onClicked: {
+                    removeSciHubURL(comboBoxPreferencesNetworkSciHubURL.currentIndex)
+                    dialogRemoveSciHubURLConfirmMessage.close()
+                }
             }
 
             Button {

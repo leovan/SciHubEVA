@@ -47,6 +47,7 @@ Dialog {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                 Layout.fillWidth: true
+                Layout.minimumWidth: 200
                 Layout.maximumWidth: 300
 
                 textFormat: Text.RichText

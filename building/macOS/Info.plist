@@ -9,7 +9,7 @@
     <key>CFBundleExecutable</key>
     <string>MacOS/SciHubEVA</string>
     <key>CFBundleShortVersionString</key>
-    <string>2.1.1</string>
+    <string>2.1.2</string>
     <key>LSBackgroundOnly</key>
     <string>0</string>
     <key>CFBundleName</key>

@@ -22,6 +22,7 @@ scihub_resources.py
 *.spec
 design/**
 !design/*.psd
+!design/*.svg
 build/**
 dist/**
 translations/*_zh_HK.ts

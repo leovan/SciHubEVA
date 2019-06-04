@@ -71,3 +71,6 @@ See [`building/README.md`](building/README.md)
 [PySide2](https://doc.qt.io/qtforpython): GNU Lesser General Public License (LGPL)
 
 [Material design icons](https://github.com/templarian/MaterialDesign/): [SIL Open Font License 1.1](http://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web)
+
+Icons: GNU General Public License 3.0 (GPL-3.0), borrowed from [Numix Circle](https://github.com/numixproject/numix-icon-theme-circle).
+

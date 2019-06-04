@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.1.2](https://github.com/leovan/SciHubEVA/compare/v2.1.1...v2.1.2) (2019-06-04)
+
+### Features
+
+- Change to new icon.
+
+### Bug Fixes
+
+- Fix building with PyInstaller against PySide2 5.13.2+.
+- Fix some bugs.
+
 ## [2.1.1](https://github.com/leovan/SciHubEVA/compare/v2.1.0...v2.1.1) (2019-03-27)
 
 ### Bug Fixes

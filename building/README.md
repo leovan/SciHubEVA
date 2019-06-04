@@ -57,17 +57,12 @@
    rm -f scihub_resources.py
    pyside2-rcc SciHubEVA.qrc -o scihub_resources.py
    
-   # Need fix PyInstaller issues 
-   # https://github.com/pyinstaller/pyinstaller/pull/3875
-   # https://github.com/pyinstaller/pyinstaller/issues/4040
-   
    pyinstaller -w scihub_eva.py \
      --add-data "LICENSE:." \
      --add-data "SciHubEVA.conf:." \
      --add-data "qtquickcontrols2.conf:." \
      --add-data "images/SciHubEVA-icon.png:images" \
      --add-data "translations/*.qm:translations" \
-     --additional-hooks-dir "building/hooks" \
      --name "SciHubEVA" \
      --icon "images/SciHubEVA.icns" \
      --noupx
@@ -75,13 +70,18 @@
    cp building/macOS/Info.plist dist/SciHubEVA.app/Contents
    
    # QML libraries and resource files in different directories cause errors.
-   find dist/SciHubEVA.app/Contents/MacOS/qml -type l | xargs rm -f
-   cp -rf dist/SciHubEVA.app/Contents/Resources/qml dist/SciHubEVA.app/Contents/MacOS
-   rm -rf dist/SciHubEVA.app/Contents/Resources/qml
+   find dist/SciHubEVA.app/Contents/MacOS/PySide2/qml -type l | xargs rm -f
+   cp -rf dist/SciHubEVA.app/Contents/Resources/PySide2/qml dist/SciHubEVA.app/Contents/MacOS/PySide2
+   rm -rf dist/SciHubEVA.app/Contents/Resources/PySide2/qml
+   
+   # Remove useless libraries
+   cd dist/SciHubEVA.app/Contents/MacOS
+   rm -f Qt3D* QtBluetooth QtCharts QtDataVisualization QtMultimedia QtMultimediaQuick QtNfc QtPurchasing QtQuickTest QtScxml QtSensors QtTest QtWebChannel QtWebEngine QtWebEngineCore
+   cd ../../../..
    ```
-
+   
    `SciHubEVA.app` will be in `dist`.
-
+   
 5. Package with `appdmg`. Install [Node.js](https://nodejs.org) first, then run the following commands:
 
    ```bash
@@ -109,36 +109,26 @@
    del /Q scihub_resources.py
    pyside2-rcc SciHubEVA.qrc -o scihub_resources.py
    
-   :: Need fix PyInstaller issues
-   :: https://github.com/pyinstaller/pyinstaller/pull/3875
-   :: https://github.com/pyinstaller/pyinstaller/issues/4040
-   
    pyinstaller -w scihub_eva.py ^
      --add-data "LICENSE;." ^
      --add-data "SciHubEVA.conf;." ^
      --add-data "qtquickcontrols2.conf;." ^
      --add-data "images/SciHubEVA-icon.png;images" ^
      --add-data "translations/*.qm;translations" ^
-     --additional-hooks-dir "building/hooks" ^
      --name "SciHubEVA" ^
      --icon "images/SciHubEVA.ico" ^
      --version-file "building/Windows/SciHubEVA.win.version" ^
      --noupx
+     
+   :: Remove useless libraries
+   cd dist/SciHubEVA
+   del /Q Qt53D* Qt5Bluetooth.dll Qt5Charts.dll Qt5DataVisualization.dll Qt5Multimedia.dll Qt5MultimediaQuick.dll Qt5Nfc.dll Qt5Purchasing.dll Qt5QuickTest.dll Qt5Scxml.dll Qt5Sensors.dll Qt5Test.dll Qt5WebChannel.dll Qt5WebEngine.dll Qt5WebEngineCore.dll
+   cd ../..
    ```
 
    All compiled files will be in `dist\SciHubEVA`.
 
-5. Add OpenGL libraries.
-
-   ```powershell
-   set PYSIDE2_PACKAGE_DIR=X:\PYTHON_ROOT\Lib\site-packages\PySide2
-   
-   copy %PYSIDE2_PACKAGE_DIR%\libEGL.dll dist\SciHubEVA
-   copy %PYSIDE2_PACKAGE_DIR%\libGLESv2.dll dist\SciHubEVA
-   copy %PYSIDE2_PACKAGE_DIR%\d3dcompiler_*.dll dist\SciHubEVA
-   ```
-
-6. Package with Inno Setup. Install [Inno Setup 6](http://www.jrsoftware.org/isinfo.php) first and add installation directory to PATH. Download Chinese (Simplified) and Chinese (Traditional) translations from [here](http://www.jrsoftware.org/files/istrans/), and copy them to `INNO_SETUP_ROOT\Languages`.
+5. Package with Inno Setup. Install [Inno Setup 6](http://www.jrsoftware.org/isinfo.php) first and add installation directory to PATH. Download Chinese (Simplified) and Chinese (Traditional) translations from [here](http://www.jrsoftware.org/files/istrans/), and copy them to `INNO_SETUP_ROOT\Languages`.
 
    ```powershell
    ISCC.exe building/Windows/SciHubEVA.iss
@@ -146,7 +136,7 @@
 
    `SciHubEVA.exe` installer will be in the `dist`.
 
-7. If you need a x86 version, please make sure you have a x86 version python environment, and modify the `SciHubEVA.iss` accordingly.
+6. If you need a x86 version, please make sure you have a x86 version python environment, and modify the `SciHubEVA.iss` accordingly.
 
    ```text
    DefaultDirName={autopf64}\{#MyAppName} -> DefaultDirName={autopf32}\{#MyAppName}

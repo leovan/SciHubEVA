@@ -60,6 +60,14 @@ Sometimes, you need enter the captcha to continue the download.
   </tr>
 </table>
 
+## Installing
+
+### macOS
+
+Install from brew cask
+
+>brew cask install scievahub
+
 ## Building
 
 See [`building/README.md`](building/README.md)

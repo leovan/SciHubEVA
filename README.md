@@ -65,7 +65,7 @@ Sometimes, you need enter the captcha to continue the download.
 ### macOS
 
 - Install with [DMG file](https://github.com/leovan/SciHubEVA/releases).
-- Install from brew cask. `brew cask install scievahub`
+- Install from brew cask. `brew cask install scihubeva`
 
 ### Windows
 

@@ -22,10 +22,7 @@
    lupdate SciHubEVA.pro
    
    # Generate translations source of Python files
-   pyside2-lupdate *.py -ts translations/SciHubEVA_py_zh_CN.ts
-   
-   # Merge translations/SciHubEVA_py_zh_CN.ts into translations/SciHubEVA_zh_CN.ts manually
-   # ......
+   pyside2-lupdate *.py -ts translations/SciHubEVA_zh_CN.ts
    
    # Do translations with Qt Linguist
    # ......
@@ -39,9 +36,9 @@
    lrelease translations/SciHubEVA_zh_TW.ts
    lrelease translations/SciHubEVA_zh_HK.ts
    ```
-
+   
    Complied translations will be in `translations` end with `.qm`.
-
+   
 4. Build with `PyInstaller`.
 
    ```bash
@@ -68,11 +65,6 @@
      --noupx
    
    cp building/macOS/Info.plist dist/SciHubEVA.app/Contents
-   
-   # QML libraries and resource files in different directories cause errors.
-   find dist/SciHubEVA.app/Contents/MacOS/PySide2/qml -type l | xargs rm -f
-   cp -rf dist/SciHubEVA.app/Contents/Resources/PySide2/qml dist/SciHubEVA.app/Contents/MacOS/PySide2
-   rm -rf dist/SciHubEVA.app/Contents/Resources/PySide2/qml
    
    # Remove useless libraries
    cd dist/SciHubEVA.app/Contents/MacOS

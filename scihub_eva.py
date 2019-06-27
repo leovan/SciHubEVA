@@ -4,6 +4,7 @@
 import sys
 import locale
 import os
+import PySide2
 
 from PySide2.QtCore import QObject, Qt, QTranslator, Slot, Signal
 from PySide2.QtGui import QGuiApplication, QIcon, QFont
@@ -36,6 +37,8 @@ class SciHubEVA(QObject):
         self._qt_quick_controls2_conf = SciHubConf('qtquickcontrols2.conf', space_around_delimiters=False)
 
         self._engine = QQmlApplicationEngine()
+        self._engine.rootContext().setContextProperty('PYTHON_VERSION', '.'.join(str(v) for v in sys.version_info[:3]))
+        self._engine.rootContext().setContextProperty('QT_VERSION', PySide2.QtCore.qVersion())
         self._engine.load('qrc:/ui/SciHubEVA.qml')
         self._window = self._engine.rootObjects()[0]
         self._connect()

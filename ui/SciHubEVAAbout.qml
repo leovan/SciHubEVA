@@ -34,7 +34,9 @@ Dialog {
                 id: labelAboutText
                 text: "<style>a { color: " + Material.accent + "; }</style>" +
                       "<p><b>Sci-Hub EVA v2.1.2</b></p>" +
-                      "<p>" + qsTr("Sci-Hub EVA is a cross-platform Sci-Hub GUI Application written with Python and Qt.") + "</p>" +
+                      "<p>" + qsTr("Sci-Hub EVA is a cross-platform Sci-Hub GUI Application based on ") +
+                      "Python " + PYTHON_VERSION + qsTr(" and ") +
+                      "Qt (PySide2) " + QT_VERSION + qsTr(".") + "</p>" +
                       "<p>" + qsTr("Author: ") + "<a href=\"https://leovan.me\">" + qsTr("Leo Van") + "</a></p>" +
                       "<p>" + qsTr("License: ") +
                       "<a href=\"https://github.com/leovan/SciHubEVA\">The MIT License</a></p>"

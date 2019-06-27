@@ -136,21 +136,31 @@
     <name>SciHubEVAAbout</name>
     <message>
         <location filename="../ui/SciHubEVAAbout.qml" line="37"/>
-        <source>Sci-Hub EVA is a cross-platform Sci-Hub GUI Application written with Python and Qt.</source>
-        <translation>Sci-Hub EVA 是一个跨平台的 Sci-Hub GUI 程序。</translation>
+        <source>Sci-Hub EVA is a cross-platform Sci-Hub GUI Application based on </source>
+        <translation>Sci-Hub EVA 是一个基于 </translation>
     </message>
     <message>
         <location filename="../ui/SciHubEVAAbout.qml" line="38"/>
+        <source> and </source>
+        <translation> 和 </translation>
+    </message>
+    <message>
+        <location filename="../ui/SciHubEVAAbout.qml" line="39"/>
+        <source>.</source>
+        <translation> 的 Sci-Hub GUI 程序。</translation>
+    </message>
+    <message>
+        <location filename="../ui/SciHubEVAAbout.qml" line="40"/>
         <source>Author: </source>
         <translation>作者: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAAbout.qml" line="38"/>
+        <location filename="../ui/SciHubEVAAbout.qml" line="40"/>
         <source>Leo Van</source>
         <translation>Leo Van</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAAbout.qml" line="39"/>
+        <location filename="../ui/SciHubEVAAbout.qml" line="41"/>
         <source>License: </source>
         <translation>许可: </translation>
     </message>
@@ -213,37 +223,37 @@
         <translation>配置</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="187"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="190"/>
         <source>Common</source>
         <translation>通用</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="200"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="203"/>
         <source>Filename Prefix Format: </source>
         <translation>文件名前缀格式: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="218"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="221"/>
         <source>Supported Keywords: </source>
         <translation>支持的关键字: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="223"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="226"/>
         <source>{author}: Author, {year}: Year, {title}: Title</source>
         <translation>{author}: 作者, {year}: 年份, {title}: 标题</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="242"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="245"/>
         <source>Network</source>
         <translation>网络</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="258"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="261"/>
         <source>SciHub URL: </source>
         <translation>SciHub URL: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="288"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="291"/>
         <source>Cannot remove the last Sci-Hub URL!</source>
         <translation>无法删除最后一个 Sci-Hub 网址！</translation>
     </message>
@@ -263,72 +273,72 @@
         <translation>是</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="172"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="175"/>
         <source>No</source>
         <translation>否</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="228"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="231"/>
         <source>Theme: </source>
         <translation>主题: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="291"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="294"/>
         <source>Delete Sci-Hub URL: </source>
         <translation>删除 Sci-Hub 网址: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="307"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="310"/>
         <source>Timeout: </source>
         <translation>超时: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="334"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="337"/>
         <source>Retry Times: </source>
         <translation>重试次数: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="355"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="358"/>
         <source>Proxy</source>
         <translation>代理</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="372"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="375"/>
         <source>Enable Proxy</source>
         <translation>开启代理</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="381"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="384"/>
         <source>Proxy Type: </source>
         <translation>代理类型: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="402"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="405"/>
         <source>Proxy Host: </source>
         <translation>代理地址: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="416"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="419"/>
         <source>Proxy Port: </source>
         <translation>代理端口: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="433"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="436"/>
         <source>Proxy Username: </source>
         <translation>用户名: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="447"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="450"/>
         <source>Proxy Password: </source>
         <translation>密码: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="470"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="473"/>
         <source>Confirm</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="477"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="480"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>

@@ -12,11 +12,15 @@
 
 ## Usage
 
-Launch the app, click `OPEN ...` to choose where to save the download files. Fill the query and click `RAMPAGE`, then it will search and download. Currently, you can fill the query with `URL`, `DOI` / `PMID` or search string.
+Launch the app, click `OPEN` button to choose where to save the download files. Click `SHOW` button will open the diretory where you save the downloaded files.
+
+Fill the query and click `RAMPAGE` button, then it will search the query and download the file. Currently, you can fill the query with `URL`, `DOI`, `PMID` or search string.
+
+Also you can download with a query list file, in which each line represents a query. Click `LOAD` button to choose the query list file.
 
 ![Application_MACOS_EN](docs/scihub-eva-application-macos-en.png)
 
-You may want to change some options in the `Preferences`. Due to the unstable Sci-Hub host accessibility, it may fail to download PDFs sometimes, you can change or add other Sci-Hub URLs.
+You can change options in the `Preferences` dialog. Due to the unstable Sci-Hub host accessibility, it may fail to download PDFs sometimes, you can change and add other Sci-Hub URLs, or set a proxy server.
 
 ![Preferences_MACOS_EN](docs/scihub-eva-preferences-macos-en.png)
 
@@ -84,4 +88,3 @@ See [`building/README.md`](building/README.md)
 [Material design icons](https://github.com/templarian/MaterialDesign/): [SIL Open Font License 1.1](http://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web)
 
 Icons: GNU General Public License 3.0 (GPL-3.0), borrowed from [Numix Circle](https://github.com/numixproject/numix-icon-theme-circle).
-

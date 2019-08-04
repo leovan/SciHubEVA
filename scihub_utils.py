@@ -4,6 +4,7 @@
 import platform
 import subprocess
 
+from pathlib import Path
 from pdfminer.psparser import PSLiteral, PSKeyword
 
 
@@ -33,7 +34,7 @@ def show_directory(dir: str, timeout=1):
     if platform.system() == 'Darwin':
         subprocess.call(['open', dir], timeout=timeout)
     elif platform.system() == 'Windows':
-        subprocess.call(['explorer', dir], timeout=timeout)
+        subprocess.call(['explorer', str(Path(dir))], timeout=timeout)
     else:
         subprocess.call(['xdg-open', dir], timeout=timeout)
 

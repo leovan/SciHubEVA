@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.0](https://github.com/leovan/SciHubEVA/compare/v2.1.2...v3.0.0) (2019-08-04)
+
+### Features
+
+- Support downloading with query list file. ([#10](https://github.com/leovan/SciHubEVA/issues/10))
+- Add SciHubEVA as a brew cask formula. (Thanks [@womeimingzi11](https://github.com/womeimingzi11))
+
 ## [2.1.2](https://github.com/leovan/SciHubEVA/compare/v2.1.1...v2.1.2) (2019-06-04)
 
 ### Features

@@ -22,28 +22,42 @@ ApplicationWindow {
     maximumWidth: columnLayoutApplication.Layout.maximumWidth + 2 * margin
     maximumHeight: columnLayoutApplication.Layout.maximumHeight + 2 * margin
 
-    signal saveToDir(string directory)
+    signal setSaveToDir(string directory)
+    signal showSaveToDir(string directory)
     signal showWindowPreference()
     signal showWindowAddSciHubURL()
 
     signal rampage(string query)
 
+    function loadSaveToDir(directory) {
+        textFieldSaveToDir.text = directory
+    }
+
     function beforeRampage() {
         buttonRampage.enabled = false
-        buttonSaveToOpen.enabled = false
+        buttonLoadInputQueryList.enabled = false
+        buttonOpenSaveToDir.enabled = false
     }
 
     function afterRampage() {
         buttonRampage.enabled = true
-        buttonSaveToOpen.enabled = true
+        buttonLoadInputQueryList.enabled = true
+        buttonOpenSaveToDir.enabled = true
     }
 
-    function setSaveToDir(directory) {
-        textFieldSaveToDir.text = directory
-    }
+    function appendLogs(message, level) {
+        var style = "<style>a { color: " + Material.accent + "; }</style>"
+        var prefix = ""
 
-    function appendLogs(log) {
-        textAreaLogs.append("<style>a { color: " + Material.accent + "; }</style>" + log)
+        if (level === "INFO") {
+            prefix = "[INFO] - "
+        } else if (level === "WARN") {
+            prefix = "[WARN] - "
+        } else if (level === "ERROR") {
+            prefix = "[ERROR] - "
+        }
+
+        textAreaLogs.append(style + prefix + message)
     }
 
     FontLoader {
@@ -74,25 +88,44 @@ ApplicationWindow {
         }
     }
 
+    Platform.FileDialog {
+        id: fileDialogQueryList
+
+        onAccepted: {
+            var queryListURI = fileDialogQueryList.file.toString()
+
+            switch (Qt.platform.os) {
+            case "windows":
+                queryListURI = queryListURI.replace(/^(file:\/{3})/, "")
+                break
+            default:
+                queryListURI = queryListURI.replace(/^(file:\/{2})/, "")
+                break
+            }
+
+            textFieldQuery.text = queryListURI
+        }
+    }
+
     Platform.FolderDialog {
         id: folderDialogSaveTo
 
         options: Platform.FolderDialog.ShowDirsOnly
 
         onAccepted: {
-            var folderURI = folderDialogSaveTo.folder.toString()
+            var saveToURI = folderDialogSaveTo.folder.toString()
 
             switch (Qt.platform.os) {
             case "windows":
-                folderURI = folderURI.replace(/^(file:\/{3})/, "")
+                saveToURI = saveToURI.replace(/^(file:\/{3})/, "")
                 break
             default:
-                folderURI = folderURI.replace(/^(file:\/{2})/, "")
+                saveToURI = saveToURI.replace(/^(file:\/{2})/, "")
                 break
             }
 
-            textFieldSaveToDir.text = folderURI
-            applicationWindow.saveToDir(folderURI)
+            textFieldSaveToDir.text = saveToURI
+            applicationWindow.setSaveToDir(saveToURI)
         }
     }
 
@@ -125,7 +158,7 @@ ApplicationWindow {
             Layout.fillWidth: true
 
             rows: 2
-            columns: 4
+            columns: 5
 
             Label {
                 id: labelQuery
@@ -136,7 +169,7 @@ ApplicationWindow {
 
             TextField {
                 id: textFieldQuery
-                placeholderText: qsTr("URL, PMID / DOI or search string")
+                placeholderText: qsTr("URL, PMID, DOI, Search String or Query List File")
 
                 implicitWidth: 300
                 Layout.minimumWidth: 300
@@ -147,11 +180,10 @@ ApplicationWindow {
 
             Button {
                 id: buttonRampage
-                text: qsTr("RAMPAGE")
-
-                Layout.minimumWidth: 100
+                text: qsTr("Rampage")
 
                 font.bold: false
+                Layout.fillWidth: true
 
                 onClicked: {
                     if (textFieldSaveToDir.text.trim() === "") {
@@ -169,8 +201,20 @@ ApplicationWindow {
             }
 
             Button {
+                id: buttonLoadInputQueryList
+                text: qsTr("Load")
+
+                font.bold: false
+                Layout.fillWidth: true
+
+                onClicked: fileDialogQueryList.open()
+            }
+
+            Button {
                 id: buttonAbout
                 text: "\uf2fc"
+
+                Layout.maximumWidth: buttonPreferences.height
 
                 font.family: fontMDI.name
                 font.pointSize: buttonRampage.font.pointSize * 1.2
@@ -197,22 +241,33 @@ ApplicationWindow {
             }
 
             Button {
-                id: buttonSaveToOpen
-                text: qsTr("Open ...")
-
-                Layout.minimumWidth: 100
+                id: buttonOpenSaveToDir
+                text: qsTr("Open")
 
                 font.bold: false
+                Layout.fillWidth: true
 
                 onClicked: folderDialogSaveTo.open()
+            }
+
+            Button {
+                id: buttonShowSaveToDir
+                text: qsTr("Show")
+
+                font.bold: false
+                Layout.fillWidth: true
+
+                onClicked: applicationWindow.showSaveToDir(textFieldSaveToDir.text.trim())
             }
 
             Button {
                 id: buttonPreferences
                 text: "\uf493"
 
+                Layout.maximumWidth: buttonPreferences.height
+
                 font.family: fontMDI.name
-                font.pointSize: buttonSaveToOpen.font.pointSize * 1.2
+                font.pointSize: buttonOpenSaveToDir.font.pointSize * 1.2
 
                 onClicked: {
                     applicationWindow.showWindowPreference()
@@ -248,6 +303,7 @@ ApplicationWindow {
                 wrapMode: Text.WordWrap
                 readOnly: true
                 selectByMouse: true
+                horizontalAlignment: Text.AlignLeft
 
                 onTextChanged: flickableLogs.scrollToBottom()
                 onLinkActivated: Qt.openUrlExternally(link)

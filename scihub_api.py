@@ -323,7 +323,7 @@ class SciHubAPI(QObject, threading.Thread):
         return pdf_url, err
 
     def save_pdf(self, pdf, filename):
-        """Save pdf to locaal
+        """Save pdf to local
 
         Args:
             pdf: PDF content (in bytes)
@@ -339,7 +339,9 @@ class SciHubAPI(QObject, threading.Thread):
         with open(pdf_path, 'wb') as fp:
             fp.write(pdf)
 
-        self.log(self.tr('Saved PDF as: ') + pdf_name, 'INFO')
+        pdf_link = '<a href="file:///{pdf_path}">{pdf_path}</a>'.format(pdf_path=pdf_path)
+
+        self.log(self.tr('Saved PDF as: ') + pdf_link, 'INFO')
 
     def rampage(self, query, rampage_type):
         """Main process of downloading PDF
@@ -359,7 +361,7 @@ class SciHubAPI(QObject, threading.Thread):
         if rampage_type == SciHubRampageType.INPUT:
             # Query is user input
 
-            self.log('')
+            self.log('<hr/>')
             self.log(self.tr('Dealing with query: ') + query, 'INFO')
 
             # Fetch PDF URL

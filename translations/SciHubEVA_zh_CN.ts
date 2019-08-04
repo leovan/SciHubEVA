@@ -1,73 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="zh_CN">
+<!DOCTYPE TS><TS version="1.1" language="zh_CN">
 <context>
     <name>SciHubAPI</name>
     <message>
+        <location filename="scihub_api.py" line="179"/>
         <source>Query type: </source>
         <translation>搜索类型: </translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="231"/>
         <source>Angel [CAPTCHA] down!</source>
         <translation>使徒 [CAPTCHA] 已消灭！</translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="250"/>
         <source>Fetching PDF ...</source>
         <translation>获取 PDF 中 ...</translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="261"/>
         <source>Angel [CAPTCHA] is coming!</source>
         <translation>使徒 [CAPTCHA] 来袭！</translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="265"/>
         <source>Unknown PDF Content-Type!</source>
         <translation>未知的 PDF 数据类型！</translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="283"/>
         <source>Using Sci-Hub URL: </source>
         <translation>使用 Sci-Hub URL: </translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="291"/>
         <source>Fetching PDF URL ...</source>
         <translation>获取 PDF URL 中 ...</translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="304"/>
         <source>Got PDF URL: </source>
         <translation>获取到 PDF URL: </translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="312"/>
         <source>Failed to get PDF URL!</source>
         <translation>获取 PDF URL 失败！</translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="313"/>
         <source>No valid &amp;lt;iframe&amp;gt;!</source>
         <translation>无有效的 &amp;lt;iframe&amp;gt; ！</translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="314"/>
         <source>You may need handle it manually.</source>
         <translation>你可能需要手动处理。</translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="315"/>
         <source>Request URL: </source>
         <translation>请求 URL: </translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="316"/>
         <source>Response URL: </source>
         <translation>响应 URL: </translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="320"/>
         <source>Failed to get PDF!</source>
         <translation>获取 PDF 失败！</translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="344"/>
         <source>Saved PDF as: </source>
         <translation>保存 PDF 为: </translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="365"/>
         <source>Dealing with query: </source>
         <translation>正在处理搜索: </translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="388"/>
         <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
         <translation>验证码错误，使徒 [CAPTCHA] 消灭失败！</translation>
     </message>
@@ -75,6 +91,7 @@
 <context>
     <name>SciHubCaptcha</name>
     <message>
+        <location filename="scihub_captcha.py" line="34"/>
         <source>Battle canceled, rampage again?</source>
         <translation>战斗取消，再次暴走？</translation>
     </message>
@@ -82,54 +99,74 @@
 <context>
     <name>SciHubEVA</name>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="70"/>
+        <location filename="../ui/SciHubEVA.qml" line="84"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="132"/>
+        <location filename="../ui/SciHubEVA.qml" line="165"/>
         <source>Query: </source>
         <translation>搜索: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="139"/>
-        <source>URL, PMID / DOI or search string</source>
-        <translation>URL, PMID / DOI 或标题</translation>
+        <location filename="../ui/SciHubEVA.qml" line="172"/>
+        <source>URL, PMID, DOI, Search String or Query List File</source>
+        <translation>URL, PMID, DOI, 标题或搜索列表文件</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="150"/>
-        <source>RAMPAGE</source>
+        <location filename="../ui/SciHubEVA.qml" line="183"/>
+        <source>Rampage</source>
         <translation>暴走</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="159"/>
+        <location filename="../ui/SciHubEVA.qml" line="191"/>
         <source>Please choose save to directory first!</source>
         <translation>请先选择保存路径！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="163"/>
+        <location filename="../ui/SciHubEVA.qml" line="195"/>
         <source>Please specify query!</source>
         <translation>请指定搜索内容！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="183"/>
+        <location filename="../ui/SciHubEVA.qml" line="205"/>
+        <source>Load</source>
+        <translation>载入</translation>
+    </message>
+    <message>
+        <location filename="../ui/SciHubEVA.qml" line="227"/>
         <source>Save to: </source>
         <translation>保存至: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="201"/>
-        <source>Open ...</source>
-        <translation>打开 ...</translation>
+        <location filename="../ui/SciHubEVA.qml" line="245"/>
+        <source>Open</source>
+        <translation>打开</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="225"/>
+        <location filename="../ui/SciHubEVA.qml" line="255"/>
+        <source>Show</source>
+        <translation>显示</translation>
+    </message>
+    <message>
+        <location filename="../ui/SciHubEVA.qml" line="280"/>
         <source>Logs: </source>
         <translation>日志: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="244"/>
+        <location filename="../ui/SciHubEVA.qml" line="299"/>
         <source>Welcome to Sci-Hub EVA</source>
         <translation>欢迎使用 Sci-Hub EVA</translation>
+    </message>
+    <message>
+        <location filename="scihub_eva.py" line="117"/>
+        <source>Query list file is not a text file!</source>
+        <translation>搜索列表文件不是一个文本文件！</translation>
+    </message>
+    <message>
+        <location filename="scihub_eva.py" line="129"/>
+        <source>Dealing with {}/{} query ...</source>
+        <translation>正在处理 {}/{} 查询 ...</translation>
     </message>
 </context>
 <context>
@@ -165,6 +202,7 @@
         <translation>许可: </translation>
     </message>
     <message>
+        <location filename="../ui/SciHubEVAAbout.qml" line="41"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>

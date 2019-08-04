@@ -33,7 +33,7 @@ Dialog {
             Label {
                 id: labelAboutText
                 text: "<style>a { color: " + Material.accent + "; }</style>" +
-                      "<p><b>Sci-Hub EVA v2.1.2</b></p>" +
+                      "<p><b>Sci-Hub EVA v3.0.0</b></p>" +
                       "<p>" + qsTr("Sci-Hub EVA is a cross-platform Sci-Hub GUI Application based on ") +
                       "Python " + PYTHON_VERSION + qsTr(" and ") +
                       "Qt (PySide2) " + QT_VERSION + qsTr(".") + "</p>" +

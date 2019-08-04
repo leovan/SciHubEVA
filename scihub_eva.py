@@ -6,6 +6,8 @@ import locale
 import os
 import PySide2
 
+from collections import deque
+
 from PySide2.QtCore import QObject, Qt, QTranslator, Slot, Signal
 from PySide2.QtGui import QGuiApplication, QIcon, QFont
 from PySide2.QtQml import QQmlApplicationEngine
@@ -14,6 +16,7 @@ from scihub_conf import SciHubConf
 from scihub_preferences import SciHubPreferences
 from scihub_captcha import SciHubCaptcha
 from scihub_api import SciHubAPI, SciHubRampageType, SciHubError
+from scihub_utils import show_directory, is_text_file
 
 import scihub_resources
 
@@ -27,8 +30,8 @@ class SciHubEVA(QObject):
     beforeRampage = Signal()
     afterRampage = Signal()
 
-    setSaveToDir = Signal(str)
-    appendLogs = Signal(str)
+    loadSaveToDir = Signal(str)
+    appendLogs = Signal(str, str)
 
     def __init__(self):
         super(SciHubEVA, self).__init__()
@@ -52,19 +55,23 @@ class SciHubEVA(QObject):
             self._save_to_dir = None
         else:
             self._save_to_dir = save_to_dir
-            self.setSaveToDir.emit(save_to_dir)
+            self.loadSaveToDir.emit(save_to_dir)
+
+        self._query_list = deque()
+        self._query_list_length = 0
 
     def _connect(self):
         # Connect QML signals to PyQt slots
-        self._window.saveToDir.connect(self.saveToDir)
+        self._window.setSaveToDir.connect(self.setSaveToDir)
+        self._window.showSaveToDir.connect(self.showSaveToDir)
         self._window.rampage.connect(self.rampage)
-        self._window.showWindowPreference.connect(self.showWindowPreferences)
+        self._window.showWindowPreference.connect(self.showWindowPreference)
 
         # Connect PyQt signals to QML slots
         self.beforeRampage.connect(self._window.beforeRampage)
         self.afterRampage.connect(self._window.afterRampage)
 
-        self.setSaveToDir.connect(self._window.setSaveToDir)
+        self.loadSaveToDir.connect(self._window.loadSaveToDir)
         self.appendLogs.connect(self._window.appendLogs)
 
     @property
@@ -72,31 +79,73 @@ class SciHubEVA(QObject):
         return self._conf
 
     @Slot(str)
-    def saveToDir(self, directory):
+    def setSaveToDir(self, directory):
         self._save_to_dir = directory
         self._conf.set('common', 'save_to_dir', directory)
 
+    @Slot(str)
+    def showSaveToDir(self, directory):
+        if os.path.exists(directory):
+            show_directory(directory)
+
     @Slot()
-    def showWindowPreferences(self):
-        self._scihub_preferences.loadFromConf()
+    def showWindowPreference(self):
+        self._scihub_preferences.load_from_conf()
         self._scihub_preferences.showWindowPreferences.emit()
 
     @Slot(str)
-    def rampage(self, input_query):
-        """Download PDF with query of input
+    def rampage(self, input):
+        """Download PDF with input
 
         Args:
-            input_query: Query of input
+            input: query or query list file path
 
         """
 
-        scihub_api = SciHubAPI(input_query, callback=self.rampage_callback,
+        if os.path.exists(input):
+            if is_text_file(input):
+                with open(input, 'rt') as f:
+                    for line in f:
+                        cleaned_line = line.strip()
+                        if cleaned_line != '':
+                            self._query_list.append(cleaned_line)
+
+                self._query_list_length = len(self._query_list)
+                self.rampage_query_list()
+            else:
+                self.log('<hr/>')
+                self.log(self.tr('Query list file is not a text file!'), 'ERROR')
+        else:
+            self.rampage_query(input)
+
+
+    def rampage_query_list(self):
+        """Download PDF with query list (self._query_list)
+
+        """
+
+        if self._query_list:
+            self.log('<hr/>')
+            self.log(self.tr('Dealing with {}/{} query ...').format(
+                self._query_list_length - len(self._query_list) + 1, self._query_list_length))
+
+            self.rampage_query(self._query_list.popleft())
+
+    def rampage_query(self, query):
+        """Download PDF with query
+
+        Args:
+            query: Query of input
+
+        """
+
+        scihub_api = SciHubAPI(query, callback=self.rampage_callback,
                                rampage_type=SciHubRampageType.INPUT,
                                conf=self._conf, log=self.log)
         self.beforeRampage.emit()
         scihub_api.start()
 
-    def rampageWithCaptchar(self, captcha_answer):
+    def rampage_with_captcha(self, captcha_answer):
         """ Download PDF with captcha query (self._captcha_query) and captcha answer
 
         Args:
@@ -121,11 +170,13 @@ class SciHubEVA(QObject):
         """
 
         if err == SciHubError.BLOCKED_BY_CAPTCHA:
-            self.captcha_callback(res)
+            self.show_captcha(res)
+        elif self._query_list:
+            self.rampage_query_list()
         else:
             self.afterRampage.emit()
 
-    def captcha_callback(self, pdf_captcha_response):
+    def show_captcha(self, pdf_captcha_response):
         """Callback function for PDF captcha response
 
         Args:
@@ -138,12 +189,7 @@ class SciHubEVA(QObject):
         self._scihub_captcha.showWindowCaptcha.emit(captcha_img_url)
 
     def log(self, message, level=None):
-        if level:
-            log_formatter = '[{level}] - {message}'
-        else:
-            log_formatter = '{message}'
-
-        self.appendLogs.emit(log_formatter.format(level=level, message=message))
+        self.appendLogs.emit(message, level)
 
 
 if __name__ == '__main__':

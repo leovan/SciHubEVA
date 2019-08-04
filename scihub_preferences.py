@@ -40,7 +40,7 @@ class SciHubPreferences(QObject):
         self._window = self._engine.rootObjects()[0]
         self._connect()
 
-        self.loadFromConf()
+        self.load_from_conf()
 
         self._scihub_add_scihub_url = SciHubAddSciHubURL(self._conf, self)
 
@@ -82,7 +82,7 @@ class SciHubPreferences(QObject):
         self.setProxyUsername.connect(self._window.setProxyUsername)
         self.setProxyPassword.connect(self._window.setProxyPassword)
 
-    def loadFromConf(self):
+    def load_from_conf(self):
         self.setFilenamePrefixFormat.emit(self._conf.get('common', 'filename_prefix_format'))
 
         self.setThemeModel.emit(self._themes)

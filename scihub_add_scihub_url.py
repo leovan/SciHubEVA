@@ -36,4 +36,4 @@ class SciHubAddSciHubURL(QObject):
             scihub_available_urls.append(url)
 
         self._conf.set('network', 'scihub_available_urls', json.dumps(scihub_available_urls))
-        self._parent.loadFromConf()
+        self._parent.load_from_conf()

@@ -46,11 +46,12 @@ class SciHubError(Enum):
 
 
 class SciHubAPI(QObject, threading.Thread):
-    def __init__(self, query, callback=None, rampage_type=None, conf=None, log=None, **kwargs):
+    def __init__(self, query, log, callback=None, rampage_type=None, conf=None, **kwargs):
         QObject.__init__(self)
         threading.Thread.__init__(self)
 
         self._query = query
+        self.log = log
         self._callback = callback
         self._rampage_type = rampage_type
 
@@ -62,9 +63,6 @@ class SciHubAPI(QObject, threading.Thread):
             self._conf = conf
         else:
             self._conf = SciHubConf('SciHubEVA.conf')
-
-        if log:
-            self.log = log
 
         self._sess = requests.Session()
         self._sess.headers = json.loads(self._conf.get('network', 'session_header'))
@@ -79,14 +77,6 @@ class SciHubAPI(QObject, threading.Thread):
 
         self._doi_pattern = r'\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'])\S)+)\b'
         self._illegal_filename_pattern = r'[\/\\\:\*\?\"\<\>\|]'
-
-    def log(self, message, level=None):
-        if level:
-            log_formatter = '[{level}] - {message}'
-        else:
-            log_formatter = '{message}'
-
-        print(log_formatter.format(level=level, message=message))
 
     def _set_http_proxy(self):
         if self._conf.getboolean('proxy', 'enabled'):
@@ -134,20 +124,24 @@ class SciHubAPI(QObject, threading.Thread):
                     'year': 'UNKNOWN_YEAR'}
 
         pdf_parser = PDFParser(temp_pdf_file)
-        pdf_doc = PDFDocument(pdf_parser)
-        pdf_metadata = pdf_doc.info[0]
 
-        author = make_pdf_metadata_str(pdf_metadata.get('Author', ''))
-        if author and author != '':
-            metadata['author'] = author
+        try:
+            pdf_doc = PDFDocument(pdf_parser)
+            pdf_metadata = pdf_doc.info[0]
 
-        title = make_pdf_metadata_str(pdf_metadata.get('Title', ''))
-        if title and title != '':
-            metadata['title'] = title
+            author = make_pdf_metadata_str(pdf_metadata.get('Author', ''))
+            if author and author != '':
+                metadata['author'] = author
 
-        year = pdf_metadata_moddate_to_year(make_pdf_metadata_str(pdf_metadata.get('ModDate', '')))
-        if year and year != '':
-            metadata['year'] = year
+            title = make_pdf_metadata_str(pdf_metadata.get('Title', ''))
+            if title and title != '':
+                metadata['title'] = title
+
+            year = pdf_metadata_moddate_to_year(make_pdf_metadata_str(pdf_metadata.get('ModDate', '')))
+            if year and year != '':
+                metadata['year'] = year
+        except Exception as e:
+            pass
 
         temp_pdf_file.close()
 
@@ -202,8 +196,12 @@ class SciHubAPI(QObject, threading.Thread):
         if len(imgs) > 0 and len(ids) > 0:
             captcha_id = ids[0].attrib['value']
             captcha_img_src = imgs[0].attrib['src']
-            scheme, netloc, *_ = urlparse(pdf_captcha_response.url, scheme='http')
-            captcha_img_url = scheme + '://' + netloc + captcha_img_src
+
+            if captcha_img_src.startswith('http'):
+                captcha_img_url = captcha_img_src
+            else:
+                scheme, netloc, *_ = urlparse(pdf_captcha_response.url, scheme='http')
+                captcha_img_url = scheme + '://' + netloc + captcha_img_src
 
         return captcha_id, captcha_img_url
 
@@ -258,7 +256,7 @@ class SciHubAPI(QObject, threading.Thread):
         if pdf_response.headers['Content-Type'] == 'application/pdf':
             pdf = pdf_response.content
         elif pdf_response.headers['Content-Type'].startswith('text/html'):
-            self.log(self.tr('Angel [CAPTCHA] is coming!'), 'WARNING')
+            self.log(self.tr('Angel [CAPTCHA] is coming!'), 'WARN')
             err = SciHubError.BLOCKED_BY_CAPTCHA
             pdf = pdf_response
         else:
@@ -295,9 +293,9 @@ class SciHubAPI(QObject, threading.Thread):
                     timeout=self._conf.getfloat('network', 'timeout') / 1000.0)
 
                 html = etree.HTML(pdf_url_response.content)
-                iframes = html.xpath('//iframe[@id="pdf"]')
+                iframes = html.xpath('//iframe[@id="pdf"]') if html is not None else None
 
-                if len(iframes) > 0:
+                if iframes and len(iframes) > 0:
                     pdf_url = urlparse(iframes[0].attrib['src'], scheme='http').geturl()
                     pdf_url_html = '<a href="{pdf_url}">{pdf_url}</a>'.format(pdf_url=pdf_url)
 
@@ -317,7 +315,7 @@ class SciHubAPI(QObject, threading.Thread):
             except Exception as e:
                 err = SciHubError.UNKNOWN
 
-                self.log(self.tr('Failed to get PDF!'), 'ERROR')
+                self.log(self.tr('Failed to get PDF URL!'), 'ERROR')
                 self.log(str(e), 'ERROR')
 
         return pdf_url, err

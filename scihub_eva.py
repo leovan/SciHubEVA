@@ -16,7 +16,7 @@ from scihub_conf import SciHubConf
 from scihub_preferences import SciHubPreferences
 from scihub_captcha import SciHubCaptcha
 from scihub_api import SciHubAPI, SciHubRampageType, SciHubError
-from scihub_utils import show_directory, is_text_file
+from scihub_utils import show_directory, is_text_file, is_range_query, gen_range_query_list
 
 import scihub_resources
 
@@ -57,7 +57,7 @@ class SciHubEVA(QObject):
             self._save_to_dir = save_to_dir
             self.loadSaveToDir.emit(save_to_dir)
 
-        self._query_list = deque()
+        self._query_list = None
         self._query_list_length = 0
 
     def _connect(self):
@@ -104,6 +104,8 @@ class SciHubEVA(QObject):
 
         if os.path.exists(input):
             if is_text_file(input):
+                self._query_list = deque()
+
                 with open(input, 'rt') as f:
                     for line in f:
                         cleaned_line = line.strip()
@@ -115,6 +117,10 @@ class SciHubEVA(QObject):
             else:
                 self.log('<hr/>')
                 self.log(self.tr('Query list file is not a text file!'), 'ERROR')
+        elif is_range_query(input):
+            self._query_list = deque(gen_range_query_list(input))
+            self._query_list_length = len(self._query_list)
+            self.rampage_query_list()
         else:
             self.rampage_query(input)
 
@@ -124,7 +130,7 @@ class SciHubEVA(QObject):
 
         """
 
-        if self._query_list:
+        if self._query_list and len(self._query_list) > 0:
             self.log('<hr/>')
             self.log(self.tr('Dealing with {}/{} query ...').format(
                 self._query_list_length - len(self._query_list) + 1, self._query_list_length))

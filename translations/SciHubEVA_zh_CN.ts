@@ -3,87 +3,82 @@
 <context>
     <name>SciHubAPI</name>
     <message>
-        <location filename="scihub_api.py" line="179"/>
+        <location filename="scihub_api.py" line="173"/>
         <source>Query type: </source>
         <translation>搜索类型: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="231"/>
+        <location filename="scihub_api.py" line="229"/>
         <source>Angel [CAPTCHA] down!</source>
         <translation>使徒 [CAPTCHA] 已消灭！</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="250"/>
+        <location filename="scihub_api.py" line="248"/>
         <source>Fetching PDF ...</source>
         <translation>获取 PDF 中 ...</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="261"/>
+        <location filename="scihub_api.py" line="259"/>
         <source>Angel [CAPTCHA] is coming!</source>
         <translation>使徒 [CAPTCHA] 来袭！</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="265"/>
+        <location filename="scihub_api.py" line="263"/>
         <source>Unknown PDF Content-Type!</source>
         <translation>未知的 PDF 数据类型！</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="283"/>
+        <location filename="scihub_api.py" line="281"/>
         <source>Using Sci-Hub URL: </source>
         <translation>使用 Sci-Hub URL: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="291"/>
+        <location filename="scihub_api.py" line="289"/>
         <source>Fetching PDF URL ...</source>
         <translation>获取 PDF URL 中 ...</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="304"/>
+        <location filename="scihub_api.py" line="302"/>
         <source>Got PDF URL: </source>
         <translation>获取到 PDF URL: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="312"/>
+        <location filename="scihub_api.py" line="318"/>
         <source>Failed to get PDF URL!</source>
         <translation>获取 PDF URL 失败！</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="313"/>
+        <location filename="scihub_api.py" line="311"/>
         <source>No valid &amp;lt;iframe&amp;gt;!</source>
         <translation>无有效的 &amp;lt;iframe&amp;gt; ！</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="314"/>
+        <location filename="scihub_api.py" line="312"/>
         <source>You may need handle it manually.</source>
         <translation>你可能需要手动处理。</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="315"/>
+        <location filename="scihub_api.py" line="313"/>
         <source>Request URL: </source>
         <translation>请求 URL: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="316"/>
+        <location filename="scihub_api.py" line="314"/>
         <source>Response URL: </source>
         <translation>响应 URL: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="320"/>
-        <source>Failed to get PDF!</source>
-        <translation>获取 PDF 失败！</translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="344"/>
+        <location filename="scihub_api.py" line="342"/>
         <source>Saved PDF as: </source>
         <translation>保存 PDF 为: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="365"/>
+        <location filename="scihub_api.py" line="363"/>
         <source>Dealing with query: </source>
         <translation>正在处理搜索: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="388"/>
+        <location filename="scihub_api.py" line="386"/>
         <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
         <translation>验证码错误，使徒 [CAPTCHA] 消灭失败！</translation>
     </message>
@@ -159,12 +154,12 @@
         <translation>欢迎使用 Sci-Hub EVA</translation>
     </message>
     <message>
-        <location filename="scihub_eva.py" line="117"/>
+        <location filename="scihub_eva.py" line="119"/>
         <source>Query list file is not a text file!</source>
         <translation>搜索列表文件不是一个文本文件！</translation>
     </message>
     <message>
-        <location filename="scihub_eva.py" line="129"/>
+        <location filename="scihub_eva.py" line="135"/>
         <source>Dealing with {}/{} query ...</source>
         <translation>正在处理 {}/{} 查询 ...</translation>
     </message>

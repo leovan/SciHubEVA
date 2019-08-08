@@ -16,6 +16,8 @@ Launch the app, click `OPEN` button to choose where to save the download files. 
 
 Fill the query and click `RAMPAGE` button, then it will search the query and download the file. Currently, you can fill the query with `URL`, `DOI`, `PMID` or search string.
 
+Range pattern in query is also supported, e.g. `00.000/{1-99}` will download `00.000/1`, `00.000/2`, ... `00.000/99`. Zero padded format range pattern is allowd, e.g. `00.000/{01-99}` will download `00.000/01`, `00.000/02`, ... `00.000/99`.
+
 Also you can download with a query list file, in which each line represents a query. Click `LOAD` button to choose the query list file.
 
 ![Application_MACOS_EN](docs/scihub-eva-application-macos-en.png)

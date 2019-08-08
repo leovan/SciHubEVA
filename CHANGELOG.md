@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.1.0](https://github.com/leovan/SciHubEVA/compare/v3.0.0...v3.1.0) (2019-08-08)
+
+### Features
+
+- Support range pattern in query.
+
+### Bug Fixes
+
+- Fix captcha handling bugs.
+
+### Tests
+
+- Add a fake server to test different situations. ([#11](https://github.com/leovan/SciHubEVA/issues/11))
+
 ## [3.0.0](https://github.com/leovan/SciHubEVA/compare/v2.1.2...v3.0.0) (2019-08-04)
 
 ### Features

@@ -29,7 +29,7 @@ class SciHubCaptcha(QObject):
     @Slot(bool, str)
     def killCaptcha(self, kill, captcha):
         if kill:
-            self._parent.rampageWithCaptchar(captcha)
+            self._parent.rampage_with_captcha(captcha)
         else:
             self.log(self.tr('Battle canceled, rampage again?'), 'ERROR')
             self._parent.afterRampage.emit()

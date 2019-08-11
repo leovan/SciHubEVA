@@ -27,6 +27,8 @@ ApplicationWindow {
         anchors.fill: parent
         anchors.margins: margin
 
+        focus: true
+
         RowLayout {
             id: rowLayoutAddSciHubURLText
 
@@ -70,6 +72,14 @@ ApplicationWindow {
                 text: qsTr("Cancel")
 
                 onClicked: close()
+            }
+        }
+
+        Keys.onPressed: {
+            if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
+                buttonAddSciHubURLConfirm.clicked()
+            } else if (event.key === Qt.Key_Escape) {
+                buttonAddSciHubURLCancel.clicked()
             }
         }
     }

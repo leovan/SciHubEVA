@@ -29,6 +29,8 @@ ApplicationWindow {
         anchors.fill: parent
         anchors.margins: margin
 
+        focus: true
+
         Image {
             id: imageCaptcha
         }
@@ -70,6 +72,14 @@ ApplicationWindow {
                     close()
                     killCaptcha(false, "")
                 }
+            }
+        }
+
+        Keys.onPressed: {
+            if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
+                buttonCaptchaConfirm.clicked()
+            } else if (event.key === Qt.Key_Escape) {
+                buttonCaptchaCancel.clicked()
             }
         }
     }

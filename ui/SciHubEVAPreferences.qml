@@ -52,8 +52,8 @@ ApplicationWindow {
 
         if (radioButtonPreferencesProxyTypeHTTP.checked) {
             saveProxyType('http')
-        } else if (radioButtonPreferencesProxyTypeSocks.checked) {
-            saveProxyType('socks')
+        } else if (radioButtonPreferencesProxyTypeSocks5.checked) {
+            saveProxyType('socks5')
         }
 
         saveProxyHost(textFieldPreferencesProxyHost.text.trim())
@@ -106,8 +106,8 @@ ApplicationWindow {
     function setProxyType(proxyType) {
         if (proxyType === "http") {
             radioButtonPreferencesProxyTypeHTTP.checked = true
-        } else if (proxyType === "socks") {
-            radioButtonPreferencesProxyTypeSocks.checked = true
+        } else if (proxyType === "socks5") {
+            radioButtonPreferencesProxyTypeSocks5.checked = true
         }
     }
 
@@ -184,6 +184,8 @@ ApplicationWindow {
 
         anchors.fill: parent
         anchors.margins: margin
+
+        focus: true
 
         GroupBox {
             id: groupBoxPreferencesCommon
@@ -385,8 +387,8 @@ ApplicationWindow {
                     }
 
                     RadioButton {
-                        id: radioButtonPreferencesProxyTypeSocks
-                        text: "Socks"
+                        id: radioButtonPreferencesProxyTypeSocks5
+                        text: "SOCKS5"
                     }
 
                     RadioButton {
@@ -480,6 +482,14 @@ ApplicationWindow {
                 text: qsTr("Cancel")
 
                 onClicked: close()
+            }
+        }
+
+        Keys.onPressed: {
+            if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
+                buttonPreferencesConfirm.clicked()
+            } else if (event.key === Qt.Key_Escape) {
+                buttonPreferencesCancel.clicked()
             }
         }
     }

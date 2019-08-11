@@ -151,6 +151,8 @@ ApplicationWindow {
         anchors.fill: parent
         anchors.margins: margin
 
+        focus: true
+
         GridLayout {
             id: gridLayoutQuery
 
@@ -307,6 +309,12 @@ ApplicationWindow {
 
                 onTextChanged: flickableLogs.scrollToBottom()
                 onLinkActivated: Qt.openUrlExternally(link)
+            }
+        }
+
+        Keys.onPressed: {
+            if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
+                buttonRampage.clicked()
             }
         }
     }

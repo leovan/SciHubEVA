@@ -55,6 +55,7 @@
    pyside2-rcc SciHubEVA.qrc -o scihub_resources.py
    
    pyinstaller -w scihub_eva.py \
+     --hidden-import "socks" \
      --add-data "LICENSE:." \
      --add-data "SciHubEVA.conf:." \
      --add-data "qtquickcontrols2.conf:." \
@@ -102,6 +103,7 @@
    pyside2-rcc SciHubEVA.qrc -o scihub_resources.py
    
    pyinstaller -w scihub_eva.py ^
+     --hidden-import "socks" ^
      --add-data "LICENSE;." ^
      --add-data "SciHubEVA.conf;." ^
      --add-data "qtquickcontrols2.conf;." ^

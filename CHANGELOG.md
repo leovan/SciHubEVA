@@ -8,7 +8,7 @@
 
 ### Bug Fixes
 
-- Fix socks proxy bugs. ([#12](https://github.com/leovan/SciHubEVA/issues/11))
+- Fix socks proxy bugs. ([#12](https://github.com/leovan/SciHubEVA/issues/12))
 
 ## [3.1.0](https://github.com/leovan/SciHubEVA/compare/v3.0.0...v3.1.0) (2019-08-08)
 

@@ -108,9 +108,9 @@ class SciHubPreferences(QObject):
         self._scihub_add_scihub_url.showWindowAddSciHubURL.emit()
 
     @Slot(int)
-    def removeSciHubURL(self, network__scihub_url_current_index):
+    def removeSciHubURL(self, scihub_url_current_index):
         scihub_available_urls = json.loads(self._conf.get('network', 'scihub_available_urls'))
-        del scihub_available_urls[network__scihub_url_current_index]
+        del scihub_available_urls[scihub_url_current_index]
 
         self._conf.set('network', 'scihub_available_urls', json.dumps(scihub_available_urls))
         self._conf.set('network', 'scihub_url', scihub_available_urls[0])
@@ -127,9 +127,9 @@ class SciHubPreferences(QObject):
         self._qt_quick_controls2_conf.set('Material', 'Theme', self._themes[theme_current_index])
 
     @Slot(int)
-    def saveNetworkSciHubURLCurrentIndex(self, _scihub_url_current_index):
+    def saveNetworkSciHubURLCurrentIndex(self, scihub_url_current_index):
         scihub_available_urls = json.loads(self._conf.get('network', 'scihub_available_urls'))
-        self._conf.set('network', 'scihub_url', scihub_available_urls[_scihub_url_current_index])
+        self._conf.set('network', 'scihub_url', scihub_available_urls[scihub_url_current_index])
 
     @Slot(int)
     def saveNetworkTimeout(self, timeout):

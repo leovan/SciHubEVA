@@ -60,6 +60,8 @@ class SciHubEVA(QObject):
         self._query_list = None
         self._query_list_length = 0
 
+        self._captcha_img_file = None
+
     def _connect(self):
         # Connect QML signals to PyQt slots
         self._window.setSaveToDir.connect(self.setSaveToDir)
@@ -163,6 +165,9 @@ class SciHubEVA(QObject):
                                rampage_type=SciHubRampageType.PDF_CAPTCHA_RESPONSE,
                                conf=self._conf, log=self.log, captcha_answer=captcha_answer)
 
+        if self._captcha_img_file:
+            self._captcha_img_file.close()
+
         self.beforeRampage.emit()
         scihub_api.start()
 
@@ -191,8 +196,13 @@ class SciHubEVA(QObject):
         """
 
         self._captcha_query = pdf_captcha_response
-        _, captcha_img_url = SciHubAPI.get_captcha_info(pdf_captcha_response)
-        self._scihub_captcha.showWindowCaptcha.emit(captcha_img_url)
+
+        scihub_api = SciHubAPI('', log=self.log, conf=self._conf)
+        _, captcha_img_url = scihub_api.get_captcha_info(pdf_captcha_response)
+        self._captcha_img_file = scihub_api.download_captcha_img(captcha_img_url)
+        captcha_img_local_url = 'file://' + self._captcha_img_file.name
+
+        self._scihub_captcha.showWindowCaptcha.emit(captcha_img_local_url)
 
     def log(self, message, level=None):
         self.appendLogs.emit(message, level)

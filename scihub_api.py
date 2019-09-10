@@ -15,6 +15,7 @@ from urllib.parse import urlparse
 from lxml import etree
 from pdfminer.pdfparser import PDFParser
 from pdfminer.pdfdocument import PDFDocument
+from tempfile import NamedTemporaryFile
 from PySide2.QtCore import QObject
 
 from scihub_conf import SciHubConf
@@ -174,8 +175,7 @@ class SciHubAPI(QObject, threading.Thread):
 
         return query_type
 
-    @staticmethod
-    def get_captcha_info(pdf_captcha_response):
+    def get_captcha_info(self, pdf_captcha_response):
         """Get captcha information with PDF captcha response
 
         Args:
@@ -204,6 +204,29 @@ class SciHubAPI(QObject, threading.Thread):
                 captcha_img_url = scheme + '://' + netloc + captcha_img_src
 
         return captcha_id, captcha_img_url
+
+    def download_captcha_img(self, captcha_img_url):
+        """ Download captcha image
+
+        Args:
+            captcha_img_url: Captcha image URL
+
+        Returns:
+            Captcha image file
+
+        """
+
+        captcha_img_file = NamedTemporaryFile()
+
+        captcha_img_res = self._sess.get(captcha_img_url, stream=True)
+
+        if captcha_img_res.status_code == 200:
+            for chuck in captcha_img_res:
+                captcha_img_file.write(chuck)
+
+        captcha_img_file.flush()
+
+        return captcha_img_file
 
     def fetch_pdf_with_captcha(self, pdf_captcha_response):
         """Fetch PDF with captcha

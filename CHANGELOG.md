@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.2](https://github.com/leovan/SciHubEVA/compare/v3.1.1...v3.1.2) (2019-09-10)
+
+### Bug Fixes
+
+- Fix captcha display bug. ([#13](https://github.com/leovan/SciHubEVA/issues/13))
+
 ## [3.1.1](https://github.com/leovan/SciHubEVA/compare/v3.1.0...v3.1.1) (2019-08-11)
 
 ### Features

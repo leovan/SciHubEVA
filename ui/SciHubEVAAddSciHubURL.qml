@@ -18,6 +18,7 @@ ApplicationWindow {
     signal addSciHubURL(string url)
 
     function showWindowAddSciHubURL() {
+        textFieldAddSciHubURL.text = ""
         show()
     }
 

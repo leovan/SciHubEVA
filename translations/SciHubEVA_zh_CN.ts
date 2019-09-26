@@ -210,17 +210,17 @@
         <translation>添加 Sci-Hub 网址</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAAddSciHubURL.qml" line="39"/>
+        <location filename="../ui/SciHubEVAAddSciHubURL.qml" line="40"/>
         <source>Sci-Hub URL: </source>
         <translation>Sci-Hub 网址: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAAddSciHubURL.qml" line="60"/>
+        <location filename="../ui/SciHubEVAAddSciHubURL.qml" line="61"/>
         <source>Confirm</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAAddSciHubURL.qml" line="72"/>
+        <location filename="../ui/SciHubEVAAddSciHubURL.qml" line="73"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>

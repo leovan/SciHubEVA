@@ -13,6 +13,7 @@ class SciHubPreferences(QObject):
     showWindowPreferences = Signal()
 
     setFilenamePrefixFormat = Signal(str)
+    setOverwriteExistingFile = Signal(bool)
     setThemeModel = Signal(list)
     setThemeCurrentIndex = Signal(int)
 
@@ -50,6 +51,7 @@ class SciHubPreferences(QObject):
         self._window.removeSciHubURL.connect(self.removeSciHubURL)
 
         self._window.saveFilenamePrefixFormat.connect(self.saveFilenamePrefixFormat)
+        self._window.saveOverwriteExistingFile.connect(self.saveOverwriteExistingFile)
         self._window.saveThemeCurrentIndex.connect(self.saveThemeCurrentIndex)
 
         self._window.saveNetworkSciHubURLCurrentIndex.connect(self.saveNetworkSciHubURLCurrentIndex)
@@ -67,6 +69,7 @@ class SciHubPreferences(QObject):
         self.showWindowPreferences.connect(self._window.showWindowPreferences)
         
         self.setFilenamePrefixFormat.connect(self._window.setFilenamePrefixFormat)
+        self.setOverwriteExistingFile.connect(self._window.setOverwriteExistingFile)
         self.setThemeModel.connect(self._window.setThemeModel)
         self.setThemeCurrentIndex.connect(self._window.setThemeCurrentIndex)
 
@@ -84,6 +87,7 @@ class SciHubPreferences(QObject):
 
     def load_from_conf(self):
         self.setFilenamePrefixFormat.emit(self._conf.get('common', 'filename_prefix_format'))
+        self.setOverwriteExistingFile.emit(self._conf.getboolean('common', 'overwrite_existing_file'))
 
         self.setThemeModel.emit(self._themes)
         theme = self._qt_quick_controls2_conf.get('Material', 'Theme')
@@ -122,6 +126,10 @@ class SciHubPreferences(QObject):
     def saveFilenamePrefixFormat(self, filename_prefix_format):
         self._conf.set('common', 'filename_prefix_format', filename_prefix_format)
 
+    @Slot(bool)
+    def saveOverwriteExistingFile(self, overwrite):
+        self._conf.set('common', 'overwrite_existing_file', str(overwrite).lower())
+
     @Slot(int)
     def saveThemeCurrentIndex(self, theme_current_index):
         self._qt_quick_controls2_conf.set('Material', 'Theme', self._themes[theme_current_index])
@@ -135,6 +143,7 @@ class SciHubPreferences(QObject):
     def saveNetworkTimeout(self, timeout):
         self._conf.set('network', 'timeout', str(timeout))
 
+    @Slot(int)
     def saveNetworkRetryTimes(self, retry_times):
         self._conf.set('network', 'retry_times', str(retry_times))
 

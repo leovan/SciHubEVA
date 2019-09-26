@@ -22,6 +22,7 @@ ApplicationWindow {
     signal removeSciHubURL(int networkSciHubURLCurrentIndex)
 
     signal saveFilenamePrefixFormat(string filenamePrefixFormat)
+    signal saveOverwriteExistingFile(bool overwrite)
     signal saveThemeCurrentIndex(int themeCurrentIndex)
 
     signal saveNetworkSciHubURLCurrentIndex(int networkSciHubURLCurrentIndex)
@@ -43,6 +44,7 @@ ApplicationWindow {
 
     function saveAllPreference() {
         saveFilenamePrefixFormat(textFieldPreferencesFilenamePrefixFormat.text.trim())
+        saveOverwriteExistingFile(switchOverwrite.checked)
         saveThemeCurrentIndex(comboBoxPreferencesTheme.currentIndex)
 
         saveNetworkSciHubURLCurrentIndex(comboBoxPreferencesNetworkSciHubURL.currentIndex)
@@ -72,6 +74,10 @@ ApplicationWindow {
 
     function setFilenamePrefixFormat(filenameFormat) {
         textFieldPreferencesFilenamePrefixFormat.text = filenameFormat
+    }
+
+    function setOverwriteExistingFile(overwrite) {
+        switchOverwrite.checked = overwrite
     }
 
     function setThemeModel(model) {
@@ -196,7 +202,7 @@ ApplicationWindow {
             GridLayout {
                 id: gridLayoutPreferencesFile
 
-                rows: 3
+                rows: 4
                 columns: 2
                 anchors.fill: parent
 
@@ -238,6 +244,30 @@ ApplicationWindow {
 
                     Layout.minimumWidth: 200
                     Layout.fillWidth: true
+                }
+
+                Label {
+                    id: labelOverwrite
+                    text: qsTr("Overwrite Existing File:")
+                }
+
+                RowLayout {
+                    id: rowLayoutOverwrite
+
+                    Label {
+                        id: labelOverwriteNo
+                        text: qsTr("No")
+                    }
+
+                    Switch {
+                        id: switchOverwrite
+                        display: AbstractButton.IconOnly
+                    }
+
+                    Label {
+                        id: labelOverwriteYes
+                        text: qsTr("Yes")
+                    }
                 }
             }
         }

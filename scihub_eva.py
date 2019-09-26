@@ -169,9 +169,6 @@ class SciHubEVA(QObject):
                                rampage_type=SciHubRampageType.PDF_CAPTCHA_RESPONSE,
                                conf=self._conf, log=self.log, captcha_answer=captcha_answer)
 
-        if self._captcha_img_file:
-            self._captcha_img_file.close()
-
         self.beforeRampage.emit()
         scihub_api.start()
 

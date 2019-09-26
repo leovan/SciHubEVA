@@ -7,6 +7,7 @@ import os
 import PySide2
 
 from collections import deque
+from pathlib import Path
 
 from PySide2.QtCore import QObject, Qt, QTranslator, Slot, Signal
 from PySide2.QtGui import QGuiApplication, QIcon, QFont
@@ -60,7 +61,7 @@ class SciHubEVA(QObject):
         self._query_list = None
         self._query_list_length = 0
 
-        self._captcha_img_file = None
+        self._captcha_img_file_path = None
 
     def _connect(self):
         # Connect QML signals to PyQt slots
@@ -161,6 +162,9 @@ class SciHubEVA(QObject):
 
         """
 
+        if os.path.exists(self._captcha_img_file_path) and os.path.isfile(self._captcha_img_file_path):
+            os.remove(self._captcha_img_file_path)
+
         scihub_api = SciHubAPI(self._captcha_query, callback=self.rampage_callback,
                                rampage_type=SciHubRampageType.PDF_CAPTCHA_RESPONSE,
                                conf=self._conf, log=self.log, captcha_answer=captcha_answer)
@@ -199,10 +203,11 @@ class SciHubEVA(QObject):
 
         scihub_api = SciHubAPI('', log=self.log, conf=self._conf)
         _, captcha_img_url = scihub_api.get_captcha_info(pdf_captcha_response)
-        self._captcha_img_file = scihub_api.download_captcha_img(captcha_img_url)
-        captcha_img_local_url = 'file://' + self._captcha_img_file.name
+        captcha_img_file = scihub_api.download_captcha_img(captcha_img_url)
+        self._captcha_img_file_path = Path(captcha_img_file.name).as_posix()
+        captcha_img_local_uri = Path(captcha_img_file.name).as_uri()
 
-        self._scihub_captcha.showWindowCaptcha.emit(captcha_img_local_url)
+        self._scihub_captcha.showWindowCaptcha.emit(captcha_img_local_uri)
 
     def log(self, message, level=None):
         self.appendLogs.emit(message, level)

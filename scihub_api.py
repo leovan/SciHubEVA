@@ -7,6 +7,7 @@ import re
 import tempfile
 import threading
 import requests
+import time
 
 from enum import Enum, unique
 from requests.adapters import HTTPAdapter
@@ -216,7 +217,7 @@ class SciHubAPI(QObject, threading.Thread):
 
         """
 
-        captcha_img_file = NamedTemporaryFile()
+        captcha_img_file = NamedTemporaryFile(delete=False)
 
         captcha_img_res = self._sess.get(captcha_img_url, stream=True)
 
@@ -225,6 +226,7 @@ class SciHubAPI(QObject, threading.Thread):
                 captcha_img_file.write(chuck)
 
         captcha_img_file.flush()
+        captcha_img_file.close()
 
         return captcha_img_file
 
@@ -352,7 +354,13 @@ class SciHubAPI(QObject, threading.Thread):
 
         """
 
-        pdf_name_formatter = self._conf.get('common', 'filename_prefix_format') + '_' + filename
+        pdf_name_formatter = self._conf.get('common', 'filename_prefix_format')
+
+        if not self._conf.getboolean('common', 'overwrite_existing_file'):
+            pdf_name_formatter += '_' + str(round(time.time() * 1000000))
+
+        pdf_name_formatter += '_' + filename
+
         pdf_metadata = self.get_pdf_metadata(pdf)
         pdf_name = pdf_name_formatter.format(**pdf_metadata)
         pdf_path = os.path.join(self._conf.get('common', 'save_to_dir'), pdf_name)

@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.2.0](https://github.com/leovan/SciHubEVA/compare/v3.1.2...v3.2.0) (2019-09-26)
+
+### Features
+
+- Support doing not overwrite existing file when downloading.
+
+### Bug Fixes
+
+- Fix captcha display bug due to the temporary file problem on Windows. ([#14](https://github.com/leovan/SciHubEVA/issues/14)) ([#16](https://github.com/leovan/SciHubEVA/issues/16))
+
 ## [3.1.2](https://github.com/leovan/SciHubEVA/compare/v3.1.1...v3.1.2) (2019-09-10)
 
 ### Bug Fixes

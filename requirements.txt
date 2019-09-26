@@ -2,4 +2,4 @@ lxml==4.4.1
 pdfminer.six==20181108
 PySide2==5.13.1
 requests==2.22.0
-PySocks==1.7.0
+PySocks==1.7.1

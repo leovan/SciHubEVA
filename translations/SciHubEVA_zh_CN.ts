@@ -3,82 +3,82 @@
 <context>
     <name>SciHubAPI</name>
     <message>
-        <location filename="scihub_api.py" line="174"/>
+        <location filename="scihub_api.py" line="175"/>
         <source>Query type: </source>
         <translation>搜索类型: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="252"/>
+        <location filename="scihub_api.py" line="254"/>
         <source>Angel [CAPTCHA] down!</source>
         <translation>使徒 [CAPTCHA] 已消灭！</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="271"/>
+        <location filename="scihub_api.py" line="273"/>
         <source>Fetching PDF ...</source>
         <translation>获取 PDF 中 ...</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="282"/>
+        <location filename="scihub_api.py" line="284"/>
         <source>Angel [CAPTCHA] is coming!</source>
         <translation>使徒 [CAPTCHA] 来袭！</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="286"/>
+        <location filename="scihub_api.py" line="288"/>
         <source>Unknown PDF Content-Type!</source>
         <translation>未知的 PDF 数据类型！</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="304"/>
+        <location filename="scihub_api.py" line="306"/>
         <source>Using Sci-Hub URL: </source>
         <translation>使用 Sci-Hub URL: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="312"/>
+        <location filename="scihub_api.py" line="314"/>
         <source>Fetching PDF URL ...</source>
         <translation>获取 PDF URL 中 ...</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="325"/>
+        <location filename="scihub_api.py" line="327"/>
         <source>Got PDF URL: </source>
         <translation>获取到 PDF URL: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="341"/>
+        <location filename="scihub_api.py" line="343"/>
         <source>Failed to get PDF URL!</source>
         <translation>获取 PDF URL 失败！</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="334"/>
+        <location filename="scihub_api.py" line="336"/>
         <source>No valid &amp;lt;iframe&amp;gt;!</source>
         <translation>无有效的 &amp;lt;iframe&amp;gt; ！</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="335"/>
+        <location filename="scihub_api.py" line="337"/>
         <source>You may need handle it manually.</source>
         <translation>你可能需要手动处理。</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="336"/>
+        <location filename="scihub_api.py" line="338"/>
         <source>Request URL: </source>
         <translation>请求 URL: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="337"/>
+        <location filename="scihub_api.py" line="339"/>
         <source>Response URL: </source>
         <translation>响应 URL: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="365"/>
+        <location filename="scihub_api.py" line="373"/>
         <source>Saved PDF as: </source>
         <translation>保存 PDF 为: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="386"/>
+        <location filename="scihub_api.py" line="394"/>
         <source>Dealing with query: </source>
         <translation>正在处理搜索: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="409"/>
+        <location filename="scihub_api.py" line="417"/>
         <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
         <translation>验证码错误，使徒 [CAPTCHA] 消灭失败！</translation>
     </message>
@@ -154,12 +154,12 @@
         <translation>欢迎使用 Sci-Hub EVA</translation>
     </message>
     <message>
-        <location filename="scihub_eva.py" line="121"/>
+        <location filename="scihub_eva.py" line="122"/>
         <source>Query list file is not a text file!</source>
         <translation>搜索列表文件不是一个文本文件！</translation>
     </message>
     <message>
-        <location filename="scihub_eva.py" line="137"/>
+        <location filename="scihub_eva.py" line="138"/>
         <source>Dealing with {}/{} query ...</source>
         <translation>正在处理 {}/{} 查询 ...</translation>
     </message>
@@ -256,122 +256,127 @@
         <translation>配置</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="192"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="198"/>
         <source>Common</source>
         <translation>通用</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="205"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="211"/>
         <source>Filename Prefix Format: </source>
         <translation>文件名前缀格式: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="223"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="229"/>
         <source>Supported Keywords: </source>
         <translation>支持的关键字: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="228"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="234"/>
         <source>{author}: Author, {year}: Year, {title}: Title</source>
         <translation>{author}: 作者, {year}: 年份, {title}: 标题</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="247"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="277"/>
         <source>Network</source>
         <translation>网络</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="263"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="293"/>
         <source>SciHub URL: </source>
         <translation>SciHub URL: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="293"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="323"/>
         <source>Cannot remove the last Sci-Hub URL!</source>
         <translation>无法删除最后一个 Sci-Hub 网址！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="66"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="68"/>
         <source>A restart is required for the theme to take effect.</source>
         <translation>重新启动程序后主题生效。</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="147"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="153"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="165"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="269"/>
         <source>Yes</source>
         <translation>是</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="175"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="259"/>
         <source>No</source>
         <translation>否</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="233"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="239"/>
         <source>Theme: </source>
         <translation>主题: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="296"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="251"/>
+        <source>Overwrite Existing File:</source>
+        <translation>覆盖已存在文件: </translation>
+    </message>
+    <message>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="326"/>
         <source>Delete Sci-Hub URL: </source>
         <translation>删除 Sci-Hub 网址: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="312"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="342"/>
         <source>Timeout: </source>
         <translation>超时: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="339"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="369"/>
         <source>Retry Times: </source>
         <translation>重试次数: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="360"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="390"/>
         <source>Proxy</source>
         <translation>代理</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="377"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="407"/>
         <source>Enable Proxy</source>
         <translation>开启代理</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="386"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="416"/>
         <source>Proxy Type: </source>
         <translation>代理类型: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="407"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="437"/>
         <source>Proxy Host: </source>
         <translation>代理地址: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="421"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="451"/>
         <source>Proxy Port: </source>
         <translation>代理端口: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="438"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="468"/>
         <source>Proxy Username: </source>
         <translation>用户名: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="452"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="482"/>
         <source>Proxy Password: </source>
         <translation>密码: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="475"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="505"/>
         <source>Confirm</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVAPreferences.qml" line="482"/>
+        <location filename="../ui/SciHubEVAPreferences.qml" line="512"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>

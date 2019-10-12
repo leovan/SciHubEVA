@@ -122,7 +122,18 @@
 
    All compiled files will be in `dist\SciHubEVA`.
 
-5. Package with Inno Setup. Install [Inno Setup 6](http://www.jrsoftware.org/isinfo.php) first and add installation directory to PATH. Download Chinese (Simplified) and Chinese (Traditional) translations from [here](http://www.jrsoftware.org/files/istrans/), and copy them to `INNO_SETUP_ROOT\Languages`.
+
+5. Add OpenGL libraries.
+
+   ```powershell
+   set PYSIDE2_PACKAGE_DIR=X:\PYTHON_ROOT\Lib\site-packages\PySide2
+   
+   copy %PYSIDE2_PACKAGE_DIR%\libEGL.dll dist\SciHubEVA
+   copy %PYSIDE2_PACKAGE_DIR%\libGLESv2.dll dist\SciHubEVA
+   copy %PYSIDE2_PACKAGE_DIR%\d3dcompiler_*.dll dist\SciHubEVA
+   ```
+
+6. Package with Inno Setup. Install [Inno Setup 6](http://www.jrsoftware.org/isinfo.php) first and add installation directory to PATH. Download Chinese (Simplified) and Chinese (Traditional) translations from [here](http://www.jrsoftware.org/files/istrans/), and copy them to `INNO_SETUP_ROOT\Languages`.
 
    ```powershell
    ISCC.exe building/Windows/SciHubEVA.iss
@@ -130,7 +141,7 @@
 
    `SciHubEVA.exe` installer will be in the `dist`.
 
-6. If you need a x86 version, please make sure you have a x86 version python environment, and modify the `SciHubEVA.iss` accordingly.
+7. If you need a x86 version, please make sure you have a x86 version python environment, and modify the `SciHubEVA.iss` accordingly.
 
    ```text
    DefaultDirName={autopf64}\{#MyAppName} -> DefaultDirName={autopf32}\{#MyAppName}

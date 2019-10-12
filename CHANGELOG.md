@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.2.2](https://github.com/leovan/SciHubEVA/compare/v3.2.1...v3.2.2) (2019-10-12)
+
+### Features
+
+- Add PMID and DOI filename keywords. ([#17](https://github.com/leovan/SciHubEVA/issues/17))
+
+### Bug Fixes
+
+- Fix OpenGL problem. ([#18](https://github.com/leovan/SciHubEVA/issues/18))
+
 ## [3.2.1](https://github.com/leovan/SciHubEVA/compare/v3.2.0...v3.2.1) (2019-09-26)
 
 _This is a hotfix version._

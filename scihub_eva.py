@@ -51,6 +51,7 @@ class SciHubEVA(QObject):
         self._scihub_captcha = SciHubCaptcha(self, log=self.log)
         self._captcha_query = None
 
+        self._input = None
         save_to_dir = self._conf.get('common', 'save_to_dir')
         if not save_to_dir or save_to_dir.strip() == '':
             self._save_to_dir = None
@@ -105,6 +106,8 @@ class SciHubEVA(QObject):
 
         """
 
+        self._input = input
+
         if os.path.exists(input):
             if is_text_file(input):
                 self._query_list = deque()
@@ -148,7 +151,7 @@ class SciHubEVA(QObject):
 
         """
 
-        scihub_api = SciHubAPI(query, callback=self.rampage_callback,
+        scihub_api = SciHubAPI(self._input, query, callback=self.rampage_callback,
                                rampage_type=SciHubRampageType.INPUT,
                                conf=self._conf, log=self.log)
         self.beforeRampage.emit()
@@ -165,7 +168,7 @@ class SciHubEVA(QObject):
         if os.path.exists(self._captcha_img_file_path) and os.path.isfile(self._captcha_img_file_path):
             os.remove(self._captcha_img_file_path)
 
-        scihub_api = SciHubAPI(self._captcha_query, callback=self.rampage_callback,
+        scihub_api = SciHubAPI(self._input, self._captcha_query, callback=self.rampage_callback,
                                rampage_type=SciHubRampageType.PDF_CAPTCHA_RESPONSE,
                                conf=self._conf, log=self.log, captcha_answer=captcha_answer)
 
@@ -198,7 +201,7 @@ class SciHubEVA(QObject):
 
         self._captcha_query = pdf_captcha_response
 
-        scihub_api = SciHubAPI('', log=self.log, conf=self._conf)
+        scihub_api = SciHubAPI(self._input, None, log=self.log, conf=self._conf)
         _, captcha_img_url = scihub_api.get_captcha_info(pdf_captcha_response)
         captcha_img_file = scihub_api.download_captcha_img(captcha_img_url)
         self._captcha_img_file_path = Path(captcha_img_file.name).as_posix()

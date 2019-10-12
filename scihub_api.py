@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import json
-import os
 import re
 import tempfile
 import threading
@@ -17,6 +16,8 @@ from lxml import etree
 from pdfminer.pdfparser import PDFParser
 from pdfminer.pdfdocument import PDFDocument
 from tempfile import NamedTemporaryFile
+from pathlib import Path
+
 from PySide2.QtCore import QObject
 
 from scihub_conf import SciHubConf
@@ -48,10 +49,11 @@ class SciHubError(Enum):
 
 
 class SciHubAPI(QObject, threading.Thread):
-    def __init__(self, query, log, callback=None, rampage_type=None, conf=None, **kwargs):
+    def __init__(self, input, query, log, callback=None, rampage_type=None, conf=None, **kwargs):
         QObject.__init__(self)
         threading.Thread.__init__(self)
 
+        self._input = input
         self._query = query
         self.log = log
         self._callback = callback
@@ -106,8 +108,7 @@ class SciHubAPI(QObject, threading.Thread):
 
             self._sess.proxies = {'http': proxy, 'https': proxy}
 
-    @staticmethod
-    def get_pdf_metadata(pdf):
+    def get_pdf_metadata(self, pdf):
         """Get PDF metadata with PDF content
 
         Args:
@@ -359,11 +360,24 @@ class SciHubAPI(QObject, threading.Thread):
         if not self._conf.getboolean('common', 'overwrite_existing_file'):
             pdf_name_formatter += '_' + str(round(time.time() * 1000000))
 
-        pdf_name_formatter += '_' + filename
-
         pdf_metadata = self.get_pdf_metadata(pdf)
-        pdf_name = pdf_name_formatter.format(**pdf_metadata)
-        pdf_path = os.path.join(self._conf.get('common', 'save_to_dir'), pdf_name)
+        query_type = self.guess_query_type(self._input)
+
+        if query_type in ['doi', 'pmid']:
+            pdf_metadata['id'] = self._input
+        else:
+            for patten in ['_{id}', '{id}_', '{id}']:
+                pdf_name_formatter = pdf_name_formatter.replace(patten, '')
+
+        pdf_name_formatter += '_' + filename if pdf_name_formatter else filename
+
+        try:
+            pdf_name = pdf_name_formatter.format(**pdf_metadata)
+        except Exception as e:
+            self.log(self.tr('Unsupported filename keywords: ') + pdf_name_formatter, 'ERROR')
+            return
+
+        pdf_path = str(Path(self._conf.get('common', 'save_to_dir')) / pdf_name)
 
         with open(pdf_path, 'wb') as fp:
             fp.write(pdf)

@@ -231,7 +231,10 @@ ApplicationWindow {
 
                 Label {
                     id: labelPreferencesFilenameFormatSupportedKeywordsExplain
-                    text: qsTr("{author}: Author, {year}: Year, {title}: Title")
+                    text: qsTr("{author}: Author, {year}: Year, {title}: Title") +
+                          "<br/>" +
+                          qsTr("{id}: DOI or PMID (avaiable only when in such search type)")
+                    wrapMode: Text.NoWrap
                 }
 
                 Label {

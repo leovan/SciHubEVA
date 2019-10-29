@@ -7,6 +7,7 @@ import tempfile
 import threading
 import requests
 import time
+import logging
 
 from enum import Enum, unique
 from requests.adapters import HTTPAdapter
@@ -79,8 +80,8 @@ class SciHubAPI(QObject, threading.Thread):
 
         self._set_http_proxy()
 
-        self._doi_pattern = r'\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'])\S)+)\b'
-        self._illegal_filename_pattern = r'[\/\\\:\*\?\"\<\>\|]'
+        self._doi_pattern = re.compile(r'\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'])\S)+)\b')
+        self._illegal_filename_pattern = re.compile(r'[\/\\\:\*\?\"\<\>\|]')
 
     def _set_http_proxy(self):
         if self._conf.getboolean('proxy', 'enabled'):
@@ -168,12 +169,12 @@ class SciHubAPI(QObject, threading.Thread):
                 query_type = 'url'
         elif query.isdigit():
             query_type = 'pmid'
-        elif query.startswith('doi:') or re.match(self._doi_pattern, query):
+        elif query.startswith('doi:') or self._doi_pattern.match(query):
             query_type = 'doi'
         else:
             query_type = 'string'
 
-        self.log(self.tr('Query type: ') + query_type.upper(), 'INFO')
+        self.log(self.tr('Query type: ') + query_type.upper(), logging.INFO)
 
         return query_type
 
@@ -252,7 +253,7 @@ class SciHubAPI(QObject, threading.Thread):
             timeout=self._conf.getfloat('network', 'timeout') / 1000.0)
 
         if pdf_response.headers['Content-Type'] == 'application/pdf':
-            self.log(self.tr('Angel [CAPTCHA] down!'), 'INFO')
+            self.log(self.tr('Angel [CAPTCHA] down!'), logging.INFO)
             pdf = pdf_response.content
         else:
             err = SciHubError.WRONG_CAPTCHA
@@ -271,7 +272,7 @@ class SciHubAPI(QObject, threading.Thread):
 
         """
 
-        self.log(self.tr('Fetching PDF ...'), 'INFO')
+        self.log(self.tr('Fetching PDF ...'), logging.INFO)
 
         pdf, err = None, None
 
@@ -282,11 +283,11 @@ class SciHubAPI(QObject, threading.Thread):
         if pdf_response.headers['Content-Type'] == 'application/pdf':
             pdf = pdf_response.content
         elif pdf_response.headers['Content-Type'].startswith('text/html'):
-            self.log(self.tr('Angel [CAPTCHA] is coming!'), 'WARN')
+            self.log(self.tr('Angel [CAPTCHA] is coming!'), logging.WARN)
             err = SciHubError.BLOCKED_BY_CAPTCHA
             pdf = pdf_response
         else:
-            self.log(self.tr('Unknown PDF Content-Type!'), 'ERROR')
+            self.log(self.tr('Unknown PDF Content-Type!'), logging.ERROR)
 
         return pdf, err
 
@@ -304,7 +305,7 @@ class SciHubAPI(QObject, threading.Thread):
 
         scihub_url = self._conf.get('network', 'scihub_url')
         self.log(self.tr('Using Sci-Hub URL: ') +
-                 '<a href="{scihub_url}">{scihub_url}</a>'.format(scihub_url=scihub_url), 'INFO')
+                 '<a href="{scihub_url}">{scihub_url}</a>'.format(scihub_url=scihub_url), logging.INFO)
 
         query_type = self.guess_query_type(query)
         pdf_url = query
@@ -312,7 +313,7 @@ class SciHubAPI(QObject, threading.Thread):
 
         if query_type != 'pdf':
             try:
-                self.log(self.tr('Fetching PDF URL ...'), 'INFO')
+                self.log(self.tr('Fetching PDF URL ...'), logging.INFO)
 
                 pdf_url_response = self._sess.post(
                     scihub_url, data={'request': query}, verify=False,
@@ -325,7 +326,7 @@ class SciHubAPI(QObject, threading.Thread):
                     pdf_url = urlparse(iframes[0].attrib['src'], scheme='http').geturl()
                     pdf_url_html = '<a href="{pdf_url}">{pdf_url}</a>'.format(pdf_url=pdf_url)
 
-                    self.log(self.tr('Got PDF URL: ') + pdf_url_html, 'INFO')
+                    self.log(self.tr('Got PDF URL: ') + pdf_url_html, logging.INFO)
                 else:
                     err = SciHubError.NO_VALID_IFRAME
                     request_url = '{scihub_url}/{query}'.format(scihub_url=scihub_url, query=query)
@@ -333,16 +334,16 @@ class SciHubAPI(QObject, threading.Thread):
                     response_url = pdf_url_response.url
                     response_url_html = '<a href="{response_url}">{response_url}</a>'.format(response_url=response_url)
 
-                    self.log(self.tr('Failed to get PDF URL!'), 'ERROR')
-                    self.log(self.tr('No valid &lt;iframe&gt;!'), 'ERROR')
-                    self.log(self.tr('You may need handle it manually.'), 'INFO')
-                    self.log(self.tr('Request URL: ') + request_url_html, 'INFO')
-                    self.log(self.tr('Response URL: ') + response_url_html, 'INFO')
+                    self.log(self.tr('Failed to get PDF URL!'), logging.ERROR)
+                    self.log(self.tr('No valid &lt;iframe&gt;!'), logging.ERROR)
+                    self.log(self.tr('You may need handle it manually.'), logging.INFO)
+                    self.log(self.tr('Request URL: ') + request_url_html, logging.INFO)
+                    self.log(self.tr('Response URL: ') + response_url_html, logging.INFO)
             except Exception as e:
                 err = SciHubError.UNKNOWN
 
-                self.log(self.tr('Failed to get PDF URL!'), 'ERROR')
-                self.log(str(e), 'ERROR')
+                self.log(self.tr('Failed to get PDF URL!'), logging.ERROR)
+                self.log(str(e), logging.ERROR)
 
         return pdf_url, err
 
@@ -374,9 +375,10 @@ class SciHubAPI(QObject, threading.Thread):
         try:
             pdf_name = pdf_name_formatter.format(**pdf_metadata)
         except Exception as e:
-            self.log(self.tr('Unsupported filename keywords: ') + pdf_name_formatter, 'ERROR')
+            self.log(self.tr('Unsupported filename keywords: ') + pdf_name_formatter, logging.ERROR)
             return
 
+        pdf_name = self._illegal_filename_pattern.sub('-', pdf_name)
         pdf_path = str(Path(self._conf.get('common', 'save_to_dir')) / pdf_name)
 
         with open(pdf_path, 'wb') as fp:
@@ -384,7 +386,7 @@ class SciHubAPI(QObject, threading.Thread):
 
         pdf_link = '<a href="file:///{pdf_path}">{pdf_path}</a>'.format(pdf_path=pdf_path)
 
-        self.log(self.tr('Saved PDF as: ') + pdf_link, 'INFO')
+        self.log(self.tr('Saved PDF as: ') + pdf_link, logging.INFO)
 
     def rampage(self, query, rampage_type):
         """Main process of downloading PDF
@@ -405,7 +407,7 @@ class SciHubAPI(QObject, threading.Thread):
             # Query is user input
 
             self.log('<hr/>')
-            self.log(self.tr('Dealing with query: ') + query, 'INFO')
+            self.log(self.tr('Dealing with query: ') + query, logging.INFO)
 
             # Fetch PDF URL
             pdf_url, err = self.fetch_pdf_url(query)
@@ -428,7 +430,7 @@ class SciHubAPI(QObject, threading.Thread):
             # Fetch PDF with Captcha
             pdf, err = self.fetch_pdf_with_captcha(query)
             if err == SciHubError.WRONG_CAPTCHA:
-                self.log(self.tr('Wrong captcha, failed to kill Angel [CAPTCHA]!'), 'ERROR')
+                self.log(self.tr('Wrong captcha, failed to kill Angel [CAPTCHA]!'), logging.ERROR)
                 return None, err
 
             # Save PDF

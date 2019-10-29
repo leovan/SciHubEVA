@@ -4,10 +4,13 @@
 import sys
 import locale
 import os
+import logging
+import html2text
 import PySide2
 
 from collections import deque
 from pathlib import Path
+from logging.handlers import TimedRotatingFileHandler
 
 from PySide2.QtCore import QObject, Qt, QTranslator, Slot, Signal
 from PySide2.QtGui import QGuiApplication, QIcon, QFont
@@ -17,7 +20,7 @@ from scihub_conf import SciHubConf
 from scihub_preferences import SciHubPreferences
 from scihub_captcha import SciHubCaptcha
 from scihub_api import SciHubAPI, SciHubRampageType, SciHubError
-from scihub_utils import show_directory, is_text_file, is_range_query, gen_range_query_list
+from scihub_utils import *
 
 import scihub_resources
 
@@ -64,12 +67,28 @@ class SciHubEVA(QObject):
 
         self._captcha_img_file_path = None
 
+        self._logger = logging.getLogger('SciHubEVA')
+        self._logger.setLevel(logging.DEBUG)
+
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        log_file_name_prefix = str(get_log_directory() / 'SciHubEVA.log')
+        handler = TimedRotatingFileHandler(filename=log_file_name_prefix, when='D')
+        handler.setFormatter(formatter)
+        handler.setLevel(logging.DEBUG)
+
+        self._logger.addHandler(handler)
+
+        self._h2t = html2text.HTML2Text()
+        self._h2t.ignore_links = True
+
     def _connect(self):
         # Connect QML signals to PyQt slots
         self._window.setSaveToDir.connect(self.setSaveToDir)
-        self._window.showSaveToDir.connect(self.showSaveToDir)
+        self._window.openSaveToDir.connect(self.openSaveToDir)
         self._window.rampage.connect(self.rampage)
         self._window.showWindowPreference.connect(self.showWindowPreference)
+        self._window.openLogFile.connect(self.openLogFile)
+        self._window.openLogDirectory.connect(self.openLogDirectory)
 
         # Connect PyQt signals to QML slots
         self.beforeRampage.connect(self._window.beforeRampage)
@@ -88,14 +107,22 @@ class SciHubEVA(QObject):
         self._conf.set('common', 'save_to_dir', directory)
 
     @Slot(str)
-    def showSaveToDir(self, directory):
+    def openSaveToDir(self, directory):
         if os.path.exists(directory):
-            show_directory(directory)
+            open_directory(directory)
 
     @Slot()
     def showWindowPreference(self):
         self._scihub_preferences.load_from_conf()
         self._scihub_preferences.showWindowPreferences.emit()
+
+    @Slot()
+    def openLogFile(self):
+        open_file(str(get_log_directory() / 'SciHubEVA.log'))
+
+    @Slot()
+    def openLogDirectory(self):
+        open_directory(str(get_log_directory()))
 
     @Slot(str)
     def rampage(self, input):
@@ -122,7 +149,7 @@ class SciHubEVA(QObject):
                 self.rampage_query_list()
             else:
                 self.log('<hr/>')
-                self.log(self.tr('Query list file is not a text file!'), 'ERROR')
+                self.log(self.tr('Query list file is not a text file!'), logging.ERROR)
         elif is_range_query(input):
             self._query_list = deque(gen_range_query_list(input))
             self._query_list_length = len(self._query_list)
@@ -209,8 +236,12 @@ class SciHubEVA(QObject):
 
         self._scihub_captcha.showWindowCaptcha.emit(captcha_img_local_uri)
 
-    def log(self, message, level=None):
-        self.appendLogs.emit(message, level)
+    def log(self, message: str, level=None):
+        self.appendLogs.emit(message, logging.getLevelName(level) if level else '')
+
+        text_message = self._h2t.handle(message).strip()
+        if text_message and text_message != '':
+            self._logger.log(level if level else logging.INFO, text_message)
 
 
 if __name__ == '__main__':

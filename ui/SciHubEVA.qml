@@ -23,9 +23,11 @@ ApplicationWindow {
     maximumHeight: columnLayoutApplication.Layout.maximumHeight + 2 * margin
 
     signal setSaveToDir(string directory)
-    signal showSaveToDir(string directory)
+    signal openSaveToDir(string directory)
     signal showWindowPreference()
     signal showWindowAddSciHubURL()
+    signal openLogFile()
+    signal openLogDirectory()
 
     signal rampage(string query)
 
@@ -51,8 +53,8 @@ ApplicationWindow {
 
         if (level === "INFO") {
             prefix = "[INFO] - "
-        } else if (level === "WARN") {
-            prefix = "[WARN] - "
+        } else if (level === "WARNING") {
+            prefix = "[WARNING] - "
         } else if (level === "ERROR") {
             prefix = "[ERROR] - "
         }
@@ -259,7 +261,7 @@ ApplicationWindow {
                 font.bold: false
                 Layout.fillWidth: true
 
-                onClicked: applicationWindow.showSaveToDir(textFieldSaveToDir.text.trim())
+                onClicked: applicationWindow.openSaveToDir(textFieldSaveToDir.text.trim())
             }
 
             Button {
@@ -309,6 +311,39 @@ ApplicationWindow {
 
                 onTextChanged: flickableLogs.scrollToBottom()
                 onLinkActivated: Qt.openUrlExternally(link)
+
+                MouseArea {
+                    id: mouseAreaLogs
+
+                    anchors.fill: parent
+
+                    propagateComposedEvents: true
+                    acceptedButtons: Qt.RightButton
+
+                    onClicked: {
+                        if (mouse.button === Qt.RightButton) {
+                            menuLogs.open()
+                        }
+                    }
+
+                    Platform.Menu {
+                        id: menuLogs
+
+                        Platform.MenuItem {
+                            text: qsTr("Open Log File")
+                            iconName: "text-x-generic"
+
+                            onTriggered: openLogFile()
+                        }
+
+                        Platform.MenuItem {
+                            text: qsTr("Open Log Directory")
+                            iconName: "folder"
+
+                            onTriggered: openLogDirectory()
+                        }
+                    }
+                }
             }
         }
 

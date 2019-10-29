@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import logging
+
 from PySide2.QtCore import QObject, Slot, Signal
 from PySide2.QtQml import QQmlApplicationEngine
 
@@ -31,5 +33,5 @@ class SciHubCaptcha(QObject):
         if kill:
             self._parent.rampage_with_captcha(captcha)
         else:
-            self.log(self.tr('Battle canceled, rampage again?'), 'ERROR')
+            self.log(self.tr('Battle canceled, rampage again?'), logging.ERROR)
             self._parent.afterRampage.emit()

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 import re
 import platform
 import subprocess
@@ -35,13 +36,22 @@ def pdf_metadata_moddate_to_year(moddate: str) -> str:
     return year
 
 
-def show_directory(dir: str, timeout=3):
+def open_file(file: str, timeout=3):
     if platform.system() == 'Darwin':
-        subprocess.call(['open', dir], timeout=timeout)
+        subprocess.call(['open', file], timeout=timeout)
     elif platform.system() == 'Windows':
-        subprocess.call(['explorer', str(Path(dir))], timeout=timeout)
+        os.startfile(file)
     else:
-        subprocess.call(['xdg-open', dir], timeout=timeout)
+        subprocess.call(['xdg-open', file], timeout=timeout)
+
+
+def open_directory(directory: str, timeout=3):
+    if platform.system() == 'Darwin':
+        subprocess.call(['open', directory], timeout=timeout)
+    elif platform.system() == 'Windows':
+        subprocess.call(['explorer', str(Path(directory))], timeout=timeout)
+    else:
+        subprocess.call(['xdg-open', directory], timeout=timeout)
 
 
 def is_text_file(path: str) -> bool:
@@ -75,3 +85,30 @@ def gen_range_query_list(query: str) -> List[str]:
         range_items = [str(i) for i in range(int(range_from), int(range_to) + 1)]
 
     return [query.replace(range_pattern, range_item) for range_item in range_items]
+
+
+def get_log_directory() -> Path:
+    if platform.system() == 'Darwin':
+        log_directory = Path.home() / 'Library/Logs/SciHubEVA'
+    elif platform.system() == 'Windows':
+        log_directory = Path.home() / 'AppData/Local/SciHubEVA'
+    else:
+        log_directory = Path('/var/log/SciHubEVA')
+
+    if not log_directory.exists():
+        log_directory.mkdir()
+
+    return log_directory
+
+
+__all__ = [
+    'RANGE_QUERY_PATTERN',
+    'make_pdf_metadata_str',
+    'pdf_metadata_moddate_to_year',
+    'open_file',
+    'open_directory',
+    'is_text_file',
+    'is_range_query',
+    'gen_range_query_list',
+    'get_log_directory'
+]

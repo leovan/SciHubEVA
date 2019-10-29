@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.2.3](https://github.com/leovan/SciHubEVA/compare/v3.2.2...v3.2.3) (2019-10-29)
+
+### Features
+
+- Add log file, right clicking log area can popup menu to open log file or log directory. ([#21](https://github.com/leovan/SciHubEVA/issues/21))
+
+### Bug Fixes
+
+- Fix illegal filename on Windows. ([#20](https://github.com/leovan/SciHubEVA/issues/20))
+
 ## [3.2.2](https://github.com/leovan/SciHubEVA/compare/v3.2.1...v3.2.2) (2019-10-12)
 
 ### Features

@@ -12,19 +12,25 @@
 
 ## Usage
 
-Launch the app, click `OPEN` button to choose where to save the download files. Click `SHOW` button will open the diretory where you save the downloaded files.
+![Application_MACOS_EN](docs/scihub-eva-application-macos-en.png)
+
+Click `OPEN` button to choose where to save the downloaded files. Click `SHOW` button will open the directory where you set.
 
 Fill the query and click `RAMPAGE` button, then it will search the query and download the file. Currently, you can fill the query with `URL`, `DOI`, `PMID` or search string.
 
-Range pattern in query is also supported, e.g. `00.000/{1-99}` will download `00.000/1`, `00.000/2`, ... `00.000/99`. Zero padded format range pattern is allowed, e.g. `00.000/{01-99}` will download `00.000/01`, `00.000/02`, ... `00.000/99`.
+Range pattern in query is supported, e.g. `00.000/{1-99}` will download `00.000/1`, `00.000/2`, ... `00.000/99`. Zero padded format range pattern is allowed, e.g. `00.000/{01-99}` will download `00.000/01`, `00.000/02`, ... `00.000/99`.
 
-Also you can download with a query list file, in which each line represents a query. Click `LOAD` button to choose the query list file.
+Also you can download with a query list file, in which each line represents a query. Click `LOAD` button to load the query list file.
 
-![Application_MACOS_EN](docs/scihub-eva-application-macos-en.png)
+Right clicking the log area will popup menu, you can open the log file or log directory.
 
-You can change options in the `Preferences` dialog. Due to the unstable Sci-Hub host accessibility, it may fail to download PDFs sometimes, you can change and add other Sci-Hub URLs, or set a proxy server.
+Click `GEAR` icon button, it will open `Preferences` dialog, and you can change options in it.
 
 ![Preferences_MACOS_EN](docs/scihub-eva-preferences-macos-en.png)
+
+You can change filename prefix format with supported keywords. Light and dark theme are supported, also you can choose `System` on macOS to fit system theme automatically. Setting overwrite existing file to `No` will add a timestamp suffix in filename to avoid overwriting previous downloaded files.
+
+Due to the unstable Sci-Hub host accessibility, it may fail to download PDFs sometimes, you can change and add other Sci-Hub URLs, or set a proxy server.
 
 Sometimes, you need enter the captcha to continue the download.
 
@@ -71,7 +77,8 @@ Sometimes, you need enter the captcha to continue the download.
 ### macOS
 
 - Install with [DMG file](https://github.com/leovan/SciHubEVA/releases).
-- Install from brew cask. `brew cask install scihubeva`
+- Install from brew cask.  
+  `brew cask install scihubeva`
 
 ### Windows
 

@@ -51,20 +51,19 @@
    rm -rf dist
    rm -f SciHubEVA.spec
 
-   rm -f scihubeva/resources.py
    pyside2-rcc SciHubEVA.qrc -o scihubeva/resources.py
 
    pyinstaller -w app.py \
-     --hidden-import "socks" \
-     --hidden-import "PIL" \
-     --add-data "LICENSE:." \
-     --add-data "conf/SciHubEVA.conf:conf" \
-     --add-data "conf/qtquickcontrols2.conf:conf" \
-     --add-data "images/SciHubEVA-icon.png:images" \
-     --add-data "translations/*.qm:translations" \
-     --name "SciHubEVA" \
-     --icon "images/SciHubEVA.icns" \
-     --noupx
+      --hidden-import "socks" \
+      --hidden-import "PIL" \
+      --add-data "LICENSE:." \
+      --add-data "conf/SciHubEVA.conf:conf" \
+      --add-data "conf/qtquickcontrols2.conf:conf" \
+      --add-data "images/SciHubEVA-icon.png:images" \
+      --add-data "translations/*.qm:translations" \
+      --name "SciHubEVA" \
+      --icon "images/SciHubEVA.icns" \
+      --noupx
 
    cp building/macOS/Info.plist dist/SciHubEVA.app/Contents
 
@@ -78,7 +77,7 @@
    rm -rf PyInstaller
    cd ../../../..
    ```
-   
+
    `SciHubEVA.app` will be in `dist`.
 
 5. Package with `appdmg`. Install [Node.js](https://nodejs.org) first, then run the following commands:
@@ -105,30 +104,29 @@
    rd /s /Q dist
    del /F /S /Q SciHubEVA.spec
 
-   del /F /S /Q "scihubeva/resources.py"
    pyside2-rcc SciHubEVA.qrc -o scihubeva/resources.py
 
    pyinstaller -w app.py ^
-     --hidden-import "socks" ^
-     --hidden-import "PIL" ^
-     --add-data "LICENSE;." ^
-     --add-data "conf/SciHubEVA.conf;conf" ^
-     --add-data "conf/qtquickcontrols2.conf;conf" ^
-     --add-data "images/SciHubEVA-icon.png;images" ^
-     --add-data "translations/*.qm;translations" ^
-     --name "SciHubEVA" ^
-     --icon "images/SciHubEVA.ico" ^
-     --version-file "building/Windows/SciHubEVA.win.version" ^
-     --noupx
+      --hidden-import "socks" ^
+      --hidden-import "PIL" ^
+      --add-data "LICENSE;." ^
+      --add-data "conf/SciHubEVA.conf;conf" ^
+      --add-data "conf/qtquickcontrols2.conf;conf" ^
+      --add-data "images/SciHubEVA-icon.png;images" ^
+      --add-data "translations/*.qm;translations" ^
+      --name "SciHubEVA" ^
+      --icon "images/SciHubEVA.ico" ^
+      --version-file "building/Windows/SciHubEVA.win.version" ^
+      --noupx
 
    :: Remove useless libraries
-   cd dist/SciHubEVA
-   del /F /S /Q Qt53D* Qt5Bluetooth.dll Qt5Bodymovin.dll Qt5Charts.dll Qt5DataVisualization.dll Qt5Gamepad.dll Qt5Location.dll Qt5Multimedia.dll Qt5MultimediaQuick.dll Qt5Nfc.dll Qt5Positioning.dll Qt5PositioningQuick.dll Qt5Purchasing.dll Qt5Quick3D*.dll Qt5QuickTest.dll Qt5RemoteObjects.dll Qt5Scxml.dll Qt5Sensors.dll Qt5Sql.dll Qt5Test.dll Qt5VirtualKeyboard.dll Qt5Web*
-   cd PySide2/qml
-   del /F /S /Q Qt3D QtAudioEngine QtBluetooth QtCharts QtDataVisualization QtGamepad QtLocation QtMultimedia QtNfc QtPositioning QtPurchasing QtQuick3D QtRemoteObjects QtScxml QtSensors QtTest QtWebChannel QtWebEngine QtWebSockets QtWebView QtWinExtras
-cd ../../../..
+      cd dist/SciHubEVA
+      del /F /S /Q Qt53D* Qt5Bluetooth.dll Qt5Bodymovin.dll Qt5Charts.dll Qt5DataVisualization.dll Qt5Gamepad.dll Qt5Location.dll Qt5Multimedia.dll Qt5MultimediaQuick.dll Qt5Nfc.dll Qt5Positioning.dll Qt5PositioningQuick.dll Qt5Purchasing.dll Qt5Quick3D*.dll Qt5QuickTest.dll Qt5RemoteObjects.dll Qt5Scxml.dll Qt5Sensors.dll Qt5Sql.dll Qt5Test.dll Qt5VirtualKeyboard.dll Qt5Web*
+      cd PySide2/qml
+      del /F /S /Q Qt3D QtAudioEngine QtBluetooth QtCharts QtDataVisualization QtGamepad QtLocation QtMultimedia QtNfc QtPositioning QtPurchasing QtQuick3D QtRemoteObjects QtScxml QtSensors QtTest QtWebChannel QtWebEngine QtWebSockets QtWebView QtWinExtras
+      cd ../../../..
    ```
-   
+
    All compiled files will be in `dist\SciHubEVA`.
 
 

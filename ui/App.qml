@@ -192,7 +192,7 @@ ApplicationWindow {
 
                 onClicked: {
                     if (textFieldSaveToDir.text.trim() === "") {
-                        dialogMessage.setIcon("\uf493")
+                        dialogMessage.setIcon("\uf5de")
                         dialogMessage.setText(qsTr("Please choose save to directory first!"))
                         dialogMessage.open()
                     } else if (textFieldQuery.text.trim() === "") {

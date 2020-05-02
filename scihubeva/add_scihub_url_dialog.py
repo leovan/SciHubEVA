@@ -7,17 +7,17 @@ from PySide2.QtCore import QObject, Slot, Signal
 from PySide2.QtQml import QQmlApplicationEngine
 
 
-class SciHubAddSciHubURL(QObject):
+class AddSciHubURLDialog(QObject):
     showWindowAddSciHubURL = Signal()
 
     def __init__(self, conf, parent):
-        super(SciHubAddSciHubURL, self).__init__()
+        super(AddSciHubURLDialog, self).__init__()
 
         self._conf = conf
         self._parent = parent
 
         self._engine = QQmlApplicationEngine()
-        self._engine.load('qrc:/ui/SciHubEVAAddSciHubURL.qml')
+        self._engine.load('qrc:/ui/AddSciHubURL.qml')
         self._window = self._engine.rootObjects()[0]
         self._connect()
 

@@ -4,6 +4,8 @@
 from tempfile import TemporaryFile
 from flask import Flask, request, send_file
 
+from scihubeva.utils import *
+
 
 app = Flask(__name__)
 
@@ -58,7 +60,7 @@ def captcha_response(host_url: str, pdf: str):
 
 @app.route('/evangelion.png', methods=['GET'])
 def evangelion_img():
-    return send_file('images/evangelion.png', mimetype='image/png')
+    return send_file((IMAGES_DIR / 'evangelion.png').resolve().as_posix(), mimetype='image/png')
 
 
 if __name__ == '__main__':

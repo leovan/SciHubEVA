@@ -12,7 +12,7 @@
 
 ## Usage
 
-![Application_MACOS_EN](docs/scihub-eva-application-macos-en.png)
+![Application macOS EN](docs/scihub-eva-application-macos-en.png)
 
 Click `OPEN` button to choose where to save the downloaded files. Click `SHOW` button will open the directory where you set.
 
@@ -26,9 +26,11 @@ Right clicking the log area will popup menu, you can open the log file or log di
 
 Click `GEAR` icon button, it will open `Preferences` dialog, and you can change options in it.
 
-![Preferences_MACOS_EN](docs/scihub-eva-preferences-macos-en.png)
+![Preferences Common macOS EN](docs/scihub-eva-preferences-common-macos-en.png)
 
 You can change filename prefix format with supported keywords. Light and dark theme are supported, also you can choose `System` on macOS to fit system theme automatically. Setting overwrite existing file to `No` will add a timestamp suffix in filename to avoid overwriting previous downloaded files.
+
+![Preferences Network macOS EN](docs/scihub-eva-preferences-network-macos-en.png)
 
 Due to the unstable Sci-Hub host accessibility, it may fail to download PDFs sometimes, you can change and add other Sci-Hub URLs, or set a proxy server.
 

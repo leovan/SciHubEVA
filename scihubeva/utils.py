@@ -3,8 +3,10 @@
 
 import os
 import re
+import sys
 import platform
 import subprocess
+import PIL.ImageOps
 
 from pathlib import Path
 from typing import List
@@ -89,16 +91,32 @@ def gen_range_query_list(query: str) -> List[str]:
 
 def get_log_directory() -> Path:
     if platform.system() == 'Darwin':
-        log_directory = Path.home() / 'Library/Logs/SciHubEVA'
+        log_directory = Path.home() / 'Library/Logs/SciHubEVADialog'
     elif platform.system() == 'Windows':
-        log_directory = Path.home() / 'AppData/Local/SciHubEVA'
+        log_directory = Path.home() / 'AppData/Local/SciHubEVADialog'
     else:
-        log_directory = Path('/var/log/SciHubEVA')
+        log_directory = Path('/var/log/SciHubEVADialog')
 
     if not log_directory.exists():
         log_directory.mkdir()
 
     return log_directory
+
+
+def is_windows():
+    return sys.platform == 'win32'
+
+
+def is_macos():
+    return sys.platform == 'darwin'
+
+
+BASE_DIR = Path(os.path.dirname(__file__)) / '..'
+CAPTCHA_MODEL_DIR = BASE_DIR / 'models'
+IMAGES_DIR = BASE_DIR / 'images'
+CONF_DIR = BASE_DIR / 'conf'
+TRANSLATION_DIR = BASE_DIR / 'translations'
+UI_DIR = BASE_DIR / 'ui'
 
 
 __all__ = [
@@ -110,5 +128,13 @@ __all__ = [
     'is_text_file',
     'is_range_query',
     'gen_range_query_list',
-    'get_log_directory'
+    'get_log_directory',
+    'is_windows',
+    'is_macos',
+    'BASE_DIR',
+    'CAPTCHA_MODEL_DIR',
+    'IMAGES_DIR',
+    'CONF_DIR',
+    'TRANSLATION_DIR',
+    'UI_DIR'
 ]

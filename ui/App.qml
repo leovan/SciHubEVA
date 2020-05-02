@@ -1,7 +1,7 @@
-import QtQuick 2.12
-import QtQuick.Layouts 1.12
-import QtQuick.Controls 2.12
-import QtQuick.Controls.Material 2.12
+import QtQuick 2.14
+import QtQuick.Layouts 1.14
+import QtQuick.Controls 2.14
+import QtQuick.Controls.Material 2.14
 import Qt.labs.settings 1.1
 import Qt.labs.platform 1.1 as Platform
 
@@ -14,6 +14,7 @@ ApplicationWindow {
     visible: true
 
     property int margin: 10
+    property int theme: Material.theme
 
     width: columnLayoutApplication.implicitWidth + 2 * margin
     height: columnLayoutApplication.implicitHeight + 2 * margin
@@ -67,15 +68,15 @@ ApplicationWindow {
         source: "qrc:/fonts/materialdesignicons-webfont.ttf"
     }
 
-    Ui.SciHubEVAPreferences {
+    Ui.Preferences {
         id: windowPreferences
     }
 
-    Ui.SciHubEVAAbout {
+    Ui.About {
         id: windowAbout
     }
 
-    Ui.SciHubEVAMessage {
+    Ui.Message {
         id: dialogMessage
 
         modal: true
@@ -191,7 +192,7 @@ ApplicationWindow {
 
                 onClicked: {
                     if (textFieldSaveToDir.text.trim() === "") {
-                        dialogMessage.setIcon("\uf5de")
+                        dialogMessage.setIcon("\uf493")
                         dialogMessage.setText(qsTr("Please choose save to directory first!"))
                         dialogMessage.open()
                     } else if (textFieldQuery.text.trim() === "") {

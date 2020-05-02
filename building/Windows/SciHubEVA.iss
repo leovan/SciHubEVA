@@ -1,5 +1,5 @@
 ﻿#define MyAppName "Sci-Hub EVA"
-#define MyAppVersion "3.2.3"
+#define MyAppVersion "4.0.0"
 #define MyAppPublisher "Leo Van"
 #define MyAppURL "https://leovan.me"
 #define MyAppExeName "SciHubEVA.exe"
@@ -12,7 +12,7 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-AppCopyright=Copyright (c) 2018-2019 Leo Van.
+AppCopyright=Copyright (c) 2018-2020 Leo Van.
 AppReadmeFile=https://github.com/leovan/SciHubEVA
 DefaultDirName={autopf64}\{#MyAppName}
 DefaultGroupName={#MyAppName}

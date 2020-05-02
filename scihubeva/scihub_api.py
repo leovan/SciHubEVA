@@ -18,24 +18,25 @@ from pdfminer.pdfparser import PDFParser
 from pdfminer.pdfdocument import PDFDocument
 from tempfile import NamedTemporaryFile
 from pathlib import Path
+from PIL import Image, ImageOps
 
 from PySide2.QtCore import QObject
 
-from scihub_conf import SciHubConf
-from scihub_utils import make_pdf_metadata_str, pdf_metadata_moddate_to_year
+from scihubeva.configuration import Configuration
+from scihubeva.utils import make_pdf_metadata_str, pdf_metadata_moddate_to_year
 
 
 @unique
-class SciHubRampageType(Enum):
-    # Input from main window
-    INPUT = 0
+class RampageType(Enum):
+    # Original query
+    ORIGINAL = 0
 
-    # Response of fetching PDF (if response is not PDF, but a HTML with captcha)
-    PDF_CAPTCHA_RESPONSE = 1
+    # Query with typed captcha
+    WITH_TYPED_CAPTCHA = 1
 
 
 @unique
-class SciHubError(Enum):
+class Error(Enum):
     # Unknown error
     UNKNOWN = 0
 
@@ -60,14 +61,13 @@ class SciHubAPI(QObject, threading.Thread):
         self._callback = callback
         self._rampage_type = rampage_type
 
-        # Captcha answer, used only when rampage_type == SciHubRampageType.PDF_CAPTCHA_RESPONSE
         if 'captcha_answer' in kwargs:
             self._captcha_answer = kwargs['captcha_answer']
 
         if conf:
             self._conf = conf
         else:
-            self._conf = SciHubConf('SciHubEVA.conf')
+            self._conf = Configuration('SciHubEVA.conf')
 
         self._sess = requests.Session()
         self._sess.headers = json.loads(self._conf.get('network', 'session_header'))
@@ -110,16 +110,6 @@ class SciHubAPI(QObject, threading.Thread):
             self._sess.proxies = {'http': proxy, 'https': proxy}
 
     def get_pdf_metadata(self, pdf):
-        """Get PDF metadata with PDF content
-
-        Args:
-            pdf: PDF content (in bytes)
-
-        Returns:
-            metadata: PDF metadata dictionary
-
-        """
-
         temp_pdf_file = tempfile.TemporaryFile()
         temp_pdf_file.write(pdf)
 
@@ -152,16 +142,6 @@ class SciHubAPI(QObject, threading.Thread):
         return metadata
 
     def guess_query_type(self, query):
-        """Guess query type
-
-        Args:
-            query: Query
-
-        Returns:
-            query_type: Query type
-
-        """
-
         if query.startswith('http') or query.startswith('https'):
             if query.endswith('pdf'):
                 query_type = 'pdf'
@@ -174,22 +154,9 @@ class SciHubAPI(QObject, threading.Thread):
         else:
             query_type = 'string'
 
-        self.log(self.tr('Query type: ') + query_type.upper(), logging.INFO)
-
         return query_type
 
     def get_captcha_info(self, pdf_captcha_response):
-        """Get captcha information with PDF captcha response
-
-        Args:
-            pdf_captcha_response: PDF captcha response
-
-        Returns:
-            captcha_id: Captcha ID
-            captcha_img_url: Captcha image URL
-
-        """
-
         captcha_id, captcha_img_url = None, None
 
         html = etree.HTML(pdf_captcha_response.content)
@@ -208,18 +175,9 @@ class SciHubAPI(QObject, threading.Thread):
 
         return captcha_id, captcha_img_url
 
-    def download_captcha_img(self, captcha_img_url):
-        """ Download captcha image
-
-        Args:
-            captcha_img_url: Captcha image URL
-
-        Returns:
-            Captcha image file
-
-        """
-
+    def download_captcha_img(self, captcha_img_url, invert_color=False):
         captcha_img_file = NamedTemporaryFile(delete=False)
+        captcha_img_file_path = Path(captcha_img_file.name)
 
         captcha_img_res = self._sess.get(captcha_img_url, stream=True)
 
@@ -230,20 +188,15 @@ class SciHubAPI(QObject, threading.Thread):
         captcha_img_file.flush()
         captcha_img_file.close()
 
-        return captcha_img_file
+        if invert_color:
+            img = Image.open(captcha_img_file_path).convert('RGB')
+            invert_img = ImageOps.invert(img)
+            img.close()
+            invert_img.save(captcha_img_file_path, format='png')
+
+        return captcha_img_file_path
 
     def fetch_pdf_with_captcha(self, pdf_captcha_response):
-        """Fetch PDF with captcha
-
-        Args:
-            pdf_captcha_response: PDF captcha response
-
-        Returns:
-            pdf: PDF content (in bytes)
-            err: Error
-
-        """
-
         pdf, err = None, None
 
         captcha_id, _ = self.get_captcha_info(pdf_captcha_response)
@@ -256,22 +209,12 @@ class SciHubAPI(QObject, threading.Thread):
             self.log(self.tr('Angel [CAPTCHA] down!'), logging.INFO)
             pdf = pdf_response.content
         else:
-            err = SciHubError.WRONG_CAPTCHA
+            pdf = pdf_response
+            err = Error.WRONG_CAPTCHA
 
         return pdf, err
 
     def fetch_pdf(self, pdf_url):
-        """ Fetch PDF with PDF URL
-
-        Args:
-            pdf_url: PDF URL
-
-        Returns:
-            pdf: PDF (in bytes) or PDF captcha response (when downloading is blocked by captcha)
-            err: Error
-
-        """
-
         self.log(self.tr('Fetching PDF ...'), logging.INFO)
 
         pdf, err = None, None
@@ -284,7 +227,7 @@ class SciHubAPI(QObject, threading.Thread):
             pdf = pdf_response.content
         elif pdf_response.headers['Content-Type'].startswith('text/html'):
             self.log(self.tr('Angel [CAPTCHA] is coming!'), logging.WARN)
-            err = SciHubError.BLOCKED_BY_CAPTCHA
+            err = Error.BLOCKED_BY_CAPTCHA
             pdf = pdf_response
         else:
             self.log(self.tr('Unknown PDF Content-Type!'), logging.ERROR)
@@ -292,22 +235,13 @@ class SciHubAPI(QObject, threading.Thread):
         return pdf, err
 
     def fetch_pdf_url(self, query):
-        """Fetch PDF URL with query
-
-        Args:
-            query: Query
-
-        Returns:
-            pdf_url: PDF URL
-            err: Error
-
-        """
-
         scihub_url = self._conf.get('network', 'scihub_url')
         self.log(self.tr('Using Sci-Hub URL: ') +
                  '<a href="{scihub_url}">{scihub_url}</a>'.format(scihub_url=scihub_url), logging.INFO)
 
         query_type = self.guess_query_type(query)
+        self.log(self.tr('Query type: ') + query_type.upper(), logging.INFO)
+
         pdf_url = query
         err = None
 
@@ -328,7 +262,7 @@ class SciHubAPI(QObject, threading.Thread):
 
                     self.log(self.tr('Got PDF URL: ') + pdf_url_html, logging.INFO)
                 else:
-                    err = SciHubError.NO_VALID_IFRAME
+                    err = Error.NO_VALID_IFRAME
                     request_url = '{scihub_url}/{query}'.format(scihub_url=scihub_url, query=query)
                     request_url_html = '<a href="{request_url}">{request_url}</a>'.format(request_url=request_url)
                     response_url = pdf_url_response.url
@@ -340,7 +274,7 @@ class SciHubAPI(QObject, threading.Thread):
                     self.log(self.tr('Request URL: ') + request_url_html, logging.INFO)
                     self.log(self.tr('Response URL: ') + response_url_html, logging.INFO)
             except Exception as e:
-                err = SciHubError.UNKNOWN
+                err = Error.UNKNOWN
 
                 self.log(self.tr('Failed to get PDF URL!'), logging.ERROR)
                 self.log(str(e), logging.ERROR)
@@ -348,14 +282,6 @@ class SciHubAPI(QObject, threading.Thread):
         return pdf_url, err
 
     def save_pdf(self, pdf, filename):
-        """Save pdf to local
-
-        Args:
-            pdf: PDF content (in bytes)
-            filename: PDF filename
-
-        """
-
         pdf_name_formatter = self._conf.get('common', 'filename_prefix_format')
 
         if not self._conf.getboolean('common', 'overwrite_existing_file'):
@@ -389,23 +315,7 @@ class SciHubAPI(QObject, threading.Thread):
         self.log(self.tr('Saved PDF as: ') + pdf_link, logging.INFO)
 
     def rampage(self, query, rampage_type):
-        """Main process of downloading PDF
-
-        Args:
-            query: Query (input, response of fetching PDF, ...)
-            rampage_type: Rampage type
-
-        Returns:
-            res: Result of rampage, maybe used for next steps
-            err: Error of rampage
-
-            e.g. (None, None), (pdf_captcha_response, SciHubError.BLOCKED_BY_CAPTCHA), ...
-
-        """
-
-        if rampage_type == SciHubRampageType.INPUT:
-            # Query is user input
-
+        if rampage_type == RampageType.ORIGINAL:
             self.log('<hr/>')
             self.log(self.tr('Dealing with query: ') + query, logging.INFO)
 
@@ -416,7 +326,7 @@ class SciHubAPI(QObject, threading.Thread):
 
             # Fetch PDF
             pdf, err = self.fetch_pdf(pdf_url)
-            if err == SciHubError.BLOCKED_BY_CAPTCHA:
+            if err == Error.BLOCKED_BY_CAPTCHA:
                 return pdf, err
             elif err is not None:
                 return None, err
@@ -424,12 +334,10 @@ class SciHubAPI(QObject, threading.Thread):
             # Save PDF
             filename = urlparse(pdf_url).path[1:].split('/')[-1]
             self.save_pdf(pdf, filename)
-        elif rampage_type == SciHubRampageType.PDF_CAPTCHA_RESPONSE:
-            # Query is PDF captcha response (with answer)
-
+        elif rampage_type == RampageType.WITH_TYPED_CAPTCHA:
             # Fetch PDF with Captcha
             pdf, err = self.fetch_pdf_with_captcha(query)
-            if err == SciHubError.WRONG_CAPTCHA:
+            if err == Error.WRONG_CAPTCHA:
                 self.log(self.tr('Wrong captcha, failed to kill Angel [CAPTCHA]!'), logging.ERROR)
                 return None, err
 

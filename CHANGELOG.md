@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.0](https://github.com/leovan/SciHubEVA/compare/v3.2.3...v4.0.0) (2020-05-02)
+
+### Features
+
+- More modern preference dialog.
+- Invert captcha image when dark theme is enabled.
+
 ## [3.2.3](https://github.com/leovan/SciHubEVA/compare/v3.2.2...v3.2.3) (2019-10-29)
 
 ### Features

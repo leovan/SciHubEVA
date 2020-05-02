@@ -6,16 +6,16 @@ import json
 from PySide2.QtCore import QObject, Slot, Signal
 from PySide2.QtQml import QQmlApplicationEngine
 
-from scihub_add_scihub_url import SciHubAddSciHubURL
+from scihubeva.add_scihub_url_dialog import AddSciHubURLDialog
 
 
-class SciHubPreferences(QObject):
+class PreferencesDialog(QObject):
     showWindowPreferences = Signal()
 
     setFilenamePrefixFormat = Signal(str)
-    setOverwriteExistingFile = Signal(bool)
     setThemeModel = Signal(list)
     setThemeCurrentIndex = Signal(int)
+    setOverwriteExistingFile = Signal(bool)
 
     setNetworkSciHubURLModel = Signal(list)
     setNetworkSciHubURLCurrentIndex = Signal(int)
@@ -30,20 +30,20 @@ class SciHubPreferences(QObject):
     setProxyPassword = Signal(str)
 
     def __init__(self, conf, qt_quick_controls2_conf):
-        super(SciHubPreferences, self).__init__()
+        super(PreferencesDialog, self).__init__()
 
         self._conf = conf
         self._qt_quick_controls2_conf = qt_quick_controls2_conf
         self._themes = ['System', 'Light', 'Dark']
 
         self._engine = QQmlApplicationEngine()
-        self._engine.load('qrc:/ui/SciHubEVAPreferences.qml')
+        self._engine.load('qrc:/ui/Preferences.qml')
         self._window = self._engine.rootObjects()[0]
         self._connect()
 
         self.load_from_conf()
 
-        self._scihub_add_scihub_url = SciHubAddSciHubURL(self._conf, self)
+        self._scihub_add_scihub_url = AddSciHubURLDialog(self._conf, self)
 
     def _connect(self):
         # Connect QML signals to PyQt slots
@@ -51,8 +51,8 @@ class SciHubPreferences(QObject):
         self._window.removeSciHubURL.connect(self.removeSciHubURL)
 
         self._window.saveFilenamePrefixFormat.connect(self.saveFilenamePrefixFormat)
-        self._window.saveOverwriteExistingFile.connect(self.saveOverwriteExistingFile)
         self._window.saveThemeCurrentIndex.connect(self.saveThemeCurrentIndex)
+        self._window.saveOverwriteExistingFile.connect(self.saveOverwriteExistingFile)
 
         self._window.saveNetworkSciHubURLCurrentIndex.connect(self.saveNetworkSciHubURLCurrentIndex)
         self._window.saveNetworkTimeout.connect(self.saveNetworkTimeout)
@@ -69,9 +69,9 @@ class SciHubPreferences(QObject):
         self.showWindowPreferences.connect(self._window.showWindowPreferences)
         
         self.setFilenamePrefixFormat.connect(self._window.setFilenamePrefixFormat)
-        self.setOverwriteExistingFile.connect(self._window.setOverwriteExistingFile)
         self.setThemeModel.connect(self._window.setThemeModel)
         self.setThemeCurrentIndex.connect(self._window.setThemeCurrentIndex)
+        self.setOverwriteExistingFile.connect(self._window.setOverwriteExistingFile)
 
         self.setNetworkSciHubURLModel.connect(self._window.setNetworkSciHubURLModel)
         self.setNetworkSciHubURLCurrentIndex.connect(self._window.setNetworkSciHubURLCurrentIndex)
@@ -87,11 +87,10 @@ class SciHubPreferences(QObject):
 
     def load_from_conf(self):
         self.setFilenamePrefixFormat.emit(self._conf.get('common', 'filename_prefix_format'))
-        self.setOverwriteExistingFile.emit(self._conf.getboolean('common', 'overwrite_existing_file'))
-
         self.setThemeModel.emit(self._themes)
         theme = self._qt_quick_controls2_conf.get('Material', 'Theme')
         self.setThemeCurrentIndex.emit(self._themes.index(theme))
+        self.setOverwriteExistingFile.emit(self._conf.getboolean('common', 'overwrite_existing_file'))
 
         scihub_available_urls = json.loads(self._conf.get('network', 'scihub_available_urls'))
         self.setNetworkSciHubURLModel.emit(scihub_available_urls)
@@ -126,13 +125,13 @@ class SciHubPreferences(QObject):
     def saveFilenamePrefixFormat(self, filename_prefix_format):
         self._conf.set('common', 'filename_prefix_format', filename_prefix_format)
 
-    @Slot(bool)
-    def saveOverwriteExistingFile(self, overwrite):
-        self._conf.set('common', 'overwrite_existing_file', str(overwrite).lower())
-
     @Slot(int)
     def saveThemeCurrentIndex(self, theme_current_index):
         self._qt_quick_controls2_conf.set('Material', 'Theme', self._themes[theme_current_index])
+
+    @Slot(bool)
+    def saveOverwriteExistingFile(self, overwrite):
+        self._conf.set('common', 'overwrite_existing_file', str(overwrite).lower())
 
     @Slot(int)
     def saveNetworkSciHubURLCurrentIndex(self, scihub_url_current_index):

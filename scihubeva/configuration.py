@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 
 import os
+
 from configparser import ConfigParser
 
 
-class SciHubConf(ConfigParser):
+class Configuration(ConfigParser):
     def __init__(self, conf_filename, space_around_delimiters=True):
-        super(SciHubConf, self).__init__()
+        super(Configuration, self).__init__()
         self.optionxform = str
 
         self._conf_path = os.path.join(os.path.dirname(__file__), conf_filename)
@@ -16,7 +17,7 @@ class SciHubConf(ConfigParser):
         self._space_around_delimiters = space_around_delimiters
 
     def set(self, section, option, value=None):
-        super(SciHubConf, self).set(section, option, value)
+        super(Configuration, self).set(section, option, value)
         self.save()
 
     def save(self):

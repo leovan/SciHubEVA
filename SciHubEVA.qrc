@@ -1,12 +1,11 @@
 <RCC>
     <qresource prefix="/">
-        <file>ui/SciHubEVA.qml</file>
-        <file>ui/SciHubEVAAbout.qml</file>
-        <file>ui/SciHubEVAAddSciHubURL.qml</file>
-        <file>ui/SciHubEVACaptcha.qml</file>
-        <file>ui/SciHubEVAMessage.qml</file>
-        <file>ui/SciHubEVAPreferences.qml</file>
-        <file>images/SciHubEVA-about.png</file>
+        <file>ui/About.qml</file>
+        <file>ui/AddSciHubURL.qml</file>
+        <file>ui/App.qml</file>
+        <file>ui/Captcha.qml</file>
+        <file>ui/Message.qml</file>
+        <file>ui/Preferences.qml</file>
         <file>images/SciHubEVA-background-dark.png</file>
         <file>images/SciHubEVA-background-light.png</file>
         <file>images/SciHubEVA-icon.png</file>

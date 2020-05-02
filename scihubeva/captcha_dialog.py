@@ -7,17 +7,17 @@ from PySide2.QtCore import QObject, Slot, Signal
 from PySide2.QtQml import QQmlApplicationEngine
 
 
-class SciHubCaptcha(QObject):
+class CaptchaDialog(QObject):
     showWindowCaptcha = Signal(str)
 
     def __init__(self, parent, log=None):
-        super(SciHubCaptcha, self).__init__()
+        super(CaptchaDialog, self).__init__()
 
         self._parent = parent
         self.log = log
 
         self._engine = QQmlApplicationEngine()
-        self._engine.load('qrc:/ui/SciHubEVACaptcha.qml')
+        self._engine.load('qrc:/ui/Captcha.qml')
         self._window = self._engine.rootObjects()[0]
         self._connect()
 
@@ -31,7 +31,7 @@ class SciHubCaptcha(QObject):
     @Slot(bool, str)
     def killCaptcha(self, kill, captcha):
         if kill:
-            self._parent.rampage_with_captcha(captcha)
+            self._parent.rampage_with_typed_captcha(captcha)
         else:
             self.log(self.tr('Battle canceled, rampage again?'), logging.ERROR)
             self._parent.afterRampage.emit()

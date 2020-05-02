@@ -1,36 +1,26 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
-import locale
 import os
+import sys
 import logging
 import html2text
 import PySide2
 
 from collections import deque
-from pathlib import Path
 from logging.handlers import TimedRotatingFileHandler
 
-from PySide2.QtCore import QObject, Qt, QTranslator, Slot, Signal
-from PySide2.QtGui import QGuiApplication, QIcon, QFont
+from PySide2.QtCore import QObject, Slot, Signal
 from PySide2.QtQml import QQmlApplicationEngine
 
-from scihub_conf import SciHubConf
-from scihub_preferences import SciHubPreferences
-from scihub_captcha import SciHubCaptcha
-from scihub_api import SciHubAPI, SciHubRampageType, SciHubError
-from scihub_utils import *
-
-import scihub_resources
-
-if hasattr(Qt, 'AA_EnableHighDpiScaling'):
-    QGuiApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
-if hasattr(Qt, 'AA_UseHighDpiPixmaps'):
-    QGuiApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
+from scihubeva.configuration import Configuration
+from scihubeva.preferences_dialog import PreferencesDialog
+from scihubeva.captcha_dialog import CaptchaDialog
+from scihubeva.scihub_api import SciHubAPI, RampageType, Error
+from scihubeva.utils import *
 
 
-class SciHubEVA(QObject):
+class SciHubEVADialog(QObject):
     beforeRampage = Signal()
     afterRampage = Signal()
 
@@ -38,20 +28,22 @@ class SciHubEVA(QObject):
     appendLogs = Signal(str, str)
 
     def __init__(self):
-        super(SciHubEVA, self).__init__()
+        super(SciHubEVADialog, self).__init__()
 
-        self._conf = SciHubConf('SciHubEVA.conf')
-        self._qt_quick_controls2_conf = SciHubConf('qtquickcontrols2.conf', space_around_delimiters=False)
+        self._conf = Configuration((CONF_DIR / 'SciHubEVA.conf').resolve().as_posix())
+        self._qt_quick_controls2_conf = Configuration(
+            (CONF_DIR / 'qtquickcontrols2.conf').resolve().as_posix(), space_around_delimiters=False)
 
         self._engine = QQmlApplicationEngine()
         self._engine.rootContext().setContextProperty('PYTHON_VERSION', '.'.join(str(v) for v in sys.version_info[:3]))
         self._engine.rootContext().setContextProperty('QT_VERSION', PySide2.QtCore.qVersion())
-        self._engine.load('qrc:/ui/SciHubEVA.qml')
+        self._engine.load('qrc:/ui/App.qml')
         self._window = self._engine.rootObjects()[0]
+        self._theme = self._window.property('theme')
         self._connect()
 
-        self._scihub_preferences = SciHubPreferences(self._conf, self._qt_quick_controls2_conf)
-        self._scihub_captcha = SciHubCaptcha(self, log=self.log)
+        self._scihub_preferences = PreferencesDialog(self._conf, self._qt_quick_controls2_conf)
+        self._scihub_captcha = CaptchaDialog(self, log=self.log)
         self._captcha_query = None
 
         self._input = None
@@ -126,13 +118,6 @@ class SciHubEVA(QObject):
 
     @Slot(str)
     def rampage(self, input):
-        """Download PDF with input
-
-        Args:
-            input: query or query list file path
-
-        """
-
         self._input = input
 
         if os.path.exists(input):
@@ -157,12 +142,7 @@ class SciHubEVA(QObject):
         else:
             self.rampage_query(input)
 
-
     def rampage_query_list(self):
-        """Download PDF with query list (self._query_list)
-
-        """
-
         if self._query_list and len(self._query_list) > 0:
             self.log('<hr/>')
             self.log(self.tr('Dealing with {}/{} query ...').format(
@@ -171,47 +151,24 @@ class SciHubEVA(QObject):
             self.rampage_query(self._query_list.popleft())
 
     def rampage_query(self, query):
-        """Download PDF with query
-
-        Args:
-            query: Query of input
-
-        """
-
         scihub_api = SciHubAPI(self._input, query, callback=self.rampage_callback,
-                               rampage_type=SciHubRampageType.INPUT,
+                               rampage_type=RampageType.ORIGINAL,
                                conf=self._conf, log=self.log)
         self.beforeRampage.emit()
         scihub_api.start()
 
-    def rampage_with_captcha(self, captcha_answer):
-        """ Download PDF with captcha query (self._captcha_query) and captcha answer
-
-        Args:
-            captcha_answer: Captcha answer
-
-        """
-
-        if os.path.exists(self._captcha_img_file_path) and os.path.isfile(self._captcha_img_file_path):
-            os.remove(self._captcha_img_file_path)
+    def rampage_with_typed_captcha(self, captcha_answer):
+        self.remove_captcha_img()
 
         scihub_api = SciHubAPI(self._input, self._captcha_query, callback=self.rampage_callback,
-                               rampage_type=SciHubRampageType.PDF_CAPTCHA_RESPONSE,
+                               rampage_type=RampageType.WITH_TYPED_CAPTCHA,
                                conf=self._conf, log=self.log, captcha_answer=captcha_answer)
 
         self.beforeRampage.emit()
         scihub_api.start()
 
     def rampage_callback(self, res, err):
-        """Callback function
-
-        Args:
-            res: Result from last round rampage
-            err: Error
-
-        """
-
-        if err == SciHubError.BLOCKED_BY_CAPTCHA:
+        if err == Error.BLOCKED_BY_CAPTCHA:
             self.show_captcha(res)
         elif self._query_list:
             self.rampage_query_list()
@@ -219,22 +176,20 @@ class SciHubEVA(QObject):
             self.afterRampage.emit()
 
     def show_captcha(self, pdf_captcha_response):
-        """Callback function for PDF captcha response
-
-        Args:
-            pdf_captcha_response: PDF captcha response
-
-        """
-
         self._captcha_query = pdf_captcha_response
 
         scihub_api = SciHubAPI(self._input, None, log=self.log, conf=self._conf)
         _, captcha_img_url = scihub_api.get_captcha_info(pdf_captcha_response)
-        captcha_img_file = scihub_api.download_captcha_img(captcha_img_url)
-        self._captcha_img_file_path = Path(captcha_img_file.name).as_posix()
-        captcha_img_local_uri = Path(captcha_img_file.name).as_uri()
+        invert_color = True if self._theme == 1 else False
+        captcha_img_file_path = scihub_api.download_captcha_img(captcha_img_url, invert_color=invert_color)
+        self._captcha_img_file_path = captcha_img_file_path.resolve().as_posix()
+        captcha_img_local_uri = captcha_img_file_path.as_uri()
 
         self._scihub_captcha.showWindowCaptcha.emit(captcha_img_local_uri)
+
+    def remove_captcha_img(self):
+        if os.path.exists(self._captcha_img_file_path) and os.path.isfile(self._captcha_img_file_path):
+            os.remove(self._captcha_img_file_path)
 
     def log(self, message: str, level=None):
         self.appendLogs.emit(message, logging.getLevelName(level) if level else '')
@@ -242,25 +197,3 @@ class SciHubEVA(QObject):
         text_message = self._h2t.handle(message).strip()
         if text_message and text_message != '':
             self._logger.log(level if level else logging.INFO, text_message)
-
-
-if __name__ == '__main__':
-    app_path = os.path.abspath(os.path.dirname(sys.argv[0]))
-    os.environ['QT_QUICK_CONTROLS_CONF'] = os.path.join(app_path, 'qtquickcontrols2.conf')
-
-    app = QGuiApplication(sys.argv)
-
-    lang = locale.getdefaultlocale()[0]
-    lang_file_path = os.path.join(app_path, 'translations/SciHubEVA_{lang}.qm'.format(lang=lang))
-    translator = QTranslator()
-    translator.load(lang_file_path)
-    app.installTranslator(translator)
-
-    icon_file_path = os.path.join(app_path, 'images/SciHubEVA-icon.png')
-    app.setWindowIcon(QIcon(icon_file_path))
-
-    if sys.platform == 'win32':
-        app.setFont(QFont('Microsoft YaHei'))
-
-    eva = SciHubEVA()
-    sys.exit(app.exec_())

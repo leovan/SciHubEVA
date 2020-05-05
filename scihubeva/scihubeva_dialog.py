@@ -39,10 +39,11 @@ class SciHubEVADialog(QObject):
         self._engine.rootContext().setContextProperty('QT_VERSION', PySide2.QtCore.qVersion())
         self._engine.load('qrc:/ui/App.qml')
         self._window = self._engine.rootObjects()[0]
+
         self._theme = self._window.property('theme')
         self._connect()
 
-        self._scihub_preferences = PreferencesDialog(self._conf, self._qt_quick_controls2_conf)
+        self._scihub_preferences = PreferencesDialog(self, self._conf, self._qt_quick_controls2_conf)
         self._scihub_captcha = CaptchaDialog(self, log=self.log)
         self._captcha_query = None
 
@@ -106,6 +107,7 @@ class SciHubEVADialog(QObject):
     @Slot()
     def showWindowPreference(self):
         self._scihub_preferences.load_from_conf()
+        center_window(self._scihub_preferences._window, self._window)
         self._scihub_preferences.showWindowPreferences.emit()
 
     @Slot()
@@ -185,6 +187,7 @@ class SciHubEVADialog(QObject):
         self._captcha_img_file_path = captcha_img_file_path.resolve().as_posix()
         captcha_img_local_uri = captcha_img_file_path.as_uri()
 
+        center_window(self._scihub_captcha._window, self._window)
         self._scihub_captcha.showWindowCaptcha.emit(captcha_img_local_uri)
 
     def remove_captcha_img(self):

@@ -10,11 +10,11 @@ from PySide2.QtQml import QQmlApplicationEngine
 class AddSciHubURLDialog(QObject):
     showWindowAddSciHubURL = Signal()
 
-    def __init__(self, conf, parent):
+    def __init__(self, parent, conf):
         super(AddSciHubURLDialog, self).__init__()
 
-        self._conf = conf
         self._parent = parent
+        self._conf = conf
 
         self._engine = QQmlApplicationEngine()
         self._engine.load('qrc:/ui/AddSciHubURL.qml')

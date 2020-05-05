@@ -3,10 +3,8 @@
 
 import os
 import re
-import sys
 import platform
 import subprocess
-import PIL.ImageOps
 
 from pathlib import Path
 from typing import List
@@ -14,6 +12,16 @@ from pdfminer.psparser import PSLiteral, PSKeyword
 
 
 RANGE_QUERY_PATTERN = re.compile(r'\{\d+\-\d+\}')
+
+
+def center_window(window, parent_window):
+    parent_window_center_x = parent_window.x() + int(parent_window.width() / 2)
+    parent_window_center_y = parent_window.y() + int(parent_window.height() / 2)
+
+    window_x = parent_window_center_x - int(window.width() / 2)
+    window_y = parent_window_center_y - int(window.height() / 2)
+
+    window.setPosition(window_x, window_y)
 
 
 def make_pdf_metadata_str(value) -> str:
@@ -89,26 +97,26 @@ def gen_range_query_list(query: str) -> List[str]:
     return [query.replace(range_pattern, range_item) for range_item in range_items]
 
 
+def is_windows():
+    return platform.system() == 'Windows'
+
+
+def is_macos():
+    return platform.system() == 'Darwin'
+
+
 def get_log_directory() -> Path:
-    if platform.system() == 'Darwin':
-        log_directory = Path.home() / 'Library/Logs/SciHubEVADialog'
-    elif platform.system() == 'Windows':
-        log_directory = Path.home() / 'AppData/Local/SciHubEVADialog'
+    if is_macos():
+        log_directory = Path.home() / 'Library/Logs/SciHubEVA'
+    elif is_windows():
+        log_directory = Path.home() / 'AppData/Local/SciHubEVA'
     else:
-        log_directory = Path('/var/log/SciHubEVADialog')
+        log_directory = Path('/var/log/SciHubEVA')
 
     if not log_directory.exists():
         log_directory.mkdir()
 
     return log_directory
-
-
-def is_windows():
-    return sys.platform == 'win32'
-
-
-def is_macos():
-    return sys.platform == 'darwin'
 
 
 BASE_DIR = Path(os.path.dirname(__file__)) / '..'
@@ -121,6 +129,7 @@ UI_DIR = BASE_DIR / 'ui'
 
 __all__ = [
     'RANGE_QUERY_PATTERN',
+    'center_window',
     'make_pdf_metadata_str',
     'pdf_metadata_moddate_to_year',
     'open_file',

@@ -7,6 +7,7 @@ from PySide2.QtCore import QObject, Slot, Signal
 from PySide2.QtQml import QQmlApplicationEngine
 
 from scihubeva.add_scihub_url_dialog import AddSciHubURLDialog
+from scihubeva.utils import *
 
 
 class PreferencesDialog(QObject):
@@ -29,9 +30,10 @@ class PreferencesDialog(QObject):
     setProxyUsername = Signal(str)
     setProxyPassword = Signal(str)
 
-    def __init__(self, conf, qt_quick_controls2_conf):
+    def __init__(self, parent, conf, qt_quick_controls2_conf):
         super(PreferencesDialog, self).__init__()
 
+        self._parent = parent
         self._conf = conf
         self._qt_quick_controls2_conf = qt_quick_controls2_conf
         self._themes = ['System', 'Light', 'Dark']
@@ -39,11 +41,12 @@ class PreferencesDialog(QObject):
         self._engine = QQmlApplicationEngine()
         self._engine.load('qrc:/ui/Preferences.qml')
         self._window = self._engine.rootObjects()[0]
+
         self._connect()
 
         self.load_from_conf()
 
-        self._scihub_add_scihub_url = AddSciHubURLDialog(self._conf, self)
+        self._scihub_add_scihub_url = AddSciHubURLDialog(self, self._conf)
 
     def _connect(self):
         # Connect QML signals to PyQt slots
@@ -108,6 +111,7 @@ class PreferencesDialog(QObject):
 
     @Slot()
     def showWindowAddSciHubURL(self):
+        center_window(self._scihub_add_scihub_url._window, self._window)
         self._scihub_add_scihub_url.showWindowAddSciHubURL.emit()
 
     @Slot(int)

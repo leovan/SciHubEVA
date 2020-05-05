@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.0.1](https://github.com/leovan/SciHubEVA/compare/v4.0.0...v4.0.1) (2020-05-05)
+
+### Features
+
+- Center windows based on parent.
+
 ## [4.0.0](https://github.com/leovan/SciHubEVA/compare/v3.2.3...v4.0.0) (2020-05-02)
 
 ### Features

@@ -33,12 +33,12 @@ Dialog {
             Label {
                 id: labelAboutText
                 text: "<style>a { color: " + Material.accent + "; }</style>" +
-                      "<p><b>Sci-Hub EVA v4.0.0</b></p>" +
+                      "<p><b>Sci-Hub EVA v4.0.1</b></p>" +
                       "<p>" + qsTr("Sci-Hub EVA is a cross-platform Sci-Hub GUI Application based on ") +
                       "Python " + PYTHON_VERSION + qsTr(" and ") +
                       "Qt (PySide2) " + QT_VERSION + qsTr(".") + "</p>" +
                       "<p>" + qsTr("Author: ") + "<a href=\"https://leovan.me\">" + qsTr("Leo Van") + "</a><br/>" +
-                      qsTr("License: ") + "<a href=\"https://github.com/leovan/SciHubEVADialog\">The MIT License</a>" +
+                      qsTr("License: ") + "<a href=\"https://github.com/leovan/SciHubEVA\">The MIT License</a>" +
                       "</p>"
 
                 Layout.preferredWidth: 300

@@ -384,12 +384,12 @@
 <context>
     <name>SciHubEVADialog</name>
     <message>
-        <location filename="scihubeva_dialog.py" line="137"/>
+        <location filename="scihubeva_dialog.py" line="139"/>
         <source>Query list file is not a text file!</source>
         <translation>搜索列表文件不是一个文本文件！</translation>
     </message>
     <message>
-        <location filename="scihubeva_dialog.py" line="148"/>
+        <location filename="scihubeva_dialog.py" line="150"/>
         <source>Dealing with {}/{} query ...</source>
         <translation>正在处理 {}/{} 查询 ...</translation>
     </message>

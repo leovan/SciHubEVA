@@ -21,8 +21,8 @@ VERSION_PATTERN = r'\d+.\d+.\d+.\d+'
 
 VERSION_FILES = [
     'macOS/Info.plist',
-    'Windows/SciHubEVADialog.win.version',
-    'Windows/SciHubEVADialog.iss',
+    'Windows/SciHubEVA.win.version',
+    'Windows/SciHubEVA.iss',
     '../ui/About.qml'
 ]
 

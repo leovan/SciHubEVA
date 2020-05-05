@@ -120,11 +120,11 @@
       --noupx
 
    :: Remove useless libraries
-      cd dist/SciHubEVA
-      del /F /S /Q Qt53D* Qt5Bluetooth.dll Qt5Bodymovin.dll Qt5Charts.dll Qt5DataVisualization.dll Qt5Gamepad.dll Qt5Location.dll Qt5Multimedia.dll Qt5MultimediaQuick.dll Qt5Nfc.dll Qt5Positioning.dll Qt5PositioningQuick.dll Qt5Purchasing.dll Qt5Quick3D*.dll Qt5QuickTest.dll Qt5RemoteObjects.dll Qt5Scxml.dll Qt5Sensors.dll Qt5Sql.dll Qt5Test.dll Qt5VirtualKeyboard.dll Qt5Web*
-      cd PySide2/qml
-      del /F /S /Q Qt3D QtAudioEngine QtBluetooth QtCharts QtDataVisualization QtGamepad QtLocation QtMultimedia QtNfc QtPositioning QtPurchasing QtQuick3D QtRemoteObjects QtScxml QtSensors QtTest QtWebChannel QtWebEngine QtWebSockets QtWebView QtWinExtras
-      cd ../../../..
+   cd dist/SciHubEVA
+   del /F /S /Q Qt53D* Qt5Bluetooth.dll Qt5Bodymovin.dll Qt5Charts.dll Qt5DataVisualization.dll Qt5Gamepad.dll Qt5Location.dll Qt5Multimedia.dll Qt5MultimediaQuick.dll Qt5Nfc.dll Qt5Positioning.dll Qt5PositioningQuick.dll Qt5Purchasing.dll Qt5Quick3D*.dll Qt5QuickTest.dll Qt5RemoteObjects.dll Qt5Scxml.dll Qt5Sensors.dll Qt5Sql.dll Qt5Test.dll Qt5VirtualKeyboard.dll Qt5Web*
+   cd PySide2/qml
+   del /F /S /Q Qt3D QtAudioEngine QtBluetooth QtCharts QtDataVisualization QtGamepad QtLocation QtMultimedia QtNfc QtPositioning QtPurchasing QtQuick3D QtRemoteObjects QtScxml QtSensors QtTest QtWebChannel QtWebEngine QtWebSockets QtWebView QtWinExtras
+   cd ../../../..
    ```
 
    All compiled files will be in `dist\SciHubEVA`.

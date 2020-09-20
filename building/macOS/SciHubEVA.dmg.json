@@ -2,7 +2,7 @@
     "title": "Sci-Hub EVA",
     "icon": "../../images/SciHubEVA-dmg.icns",
     "icon-size": 100,
-    "background": "../../images/SciHubEVA-dmg-backgroud.png",
+    "background": "../../images/SciHubEVA-dmg-background.png",
     "format": "UDBZ",
     "window": {
         "size": {

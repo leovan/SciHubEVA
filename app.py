@@ -5,13 +5,13 @@ import os
 import sys
 import locale
 
+import scihubeva.resources
+
 from PySide2.QtCore import Qt, QTranslator
 from PySide2.QtGui import QGuiApplication, QIcon, QFont
 
 from scihubeva.scihubeva_dialog import SciHubEVADialog
 from scihubeva.utils import *
-
-import scihubeva.resources
 
 if hasattr(Qt, 'AA_EnableHighDpiScaling'):
     QGuiApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)

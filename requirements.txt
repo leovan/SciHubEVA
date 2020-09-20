@@ -1,5 +1,5 @@
-lxml==4.5.0
-pdfminer.six==20200402
+lxml==4.5.1
+pdfminer.six==20200517
 PySide2==5.14.1
 requests==2.23.0
 PySocks==1.7.1

@@ -11,7 +11,6 @@ import logging
 
 from enum import Enum, unique
 from requests.adapters import HTTPAdapter
-from urllib3.util import Retry
 from urllib.parse import urlparse
 from lxml import etree
 from pdfminer.pdfparser import PDFParser
@@ -73,8 +72,7 @@ class SciHubAPI(QObject, threading.Thread):
         self._sess.headers = json.loads(self._conf.get('network', 'session_header'))
 
         retry_times = self._conf.getint('network', 'retry_times')
-        retry = Retry(total=retry_times, read=retry_times, connect=retry_times)
-        adapter = HTTPAdapter(max_retries=retry)
+        adapter = HTTPAdapter(max_retries=retry_times)
         self._sess.mount('http://', adapter)
         self._sess.mount('https://', adapter)
 
@@ -97,7 +95,7 @@ class SciHubAPI(QObject, threading.Thread):
                 proxy += proxy_username
 
             if proxy_password and proxy_password != '':
-                proxy += proxy_password
+                proxy += ':' + proxy_password
 
             if proxy_username and proxy_username != '':
                 proxy += '@'

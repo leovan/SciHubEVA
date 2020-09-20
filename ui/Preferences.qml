@@ -312,11 +312,8 @@ ApplicationWindow {
                             implicitWidth: 200
                             Layout.fillWidth: true
 
-                            placeholderText: "{author}_{year}_{title}"
+                            placeholderText: "{id}_{year}_{author}_{title}"
                             selectByMouse: true
-                            validator: RegExpValidator {
-                                regExp: /.*[(\{author\})|(\{year\})|(\{title\})]+.*/
-                            }
                         }
 
                         Label {

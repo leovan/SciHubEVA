@@ -7,6 +7,7 @@ ApplicationWindow {
     title: qsTr("Captcha")
 
     modality: Qt.ApplicationModal
+    flags: Qt.Dialog
 
     property int margin: 10
 
@@ -17,7 +18,7 @@ ApplicationWindow {
 
     signal killCaptcha(bool kill, string captcha)
 
-    function showWindowCaptcha(captchaImagePath) {
+    function showUICaptcha(captchaImagePath) {
         imageCaptcha.source = captchaImagePath
         textFieldCaptcha.text = ""
         show()
@@ -36,14 +37,11 @@ ApplicationWindow {
         }
 
         RowLayout {
-            id: rowLayoutCaptchaButtons
-
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
 
             Label {
-                id: labelCaptcha
-                text: qsTr("Enter captcha: ")
+                text: qsTr("Captcha: ")
             }
 
             TextField {
@@ -82,5 +80,9 @@ ApplicationWindow {
                 buttonCaptchaCancel.clicked()
             }
         }
+    }
+
+    onClosing: {
+        killCaptcha(false, "")
     }
 }

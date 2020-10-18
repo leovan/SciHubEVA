@@ -1,7 +1,7 @@
-lxml==4.5.1
-pdfminer.six==20200517
+lxml==4.6.0
+pdfminer.six==20200726
 PySide2==5.14.1
-requests==2.23.0
+requests==2.24.0
 PySocks==1.7.1
-html2text==2020.1.16
-Pillow==7.1.2
+Pillow==8.0.0
+darkdetect==0.1.1

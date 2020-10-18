@@ -26,9 +26,13 @@ Right clicking the log area will popup menu, you can open the log file or log di
 
 Click `GEAR` icon button, it will open `Preferences` dialog, and you can change options in it.
 
-![Preferences Common macOS EN](docs/scihub-eva-preferences-common-macos-en.png)
+![Preferences System macOS EN](docs/scihub-eva-preferences-system-macos-en.png)
 
-You can change filename prefix format with supported keywords. Light and dark theme are supported, also you can choose `System` on macOS to fit system theme automatically. Setting overwrite existing file to `No` will add a timestamp suffix in filename to avoid overwriting previous downloaded files.
+You can change language manually. Light and dark theme are supported, also you can choose `System` to fit system theme automatically. Changes will take effect after restart.
+
+![Preferences File macOS EN](docs/scihub-eva-preferences-file-macos-en.png)
+
+You can change filename prefix format with supported keywords. Setting overwrite existing file to `No` will add a timestamp suffix in filename to avoid overwriting previous downloaded files.
 
 ![Preferences Network macOS EN](docs/scihub-eva-preferences-network-macos-en.png)
 
@@ -96,6 +100,4 @@ See [`building/README.md`](building/README.md)
 
 [PySide2](https://doc.qt.io/qtforpython): GNU Lesser General Public License (LGPL)
 
-[Material design icons](https://github.com/templarian/MaterialDesign/): [SIL Open Font License 1.1](http://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web)
-
-Icons: GNU General Public License 3.0 (GPL-3.0), borrowed from [Numix Circle](https://github.com/numixproject/numix-icon-theme-circle).
+Icons: GNU General Public License 3.0 (GPL-3.0), modified from [Numix Circle](https://github.com/numixproject/numix-icon-theme-circle).

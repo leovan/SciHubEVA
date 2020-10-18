@@ -23,7 +23,7 @@ VERSION_FILES = [
     'macOS/Info.plist',
     'Windows/SciHubEVA.win.version',
     'Windows/SciHubEVA.iss',
-    '../ui/About.qml'
+    '../scihub_eva/globals/versions.py'
 ]
 
 VERSION_REPLACE_PATTERN = [
@@ -33,7 +33,7 @@ VERSION_REPLACE_PATTERN = [
     r"StringStruct\(u'FileVersion', u'\d+.\s*\d+.\s*\d+.\s*\d+'\)",
     r"StringStruct\(u'ProductVersion', u'\d+.\s*\d+.\s*\d+.\s*\d+'\)",
     r'#define MyAppVersion "\d+.\d+.\d+"',
-    r'v\d+.\d+.\d+'
+    r"APPLICATION_VERSION = 'v\d+.\d+.\d+'"
 ]
 
 VERSION_REPLACE_FORMATTER = [
@@ -43,7 +43,7 @@ VERSION_REPLACE_FORMATTER = [
     "StringStruct(u'FileVersion', u'{major}.{minor}.{patch}.{build}')",
     "StringStruct(u'ProductVersion', u'{major}.{minor}.{patch}.{build}')",
     '#define MyAppVersion "{major}.{minor}.{patch}"',
-    'v{major}.{minor}.{patch}'
+    "APPLICATION_VERSION = 'v{major}.{minor}.{patch}'"
 ]
 
 

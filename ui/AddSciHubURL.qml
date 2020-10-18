@@ -7,6 +7,7 @@ ApplicationWindow {
     title: qsTr("Add Sci-Hub URL")
 
     modality: Qt.ApplicationModal
+    flags: Qt.Dialog
 
     property int margin: 10
 
@@ -17,7 +18,7 @@ ApplicationWindow {
 
     signal addSciHubURL(string url)
 
-    function showWindowAddSciHubURL() {
+    function showUIAddSciHubURL() {
         textFieldAddSciHubURL.text = ""
         show()
     }
@@ -31,12 +32,9 @@ ApplicationWindow {
         focus: true
 
         RowLayout {
-            id: rowLayoutAddSciHubURLText
-
             Layout.fillWidth: true
 
             Label {
-                id: labelAddSciHubURL
                 text: qsTr("Sci-Hub URL: ")
             }
 
@@ -51,8 +49,6 @@ ApplicationWindow {
         }
 
         RowLayout {
-            id: rowLayoutAddSciHubURLButtons
-
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
 

@@ -1,5 +1,15 @@
 # Changelog
 
+## [4.1.0](https://github.com/leovan/SciHubEVA/compare/v4.0.1...v4.1.0) (2020-10-19)
+
+### Features
+
+- Restore preferences after a new version installed.
+
+### Bug Fixes
+
+- Fix network retry times and proxy.
+
 ## [4.0.1](https://github.com/leovan/SciHubEVA/compare/v4.0.0...v4.0.1) (2020-05-05)
 
 ### Features

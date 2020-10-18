@@ -3,13 +3,15 @@ import QtQuick.Layouts 1.14
 import QtQuick.Controls 2.14
 import QtQuick.Window 2.14
 
-import "." as Ui
+import "." as UI
+import "./elements" as UIElements
 
 ApplicationWindow {
-    id: preferencesWindow
+    id: applicationWindowPreferences
     title: qsTr("Preferences")
 
     modality: Qt.ApplicationModal
+    flags: Qt.Dialog
 
     property int margin: 10
 
@@ -18,83 +20,86 @@ ApplicationWindow {
     minimumWidth: columnLayoutPreferences.Layout.minimumWidth + 2 * margin
     minimumHeight: columnLayoutPreferences.Layout.minimumHeight + 2 * margin
 
-    signal showWindowAddSciHubURL()
+    signal showUIAddSciHubURL()
     signal removeSciHubURL(int networkSciHubURLCurrentIndex)
-
-    signal saveFilenamePrefixFormat(string filenamePrefixFormat)
-    signal saveThemeCurrentIndex(int themeCurrentIndex)
-    signal saveOverwriteExistingFile(bool overwrite)
-
-    signal saveNetworkSciHubURLCurrentIndex(int networkSciHubURLCurrentIndex)
+    signal saveSystemLanguage(string language)
+    signal saveSystemTheme(string theme)
+    signal saveFileFilenamePrefixFormat(string filenamePrefixFormat)
+    signal saveFileOverwriteExistingFile(bool overwrite)
+    signal saveNetworkSciHubURLs(variant networkSciHubURLs)
+    signal saveNetworkSciHubURL(string networkSciHubURL)
     signal saveNetworkTimeout(int networkTimeout)
     signal saveNetworkRetryTimes(int networkRetryTimes)
+    signal saveNetworkProxyEnabled(bool proxyEnabled)
+    signal saveNetworkProxyType(string proxyType)
+    signal saveNetworkProxyHost(string proxyHost)
+    signal saveNetworkProxyPort(string proxyPort)
+    signal saveNetworkProxyUsername(string proxyUsername)
+    signal saveNetworkProxyPassword(string proxyPassword)
 
-    signal saveProxyEnabled(bool proxyEnabled)
-    signal saveProxyType(string proxyType)
-    signal saveProxyHost(string proxyHost)
-    signal saveProxyPort(int proxyPort)
-    signal saveProxyUsername(string proxyUsername)
-    signal saveProxyPassword(string proxyPassword)
+    function saveAll() {
+        saveSystemLanguage(comboBoxPreferencesSystemLanguage.currentValue)
+        saveSystemTheme(comboBoxPreferencesSystemTheme.currentValue)
 
-    property int themeCurrentIndex
+        saveFileFilenamePrefixFormat(textFieldPreferencesFileFilenamePrefixFormat.text.trim())
+        saveFileOverwriteExistingFile(switchPreferencesFileOverwrite.checked)
 
-    function showWindowPreferences() {
-        show()
-    }
-
-    function saveAllPreference() {
-        saveFilenamePrefixFormat(textFieldPreferencesCommonFilenamePrefixFormat.text.trim())
-        saveThemeCurrentIndex(comboBoxPreferencesCommonTheme.currentIndex)
-        saveOverwriteExistingFile(switchCommonOverwrite.checked)
-
-        saveNetworkSciHubURLCurrentIndex(comboBoxPreferencesNetworkSciHubURL.currentIndex)
+        saveNetworkSciHubURLs(comboBoxPreferencesNetworkSciHubURL.model)
+        saveNetworkSciHubURL(comboBoxPreferencesNetworkSciHubURL.currentText)
         saveNetworkTimeout(textFieldPreferencesNetworkTimeout.text)
-
-        saveProxyEnabled(switchPreferencesNetworkEnableProxy.checked)
+        saveNetworkProxyEnabled(switchPreferencesNetworkEnableProxy.checked)
 
         if (radioButtonPreferencesNetworkProxyTypeHTTP.checked) {
-            saveProxyType('http')
+            saveNetworkProxyType('http')
         } else if (radioButtonPreferencesNetworkProxyTypeSocks5.checked) {
-            saveProxyType('socks5')
+            saveNetworkProxyType('socks5')
         }
 
-        saveProxyHost(textFieldPreferencesNetworkProxyHost.text.trim())
-        saveProxyPort(textFieldPreferencesNetworkProxyPort.text.trim())
-        saveProxyUsername(textFieldPreferencesNetworkProxyUsername.text.trim())
-        saveProxyPassword(textFieldPreferencesNetworkProxyPassword.text.trim())
+        saveNetworkProxyHost(textFieldPreferencesNetworkProxyHost.text.trim())
+        saveNetworkProxyPort(textFieldPreferencesNetworkProxyPort.text.trim())
+        saveNetworkProxyUsername(textFieldPreferencesNetworkProxyUsername.text.trim())
+        saveNetworkProxyPassword(textFieldPreferencesNetworkProxyPassword.text.trim())
 
-        if (comboBoxPreferencesCommonTheme.currentIndex != themeCurrentIndex) {
-            dialogChangeThemeRestartMessage.setIcon("\uf17d")
-            dialogChangeThemeRestartMessage.setText(qsTr("A restart is required for the theme to take effect."))
-            dialogChangeThemeRestartMessage.open()
-        } else {
-            close()
+        close()
+    }
+
+    function setSystemLanguage(language) {
+        for (var idx = 0; idx < comboBoxPreferencesSystemLanguage.count; idx ++) {
+            if (language === comboBoxPreferencesSystemLanguage.valueAt(idx)) {
+                comboBoxPreferencesSystemLanguage.currentIndex = idx
+                break
+            }
         }
     }
 
-    function setFilenamePrefixFormat(filenameFormat) {
-        textFieldPreferencesCommonFilenamePrefixFormat.text = filenameFormat
+    function setSystemTheme(theme) {
+        for (var idx = 0; idx < comboBoxPreferencesSystemTheme.count; idx ++) {
+            if (theme === comboBoxPreferencesSystemTheme.valueAt(idx)) {
+                comboBoxPreferencesSystemTheme.currentIndex = idx
+                break
+            }
+        }
     }
 
-    function setThemeModel(model) {
-        comboBoxPreferencesCommonTheme.model = model
+    function setFileFilenamePrefixFormat(filenameFormat) {
+        textFieldPreferencesFileFilenamePrefixFormat.text = filenameFormat
     }
 
-    function setThemeCurrentIndex(currentIndex) {
-        themeCurrentIndex = currentIndex
-        comboBoxPreferencesCommonTheme.currentIndex = currentIndex
+    function setFileOverwriteExistingFile(overwrite) {
+        switchPreferencesFileOverwrite.checked = overwrite
     }
 
-    function setOverwriteExistingFile(overwrite) {
-        switchCommonOverwrite.checked = overwrite
+    function setNetworkSciHubURLs(urls) {
+        comboBoxPreferencesNetworkSciHubURL.model = urls
     }
 
-    function setNetworkSciHubURLModel(model) {
-        comboBoxPreferencesNetworkSciHubURL.model = model
-    }
-
-    function setNetworkSciHubURLCurrentIndex(currentIndex) {
-        comboBoxPreferencesNetworkSciHubURL.currentIndex = currentIndex
+    function setNetworkSciHubURL(url) {
+        for (var idx = 0; idx < comboBoxPreferencesNetworkSciHubURL.count; idx ++) {
+            if (url === comboBoxPreferencesNetworkSciHubURL.valueAt(idx)) {
+                comboBoxPreferencesNetworkSciHubURL.currentIndex = idx
+                break
+            }
+        }
     }
 
     function setNetworkTimeout(networkTimeout) {
@@ -105,11 +110,11 @@ ApplicationWindow {
         textFieldPreferencesNetworkRetryTimes.text = networkRetryTimes
     }
 
-    function setProxyEnabled(proxyEnabled) {
+    function setNetworkProxyEnabled(proxyEnabled) {
         switchPreferencesNetworkEnableProxy.checked = proxyEnabled
     }
 
-    function setProxyType(proxyType) {
+    function setNetworkProxyType(proxyType) {
         if (proxyType === "http") {
             radioButtonPreferencesNetworkProxyTypeHTTP.checked = true
         } else if (proxyType === "socks5") {
@@ -117,70 +122,61 @@ ApplicationWindow {
         }
     }
 
-    function setProxyHost(proxyHost) {
+    function setNetworkProxyHost(proxyHost) {
         textFieldPreferencesNetworkProxyHost.text = proxyHost
     }
 
-    function setProxyPort(proxyPort) {
+    function setNetworkProxyPort(proxyPort) {
         textFieldPreferencesNetworkProxyPort.text = proxyPort
     }
 
-    function setProxyUsername(proxyUsername) {
+    function setNetworkProxyUsername(proxyUsername) {
         textFieldPreferencesNetworkProxyUsername.text = proxyUsername
     }
 
-    function setProxyPassword(proxyPassword) {
+    function setNetworkProxyPassword(proxyPassword) {
         textFieldPreferencesNetworkProxyPassword.text = proxyPassword
     }
 
-    FontLoader {
-        id: fontMDI
-        source: "qrc:/fonts/materialdesignicons-webfont.ttf"
-    }
-
-    Ui.AddSciHubURL {
+    UI.AddSciHubURL {
         id: windowAddSciHubURL
     }
 
-    Ui.Message {
-        id: dialogChangeThemeRestartMessage
+    UIElements.Message {
+        id: dialogPreferencesMessage
 
         modal: true
 
         footer: DialogButtonBox {
             Button {
-                id: buttonDialogChangeThemeRestartMessageOK
                 text: qsTr("OK")
 
                 onClicked: {
-                    dialogChangeThemeRestartMessage.close()
-                    preferencesWindow.close()
+                    dialogPreferencesMessage.close()
                 }
             }
         }
     }
 
-    Ui.Message {
-        id: dialogRemoveSciHubURLConfirmMessage
+    UIElements.Message {
+        id: dialogPreferencesRemoveSciHubURLConfirmMessage
 
         modal: true
 
         footer: DialogButtonBox {
             Button {
-                id: buttonDialogRemoveSciHubURLConfirmMessageYes
                 text: qsTr("Yes")
 
                 onClicked: {
                     removeSciHubURL(comboBoxPreferencesNetworkSciHubURL.currentIndex)
-                    dialogRemoveSciHubURLConfirmMessage.close()
+                    dialogPreferencesRemoveSciHubURLConfirmMessage.close()
                 }
             }
 
             Button {
-                id: buttonDialogRemoveSciHubURLConfirmMessageNo
                 text: qsTr("No")
 
-                onClicked: dialogRemoveSciHubURLConfirmMessage.close()
+                onClicked: dialogPreferencesRemoveSciHubURLConfirmMessage.close()
             }
         }
     }
@@ -194,8 +190,6 @@ ApplicationWindow {
         focus: true
 
         RowLayout {
-            id: rowLayoutPreferencesTabs
-
             spacing: 0
 
             Layout.fillHeight: true
@@ -205,13 +199,18 @@ ApplicationWindow {
                 id: listModelPreferencesTabButtons
 
                 ListElement {
-                    name: qsTr("Common")
-                    iconText: "\uf61b"
+                    property string name: qsTr("System")
+                    property string iconSource: "qrc:/images/icons/monitor.svg"
                 }
 
                 ListElement {
-                    name: qsTr("Network")
-                    iconText: "\uf003"
+                    property string name: qsTr("File")
+                    property string iconSource: "qrc:/images/icons/edit_file.svg"
+                }
+
+                ListElement {
+                    property string name: qsTr("Network")
+                    property string iconSource: "qrc:/images/icons/ethernet_on.svg"
                 }
             }
 
@@ -229,20 +228,23 @@ ApplicationWindow {
                         anchors.fill: parent
                         Layout.alignment: Qt.AlignCenter | Qt.AlignVCenter
 
-                        Label {
-                            text: iconText
-                            font.family: fontMDI.name
-                            font.bold: true
-                            font.pixelSize: 1.2 * buttonDialogRemoveSciHubURLConfirmMessageYes.font.pixelSize
+                        Image {
+                            source: iconSource
+
+                            sourceSize.height: labelDelegateToolsItemText.font.pointSize * 1.6
+                            sourceSize.width: labelDelegateToolsItemText.font.pointSize * 1.6
 
                             Layout.leftMargin: 6
                         }
 
                         Label {
+                            id: labelDelegateToolsItemText
+
                             text: name
-                            font.bold: true
+                            font.weight: Font.Medium
 
                             Layout.rightMargin: 6
+                            Layout.fillWidth: true
                         }
                     }
 
@@ -284,13 +286,12 @@ ApplicationWindow {
                 Layout.fillWidth: true
 
                 Item {
-                    id: itemTabPreferencesCommon
+                    id: itemTabPreferencesSystem
 
                     Layout.fillHeight: true
                     Layout.fillWidth: true
 
                     GridLayout {
-                        id: gridLayoutPreferencesCommon
                         columnSpacing: 3
                         rowSpacing: 0
 
@@ -298,16 +299,99 @@ ApplicationWindow {
                         anchors.left: parent.left
                         anchors.top: parent.top
 
-                        rows: 4
                         columns: 2
 
                         Label {
-                            id: labelPreferencesCommonFilenamePrefixFormat
+                            text: qsTr("Language: ")
+                        }
+
+                        ComboBox {
+                            id: comboBoxPreferencesSystemLanguage
+
+                            Layout.minimumWidth: 200
+                            Layout.fillWidth: true
+
+                            textRole: "text"
+                            valueRole: "value"
+
+                            model: [
+                                { text: "English", value: "en" },
+                                { text: "简体中文", value: "zh_CN" },
+                                { text: "繁體中文", value: "zh_HK" },
+                                { text: "正體中文", value: "zh_TW" }
+                            ]
+                        }
+
+                        Label {
+                            text: qsTr("Theme: ")
+                        }
+
+                        ComboBox {
+                            id: comboBoxPreferencesSystemTheme
+
+                            Layout.minimumWidth: 200
+                            Layout.fillWidth: true
+
+                            textRole: "text"
+                            valueRole: "value"
+
+                            model: [
+                                { text: qsTr("System"), value: "System" },
+                                { text: qsTr("Light"), value: "Light" },
+                                { text: qsTr("Dark"), value: "Dark" }
+                            ]
+                        }
+
+                        ToolSeparator {
+                            rightPadding: 0
+                            leftPadding: 0
+                            Layout.fillWidth: true
+                            Layout.columnSpan: 2
+                            orientation: Qt.Horizontal
+                        }
+
+                        RowLayout {
+                            Layout.fillWidth: true
+                            Layout.columnSpan: 2
+
+                            Image {
+                                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+
+                                source: "qrc:/images/icons/info.svg"
+                                sourceSize.height: labelAttention.font.pointSize * 1.6
+                                sourceSize.width: labelAttention.font.pointSize * 1.6
+                            }
+
+                            Label {
+                                id: labelAttention
+                                text: qsTr("Changes will take effect after restart")
+                            }
+                        }
+                    }
+                }
+
+                Item {
+                    id: itemTabPreferencesFile
+
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+
+                    GridLayout {
+                        columnSpacing: 3
+                        rowSpacing: 0
+
+                        anchors.right: parent.right
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+
+                        columns: 2
+
+                        Label {
                             text: qsTr("Filename Prefix Format: ")
                         }
 
                         TextField {
-                            id: textFieldPreferencesCommonFilenamePrefixFormat
+                            id: textFieldPreferencesFileFilenamePrefixFormat
 
                             implicitWidth: 200
                             Layout.fillWidth: true
@@ -317,37 +401,17 @@ ApplicationWindow {
                         }
 
                         Label {
-                            id: labelPreferencesCommonFilenameFormatSupportedKeywords
-                            text: qsTr("Supported Keywords: ")
+                            text: qsTr("Supported Keywords: ") + "<br/>" +
+                                  qsTr("{author}: Author, {year}: Year, {title}: Title, {id}: DOI or PMID")
+                            Layout.columnSpan: 2
                         }
 
                         Label {
-                            id: labelPreferencesCommonFilenameFormatSupportedKeywordsExplain
-                            text: qsTr("{author}: Author, {year}: Year") +
-                                  "<br/>" +
-                                  qsTr("{title}: Title, {id}: DOI or PMID")
-                            wrapMode: Text.NoWrap
-                        }
-
-                        Label {
-                            id: labelPreferencesCommonTheme
-                            text: qsTr("Theme: ")
-                        }
-
-                        ComboBox {
-                            id: comboBoxPreferencesCommonTheme
-
-                            Layout.minimumWidth: 200
-                            Layout.fillWidth: true
-                        }
-
-                        Label {
-                            id: labelCommonOverwrite
-                            text: qsTr("Overwrite Existing File:")
+                            text: qsTr("Overwrite Existing File: ")
                         }
 
                         Switch {
-                            id: switchCommonOverwrite
+                            id: switchPreferencesFileOverwrite
                             text: checked ? qsTr("Yes") : qsTr("No")
                             display: AbstractButton.TextBesideIcon
                         }
@@ -361,7 +425,6 @@ ApplicationWindow {
                     Layout.fillWidth: true
 
                     GridLayout {
-                        id: gridLayoutPreferencesNetwork
                         rowSpacing: 0
                         columnSpacing: 3
 
@@ -373,13 +436,10 @@ ApplicationWindow {
                         columns: 2
 
                         Label {
-                            id: labelPreferencesNetworkSciHubURL
                             text: qsTr("SciHub URL: ")
                         }
 
                         RowLayout {
-                            id: rowLayoutPreferencesNetworkSciHubURL
-
                             Layout.fillWidth: true
 
                             ComboBox {
@@ -391,43 +451,37 @@ ApplicationWindow {
 
                             RoundButton {
                                 id: roundButtonPreferencesNetworkSciHubURLAdd
-                                text: "\uf415"
-
-                                font.family: fontMDI.name
+                                text: "+"
 
                                 onClicked: {
-                                    showWindowAddSciHubURL()
+                                    showUIAddSciHubURL()
                                 }
                             }
 
                             RoundButton {
                                 id: roundButtonPreferencesNetworkSciHubURLRemove
-                                text: "\uf374"
-
-                                font.family: fontMDI.name
+                                text: "-"
 
                                 onClicked: {
                                     if (comboBoxPreferencesNetworkSciHubURL.count <= 1) {
-                                        dialogChangeThemeRestartMessage.setIcon("\uf5de")
-                                        dialogChangeThemeRestartMessage.setText(qsTr("Cannot remove the last Sci-Hub URL!"))
-                                        dialogChangeThemeRestartMessage.open()
+                                        dialogPreferencesMessage.messageType = "error"
+                                        dialogPreferencesMessage.message = qsTr("Cannot remove the last Sci-Hub URL!")
+                                        dialogPreferencesMessage.open()
                                     } else {
-                                        var text = qsTr("Delete Sci-Hub URL: ") + comboBoxPreferencesNetworkSciHubURL.currentText + " ?"
-                                        dialogRemoveSciHubURLConfirmMessage.setIcon("\uf816")
-                                        dialogRemoveSciHubURLConfirmMessage.setText(text)
-                                        dialogRemoveSciHubURLConfirmMessage.open()
+                                        var message = qsTr("Delete Sci-Hub URL: ") + comboBoxPreferencesNetworkSciHubURL.currentText + " ?"
+                                        dialogPreferencesRemoveSciHubURLConfirmMessage.messageType = "question"
+                                        dialogPreferencesRemoveSciHubURLConfirmMessage.message = message
+                                        dialogPreferencesRemoveSciHubURLConfirmMessage.open()
                                     }
                                 }
                             }
                         }
 
                         Label {
-                            id: labelPreferencesNetworkTimeout
                             text: qsTr("Timeout: ")
                         }
 
                         RowLayout {
-                            id: rowLayoutPreferencesNetworkTimeout
                             width: 100
                             height: 100
 
@@ -445,13 +499,11 @@ ApplicationWindow {
                             }
 
                             Label {
-                                id: labelPreferencesNetworkTimeoutUnits
                                 text: "ms"
                             }
                         }
 
                         Label {
-                            id: labelPreferencesNetworkRetryTimes
                             text: qsTr("Retry Times: ")
                         }
 
@@ -469,7 +521,6 @@ ApplicationWindow {
                         }
 
                         Label {
-                            id: labelPreferencesNetworkEnableProxy
                             text: qsTr("Enable Proxy")
                         }
 
@@ -479,12 +530,10 @@ ApplicationWindow {
                         }
 
                         Label {
-                            id: labelPreferencesNetworkProxyType
                             text: qsTr("Proxy Type: ")
                         }
 
                         RowLayout {
-                            id: rowLayoutPreferencesNetworkProxyType
                             width: 100
                             height: 100
 
@@ -501,7 +550,6 @@ ApplicationWindow {
                         }
 
                         Label {
-                            id: labelPreferencesNetworkProxyHost
                             text: qsTr("Proxy Host: ")
                         }
 
@@ -515,7 +563,6 @@ ApplicationWindow {
                         }
 
                         Label {
-                            id: labelPreferencesNetworkProxyPort
                             text: qsTr("Proxy Port: ")
                         }
 
@@ -532,7 +579,6 @@ ApplicationWindow {
                         }
 
                         Label {
-                            id: labelPreferencesNetworkProxyUsername
                             text: qsTr("Proxy Username: ")
                         }
 
@@ -546,7 +592,6 @@ ApplicationWindow {
                         }
 
                         Label {
-                            id: labelPreferencesNetworkProxyPassword
                             text: qsTr("Proxy Password: ")
                         }
 
@@ -564,7 +609,6 @@ ApplicationWindow {
         }
 
         RowLayout {
-            id: rowLayoutPreferencesButtons
             Layout.topMargin: 6
             Layout.fillHeight: true
 
@@ -575,7 +619,7 @@ ApplicationWindow {
                 id: buttonPreferencesConfirm
                 text: qsTr("Confirm")
 
-                onClicked: saveAllPreference()
+                onClicked: saveAll()
             }
 
             Button {

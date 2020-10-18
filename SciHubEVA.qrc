@@ -2,13 +2,21 @@
     <qresource prefix="/">
         <file>ui/About.qml</file>
         <file>ui/AddSciHubURL.qml</file>
-        <file>ui/App.qml</file>
         <file>ui/Captcha.qml</file>
-        <file>ui/Message.qml</file>
         <file>ui/Preferences.qml</file>
+        <file>ui/SciHubEVA.qml</file>
+        <file>ui/elements/IconButton.qml</file>
+        <file>ui/elements/Message.qml</file>
         <file>images/SciHubEVA-background-dark.png</file>
         <file>images/SciHubEVA-background-light.png</file>
         <file>images/SciHubEVA-icon.png</file>
-        <file>fonts/materialdesignicons-webfont.ttf</file>
+        <file>images/icons/box_important.svg</file>
+        <file>images/icons/cancel.svg</file>
+        <file>images/icons/ethernet_on.svg</file>
+        <file>images/icons/help.svg</file>
+        <file>images/icons/info.svg</file>
+        <file>images/icons/monitor.svg</file>
+        <file>images/icons/settings.svg</file>
+        <file>images/icons/edit_file.svg</file>
     </qresource>
 </RCC>

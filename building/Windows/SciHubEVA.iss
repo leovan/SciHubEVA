@@ -1,7 +1,7 @@
 ﻿#define MyAppName "Sci-Hub EVA"
-#define MyAppVersion "4.0.1"
+#define MyAppVersion "4.1.0"
 #define MyAppPublisher "Leo Van"
-#define MyAppURL "https://leovan.me"
+#define MyAppURL "https://github.com/leovan/SciHubEVA"
 #define MyAppExeName "SciHubEVA.exe"
 
 [Setup]
@@ -13,19 +13,18 @@ AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 AppCopyright=Copyright (c) 2018-2020 Leo Van.
-AppReadmeFile=https://github.com/leovan/SciHubEVA
 DefaultDirName={autopf64}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile=..\..\LICENSE
-OutputDir=..\..\dist
+OutputDir=..\..\dist-Windows
 OutputBaseFilename=SciHubEVA-x64
-SetupIconFile=..\..\images\SciHubEVA-win-installer.ico
+SetupIconFile=SciHubEVA-inno-installer.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
 DisableWelcomePage=no
-WizardImageFile=..\..\images\SciHubEVA-inno-installer-wizard.bmp
-WizardSmallImageFile=..\..\images\SciHubEVA-inno-installer-wizard-small.bmp
+WizardImageFile=SciHubEVA-inno-installer-wizard.bmp
+WizardSmallImageFile=SciHubEVA-inno-installer-wizard-small.bmp
 ArchitecturesAllowed=x64
 UninstallDisplayIcon={app}\{#MyAppExeName}
 PrivilegesRequiredOverridesAllowed=dialog
@@ -39,8 +38,8 @@ Name: "zh_Hant"; MessagesFile: "compiler:\Languages\ChineseTraditional.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "..\..\dist\SciHubEVA\SciHubEVA.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\dist\SciHubEVA\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\dist-Windows\SciHubEVA\SciHubEVA.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\dist-Windows\SciHubEVA\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

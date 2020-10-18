@@ -11,38 +11,31 @@ Dialog {
     modal: true
 
     ColumnLayout {
-        id: columnLayoutAbout
-
         anchors.fill: parent
 
         RowLayout {
-            id: rowLayoutAboutText
+            Layout.fillWidth: true
 
-            spacing: 20
+            spacing: 10
 
             Image {
                 id: imageAboutLogo
 
                 Layout.alignment: Qt.AlignTop
 
-                sourceSize.height: 86
-                sourceSize.width: 86
+                sourceSize.height: 96
+                sourceSize.width: 96
                 source: "qrc:/images/SciHubEVA-icon.png"
             }
 
             Label {
-                id: labelAboutText
                 text: "<style>a { color: " + Material.accent + "; }</style>" +
-                      "<p><b>Sci-Hub EVA v4.0.1</b></p>" +
-                      "<p>" + qsTr("Sci-Hub EVA is a cross-platform Sci-Hub GUI Application based on ") +
-                      "Python " + PYTHON_VERSION + qsTr(" and ") +
-                      "Qt (PySide2) " + QT_VERSION + qsTr(".") + "</p>" +
-                      "<p>" + qsTr("Author: ") + "<a href=\"https://leovan.me\">" + qsTr("Leo Van") + "</a><br/>" +
-                      qsTr("License: ") + "<a href=\"https://github.com/leovan/SciHubEVA\">The MIT License</a>" +
-                      "</p>"
-
-                Layout.preferredWidth: 300
-                Layout.maximumWidth: 300
+                      "<p><b>Sci-Hub EVA</a> " + APPLICATION_VERSION + "</b></p>" +
+                      "<p>" + "<a href=\"https://github.com/leovan/SciHubEVA\">Sci-Hub EVA</a> " +
+                      qsTr("is a cross-platform Sci-Hub GUI Application.") + "<br/>" +
+                      "Powered By Python " + PYTHON_VERSION + " & Qt (PySide2) " + QT_VERSION + "</p>" +
+                      "<p>Copyright (c) 2018-2020 <a href=\"https://leovan.me\">" + qsTr("Leo Van") +
+                      "</a> The MIT License</p>"
 
                 onLinkActivated: Qt.openUrlExternally(link)
                 textFormat: Text.RichText

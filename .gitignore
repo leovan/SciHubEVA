@@ -16,7 +16,7 @@ __pycache__/
 *$py.class
 .hypothesis
 .pytest_cache
-scihubeva/resources.py
+scihub_eva/resources.py
 
 # Others
 *.spec
@@ -25,6 +25,6 @@ design/**
 !design/*.svg
 build/**
 dist/**
-translations/*_zh_HK.ts
-translations/*_zh_TW.ts
+i18n/*_zh_HK.ts
+i18n/*_zh_TW.ts
 *.bak

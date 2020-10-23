@@ -61,10 +61,6 @@ ApplicationWindow {
     UIElements.Message {
         id: dialogMessage
 
-        Button {
-            text: "TEST"
-        }
-
         footer: DialogButtonBox {
             Button {
                 id: buttonDialogMessageOK

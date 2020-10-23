@@ -19,8 +19,6 @@ Dialog {
             spacing: 10
 
             Image {
-                id: imageAboutLogo
-
                 Layout.alignment: Qt.AlignTop
 
                 sourceSize.height: 96
@@ -36,6 +34,9 @@ Dialog {
                       "Powered By Python " + PYTHON_VERSION + " & Qt (PySide2) " + QT_VERSION + "</p>" +
                       "<p>Copyright (c) 2018-2020 <a href=\"https://leovan.me\">" + qsTr("Leo Van") +
                       "</a> The MIT License</p>"
+
+                Layout.fillWidth: true
+                Layout.minimumWidth: 200
 
                 onLinkActivated: Qt.openUrlExternally(link)
                 textFormat: Text.RichText

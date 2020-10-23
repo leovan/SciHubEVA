@@ -27,6 +27,7 @@ if __name__ == '__main__':
     QGuiApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
     QGuiApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
     QGuiApplication.setAttribute(Qt.AA_ShareOpenGLContexts)
+    QGuiApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
 
     app = QGuiApplication(sys.argv)
 

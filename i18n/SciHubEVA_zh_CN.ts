@@ -3,17 +3,17 @@
 <context>
     <name>About</name>
     <message>
-        <location filename="../ui/About.qml" line="35"/>
+        <location filename="../ui/About.qml" line="33"/>
         <source>is a cross-platform Sci-Hub GUI Application.</source>
         <translation>是一个跨平台的 Sci-Hub GUI 程序。</translation>
     </message>
     <message>
-        <location filename="../ui/About.qml" line="37"/>
+        <location filename="../ui/About.qml" line="35"/>
         <source>Leo Van</source>
         <translation>Leo Van</translation>
     </message>
     <message>
-        <location filename="../ui/About.qml" line="37"/>
+        <location filename="../ui/About.qml" line="35"/>
         <source>License: </source>
         <translation>许可: </translation>
     </message>
@@ -414,72 +414,72 @@
 <context>
     <name>SciHubEVA</name>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="71"/>
+        <location filename="../ui/SciHubEVA.qml" line="67"/>
         <source>OK</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="151"/>
+        <location filename="../ui/SciHubEVA.qml" line="147"/>
         <source>Query: </source>
         <translation>搜索: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="158"/>
+        <location filename="../ui/SciHubEVA.qml" line="154"/>
         <source>URL, PMID, DOI, Search String or Query List File</source>
         <translation>URL, PMID, DOI, 标题或搜索列表文件</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="169"/>
+        <location filename="../ui/SciHubEVA.qml" line="165"/>
         <source>Rampage</source>
         <translation>暴走</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="177"/>
+        <location filename="../ui/SciHubEVA.qml" line="173"/>
         <source>Please choose save to directory first!</source>
         <translation>请先选择保存路径！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="181"/>
+        <location filename="../ui/SciHubEVA.qml" line="177"/>
         <source>Please specify query!</source>
         <translation>请指定搜索内容！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="191"/>
+        <location filename="../ui/SciHubEVA.qml" line="187"/>
         <source>Load</source>
         <translation>载入</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="207"/>
+        <location filename="../ui/SciHubEVA.qml" line="203"/>
         <source>Save to: </source>
         <translation>保存至: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="225"/>
+        <location filename="../ui/SciHubEVA.qml" line="221"/>
         <source>Open</source>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="235"/>
+        <location filename="../ui/SciHubEVA.qml" line="231"/>
         <source>Show</source>
         <translation>显示</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="255"/>
+        <location filename="../ui/SciHubEVA.qml" line="251"/>
         <source>Logs: </source>
         <translation>日志: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="255"/>
+        <location filename="../ui/SciHubEVA.qml" line="251"/>
         <source>Welcome to Sci-Hub EVA</source>
         <translation>欢迎使用 Sci-Hub EVA</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="303"/>
+        <location filename="../ui/SciHubEVA.qml" line="299"/>
         <source>Open Log File</source>
         <translation>打开日志文件</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="310"/>
+        <location filename="../ui/SciHubEVA.qml" line="306"/>
         <source>Open Log Directory</source>
         <translation>打开日志目录</translation>
     </message>
@@ -487,12 +487,12 @@
 <context>
     <name>SciHubEVADialog</name>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="310"/>
+        <location filename="../ui/SciHubEVA.qml" line="306"/>
         <source>Query list file is not a text file!</source>
         <translation>搜索列表文件不是一个文本文件！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="310"/>
+        <location filename="../ui/SciHubEVA.qml" line="306"/>
         <source>Dealing with {}/{} query ...</source>
         <translation>正在处理 {}/{} 查询 ...</translation>
     </message>

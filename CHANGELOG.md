@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.1](https://github.com/leovan/SciHubEVA/compare/v4.1.0...v4.1.1) (2020-10-22)
+
+### Bug Fixes
+
+- Fix dialog auto width problem.
+- Fix high DPI scaling problem on Windows.
+
 ## [4.1.0](https://github.com/leovan/SciHubEVA/compare/v4.0.1...v4.1.0) (2020-10-19)
 
 ### Features

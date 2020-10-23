@@ -1,5 +1,5 @@
 ﻿#define MyAppName "Sci-Hub EVA"
-#define MyAppVersion "4.1.0"
+#define MyAppVersion "4.1.1"
 #define MyAppPublisher "Leo Van"
 #define MyAppURL "https://github.com/leovan/SciHubEVA"
 #define MyAppExeName "SciHubEVA.exe"

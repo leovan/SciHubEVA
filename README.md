@@ -101,3 +101,12 @@ See [`building/README.md`](building/README.md)
 [PySide2](https://doc.qt.io/qtforpython): GNU Lesser General Public License (LGPL)
 
 Icons: GNU General Public License 3.0 (GPL-3.0), modified from [Numix Circle](https://github.com/numixproject/numix-icon-theme-circle).
+
+## Acknowledgement
+
+Supported by JetBrains Free License Programs for Open Source Development.
+
+<div>
+  <a href="https://www.jetbrains.com/?from=SciHubEVA" target="_blank"><img src="docs/jetbrains.svg" width=100 height=100></a>
+  <a href="https://www.jetbrains.com/?from=SciHubEVA" target="_blank"><img src="docs/icon-pycharm.svg" width=100 height=100></a>
+</div>

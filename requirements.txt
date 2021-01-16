@@ -1,7 +1,7 @@
 lxml==4.6.2
-pdfminer.six==20200726
-PySide2==5.14.1
-requests==2.24.0
+pdfminer.six==20201018
+PySide2==5.15.2
+requests==2.25.1
 PySocks==1.7.1
-Pillow==8.0.0
+Pillow==8.1.0
 darkdetect==0.1.1

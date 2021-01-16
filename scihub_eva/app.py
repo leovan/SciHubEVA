@@ -33,9 +33,11 @@ if __name__ == '__main__':
 
     lang = Preferences.get_or_default(SYSTEM_LANGUAGE_KEY, SYSTEM_LANGUAGE)
     lang_file_path = (I18N_DIR / 'SciHubEVA_{lang}.qm'.format(lang=lang)).resolve().as_posix()
-    translator = QTranslator()
-    translator.load(lang_file_path)
-    app.installTranslator(translator)
+
+    if os.path.exists(lang_file_path):
+        translator = QTranslator()
+        translator.load(lang_file_path)
+        app.installTranslator(translator)
 
     icon_file_path = (IMAGES_DIR / 'SciHubEVA-icon.png').resolve().as_posix()
     app.setWindowIcon(QIcon(icon_file_path))

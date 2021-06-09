@@ -3,5 +3,5 @@ pdfminer.six==20201018
 PySide2==5.15.2
 requests==2.25.1
 PySocks==1.7.1
-Pillow==8.1.1
+Pillow==8.2.0
 darkdetect==0.1.1

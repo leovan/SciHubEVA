@@ -14,7 +14,7 @@ from tempfile import NamedTemporaryFile
 from pathlib import Path
 from PIL import Image, ImageOps
 
-from PySide2.QtCore import QObject
+from PySide6.QtCore import QObject
 
 from scihub_eva.globals.preferences import *
 from scihub_eva.utils.preferences_utils import *

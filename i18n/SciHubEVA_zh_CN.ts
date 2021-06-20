@@ -479,7 +479,7 @@
         <translation>打开日志文件</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="306"/>
+        <location filename="../ui/SciHubEVA.qml" line="304"/>
         <source>Open Log Directory</source>
         <translation>打开日志目录</translation>
     </message>
@@ -487,12 +487,12 @@
 <context>
     <name>SciHubEVADialog</name>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="306"/>
+        <location filename="../ui/SciHubEVA.qml" line="304"/>
         <source>Query list file is not a text file!</source>
         <translation>搜索列表文件不是一个文本文件！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="306"/>
+        <location filename="../ui/SciHubEVA.qml" line="304"/>
         <source>Dealing with {}/{} query ...</source>
         <translation>正在处理 {}/{} 查询 ...</translation>
     </message>

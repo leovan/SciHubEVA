@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from PySide2.QtCore import QSettings
+from PySide6.QtCore import QSettings
 from configparser import ConfigParser
 
 from scihub_eva.globals.versions import *

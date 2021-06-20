@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.0.0](https://github.com/leovan/SciHubEVA/compare/v4.1.1...v5.0.0) (2021-06-20)
+
+### Breaking Changes
+
+- Change Qt Python binding from PySide2 to PySide6.
+
 ## [4.1.1](https://github.com/leovan/SciHubEVA/compare/v4.1.0...v4.1.1) (2020-10-22)
 
 ### Bug Fixes
@@ -142,7 +148,7 @@ _This is a hotfix version._
 - Support dark theme (Change it in "Preferences", "System" option does not work currently).
 - Add Traditional Chinese support.
 
-### Breaking changes
+### Breaking Changes
 
 - Change Qt Python binding from [PyQt5](https://www.riverbankcomputing.com/software/pyqt) to [PySide2](https://doc.qt.io/qtforpython).
 - Change Windows installer builder from [NSIS](https://nsis.sourceforge.io) to [Inno Setup](http://www.jrsoftware.org/isinfo.php).

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from PySide2.QtCore import QObject, Slot, Signal
-from PySide2.QtQml import QQmlApplicationEngine
+from PySide6.QtCore import QObject, Slot, Signal
+from PySide6.QtQml import QQmlApplicationEngine
 
 
 class UICaptcha(QObject):

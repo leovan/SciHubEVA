@@ -1,9 +1,9 @@
-import QtQuick 2.14
-import QtQuick.Layouts 1.14
-import QtQuick.Controls 2.14
-import QtQuick.Controls.Material 2.14
-import Qt.labs.settings 1.1
-import Qt.labs.platform 1.1 as Platform
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Controls.Material
+import Qt.labs.settings
+import Qt.labs.platform as Platform
 
 import "." as UI
 import "./elements" as UIElements
@@ -297,15 +297,11 @@ ApplicationWindow {
 
                         Platform.MenuItem {
                             text: qsTr("Open Log File")
-                            iconName: "text-x-generic"
-
                             onTriggered: systemOpenLogFile()
                         }
 
                         Platform.MenuItem {
                             text: qsTr("Open Log Directory")
-                            iconName: "folder"
-
                             onTriggered: systemOpenLogDirectory()
                         }
                     }

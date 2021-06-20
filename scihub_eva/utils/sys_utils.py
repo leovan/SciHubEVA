@@ -14,7 +14,7 @@ except Exception:
 
 from pathlib import Path
 
-from PySide2.QtCore import qVersion
+from PySide6.QtCore import qVersion
 
 
 DEFAULT_ENCODING = 'utf-8'

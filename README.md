@@ -8,7 +8,7 @@
 
 ## Introduction
 
-**Sci-Hub EVA** is a cross-platform [Sci-Hub](https://en.wikipedia.org/wiki/Sci-Hub) GUI application written in Python and Qt (PySide2).
+**Sci-Hub EVA** is a cross-platform [Sci-Hub](https://en.wikipedia.org/wiki/Sci-Hub) GUI application written in Python and Qt.
 
 ## Usage
 
@@ -98,7 +98,7 @@ See [`building/README.md`](building/README.md)
 
 [SciHubEVA](https://github.com/leovan/SciHubEVA): The MIT License (MIT)
 
-[PySide2](https://doc.qt.io/qtforpython): GNU Lesser General Public License (LGPL)
+[PySide6](https://doc.qt.io/qtforpython): GNU Lesser General Public License (LGPL)
 
 Icons: GNU General Public License 3.0 (GPL-3.0), modified from [Numix Circle](https://github.com/numixproject/numix-icon-theme-circle).
 

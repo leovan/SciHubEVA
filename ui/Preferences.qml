@@ -1,7 +1,7 @@
-import QtQuick 2.14
-import QtQuick.Layouts 1.14
-import QtQuick.Controls 2.14
-import QtQuick.Window 2.14
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Window
 
 import "." as UI
 import "./elements" as UIElements
@@ -493,8 +493,8 @@ ApplicationWindow {
 
                                 horizontalAlignment: Text.AlignHCenter
                                 selectByMouse: true
-                                validator: RegExpValidator {
-                                    regExp: /[0-9]+/
+                                validator: RegularExpressionValidator {
+                                    regularExpression: /[0-9]+/
                                 }
                             }
 
@@ -515,8 +515,8 @@ ApplicationWindow {
 
                             horizontalAlignment: Text.AlignHCenter
                             selectByMouse: true
-                            validator: RegExpValidator {
-                                regExp: /[0-9]+/
+                            validator: RegularExpressionValidator {
+                                regularExpression: /[0-9]+/
                             }
                         }
 
@@ -573,8 +573,8 @@ ApplicationWindow {
                             Layout.fillWidth: true
 
                             selectByMouse: true
-                            validator: RegExpValidator {
-                                regExp: /[0-9]+/
+                            validator: RegularExpressionValidator {
+                                regularExpression: /[0-9]+/
                             }
                         }
 

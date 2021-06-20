@@ -5,8 +5,8 @@ import os
 from collections import deque
 from logging import StreamHandler
 
-from PySide2.QtCore import QObject, Slot, Signal
-from PySide2.QtQml import QQmlApplicationEngine
+from PySide6.QtCore import QObject, Slot, Signal
+from PySide6.QtQml import QQmlApplicationEngine
 
 from scihub_eva.globals.versions import *
 from scihub_eva.globals.preferences import *

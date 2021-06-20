@@ -5,8 +5,8 @@
 1. Create a python environment.
 
    ```bash
-   conda create -n python38 python=3.8
-   conda activate python38
+   conda create -n python39 python=3.9
+   conda activate python39
    ```
 
 2. Install requirements.
@@ -22,10 +22,10 @@
    lupdate SciHubEVA.pro
 
    # Generate translations source of Python files
-   pyside2-lupdate \
-       scihub_eva/api/*.py \
-       scihub_eva/ui/*.py \
-       -ts i18n/SciHubEVA_zh_CN.ts
+   pyside6-lupdate \
+      scihub_eva/api/*.py \
+      scihub_eva/ui/*.py \
+      -ts i18n/SciHubEVA_zh_CN.ts
 
    # Do translations with Qt Linguist
    # ......
@@ -54,7 +54,7 @@
    rm -rf dist-macOS
    rm -f SciHubEVA.spec
 
-   pyside2-rcc SciHubEVA.qrc -o scihub_eva/resources.py
+   pyside6-rcc SciHubEVA.qrc -o scihub_eva/resources.py
 
    pyinstaller scihub_eva/app.py \
       --workpath "build-macOS" \
@@ -73,12 +73,8 @@
 
    cp building/macOS/Info.plist dist-macOS/SciHubEVA.app/Contents
 
-   # Remove useless libraries
-   cd dist-macOS/SciHubEVA.app/Contents/MacOS
-   rm -f Qt3D* QtBluetooth QtBodymovin QtCharts QtDataVisualization QtGamepad QtLocation QtMultimedia QtMultimediaQuick QtNfc QtPositioning QtPositioningQuick QtPurchasing QtQuick3D* QtQuickTest QtRemoteObjects QtScxml QtSensors QtSql QtTest QtVirtualKeyboard QtWeb*
-   cd PySide2/qml
-   rm -rf Qt3D* QtAudioEngine QtBluetooth QtCharts QtDataVisualization QtGamepad QtLocation QtMultimedia QtNfc QtPositioning QtPurchasing QtQuick3D* QtRemoteObjects QtScxml QtSensors QtTest QtWeb*
-   cd ../../../../../..
+   # Post process
+   python building/post_process.py
    ```
 
    `SciHubEVA.app` will be in `dist-macOS`.
@@ -107,7 +103,7 @@
    rd /s /Q dist-Windows
    del /F /S /Q SciHubEVA.spec
 
-   pyside2-rcc SciHubEVA.qrc -o scihub_eva/resources.py
+   pyside6-rcc SciHubEVA.qrc -o scihub_eva/resources.py
 
    pyinstaller scihub_eva/app.py ^
       --workpath "build-Windows" ^
@@ -125,12 +121,8 @@
       --clean ^
       --noupx
 
-   :: Remove useless libraries
-   cd dist-Windows/SciHubEVA
-   del /F /S /Q Qt53D*.dll Qt5Bluetooth.dll Qt5Bodymovin.dll Qt5Charts.dll Qt5DataVisualization.dll Qt5Gamepad.dll Qt5Location.dll Qt5Multimedia.dll Qt5MultimediaQuick.dll Qt5Nfc.dll Qt5Positioning.dll Qt5PositioningQuick.dll Qt5Purchasing.dll Qt5Quick3D*.dll Qt5QuickTest.dll Qt5RemoteObjects.dll Qt5Scxml.dll Qt5Sensors.dll Qt5Sql.dll Qt5Test.dll Qt5VirtualKeyboard.dll Qt5Web*.dll
-   cd PySide2/qml
-   rd /S /Q Qt3D QtBluetooth QtCharts QtDataVisualization QtGamepad QtLocation QtMultimedia QtNfc QtPositioning QtPurchasing QtQuick3D QtRemoteObjects QtScxml QtSensors QtTest QtWebChannel QtWebEngine QtWebSockets QtWebView
-   cd ../../../..
+   :: Post process
+   python building/post_process.py
    ```
 
    All compiled files will be in `dist-Windows\SciHubEVA`.

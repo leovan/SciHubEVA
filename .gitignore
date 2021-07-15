@@ -23,8 +23,8 @@ scihub_eva/resources.py
 design/**
 !design/*.psd
 !design/*.svg
-build*/**
-dist*/**
+build-*/**
+dist-*/**
 i18n/*_zh_HK.ts
 i18n/*_zh_TW.ts
 *.bak

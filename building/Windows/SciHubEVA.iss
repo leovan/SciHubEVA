@@ -31,6 +31,7 @@ PrivilegesRequiredOverridesAllowed=dialog
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:\Default.isl"
+Name: "pt"; MessagesFile: "compiler:\Languages\Portuguese.isl"
 Name: "zh_Hans"; MessagesFile: "compiler:\Languages\ChineseSimplified.isl"
 Name: "zh_Hant"; MessagesFile: "compiler:\Languages\ChineseTraditional.isl"
 

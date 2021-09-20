@@ -1,5 +1,15 @@
 # Changelog
 
+## [5.1.0](https://github.com/leovan/SciHubEVA/compare/v5.0.0...v5.1.0) (2021-09-20)
+
+### Bug Fixes
+
+- Change API according to the new Sci-Hub website.
+
+### Features
+
+- Add Portuguese translation.
+
 ## [5.0.0](https://github.com/leovan/SciHubEVA/compare/v4.1.1...v5.0.0) (2021-06-20)
 
 ### Breaking Changes

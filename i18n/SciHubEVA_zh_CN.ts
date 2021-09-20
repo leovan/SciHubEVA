@@ -366,6 +366,11 @@
         <translation>获取到 PDF URL: </translation>
     </message>
     <message>
+        <location filename="scihub_api.py" line="227"/>
+        <source>You may need check it manually.</source>
+        <translation>你可能需要手动处理本次查询。</translation>
+    </message>
+    <message>
         <location filename="scihub_api.py" line="231"/>
         <source>Failed to get PDF URL!</source>
         <translation>获取 PDF URL 失败！</translation>
@@ -389,11 +394,6 @@
         <location filename="scihub_api.py" line="295"/>
         <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
         <translation>验证码错误，使徒 [CAPTCHA] 消灭失败！</translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="227"/>
-        <source>You may need check it manually.</source>
-        <translation>你可能需要手动处理本次查询。</translation>
     </message>
 </context>
 <context>

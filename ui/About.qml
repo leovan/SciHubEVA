@@ -38,9 +38,12 @@ Dialog {
                 Layout.fillWidth: true
                 Layout.minimumWidth: 200
 
-                onLinkActivated: Qt.openUrlExternally(link)
                 textFormat: Text.RichText
                 wrapMode: Text.WordWrap
+
+                onLinkActivated: (link) => {
+                    Qt.openUrlExternally(link)
+                }
             }
         }
     }

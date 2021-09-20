@@ -276,7 +276,9 @@ ApplicationWindow {
                 horizontalAlignment: Text.AlignLeft
 
                 onTextChanged: flickableLogs.scrollToBottom()
-                onLinkActivated: Qt.openUrlExternally(link)
+                onLinkActivated: (link) => {
+                    Qt.openUrlExternally(link)
+                }
 
                 MouseArea {
                     id: mouseAreaLogs
@@ -286,7 +288,7 @@ ApplicationWindow {
                     propagateComposedEvents: true
                     acceptedButtons: Qt.RightButton
 
-                    onClicked: {
+                    onClicked: (mouse) => {
                         if (mouse.button === Qt.RightButton) {
                             menuLogs.open()
                         }
@@ -309,7 +311,7 @@ ApplicationWindow {
             }
         }
 
-        Keys.onPressed: {
+        Keys.onPressed: (event) => {
             if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
                 buttonRampage.clicked()
             }

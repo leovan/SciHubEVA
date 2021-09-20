@@ -72,7 +72,7 @@ ApplicationWindow {
             }
         }
 
-        Keys.onPressed: {
+        Keys.onPressed: (event) => {
             if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
                 buttonAddSciHubURLConfirm.clicked()
             } else if (event.key === Qt.Key_Escape) {

@@ -10,12 +10,7 @@
     <message>
         <location filename="../ui/About.qml" line="35"/>
         <source>Leo Van</source>
-        <translation>Leo Van</translation>
-    </message>
-    <message>
-        <location filename="../ui/About.qml" line="35"/>
-        <source>License: </source>
-        <translation>许可: </translation>
+        <translation>范叶亮</translation>
     </message>
 </context>
 <context>
@@ -168,17 +163,17 @@
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="529"/>
+        <location filename="../ui/Preferences.qml" line="530"/>
         <source>Yes</source>
         <translation>是</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="529"/>
+        <location filename="../ui/Preferences.qml" line="530"/>
         <source>No</source>
         <translation>否</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="529"/>
+        <location filename="../ui/Preferences.qml" line="530"/>
         <source>Common</source>
         <translation>通用</translation>
     </message>
@@ -188,112 +183,112 @@
         <translation>网络</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="390"/>
+        <location filename="../ui/Preferences.qml" line="391"/>
         <source>Filename Prefix Format: </source>
         <translation>文件名前缀格式: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="404"/>
+        <location filename="../ui/Preferences.qml" line="405"/>
         <source>Supported Keywords: </source>
         <translation>支持的关键字: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="404"/>
+        <location filename="../ui/Preferences.qml" line="405"/>
         <source>{author}: Author, {year}: Year</source>
         <translation>{author}：作者，{year}：年</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="404"/>
+        <location filename="../ui/Preferences.qml" line="405"/>
         <source>{title}: Title, {id}: DOI or PMID</source>
         <translation>{title}：标题，{id}：DOI 或 PMID</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="326"/>
+        <location filename="../ui/Preferences.qml" line="327"/>
         <source>Theme: </source>
         <translation>主题: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="340"/>
+        <location filename="../ui/Preferences.qml" line="341"/>
         <source>Light</source>
         <translation>明亮</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="341"/>
+        <location filename="../ui/Preferences.qml" line="342"/>
         <source>Dark</source>
         <translation>黑暗</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="367"/>
+        <location filename="../ui/Preferences.qml" line="368"/>
         <source>Changes will take effect after restart</source>
         <translation>重启后生效</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="405"/>
+        <location filename="../ui/Preferences.qml" line="406"/>
         <source>{author}: Author, {year}: Year, {title}: Title, {id}: DOI or PMID</source>
         <translation>{author}: 作者, {year}: 年, {title}: 标题, {id}: DOI 或 PMID</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="405"/>
+        <location filename="../ui/Preferences.qml" line="406"/>
         <source>Overwrite Existing File:</source>
         <translation>覆盖现存文件:</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="439"/>
+        <location filename="../ui/Preferences.qml" line="440"/>
         <source>SciHub URL: </source>
         <translation>SciHub URL: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="468"/>
+        <location filename="../ui/Preferences.qml" line="469"/>
         <source>Cannot remove the last Sci-Hub URL!</source>
         <translation>无法删除最后一个 Sci-Hub 网址！</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="471"/>
+        <location filename="../ui/Preferences.qml" line="472"/>
         <source>Delete Sci-Hub URL: </source>
         <translation>删除 Sci-Hub 网址: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="481"/>
+        <location filename="../ui/Preferences.qml" line="482"/>
         <source>Timeout: </source>
         <translation>超时: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="507"/>
+        <location filename="../ui/Preferences.qml" line="508"/>
         <source>Retry Times: </source>
         <translation>重试次数: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="524"/>
+        <location filename="../ui/Preferences.qml" line="525"/>
         <source>Enable Proxy</source>
         <translation>开启代理</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="533"/>
+        <location filename="../ui/Preferences.qml" line="534"/>
         <source>Proxy Type: </source>
         <translation>代理类型: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="595"/>
+        <location filename="../ui/Preferences.qml" line="596"/>
         <source>Proxy Password: </source>
         <translation>代理密码: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="582"/>
+        <location filename="../ui/Preferences.qml" line="583"/>
         <source>Proxy Username: </source>
         <translation>代理用户名: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="566"/>
+        <location filename="../ui/Preferences.qml" line="567"/>
         <source>Proxy Port: </source>
         <translation>代理端口: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="553"/>
+        <location filename="../ui/Preferences.qml" line="554"/>
         <source>Proxy Host: </source>
         <translation>代理地址: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="339"/>
+        <location filename="../ui/Preferences.qml" line="340"/>
         <source>System</source>
         <translation>系统</translation>
     </message>
@@ -308,17 +303,17 @@
         <translation>语言: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="410"/>
+        <location filename="../ui/Preferences.qml" line="411"/>
         <source>Overwrite Existing File: </source>
         <translation>覆盖现有文件: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="620"/>
+        <location filename="../ui/Preferences.qml" line="621"/>
         <source>Confirm</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="627"/>
+        <location filename="../ui/Preferences.qml" line="628"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>

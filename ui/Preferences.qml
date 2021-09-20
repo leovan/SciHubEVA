@@ -318,7 +318,8 @@ ApplicationWindow {
                                 { text: "English", value: "en" },
                                 { text: "简体中文", value: "zh_CN" },
                                 { text: "繁體中文", value: "zh_HK" },
-                                { text: "正體中文", value: "zh_TW" }
+                                { text: "正體中文", value: "zh_TW" },
+                                { text: "Português", value: "pt_PT" }
                             ]
                         }
 

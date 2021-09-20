@@ -35,9 +35,7 @@
    opencc -c s2hk -i i18n/SciHubEVA_zh_CN.ts -o i18n/SciHubEVA_zh_HK.ts
 
    # Generate translations target
-   lrelease i18n/SciHubEVA_zh_CN.ts
-   lrelease i18n/SciHubEVA_zh_TW.ts
-   lrelease i18n/SciHubEVA_zh_HK.ts
+   lrelease i18n/SciHubEVA_*.ts
    ```
 
    Complied translations will be in `i18n` end with `.qm`.

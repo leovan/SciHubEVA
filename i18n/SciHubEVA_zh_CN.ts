@@ -366,49 +366,34 @@
         <translation>获取到 PDF URL: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="238"/>
+        <location filename="scihub_api.py" line="231"/>
         <source>Failed to get PDF URL!</source>
         <translation>获取 PDF URL 失败！</translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="231"/>
-        <source>No valid &amp;lt;iframe&amp;gt;!</source>
-        <translation>无有效的 &amp;lt;iframe&amp;gt; ！</translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="232"/>
-        <source>You may need handle it manually.</source>
-        <translation>你可能需要手动处理。</translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="233"/>
-        <source>Request URL: </source>
-        <translation>请求 URL: </translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="234"/>
-        <source>Response URL: </source>
-        <translation>响应 URL: </translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="265"/>
+        <location filename="scihub_api.py" line="258"/>
         <source>Unsupported filename keywords: </source>
         <translation>不支持的文件名关键字: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="276"/>
+        <location filename="scihub_api.py" line="269"/>
         <source>Saved PDF as: </source>
         <translation>保存 PDF 为: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="281"/>
+        <location filename="scihub_api.py" line="274"/>
         <source>Dealing with query: </source>
         <translation>正在处理搜索: </translation>
     </message>
     <message>
-        <location filename="scihub_api.py" line="302"/>
+        <location filename="scihub_api.py" line="295"/>
         <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
         <translation>验证码错误，使徒 [CAPTCHA] 消灭失败！</translation>
+    </message>
+    <message>
+        <location filename="scihub_api.py" line="227"/>
+        <source>You may need check it manually.</source>
+        <translation>你可能需要手动处理本次查询。</translation>
     </message>
 </context>
 <context>
@@ -474,12 +459,12 @@
         <translation>欢迎使用 Sci-Hub EVA</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="299"/>
+        <location filename="../ui/SciHubEVA.qml" line="301"/>
         <source>Open Log File</source>
         <translation>打开日志文件</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="304"/>
+        <location filename="../ui/SciHubEVA.qml" line="306"/>
         <source>Open Log Directory</source>
         <translation>打开日志目录</translation>
     </message>
@@ -487,12 +472,12 @@
 <context>
     <name>SciHubEVADialog</name>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="304"/>
+        <location filename="../ui/SciHubEVA.qml" line="306"/>
         <source>Query list file is not a text file!</source>
         <translation>搜索列表文件不是一个文本文件！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="304"/>
+        <location filename="../ui/SciHubEVA.qml" line="306"/>
         <source>Dealing with {}/{} query ...</source>
         <translation>正在处理 {}/{} 查询 ...</translation>
     </message>

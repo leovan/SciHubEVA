@@ -213,25 +213,18 @@ class SciHubAPI(QObject, threading.Thread):
                         NETWORK_TIMEOUT_KEY, NETWORK_RETRY_TIMES_DEFAULT, type=int) / 1000.0)
 
                 html = etree.HTML(pdf_url_response.content)
-                iframes = html.xpath('//iframe[@id="pdf"]') if html is not None else None
+                article = html.xpath('//div[@id="article"]/embed[1]') if html is not None else None
 
-                if iframes and len(iframes) > 0:
-                    pdf_url = urlparse(iframes[0].attrib['src'], scheme='http').geturl()
+                if article and len(article) > 0:
+                    pdf_url = urlparse(article[0].attrib['src'], scheme='http').geturl()
                     pdf_url_html = '<a href="{pdf_url}">{pdf_url}</a>'.format(pdf_url=pdf_url)
 
                     self._logger.info(self.tr('Got PDF URL: ') + pdf_url_html)
                 else:
                     err = SciHubAPIError.NO_VALID_IFRAME
-                    request_url = '{scihub_url}/{query}'.format(scihub_url=scihub_url, query=query)
-                    request_url_html = '<a href="{request_url}">{request_url}</a>'.format(request_url=request_url)
-                    response_url = pdf_url_response.url
-                    response_url_html = '<a href="{response_url}">{response_url}</a>'.format(response_url=response_url)
 
                     self._logger.error(self.tr('Failed to get PDF URL!'))
-                    self._logger.error(self.tr('No valid &lt;iframe&gt;!'))
-                    self._logger.info(self.tr('You may need handle it manually.'))
-                    self._logger.info(self.tr('Request URL: ') + request_url_html)
-                    self._logger.info(self.tr('Response URL: ') + response_url_html)
+                    self._logger.info(self.tr('You may need check it manually.'))
             except Exception as e:
                 err = SciHubAPIError.UNKNOWN
 

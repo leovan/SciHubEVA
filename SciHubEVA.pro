@@ -12,4 +12,5 @@ SOURCES += \
 }
 
 TRANSLATIONS += \
-    i18n/SciHubEVA_zh_CN.ts
+    i18n/SciHubEVA_zh_CN.ts \
+    i18n/SciHubEVA_pt_PT.ts

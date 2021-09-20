@@ -48,6 +48,7 @@ Sometimes, you need enter the captcha to continue the download.
 - Simplified Chinese (简体中文)
 - Traditional Chinese - Hongkong (繁體中文 - 香港)
 - Traditional Chinese - Taiwan (正體中文 - 臺灣)
+- Portuguese - Portugal
 
 ## Platform Support
 

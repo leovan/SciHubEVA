@@ -22,7 +22,9 @@ def pdf_url_response(host_url: str, request: str):
     return '''
     <html>
       <body>
-        <iframe id="pdf" src="{host_url}{request}.pdf"></iframe>
+        <div id="article">
+          <embed type="application/pdf" src="{host_url}{request}.pdf" id="pdf"></embed>
+        </div>
       </body>
     </html>
     '''.format(host_url=host_url, request=request)
@@ -63,4 +65,4 @@ def captcha_img():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='8080', debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)

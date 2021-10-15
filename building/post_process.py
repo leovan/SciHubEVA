@@ -39,23 +39,46 @@ USELESS_QT_LIBS = [
     'Qt3DQuickRender',
     'Qt3DQuickScene2D',
     'Qt3DRender',
+    'Qt5Compat',
     'QtBodymovin',
     'QtCharts',
+    'QtChartsQml',
+    'QtMultimedia',
+    'QtMultimediaQuick',
     'QtDataVisualization',
+    'QtPositioning',
+    'QtPositioningQuick',
     'QtQuick3D',
     'QtQuick3DAssetImport',
+    'QtQuick3DAssetUtils',
+    'QtQuick3DEffects',
+    'QtQuick3DHelpers',
+    'QtQuick3DEffects',
     'QtQuick3DParticles',
     'QtQuick3DRuntimeRender',
     'QtQuick3DUtils',
     'QtQuickTest',
+    'QtQuickTimeline',
+    'QtRemoteObjects',
+    'QtRemoteObjectsQml',
     'QtScxml',
     'QtScxmlQml',
+    'QtSensors',
+    'QtSensorsQuick',
     'QtShaderTools',
     'QtSql',
     'QtStateMachine',
     'QtStateMachineQml',
     'QtTest',
     'QtVirtualKeyboard',
+    'QtWebChannel',
+    'QtWebEngine',
+    'QtWebEngineCore',
+    'QtWebEngineQuick',
+    'QtWebEngineQuickDelegatesQml',
+    'QtWebSockets',
+    'QtWebView',
+    'QtWebViewQuick',
     'QtXmlPatterns'
 ]
 
@@ -81,7 +104,7 @@ def post_process_win():
         if os.path.exists(qt_lib_path):
             os.remove(qt_lib_path)
 
-        qt_qml_dir = os.path.join(WINDOWS_APP_PATH, 'PySide2', 'qml', qt_lib)
+        qt_qml_dir = os.path.join(WINDOWS_APP_PATH, 'PySide6', 'qml', qt_lib)
         if os.path.isdir(qt_qml_dir):
             shutil.rmtree(qt_qml_dir, ignore_errors=True)
 
@@ -99,6 +122,10 @@ def post_process_macos():
         qt_lib_path = os.path.join(MACOS_APP_PATH, 'Contents', 'MacOS', qt_lib)
         if os.path.exists(qt_lib_path):
             os.remove(qt_lib_path)
+
+        qt_qml_dir = os.path.join(MACOS_APP_PATH, 'Contents', 'MacOS', 'PySide6', 'Qt', 'qml', qt_lib)
+        if os.path.isdir(qt_qml_dir):
+            shutil.rmtree(qt_qml_dir, ignore_errors=True)
 
     # remove useless packages
     for package in USELESS_PACKAGES:

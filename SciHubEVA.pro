@@ -7,8 +7,8 @@ RESOURCES += \
 
 lupdate_only {
 SOURCES += \
-    ui/*.qml \
-    ui/elements/*.qml
+    *.qml \
+    *.py
 }
 
 TRANSLATIONS += \

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="1.1" language="pt_PT">
+<!DOCTYPE TS>
+<TS version="2.1" language="pt_PT">
 <context>
     <name>About</name>
     <message>
@@ -37,89 +38,11 @@
     </message>
 </context>
 <context>
-    <name>App</name>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>Query: </source>
-        <translation>Consulta: </translation>
-    </message>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>URL, PMID, DOI, Search String or Query List File</source>
-        <translation>URL, PMID, DOI, String de Pesquisa ou Arquivo de lista de Consulta</translation>
-    </message>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>Rampage</source>
-        <translation>Tumultuar</translation>
-    </message>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>Please choose save to directory first!</source>
-        <translation>Por favor primeiro escolha aonde salvar！</translation>
-    </message>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>Please specify query!</source>
-        <translation>Por favor especifique o valor da consulta！</translation>
-    </message>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>Load</source>
-        <translation>Carregar</translation>
-    </message>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>Save to: </source>
-        <translation>Salvar em: </translation>
-    </message>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>Open</source>
-        <translation>Abrir</translation>
-    </message>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>Show</source>
-        <translation>Mostrar</translation>
-    </message>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>Logs: </source>
-        <translation>Registros: </translation>
-    </message>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>Welcome to Sci-Hub EVA</source>
-        <translation>Bem-Vindo ao Sci-Hub EVA</translation>
-    </message>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>Open Log File</source>
-        <translation>Abrir Ficheiro de Registro</translation>
-    </message>
-    <message>
-        <location filename="../ui/AddSciHubURL.qml" line="69"/>
-        <source>Open Log Directory</source>
-        <translation>Abrir Localização do Registro</translation>
-    </message>
-</context>
-<context>
     <name>Captcha</name>
     <message>
         <location filename="../ui/Captcha.qml" line="7"/>
         <source>Captcha</source>
         <translation>Captcha</translation>
-    </message>
-    <message>
-        <location filename="../ui/Captcha.qml" line="7"/>
-        <source>Enter captcha: </source>
-        <translation>Introduzir Captcha: </translation>
     </message>
     <message>
         <location filename="../ui/Captcha.qml" line="44"/>
@@ -138,14 +61,6 @@
     </message>
 </context>
 <context>
-    <name>CaptchaDialog</name>
-    <message>
-        <location filename="../ui/Captcha.qml" line="67"/>
-        <source>Battle canceled, rampage again?</source>
-        <translation>Batalha cancelada, Tumultuar novamente？</translation>
-    </message>
-</context>
-<context>
     <name>Preferences</name>
     <message>
         <location filename="../ui/Preferences.qml" line="11"/>
@@ -153,29 +68,34 @@
         <translation>Preferências</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="11"/>
-        <source>A restart is required for the theme to take effect.</source>
-        <translation>É necessário reiniciar para que o tema seja aplicado.</translation>
-    </message>
-    <message>
         <location filename="../ui/Preferences.qml" line="152"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
+        <location filename="../ui/Preferences.qml" line="168"/>
+        <location filename="../ui/Preferences.qml" line="416"/>
         <location filename="../ui/Preferences.qml" line="530"/>
         <source>Yes</source>
         <translation>Sim</translation>
     </message>
     <message>
+        <location filename="../ui/Preferences.qml" line="177"/>
+        <location filename="../ui/Preferences.qml" line="416"/>
         <location filename="../ui/Preferences.qml" line="530"/>
         <source>No</source>
         <translation>Não</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="530"/>
-        <source>Common</source>
-        <translation>Comum</translation>
+        <location filename="../ui/Preferences.qml" line="202"/>
+        <location filename="../ui/Preferences.qml" line="340"/>
+        <source>System</source>
+        <translation>Sistema</translation>
+    </message>
+    <message>
+        <location filename="../ui/Preferences.qml" line="207"/>
+        <source>File</source>
+        <translation>Ficheiro</translation>
     </message>
     <message>
         <location filename="../ui/Preferences.qml" line="212"/>
@@ -183,24 +103,9 @@
         <translation>Rede</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="391"/>
-        <source>Filename Prefix Format: </source>
-        <translation>Formato de prefixo de nome de arquivo: </translation>
-    </message>
-    <message>
-        <location filename="../ui/Preferences.qml" line="405"/>
-        <source>Supported Keywords: </source>
-        <translation>Palavras-chave Suportadas: </translation>
-    </message>
-    <message>
-        <location filename="../ui/Preferences.qml" line="405"/>
-        <source>{author}: Author, {year}: Year</source>
-        <translation>{author}： Autor， {year}： Ano</translation>
-    </message>
-    <message>
-        <location filename="../ui/Preferences.qml" line="405"/>
-        <source>{title}: Title, {id}: DOI or PMID</source>
-        <translation>{title}： Título， {id}： DOI ou PMID</translation>
+        <location filename="../ui/Preferences.qml" line="305"/>
+        <source>Language: </source>
+        <translation>Idioma: </translation>
     </message>
     <message>
         <location filename="../ui/Preferences.qml" line="327"/>
@@ -223,14 +128,24 @@
         <translation>As alterações terão efeito após o reinício</translation>
     </message>
     <message>
+        <location filename="../ui/Preferences.qml" line="391"/>
+        <source>Filename Prefix Format: </source>
+        <translation>Formato de prefixo de nome de arquivo: </translation>
+    </message>
+    <message>
+        <location filename="../ui/Preferences.qml" line="405"/>
+        <source>Supported Keywords: </source>
+        <translation>Palavras-chave Suportadas: </translation>
+    </message>
+    <message>
         <location filename="../ui/Preferences.qml" line="406"/>
         <source>{author}: Author, {year}: Year, {title}: Title, {id}: DOI or PMID</source>
         <translation>{author}: Autor, {year}: Ano, {title}: Título, {id}: DOI ou PMID</translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="406"/>
-        <source>Overwrite Existing File:</source>
-        <translation>Substituir o Ficheiro Existente:</translation>
+        <location filename="../ui/Preferences.qml" line="411"/>
+        <source>Overwrite Existing File: </source>
+        <translation>Substituir o Ficheiro Existente: </translation>
     </message>
     <message>
         <location filename="../ui/Preferences.qml" line="440"/>
@@ -268,14 +183,9 @@
         <translation>Tipo do Proxy: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="596"/>
-        <source>Proxy Password: </source>
-        <translation>Senha do Proxy: </translation>
-    </message>
-    <message>
-        <location filename="../ui/Preferences.qml" line="583"/>
-        <source>Proxy Username: </source>
-        <translation>Usuário do Proxy: </translation>
+        <location filename="../ui/Preferences.qml" line="554"/>
+        <source>Proxy Host: </source>
+        <translation>Anfitrião do Proxy: </translation>
     </message>
     <message>
         <location filename="../ui/Preferences.qml" line="567"/>
@@ -283,29 +193,14 @@
         <translation>Porta do Proxy: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="554"/>
-        <source>Proxy Host: </source>
-        <translation>Anfitrião do Proxy: </translation>
+        <location filename="../ui/Preferences.qml" line="583"/>
+        <source>Proxy Username: </source>
+        <translation>Usuário do Proxy: </translation>
     </message>
     <message>
-        <location filename="../ui/Preferences.qml" line="340"/>
-        <source>System</source>
-        <translation>Sistema</translation>
-    </message>
-    <message>
-        <location filename="../ui/Preferences.qml" line="207"/>
-        <source>File</source>
-        <translation>Ficheiro</translation>
-    </message>
-    <message>
-        <location filename="../ui/Preferences.qml" line="305"/>
-        <source>Language: </source>
-        <translation>Idioma: </translation>
-    </message>
-    <message>
-        <location filename="../ui/Preferences.qml" line="411"/>
-        <source>Overwrite Existing File: </source>
-        <translation>Substituir o Ficheiro Existente: </translation>
+        <location filename="../ui/Preferences.qml" line="596"/>
+        <source>Proxy Password: </source>
+        <translation>Senha do Proxy: </translation>
     </message>
     <message>
         <location filename="../ui/Preferences.qml" line="621"/>
@@ -316,79 +211,6 @@
         <location filename="../ui/Preferences.qml" line="628"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
-    </message>
-</context>
-<context>
-    <name>SciHubAPI</name>
-    <message>
-        <location filename="scihub_api.py" line="167"/>
-        <source>Angel [CAPTCHA] down!</source>
-        <translation>Angel [CAPTCHA] caído！</translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="176"/>
-        <source>Fetching PDF ...</source>
-        <translation>Buscando PDF ...</translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="187"/>
-        <source>Angel [CAPTCHA] is coming!</source>
-        <translation>Angel [CAPTCHA] à caminho！</translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="191"/>
-        <source>Unknown PDF Content-Type!</source>
-        <translation>Tipo de Conteúdo do PDF, Inválido!</translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="198"/>
-        <source>Using Sci-Hub URL: </source>
-        <translation>Utilizando URL do Sci-Hub: </translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="201"/>
-        <source>Query type: </source>
-        <translation>Tipo de Consulta: </translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="208"/>
-        <source>Fetching PDF URL ...</source>
-        <translation>Buscando URL do PDF ...</translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="222"/>
-        <source>Got PDF URL: </source>
-        <translation>URL do PDF Obtido: </translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="227"/>
-        <source>You may need check it manually.</source>
-        <translation>Você vai precisar lidar com isso manualmente.</translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="231"/>
-        <source>Failed to get PDF URL!</source>
-        <translation>Falha ao obter o URL do PDF！</translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="258"/>
-        <source>Unsupported filename keywords: </source>
-        <translation>Palavras-chave de nome de arquivo não suportadas: </translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="269"/>
-        <source>Saved PDF as: </source>
-        <translation>PDF Salvo como: </translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="274"/>
-        <source>Dealing with query: </source>
-        <translation>Processando Consulta: </translation>
-    </message>
-    <message>
-        <location filename="scihub_api.py" line="295"/>
-        <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
-        <translation>Captcha errado, falhou em matar Angel [CAPTCHA]！</translation>
     </message>
 </context>
 <context>
@@ -449,11 +271,6 @@
         <translation>Registros: </translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="251"/>
-        <source>Welcome to Sci-Hub EVA</source>
-        <translation>Bem-Vindo ao Sci-Hub EVA</translation>
-    </message>
-    <message>
         <location filename="../ui/SciHubEVA.qml" line="301"/>
         <source>Open Log File</source>
         <translation>Abrir Ficheiro de Registro</translation>
@@ -465,22 +282,88 @@
     </message>
 </context>
 <context>
-    <name>SciHubEVADialog</name>
+    <name>SciHubAPI</name>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="306"/>
-        <source>Query list file is not a text file!</source>
-        <translation>O arquivo da lista de consulta não é um arquivo de texto！</translation>
+        <location filename="../scihub_eva/api/scihub_api.py" line="167"/>
+        <source>Angel [CAPTCHA] down!</source>
+        <translation>Angel [CAPTCHA] caído！</translation>
     </message>
     <message>
-        <location filename="../ui/SciHubEVA.qml" line="306"/>
-        <source>Dealing with {}/{} query ...</source>
-        <translation>Processando {}/{} consulta ...</translation>
+        <location filename="../scihub_eva/api/scihub_api.py" line="176"/>
+        <source>Fetching PDF ...</source>
+        <translation>Buscando PDF ...</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="189"/>
+        <source>Angel [CAPTCHA] is coming!</source>
+        <translation>Angel [CAPTCHA] à caminho！</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="193"/>
+        <source>Unknown PDF Content-Type!</source>
+        <translation>Tipo de Conteúdo do PDF, Inválido!</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="197"/>
+        <source>Failed to get PDF!</source>
+        <translation>Falha ao obter PDF！</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="205"/>
+        <source>Using Sci-Hub URL: </source>
+        <translation>Utilizando URL do Sci-Hub: </translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="208"/>
+        <source>Query type: </source>
+        <translation>Tipo de Consulta: </translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="215"/>
+        <source>Fetching PDF URL ...</source>
+        <translation>Buscando URL do PDF ...</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="229"/>
+        <source>Got PDF URL: </source>
+        <translation>URL do PDF Obtido: </translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="233"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="238"/>
+        <source>Failed to get PDF URL!</source>
+        <translation>Falha ao obter o URL do PDF！</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="234"/>
+        <source>You may need check it manually.</source>
+        <translation>Você vai precisar lidar com isso manualmente.</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="265"/>
+        <source>Unsupported filename keywords: </source>
+        <translation>Palavras-chave de nome de arquivo não suportadas: </translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="276"/>
+        <source>Saved PDF as: </source>
+        <translation>PDF Salvo como: </translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="281"/>
+        <source>Dealing with query: </source>
+        <translation>Processando Consulta: </translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="302"/>
+        <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
+        <translation>Captcha errado, falhou em matar Angel [CAPTCHA]！</translation>
     </message>
 </context>
 <context>
     <name>UICaptcha</name>
     <message>
-        <location filename="captcha.py" line="35"/>
+        <location filename="../scihub_eva/ui/captcha.py" line="35"/>
         <source>Battle canceled, rampage again?</source>
         <translation>Batalha cancelada，tumultuar novamente？</translation>
     </message>
@@ -488,12 +371,12 @@
 <context>
     <name>UISciHubEVA</name>
     <message>
-        <location filename="scihub_eva.py" line="127"/>
+        <location filename="../scihub_eva/ui/scihub_eva.py" line="127"/>
         <source>Query list file is not a text file!</source>
         <translation>O arquivo da lista de consulta não é um arquivo de texto！</translation>
     </message>
     <message>
-        <location filename="scihub_eva.py" line="138"/>
+        <location filename="../scihub_eva/ui/scihub_eva.py" line="138"/>
         <source>Dealing with {}/{} query ...</source>
         <translation>Lidando com {}/{} consulta ...</translation>
     </message>

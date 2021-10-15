@@ -11,7 +11,11 @@ from scihub_eva.globals.preferences import *
 def get_session():
     sess = requests.Session()
     sess.headers = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_0_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.80 Safari/537.36'
+        'User-Agent':
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+            'AppleWebKit/537.36 (KHTML, like Gecko) '
+            'Chrome/94.0.4606.81 '
+            'Safari/537.36'
     }
 
     retry_times = Preferences.get_or_default(NETWORK_RETRY_TIMES_KEY, NETWORK_RETRY_TIMES_DEFAULT, type=int)

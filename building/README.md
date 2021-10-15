@@ -43,11 +43,6 @@
 4. Build with `PyInstaller`.
 
    ```bash
-   # Install the latest develop version of PyInstaller
-
-   # You may need rebuild the bootloader of PyInstaller against 10.14 SDK to fully support dark theme
-   # See: https://pyinstaller.readthedocs.io/en/latest/bootloader-building.html
-
    rm -rf build-macOS
    rm -rf dist-macOS
    rm -f SciHubEVA.spec

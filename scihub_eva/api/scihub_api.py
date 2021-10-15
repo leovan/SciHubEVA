@@ -37,8 +37,8 @@ class SciHubAPIError(Enum):
     # Unknown error
     UNKNOWN = 0
 
-    # Cannot find a valid iframe when fetching PDF URL
-    NO_VALID_IFRAME = 1
+    # Cannot find a valid PDF when fetching PDF URL
+    NO_VALID_PDF = 1
 
     # Cannot download automatically due to captcha
     BLOCKED_BY_CAPTCHA = 2
@@ -177,18 +177,25 @@ class SciHubAPI(QObject, threading.Thread):
 
         pdf, err = None, None
 
-        pdf_response = self._sess.get(
-            pdf_url, verify=False,
-            timeout=Preferences.get_or_default(NETWORK_TIMEOUT_KEY, NETWORK_RETRY_TIMES_DEFAULT, type=int) / 1000.0)
+        try:
+            pdf_response = self._sess.get(
+                pdf_url, verify=False,
+                timeout=Preferences.get_or_default(
+                    NETWORK_TIMEOUT_KEY, NETWORK_RETRY_TIMES_DEFAULT, type=int) / 1000.0)
 
-        if pdf_response.headers['Content-Type'] == 'application/pdf':
-            pdf = pdf_response.content
-        elif pdf_response.headers['Content-Type'].startswith('text/html'):
-            self._logger.warn(self.tr('Angel [CAPTCHA] is coming!'))
-            err = SciHubAPIError.BLOCKED_BY_CAPTCHA
-            pdf = pdf_response
-        else:
-            self._logger.error(self.tr('Unknown PDF Content-Type!'))
+            if pdf_response.headers['Content-Type'] == 'application/pdf':
+                pdf = pdf_response.content
+            elif pdf_response.headers['Content-Type'].startswith('text/html'):
+                self._logger.warn(self.tr('Angel [CAPTCHA] is coming!'))
+                err = SciHubAPIError.BLOCKED_BY_CAPTCHA
+                pdf = pdf_response
+            else:
+                self._logger.error(self.tr('Unknown PDF Content-Type!'))
+        except Exception as e:
+            err = SciHubAPIError.UNKNOWN
+
+            self._logger.error(self.tr('Failed to get PDF!'))
+            self._logger.error(str(e))
 
         return pdf, err
 
@@ -221,7 +228,7 @@ class SciHubAPI(QObject, threading.Thread):
 
                     self._logger.info(self.tr('Got PDF URL: ') + pdf_url_html)
                 else:
-                    err = SciHubAPIError.NO_VALID_IFRAME
+                    err = SciHubAPIError.NO_VALID_PDF
 
                     self._logger.error(self.tr('Failed to get PDF URL!'))
                     self._logger.info(self.tr('You may need check it manually.'))

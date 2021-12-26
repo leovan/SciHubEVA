@@ -12,6 +12,7 @@ Options:
 
 import os
 import sys
+import glob
 import shutil
 
 sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir))
@@ -43,9 +44,11 @@ USELESS_QT_LIBS = [
     'QtBodymovin',
     'QtCharts',
     'QtChartsQml',
+    'QtDataVisualization',
     'QtMultimedia',
     'QtMultimediaQuick',
-    'QtDataVisualization',
+    'QtLabsAnimation'
+    'QtLabsWavefrontMesh'
     'QtPositioning',
     'QtPositioningQuick',
     'QtQuick3D',
@@ -84,7 +87,15 @@ USELESS_QT_LIBS = [
 
 
 USELESS_PACKAGES = [
-    'PyInstaller'
+    'PyInstaller',
+    'tcl',
+    'tcl8',
+    'tk'
+]
+
+USELESS_LIBRARIES = [
+    'tcl',
+    'tk'
 ]
 
 
@@ -115,6 +126,19 @@ def post_process_win():
         if os.path.isdir(package_dir):
             shutil.rmtree(package_dir, ignore_errors=True)
 
+    # remove useless libraries
+    for library in USELESS_LIBRARIES:
+        for lib in glob.glob(
+                os.path.join(WINDOWS_APP_PATH, 'lib{}*.dll'.format(library)), recursive=False):
+            os.remove(lib)
+
+    # remove useless directory
+    for postfix in ['.egg-info', '.dist-info']:
+        for directory in glob.glob(
+                os.path.join(WINDOWS_APP_PATH, '*{}'.format(postfix)), recursive=False):
+            if os.path.isdir(directory):
+                shutil.rmtree(directory, ignore_errors=True)
+
 
 def post_process_macos():
     # remove useless Qt modules
@@ -137,6 +161,24 @@ def post_process_macos():
 
         if os.path.islink(package_link):
             os.remove(package_link)
+
+    # remove useless libraries
+    for library in USELESS_LIBRARIES:
+        for lib in glob.glob(
+                os.path.join(MACOS_APP_PATH, 'Contents', 'MacOS', 'lib{}*.dylib'.format(library)), recursive=False):
+            os.remove(lib)
+
+    # remove useless directory
+    for postfix in ['.egg-info', '.dist-info']:
+        for directory in glob.glob(
+                os.path.join(MACOS_APP_PATH, 'Contents', 'Resources', '*{}'.format(postfix)), recursive=False):
+            if os.path.isdir(directory):
+                shutil.rmtree(directory, ignore_errors=True)
+
+        for directory in glob.glob(
+                os.path.join(MACOS_APP_PATH, 'Contents', 'MacOS', '*{}'.format(postfix)), recursive=False):
+            if os.path.islink(directory):
+                os.remove(directory)
 
 
 if __name__ == '__main__':

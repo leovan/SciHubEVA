@@ -49,7 +49,7 @@
 
    pyside6-rcc SciHubEVA.qrc -o scihub_eva/resources.py
 
-   pyinstaller scihub_eva/app.py \
+   pyinstaller app.py \
       --workpath "build-macOS" \
       --distpath "dist-macOS" \
       --hidden-import "socks" \
@@ -98,7 +98,7 @@
 
    pyside6-rcc SciHubEVA.qrc -o scihub_eva/resources.py
 
-   pyinstaller scihub_eva/app.py ^
+   pyinstaller app.py ^
       --workpath "build-Windows" ^
       --distpath "dist-Windows" ^
       --hidden-import "socks" ^

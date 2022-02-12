@@ -220,7 +220,8 @@ class SciHubAPI(QObject, threading.Thread):
                         NETWORK_TIMEOUT_KEY, NETWORK_RETRY_TIMES_DEFAULT, type=int) / 1000.0)
 
                 html = etree.HTML(pdf_url_response.content)
-                article = html.xpath('//div[@id="article"]/embed[1]') if html is not None else None
+                article = html.xpath('//div[@id="article"]/embed[1]') or \
+                          html.xpath('//div[@id="article"]/iframe[1]') if html is not None else None
 
                 if article and len(article) > 0:
                     pdf_url = urlparse(article[0].attrib['src'], scheme='http').geturl()

@@ -1,5 +1,11 @@
 # Changelog
 
+## [5.1.2](https://github.com/leovan/SciHubEVA/compare/v5.1.1...v5.1.2) (2022-02-12)
+
+### Bug Fixes
+
+- Fix error fetching PDF URL from different version sci-hub website mirror.  ([#47](https://github.com/leovan/SciHubEVA/issues/47))
+
 ## [5.1.1](https://github.com/leovan/SciHubEVA/compare/v5.1.0...v5.1.1) (2021-10-16)
 
 ### Bug Fixes

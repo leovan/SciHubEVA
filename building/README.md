@@ -23,9 +23,9 @@
 
    # Generate translations source of Python files
    pyside6-lupdate \
-      scihub_eva/api/*.py \
-      scihub_eva/ui/*.py \
-      -ts i18n/SciHubEVA_zh_CN.ts
+     scihub_eva/api/*.py \
+     scihub_eva/ui/*.py \
+     -ts i18n/SciHubEVA_zh_CN.ts
 
    # Do translations with Qt Linguist
    # ......
@@ -50,19 +50,19 @@
    pyside6-rcc SciHubEVA.qrc -o scihub_eva/resources.py
 
    pyinstaller app.py \
-      --workpath "build-macOS" \
-      --distpath "dist-macOS" \
-      --hidden-import "socks" \
-      --hidden-import "PIL" \
-      --add-data "LICENSE:." \
-      --add-data "preferences/qtquickcontrols2.conf:preferences" \
-      --add-data "images/SciHubEVA-icon.png:images" \
-      --add-data "i18n/*.qm:i18n" \
-      --name "SciHubEVA" \
-      --icon "building/macOS/SciHubEVA.icns" \
-      --onedir \
-      --windowed \
-      --noupx
+     --workpath "build-macOS" \
+     --distpath "dist-macOS" \
+     --hidden-import "socks" \
+     --hidden-import "PIL" \
+     --add-data "LICENSE:." \
+     --add-data "preferences/qtquickcontrols2.conf:preferences" \
+     --add-data "images/SciHubEVA-icon.png:images" \
+     --add-data "i18n/*.qm:i18n" \
+     --name "SciHubEVA" \
+     --icon "building/macOS/SciHubEVA.icns" \
+     --onedir \
+     --windowed \
+     --noupx
 
    cp building/macOS/Info.plist dist-macOS/SciHubEVA.app/Contents
 
@@ -75,9 +75,23 @@
 5. Package with `appdmg`. Install [Node.js](https://nodejs.org) first, then run the following commands:
 
    ```bash
-   npm install -g appdmg
+   brew install create-dmg
 
-   appdmg building/macOS/SciHubEVA.dmg.json dist-macOS/SciHubEVA.dmg
+   create-dmg \
+     --volname "Sci-Hub EVA" \
+     --volicon "building/macOS/SciHubEVA-dmg.icns" \
+     --background "building/macOS/SciHubEVA-dmg-background.png" \
+     --window-pos 200 120 \
+     --window-size 600 430 \
+     --text-size 14 \
+     --icon-size 100 \
+     --icon "SciHubEVA.app" 100 150 \
+     --hide-extension "SciHubEVA.app" \
+     --app-drop-link 300 150 \
+     --eula "LICENSE" \
+     --format "UDBZ" \
+     "dist-macOS/SciHubEVA.dmg" \
+     "dist-macOS/SciHubEVA.app"
    ```
 
    `SciHubEVA.dmg` will be in `dist-macOS`.
@@ -99,20 +113,20 @@
    pyside6-rcc SciHubEVA.qrc -o scihub_eva/resources.py
 
    pyinstaller app.py ^
-      --workpath "build-Windows" ^
-      --distpath "dist-Windows" ^
-      --hidden-import "socks" ^
-      --hidden-import "PIL" ^
-      --add-data "LICENSE;." ^
-      --add-data "preferences/qtquickcontrols2.conf;preferences" ^
-      --add-data "images/SciHubEVA-icon.png;images" ^
-      --add-data "i18n/*.qm;i18n" ^
-      --name "SciHubEVA" ^
-      --icon "building/Windows/SciHubEVA.ico" ^
-      --version-file "building/Windows/SciHubEVA.win.version" ^
-      --windowed ^
-      --clean ^
-      --noupx
+     --workpath "build-Windows" ^
+     --distpath "dist-Windows" ^
+     --hidden-import "socks" ^
+     --hidden-import "PIL" ^
+     --add-data "LICENSE;." ^
+     --add-data "preferences/qtquickcontrols2.conf;preferences" ^
+     --add-data "images/SciHubEVA-icon.png;images" ^
+     --add-data "i18n/*.qm;i18n" ^
+     --name "SciHubEVA" ^
+     --icon "building/Windows/SciHubEVA.ico" ^
+     --version-file "building/Windows/SciHubEVA.win.version" ^
+     --windowed ^
+     --clean ^
+     --noupx
 
    :: Post process
    python building/post_process.py

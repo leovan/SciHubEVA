@@ -1,10 +1,25 @@
 # Changelog
 
+## [6.0.0](https://github.com/leovan/SciHubEVA/compare/v5.1.2...v6.0.0) (2022-10-02)
+
+### Bug Fixes
+
+- Fix error fetching PDF URL when link is a relative path.
+- Fix error fetching PDF URL and PDF when get a non 200 response.
+
+### Tests
+
+- Add Github Actions to auto build and package. ([#51](https://github.com/leovan/SciHubEVA/issues/51))
+
+### Known Issues
+
+- Sci-Hub website is now protected by DDoS-Guard, sometimes it may get errors since the DDoS protection.
+
 ## [5.1.2](https://github.com/leovan/SciHubEVA/compare/v5.1.1...v5.1.2) (2022-02-12)
 
 ### Bug Fixes
 
-- Fix error fetching PDF URL from different version sci-hub website mirror.  ([#47](https://github.com/leovan/SciHubEVA/issues/47))
+- Fix error fetching PDF URL from different version sci-hub website mirror. ([#47](https://github.com/leovan/SciHubEVA/issues/47))
 
 ## [5.1.1](https://github.com/leovan/SciHubEVA/compare/v5.1.0...v5.1.1) (2021-10-16)
 

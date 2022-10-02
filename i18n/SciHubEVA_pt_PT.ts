@@ -214,6 +214,98 @@
     </message>
 </context>
 <context>
+    <name>SciHubAPI</name>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="166"/>
+        <source>Angel [CAPTCHA] down!</source>
+        <translation>Angel [CAPTCHA] caído！</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="175"/>
+        <source>Fetching PDF ...</source>
+        <translation>Buscando PDF ...</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="192"/>
+        <source>Angel [CAPTCHA] is coming!</source>
+        <translation>Angel [CAPTCHA] à caminho！</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="196"/>
+        <source>Unknown PDF Content-Type!</source>
+        <translation>Tipo de Conteúdo do PDF, Inválido!</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="201"/>
+        <source>Failed to get PDF!</source>
+        <translation>Falha ao obter PDF！</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="66"/>
+        <source>Using Sci-Hub URL: </source>
+        <translation>Utilizando URL do Sci-Hub: </translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="69"/>
+        <source>Query type: </source>
+        <translation>Tipo de Consulta: </translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="76"/>
+        <source>Fetching PDF URL ...</source>
+        <translation>Buscando URL do PDF ...</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="84"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="162"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="186"/>
+        <source>Error {}</source>
+        <translation>Erro {}</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="97"/>
+        <source>Got PDF URL: </source>
+        <translation>URL do PDF Obtido: </translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="101"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="106"/>
+        <source>Failed to get PDF URL!</source>
+        <translation>Falha ao obter o URL do PDF！</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="85"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="102"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="107"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="163"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="187"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="197"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="202"/>
+        <source>You may need check it manually.</source>
+        <translation>Você vai precisar lidar com isso manualmente.</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="229"/>
+        <source>Unsupported filename keywords: </source>
+        <translation>Palavras-chave de nome de arquivo não suportadas: </translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="240"/>
+        <source>Saved PDF as: </source>
+        <translation>PDF Salvo como: </translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="245"/>
+        <source>Dealing with query: </source>
+        <translation>Processando Consulta: </translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="266"/>
+        <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
+        <translation>Captcha errado, falhou em matar Angel [CAPTCHA]！</translation>
+    </message>
+</context>
+<context>
     <name>SciHubEVA</name>
     <message>
         <location filename="../ui/SciHubEVA.qml" line="67"/>
@@ -279,85 +371,6 @@
         <location filename="../ui/SciHubEVA.qml" line="306"/>
         <source>Open Log Directory</source>
         <translation>Abrir Localização do Registro</translation>
-    </message>
-</context>
-<context>
-    <name>SciHubAPI</name>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="167"/>
-        <source>Angel [CAPTCHA] down!</source>
-        <translation>Angel [CAPTCHA] caído！</translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="176"/>
-        <source>Fetching PDF ...</source>
-        <translation>Buscando PDF ...</translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="189"/>
-        <source>Angel [CAPTCHA] is coming!</source>
-        <translation>Angel [CAPTCHA] à caminho！</translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="193"/>
-        <source>Unknown PDF Content-Type!</source>
-        <translation>Tipo de Conteúdo do PDF, Inválido!</translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="197"/>
-        <source>Failed to get PDF!</source>
-        <translation>Falha ao obter PDF！</translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="205"/>
-        <source>Using Sci-Hub URL: </source>
-        <translation>Utilizando URL do Sci-Hub: </translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="208"/>
-        <source>Query type: </source>
-        <translation>Tipo de Consulta: </translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="215"/>
-        <source>Fetching PDF URL ...</source>
-        <translation>Buscando URL do PDF ...</translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="229"/>
-        <source>Got PDF URL: </source>
-        <translation>URL do PDF Obtido: </translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="233"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="238"/>
-        <source>Failed to get PDF URL!</source>
-        <translation>Falha ao obter o URL do PDF！</translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="234"/>
-        <source>You may need check it manually.</source>
-        <translation>Você vai precisar lidar com isso manualmente.</translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="265"/>
-        <source>Unsupported filename keywords: </source>
-        <translation>Palavras-chave de nome de arquivo não suportadas: </translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="276"/>
-        <source>Saved PDF as: </source>
-        <translation>PDF Salvo como: </translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="281"/>
-        <source>Dealing with query: </source>
-        <translation>Processando Consulta: </translation>
-    </message>
-    <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="302"/>
-        <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
-        <translation>Captcha errado, falhou em matar Angel [CAPTCHA]！</translation>
     </message>
 </context>
 <context>

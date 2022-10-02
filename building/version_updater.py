@@ -17,12 +17,13 @@ import os
 
 from docopt import docopt
 
+
 VERSION_PATTERN = r'\d+.\d+.\d+.\d+'
 
 VERSION_FILES = [
     'macOS/Info.plist',
     'Windows/SciHubEVA.win.version',
-    'Windows/SciHubEVA.iss',
+    'Windows/SciHubEVA-x64.iss',
     '../scihub_eva/globals/versions.py'
 ]
 

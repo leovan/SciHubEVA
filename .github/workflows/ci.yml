@@ -1,0 +1,49 @@
+name: Build latest version
+on: [push]
+jobs:
+  build-macos-x64:
+    runs-on: macOS-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install create-dmg
+        run: brew install create-dmg
+
+      - name: Build and package
+        run: |
+          chmod +x ./building/build_macos_x64.sh
+          ./building/build_macos_x64.sh
+        shell: bash
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: SciHubEVA-macOS-x64-latest
+          path: dist-macOS-x64/SciHubEVA-x64-latest.dmg
+
+  build-windows-x64:
+    runs-on: windows-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Build and package
+        run: ./building/build_windows_x64.ps1
+        shell: powershell
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: SciHubEVA-Windows-x64-latest
+          path: dist-Windows-x64/SciHubEVA-x64-latest.exe

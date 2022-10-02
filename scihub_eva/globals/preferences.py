@@ -21,7 +21,7 @@ NETWORK_SCIHUB_URL_KEY = 'Network/SciHubURL'
 NETWORK_SCIHUB_URL_DEFAULT = 'https://sci-hub.se'
 
 NETWORK_SCIHUB_URLS_KEY = 'Network/SciHubURLs'
-NETWORK_SCIHUB_URLS_DEFAULT = ['https://sci-hub.se', 'https://sci-hub.st']
+NETWORK_SCIHUB_URLS_DEFAULT = ['https://sci-hub.se', 'https://sci-hub.st', 'https://sci-hub.ru']
 
 NETWORK_TIMEOUT_KEY = 'Network/Timeout'
 NETWORK_TIMEOUT_DEFAULT = 3000

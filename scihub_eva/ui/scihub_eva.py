@@ -42,9 +42,12 @@ class UISciHubEVA(QObject):
         super(UISciHubEVA, self).__init__()
 
         self._engine = QQmlApplicationEngine()
-        self._engine.rootContext().setContextProperty('APPLICATION_VERSION', APPLICATION_VERSION)
-        self._engine.rootContext().setContextProperty('PYTHON_VERSION', PYTHON_VERSION)
-        self._engine.rootContext().setContextProperty('QT_VERSION', QT_VERSION)
+        self._engine.rootContext().setContextProperty(
+            'APPLICATION_VERSION', APPLICATION_VERSION)
+        self._engine.rootContext().setContextProperty(
+            'PYTHON_VERSION', PYTHON_VERSION)
+        self._engine.rootContext().setContextProperty(
+            'QT_VERSION', QT_VERSION)
         self._engine.load('qrc:/ui/SciHubEVA.qml')
         self._window = self._engine.rootObjects()[0]
 
@@ -62,7 +65,8 @@ class UISciHubEVA(QObject):
         self._query_list_length = 0
         self._captcha_img_file_path = None
 
-        self._save_to_dir = Preferences.get_or_default(FILE_SAVE_TO_DIR_KEY, FILE_SAVE_TO_DIR_DEFAULT)
+        self._save_to_dir = Preferences.get_or_default(
+            FILE_SAVE_TO_DIR_KEY, FILE_SAVE_TO_DIR_DEFAULT)
         self.set_save_to_dir.emit(self._save_to_dir)
 
     @property
@@ -74,7 +78,8 @@ class UISciHubEVA(QObject):
         self._window.systemOpenSaveToDir.connect(self.system_open_save_to_dir)
         self._window.showUIPreference.connect(self.show_ui_preference)
         self._window.systemOpenLogFile.connect(self.system_open_log_file)
-        self._window.systemOpenLogDirectory.connect(self.system_open_log_directory)
+        self._window.systemOpenLogDirectory.connect(
+            self.system_open_log_directory)
         self._window.rampage.connect(self.rampage)
 
         self.set_save_to_dir.connect(self._window.setSaveToDir)
@@ -124,7 +129,8 @@ class UISciHubEVA(QObject):
                 self.rampage_query_list()
             else:
                 self._logger.error(LOGGER_SEP)
-                self._logger.error(self.tr('Query list file is not a text file!'))
+                self._logger.error(
+                    self.tr('Query list file is not a text file!'))
         elif is_range_query(query_input):
             self._query_list = deque(gen_range_query_list(query_input))
             self._query_list_length = len(self._query_list)
@@ -136,7 +142,8 @@ class UISciHubEVA(QObject):
         if self._query_list and len(self._query_list) > 0:
             self._logger.info(LOGGER_SEP)
             self._logger.info(self.tr('Dealing with {}/{} query ...').format(
-                self._query_list_length - len(self._query_list) + 1, self._query_list_length))
+                self._query_list_length - len(self._query_list) + 1,
+                self._query_list_length))
 
             self.rampage_query(self._query_list.popleft())
 
@@ -181,7 +188,8 @@ class UISciHubEVA(QObject):
             logger=self._logger)
         _, captcha_img_url = scihub_api.get_captcha_info(pdf_captcha_response)
         invert_color = True if is_app_dark_theme() == 1 else False
-        captcha_img_file_path = scihub_api.download_captcha_img(captcha_img_url, invert_color=invert_color)
+        captcha_img_file_path = scihub_api.download_captcha_img(
+            captcha_img_url, invert_color=invert_color)
         self._captcha_img_file_path = captcha_img_file_path.resolve().as_posix()
         captcha_img_local_uri = captcha_img_file_path.as_uri()
 
@@ -189,5 +197,6 @@ class UISciHubEVA(QObject):
         center_window(self._ui_captcha.window, self._window)
 
     def remove_captcha_img(self):
-        if os.path.exists(self._captcha_img_file_path) and os.path.isfile(self._captcha_img_file_path):
+        if os.path.exists(self._captcha_img_file_path) and os.path.isfile(
+                self._captcha_img_file_path):
             os.remove(self._captcha_img_file_path)

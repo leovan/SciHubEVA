@@ -1,5 +1,4 @@
-pyinstaller==5.4.1
+pyinstaller==5.11.0
 flask==2.3.2
 docopt==0.6.2
-opencc==1.1.4; platform_system!="Windows"
-opencc==1.1.1; platform_system=="Windows"
+opencc-python-reimplemented==0.1.7

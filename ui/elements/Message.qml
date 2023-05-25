@@ -4,18 +4,25 @@ import QtQuick.Controls
 import QtQuick.Window
 
 Dialog {
+    id: dialog
+
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
 
     modal: true
 
     closePolicy: Popup.NoAutoClose
+    Material.roundedScale: Material.SmallScale
 
     property string message
     property string messageType
 
     ColumnLayout {
         anchors.fill: parent
+        focus: true
+
+        Keys.onReturnPressed: dialog.accept()
+        Keys.onEscapePressed: dialog.reject()
 
         RowLayout {
             Layout.fillWidth: true

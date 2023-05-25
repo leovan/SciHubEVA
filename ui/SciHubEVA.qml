@@ -16,7 +16,7 @@ ApplicationWindow {
 
     visible: true
 
-    property int margin: 10
+    property int margin: 8
     property int theme: Material.theme
 
     width: columnLayoutApplication.implicitWidth + 2 * margin
@@ -165,6 +165,7 @@ ApplicationWindow {
                 text: qsTr("Rampage")
 
                 font.bold: false
+                Layout.minimumWidth: implicitWidth
                 Layout.fillWidth: true
 
                 onClicked: {
@@ -187,6 +188,7 @@ ApplicationWindow {
                 text: qsTr("Load")
 
                 font.bold: false
+                Layout.minimumWidth: implicitWidth
                 Layout.fillWidth: true
 
                 onClicked: fileDialogQueryList.open()
@@ -221,6 +223,7 @@ ApplicationWindow {
                 text: qsTr("Open")
 
                 font.bold: false
+                Layout.minimumWidth: implicitWidth
                 Layout.fillWidth: true
 
                 onClicked: folderDialogSaveTo.open()
@@ -231,6 +234,7 @@ ApplicationWindow {
                 text: qsTr("Show")
 
                 font.bold: false
+                Layout.minimumWidth: implicitWidth
                 Layout.fillWidth: true
 
                 onClicked: systemOpenSaveToDir(textFieldSaveToDir.text.trim())
@@ -256,26 +260,28 @@ ApplicationWindow {
 
             flickableDirection: Flickable.VerticalFlick
 
-            Layout.minimumWidth: 600
             Layout.minimumHeight: 200
+            Layout.fillWidth: true
 
-            function scrollToBottom() {
-                if (contentHeight > height) {
-                    contentY = contentHeight - height
-                }
+            ScrollBar.vertical: UIElements.ScrollBar {
+                id: scrollBarLogs
             }
 
             TextArea.flickable: TextArea {
                 id: textAreaLogs
 
-                font.pointSize: labelLogs.font.pointSize
                 textFormat: Text.RichText
                 wrapMode: Text.WordWrap
                 readOnly: true
                 selectByMouse: true
                 horizontalAlignment: Text.AlignLeft
 
-                onTextChanged: flickableLogs.scrollToBottom()
+                Layout.fillWidth: true
+
+                onTextChanged: {
+                    scrollBarLogs.position = 1.0 - scrollBarLogs.size
+                }
+
                 onLinkActivated: (link) => {
                     Qt.openUrlExternally(link)
                 }

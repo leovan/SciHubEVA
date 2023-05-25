@@ -64,7 +64,8 @@ def is_system_dark_theme():
 
     if is_windows():
         k = winreg.OpenKey(
-            winreg.HKEY_CURRENT_USER, 'Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize')
+            winreg.HKEY_CURRENT_USER,
+            'Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize')
         try:
             return winreg.QueryValueEx(k, 'AppsUseLightTheme')[0] == 0
         except Exception:

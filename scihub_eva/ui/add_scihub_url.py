@@ -31,7 +31,8 @@ class UIAddSciHubURL(QObject):
 
     @Slot(str)
     def add_scihub_url(self, url):
-        scihub_available_urls = Preferences.get_or_default(NETWORK_SCIHUB_URLS_KEY, NETWORK_SCIHUB_URLS_DEFAULT)
+        scihub_available_urls = Preferences.get_or_default(
+            NETWORK_SCIHUB_URLS_KEY, NETWORK_SCIHUB_URLS_DEFAULT)
 
         if url not in scihub_available_urls:
             scihub_available_urls.append(url)

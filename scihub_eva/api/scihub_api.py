@@ -4,7 +4,7 @@ import threading
 import time
 
 from enum import Enum, unique
-from urllib.parse import urlparse, urljoin
+from urllib.parse import urlparse
 from lxml import etree
 from tempfile import NamedTemporaryFile
 from pathlib import Path
@@ -45,7 +45,14 @@ class SciHubAPIError(Enum):
 
 
 class SciHubAPI(QObject, threading.Thread):
-    def __init__(self, query_input, query, logger, callback=None, rampage_type=None, **kwargs):
+    def __init__(
+            self,
+            query_input,
+            query,
+            logger,
+            callback=None,
+            rampage_type=None,
+            **kwargs):
         QObject.__init__(self)
         threading.Thread.__init__(self)
 
@@ -61,9 +68,11 @@ class SciHubAPI(QObject, threading.Thread):
         self._sess = get_session()
 
     def fetch_pdf_url(self, query):
-        scihub_url = Preferences.get_or_default(NETWORK_SCIHUB_URL_KEY, NETWORK_SCIHUB_URL_DEFAULT)
+        scihub_url = Preferences.get_or_default(
+            NETWORK_SCIHUB_URL_KEY, NETWORK_SCIHUB_URL_DEFAULT)
         self._logger.info(
-            self.tr('Using Sci-Hub URL: ') + '<a href="{scihub_url}">{scihub_url}</a>'.format(scihub_url=scihub_url))
+            self.tr('Using Sci-Hub URL: ') +
+            f'<a href="{scihub_url}">{scihub_url}</a>')
 
         query_type = guess_query_type(query)
         self._logger.info(self.tr('Query type: ') + query_type.upper())
@@ -78,28 +87,46 @@ class SciHubAPI(QObject, threading.Thread):
                 pdf_url_response = self._sess.post(
                     scihub_url, data={'request': query}, verify=False,
                     timeout=Preferences.get_or_default(
-                        NETWORK_TIMEOUT_KEY, NETWORK_RETRY_TIMES_DEFAULT, type=int) / 1000.0)
+                        NETWORK_TIMEOUT_KEY,
+                        NETWORK_RETRY_TIMES_DEFAULT,
+                        type=int) / 1000.0)
 
                 if pdf_url_response.status_code != 200:
-                    self._logger.error(self.tr('Error {}').format(pdf_url_response.status_code))
-                    self._logger.info(self.tr('You may need check it manually.'))
+                    self._logger.error(self.tr('Error {}').format(
+                        pdf_url_response.status_code))
+                    self._logger.info(
+                        self.tr('You may need check it manually.'))
                     err = SciHubAPIError.UNKNOWN
                 else:
                     html = etree.HTML(pdf_url_response.content)
-                    article = html.xpath('//div[@id="article"]/embed[1]') or \
-                              html.xpath('//div[@id="article"]/iframe[1]') if html is not None else None
+                    article = \
+                        html.xpath('//div[@id="article"]/embed[1]') or \
+                        html.xpath('//div[@id="article"]/iframe[1]') if \
+                        html is not None else None
 
                     if article and len(article) > 0:
-                        pdf_url = urlparse(article[0].attrib['src'], scheme='http').geturl()
-                        pdf_url = urljoin(pdf_url_response.url, pdf_url)
-                        pdf_url_html = '<a href="{pdf_url}">{pdf_url}</a>'.format(pdf_url=pdf_url)
+                        pdf_url = urlparse(article[0].attrib['src'])
+                        response_url = urlparse(pdf_url_response.url)
 
-                        self._logger.info(self.tr('Got PDF URL: ') + pdf_url_html)
+                        if pdf_url.scheme == '':
+                            pdf_url = pdf_url._replace(
+                                scheme=response_url.scheme)
+
+                        if pdf_url.netloc == '':
+                            pdf_url = pdf_url._replace(
+                                netloc=response_url.netloc)
+
+                        pdf_url = pdf_url.geturl()
+                        pdf_url_html = f'<a href="{pdf_url}">{pdf_url}</a>'
+
+                        self._logger.info(
+                            self.tr('Got PDF URL: ') + pdf_url_html)
                     else:
                         err = SciHubAPIError.NO_VALID_PDF
 
                         self._logger.error(self.tr('Failed to get PDF URL!'))
-                        self._logger.info(self.tr('You may need check it manually.'))
+                        self._logger.info(
+                            self.tr('You may need check it manually.'))
             except Exception as e:
                 err = SciHubAPIError.UNKNOWN
 
@@ -118,13 +145,18 @@ class SciHubAPI(QObject, threading.Thread):
 
         if len(imgs) > 0 and len(ids) > 0:
             captcha_id = ids[0].attrib['value']
-            captcha_img_src = imgs[0].attrib['src']
+            captcha_img_url = urlparse(imgs[0].attrib['src'])
+            response_url = urlparse(pdf_captcha_response.url)
 
-            if captcha_img_src.startswith('http'):
-                captcha_img_url = captcha_img_src
-            else:
-                scheme, netloc, *_ = urlparse(pdf_captcha_response.url, scheme='http')
-                captcha_img_url = scheme + '://' + netloc + captcha_img_src
+            if captcha_img_url.scheme == '':
+                captcha_img_url = captcha_img_url._replace(
+                    scheme=response_url.scheme)
+
+            if captcha_img_url.netloc == '':
+                captcha_img_url = captcha_img_url._replace(
+                    netloc=response_url.netloc)
+
+            captcha_img_url = captcha_img_url.geturl()
 
         return captcha_id, captcha_img_url
 
@@ -155,11 +187,17 @@ class SciHubAPI(QObject, threading.Thread):
         captcha_id, _ = self.get_captcha_info(pdf_captcha_response)
 
         pdf_response = self._sess.post(
-            pdf_captcha_response.url, data={'answer': self._captcha_answer, 'id': captcha_id}, verify=False,
-            timeout=Preferences.get_or_default(NETWORK_TIMEOUT_KEY, NETWORK_RETRY_TIMES_DEFAULT, type=int) / 1000.0)
+            pdf_captcha_response.url,
+            data={'answer': self._captcha_answer, 'id': captcha_id},
+            verify=False,
+            timeout=Preferences.get_or_default(
+                NETWORK_TIMEOUT_KEY,
+                NETWORK_RETRY_TIMES_DEFAULT,
+                type=int) / 1000.0)
 
         if pdf_response.status_code != 200:
-            self._logger.error(self.tr('Error {}').format(pdf_response.status_code))
+            self._logger.error(self.tr('Error {}').format(
+                pdf_response.status_code))
             self._logger.info(self.tr('You may need check it manually.'))
             err = SciHubAPIError.UNKNOWN
         elif pdf_response.headers['Content-Type'] == 'application/pdf':
@@ -180,10 +218,13 @@ class SciHubAPI(QObject, threading.Thread):
             pdf_response = self._sess.get(
                 pdf_url, verify=False,
                 timeout=Preferences.get_or_default(
-                    NETWORK_TIMEOUT_KEY, NETWORK_RETRY_TIMES_DEFAULT, type=int) / 1000.0)
+                    NETWORK_TIMEOUT_KEY,
+                    NETWORK_RETRY_TIMES_DEFAULT,
+                    type=int) / 1000.0)
 
             if pdf_response.status_code != 200:
-                self._logger.error(self.tr('Error {}').format(pdf_response.status_code))
+                self._logger.error(self.tr('Error {}').format(
+                    pdf_response.status_code))
                 self._logger.info(self.tr('You may need check it manually.'))
                 err = SciHubAPIError.UNKNOWN
             elif pdf_response.headers['Content-Type'] == 'application/pdf':
@@ -206,10 +247,13 @@ class SciHubAPI(QObject, threading.Thread):
 
     def save_pdf(self, pdf, filename):
         pdf_name_formatter = Preferences.get_or_default(
-            FILE_FILENAME_PREFIX_FORMAT_KEY, FILE_FILENAME_PREFIX_FORMAT_DEFAULT)
+            FILE_FILENAME_PREFIX_FORMAT_KEY,
+            FILE_FILENAME_PREFIX_FORMAT_DEFAULT)
 
         if not Preferences.get_or_default(
-                FILE_OVERWRITE_EXISTING_FILE_KEY, FILE_OVERWRITE_EXISTING_FILE_DEFAULT, type=bool):
+                FILE_OVERWRITE_EXISTING_FILE_KEY,
+                FILE_OVERWRITE_EXISTING_FILE_DEFAULT,
+                type=bool):
             pdf_name_formatter += '_' + str(round(time.time() * 1000000))
 
         pdf_metadata = get_pdf_metadata(pdf)
@@ -226,7 +270,8 @@ class SciHubAPI(QObject, threading.Thread):
         try:
             pdf_name = pdf_name_formatter.format(**pdf_metadata)
         except Exception as e:
-            self._logger.error(self.tr('Unsupported filename keywords: ') + pdf_name_formatter)
+            self._logger.error(
+                self.tr('Unsupported filename keywords: ') + pdf_name_formatter)
             return
 
         pdf_name = sanitize_filename(pdf_name, replacement_text='-')
@@ -235,7 +280,7 @@ class SciHubAPI(QObject, threading.Thread):
         with open(pdf_path, 'wb') as fp:
             fp.write(pdf)
 
-        pdf_link = '<a href="file:///{pdf_path}">{pdf_path}</a>'.format(pdf_path=pdf_path)
+        pdf_link = f'<a href="file:///{pdf_path}">{pdf_path}</a>'
 
         self._logger.info(self.tr('Saved PDF as: ') + pdf_link)
 
@@ -263,7 +308,8 @@ class SciHubAPI(QObject, threading.Thread):
             # Fetch PDF with Captcha
             pdf, err = self.fetch_pdf_with_captcha(query)
             if err == SciHubAPIError.WRONG_CAPTCHA:
-                self._logger.error(self.tr('Wrong captcha, failed to kill Angel [CAPTCHA]!'))
+                self._logger.error(
+                    self.tr('Wrong captcha, failed to kill Angel [CAPTCHA]!'))
                 return None, err
 
             # Save PDF

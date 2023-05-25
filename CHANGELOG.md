@@ -1,5 +1,15 @@
 # Changelog
 
+## [6.1.0](https://github.com/leovan/SciHubEVA/compare/v6.1.0...v6.0.0) (2023-05-25)
+
+### Bug Fixes
+
+- Optimize fetching PDF URL when link is a relative path.
+
+### Features
+
+- Change to Material 3 theme.
+
 ## [6.0.0](https://github.com/leovan/SciHubEVA/compare/v5.1.2...v6.0.0) (2022-10-02)
 
 ### Bug Fixes

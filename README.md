@@ -1,4 +1,4 @@
-# Sci-Hub EVA <img src="images/SciHubEVA-icon.png" align="right" alt="logo" width="100" height = "100" style = "border: none; float: right;">
+# Sci-Hub EVA <img src="images/SciHubEVA-icon.png" align="right" alt="logo" width="100" height="100" style="border: none; float: right;">
 ![Release](https://img.shields.io/github/release/leovan/SciHubEVA.svg)
 ![License](https://img.shields.io/github/license/leovan/SciHubEVA.svg)
 ![Issues](https://img.shields.io/github/issues/leovan/SciHubEVA.svg)
@@ -12,7 +12,7 @@
 
 ## Usage
 
-![Application macOS EN](docs/scihub-eva-application-macos-en.png)
+![Application macOS EN](docs/scihub-eva-application-macos-en-light-theme.png)
 
 Click `OPEN` button to choose where to save the downloaded files. Click `SHOW` button will open the directory where you set.
 

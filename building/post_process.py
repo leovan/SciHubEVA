@@ -37,15 +37,23 @@ USELESS_QT_LIBS = [
     'Qt3DQuickScene2D',
     'Qt3DRender',
     'Qt5Compat',
+    'QtBluetooth',
     'QtBodymovin',
     'QtCharts',
     'QtChartsQml',
     'QtDataVisualization',
     'QtDataVisualizationQml',
+    'QtDesigner',
+    'QtDesignerComponents',
+    'QtLabsAnimation',
+    'QtLanguageServer',
+    'QtLabsWavefrontMesh',
+    'QtLocation',
     'QtMultimedia',
     'QtMultimediaQuick',
-    'QtLabsAnimation'
-    'QtLabsWavefrontMesh'
+    'QtMultimediaWidgets',
+    'QtNetworkAuth',
+    'QtNfc',
     'QtPositioning',
     'QtPositioningQuick',
     'QtQuick3D',
@@ -65,11 +73,16 @@ USELESS_QT_LIBS = [
     'QtScxmlQml',
     'QtSensors',
     'QtSensorsQuick',
+    'QtSerialBus',
+    'QtSerialPort',
     'QtShaderTools',
+    'QtSpatialAudio',
     'QtSql',
     'QtStateMachine',
     'QtStateMachineQml',
     'QtTest',
+    'QtTextToSpeech',
+    'QtUiTools',
     'QtVirtualKeyboard',
     'QtWebChannel',
     'QtWebEngine',
@@ -79,20 +92,57 @@ USELESS_QT_LIBS = [
     'QtWebSockets',
     'QtWebView',
     'QtWebViewQuick',
-    'QtXmlPatterns'
+    'QtXmlPatterns',
 ]
 
+USELESS_QT_DIRS_PREFIX = [
+    'examples',
+    'glue',
+    'include',
+    'scripts',
+    'support',
+    'translations',
+    'typesystems',
+    'Qt/lib/cmake',
+    'Qt/lib/metatypes',
+    'Qt/lib/objects-RelWithDebInfo',
+    'Qt/libexec',
+    'Qt/metatypes',
+    'Qt/plugins/assetimporters',
+    'Qt/plugins/canbus',
+    'Qt/plugins/designer',
+    'Qt/plugins/generic',
+    'Qt/plugins/geometryloaders',
+    'Qt/plugins/multimedia',
+    'Qt/plugins/networkinformation',
+    'Qt/plugins/platforminputcontexts',
+    'Qt/plugins/position',
+    'Qt/plugins/qmltooling',
+    'Qt/plugins/renderers',
+    'Qt/plugins/renderplugins',
+    'Qt/plugins/sceneparsers',
+    'Qt/plugins/scxmldatamodel',
+    'Qt/plugins/sensors',
+    'Qt/plugins/sqldrivers',
+    'Qt/plugins/texttospeech',
+    'Qt/plugins/tls',
+    'Qt/plugins/virtualkeyboard',
+    'Qt/qml/QtLocation',
+    'Qt/qml/QtPositioning',
+    'Qt/qml/QtTextToSpeech',
+    'Qt/translations',
+]
 
 USELESS_PACKAGES = [
     'PyInstaller',
     'tcl',
     'tcl8',
-    'tk'
+    'tk',
 ]
 
 USELESS_LIBRARIES = [
     'tcl',
-    'tk'
+    'tk',
 ]
 
 
@@ -118,6 +168,12 @@ def post_process_win(dist_folder):
         if os.path.isdir(qt_qml_dir):
             shutil.rmtree(qt_qml_dir, ignore_errors=True)
 
+    # remove useless Qt directories
+    for qt_file_prefix in USELESS_QT_DIRS_PREFIX:
+        qt_file_win_prefix = qt_file_prefix.replace('Qt/', '')
+        qt_dir = os.path.join(windows_app_path, 'PySide6', qt_file_win_prefix)
+        shutil.rmtree(qt_dir, ignore_errors=True)
+
     # remove useless packages
     for package in USELESS_PACKAGES:
         package_dir = os.path.join(windows_app_path, package)
@@ -128,13 +184,16 @@ def post_process_win(dist_folder):
     # remove useless libraries
     for library in USELESS_LIBRARIES:
         for lib in glob.glob(
-                os.path.join(windows_app_path, 'lib{}*.dll'.format(library)), recursive=False):
+                os.path.join(
+                    windows_app_path, 'lib{}*.dll'.format(
+                        library)), recursive=False):
             os.remove(lib)
 
     # remove useless directory
     for postfix in ['.egg-info', '.dist-info']:
         for directory in glob.glob(
-                os.path.join(windows_app_path, '*{}'.format(postfix)), recursive=False):
+                os.path.join(windows_app_path, '*{}'.format(
+                    postfix)), recursive=False):
             if os.path.isdir(directory):
                 shutil.rmtree(directory, ignore_errors=True)
 
@@ -148,14 +207,23 @@ def post_process_macos(dist_folder):
         if os.path.exists(qt_lib_path):
             os.remove(qt_lib_path)
 
-        qt_qml_dir = os.path.join(macos_app_path, 'Contents', 'MacOS', 'PySide6', 'Qt', 'qml', qt_lib)
+        qt_qml_dir = os.path.join(
+            macos_app_path, 'Contents', 'MacOS', 'PySide6', 'Qt', 'qml', qt_lib)
         if os.path.isdir(qt_qml_dir):
             shutil.rmtree(qt_qml_dir, ignore_errors=True)
 
+    # remove useless Qt directories
+    for qt_file_prefix in USELESS_QT_DIRS_PREFIX:
+        qt_dir = os.path.join(
+            macos_app_path, 'Contents', 'MacOS', 'PySide6', qt_file_prefix)
+        shutil.rmtree(qt_dir, ignore_errors=True)
+
     # remove useless packages
     for package in USELESS_PACKAGES:
-        package_dir = os.path.join(macos_app_path, 'Contents', 'Resources', package)
-        package_link = os.path.join(macos_app_path, 'Contents', 'MacOS', package)
+        package_dir = os.path.join(
+            macos_app_path, 'Contents', 'Resources', package)
+        package_link = os.path.join(
+            macos_app_path, 'Contents', 'MacOS', package)
 
         if os.path.isdir(package_dir):
             shutil.rmtree(package_dir, ignore_errors=True)
@@ -166,18 +234,24 @@ def post_process_macos(dist_folder):
     # remove useless libraries
     for library in USELESS_LIBRARIES:
         for lib in glob.glob(
-                os.path.join(macos_app_path, 'Contents', 'MacOS', 'lib{}*.dylib'.format(library)), recursive=False):
+                os.path.join(
+                    macos_app_path, 'Contents', 'MacOS', 'lib{}*.dylib'.format(
+                        library)), recursive=False):
             os.remove(lib)
 
     # remove useless directory
     for postfix in ['.egg-info', '.dist-info']:
         for directory in glob.glob(
-                os.path.join(macos_app_path, 'Contents', 'Resources', '*{}'.format(postfix)), recursive=False):
+                os.path.join(
+                    macos_app_path, 'Contents', 'Resources', '*{}'.format(
+                        postfix)), recursive=False):
             if os.path.isdir(directory):
                 shutil.rmtree(directory, ignore_errors=True)
 
         for directory in glob.glob(
-                os.path.join(macos_app_path, 'Contents', 'MacOS', '*{}'.format(postfix)), recursive=False):
+                os.path.join(
+                    macos_app_path, 'Contents', 'MacOS', '*{}'.format(
+                        postfix)), recursive=False):
             if os.path.islink(directory):
                 os.remove(directory)
 

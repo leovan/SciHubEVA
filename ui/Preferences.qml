@@ -1,6 +1,10 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import QtQuick.Controls.impl
+import QtQuick.Controls.Material
+import QtQuick.Controls.Material.impl
+import QtQml.Models
 import QtQuick.Window
 
 import "." as UI
@@ -187,88 +191,73 @@ ApplicationWindow {
         anchors.fill: parent
         anchors.margins: margin
 
-        focus: true
+        Layout.fillHeight: true
+        Layout.fillWidth: true
 
         RowLayout {
-            spacing: 0
-
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            ListModel {
-                id: listModelPreferencesTabButtons
+            ColumnLayout {
+                id: columnLayoutPreferenceList
 
-                ListElement {
-                    property string name: qsTr("System")
-                    property string iconSource: "qrc:/images/icons/monitor.svg"
-                }
-
-                ListElement {
-                    property string name: qsTr("File")
-                    property string iconSource: "qrc:/images/icons/edit_file.svg"
-                }
-
-                ListElement {
-                    property string name: qsTr("Network")
-                    property string iconSource: "qrc:/images/icons/ethernet_on.svg"
-                }
-            }
-
-            Component {
-                id: itemDelegatePreferencesTabButtons
-
-                ItemDelegate {
-                    width: parent.width
-                    highlighted: ListView.isCurrentItem
-
-                    RowLayout {
-                        Layout.fillHeight: true
-                        Layout.fillWidth: true
-
-                        anchors.fill: parent
-                        Layout.alignment: Qt.AlignCenter | Qt.AlignVCenter
-
-                        Image {
-                            source: iconSource
-
-                            sourceSize.height: labelDelegateToolsItemText.font.pointSize * 1.6
-                            sourceSize.width: labelDelegateToolsItemText.font.pointSize * 1.6
-
-                            Layout.leftMargin: 6
-                        }
-
-                        Label {
-                            id: labelDelegateToolsItemText
-
-                            text: name
-                            font.weight: Font.Medium
-
-                            Layout.rightMargin: 6
-                            Layout.fillWidth: true
-                        }
-                    }
-
-                    onClicked: {
-                        listViewPreferencesTabButtons.currentIndex = index
-                        stackLayoutPreferencesTabs.currentIndex = index
-                    }
-                }
-            }
-
-            ListView {
-                id: listViewPreferencesTabButtons
-
-                Layout.minimumWidth: 100
-                Layout.minimumHeight: 100
                 Layout.fillHeight: true
+                Layout.fillWidth: true
 
-                model: listModelPreferencesTabButtons
-                delegate: itemDelegatePreferencesTabButtons
+                Layout.minimumWidth: 120
+                Layout.maximumWidth: 120
+
+                ListModel {
+                    id: listModelPreferencesTools
+
+                    ListElement {
+                        property string name: qsTr("System")
+                        property string iconSource: "qrc:/images/icons/monitor.svg"
+                    }
+
+                    ListElement {
+                        property string name: qsTr("File")
+                        property string iconSource: "qrc:/images/icons/edit_file.svg"
+                    }
+
+                    ListElement {
+                        property string name: qsTr("Network")
+                        property string iconSource: "qrc:/images/icons/ethernet_on.svg"
+                    }
+                }
+
+                Component {
+                    id: itemDelegatePreferencesTools
+
+                    UIElements.ItemDelegate {
+                        width: parent.width
+
+                        onClicked: {
+                            listViewPreferencesTools.currentIndex = index
+                            stackLayoutPreferencesPanel.currentIndex = index
+                        }
+                    }
+                }
+
+                ListView {
+                    id: listViewPreferencesTools
+
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+
+                    model: listModelPreferencesTools
+                    delegate: itemDelegatePreferencesTools
+
+                    Component.onCompleted: {
+                        listViewPreferencesTools.currentIndex = 0
+                        stackLayoutPreferencesPanel.currentIndex = 0
+                    }
+                }
             }
 
             ToolSeparator {
-                id: toolSeparatorPreferences
-
+                rightPadding: 3
+                leftPadding: 3
                 bottomPadding: 0
                 topPadding: 0
 
@@ -276,333 +265,374 @@ ApplicationWindow {
             }
 
             StackLayout {
-                id: stackLayoutPreferencesTabs
+                id: stackLayoutPreferencesPanel
 
                 currentIndex: 0
 
-                Layout.minimumHeight: 380
-                Layout.minimumWidth: 400
                 Layout.fillHeight: true
                 Layout.fillWidth: true
 
-                Item {
-                    id: itemTabPreferencesSystem
-
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-
-                    GridLayout {
-                        columnSpacing: 3
-                        rowSpacing: 0
-
-                        anchors.right: parent.right
-                        anchors.left: parent.left
-                        anchors.top: parent.top
-
-                        columns: 2
-
-                        Label {
-                            text: qsTr("Language: ")
-                        }
-
-                        ComboBox {
-                            id: comboBoxPreferencesSystemLanguage
-
-                            Layout.minimumWidth: 200
-                            Layout.fillWidth: true
-
-                            textRole: "text"
-                            valueRole: "value"
-
-                            model: [
-                                { text: "English", value: "en" },
-                                { text: "简体中文", value: "zh_CN" },
-                                { text: "繁體中文", value: "zh_HK" },
-                                { text: "正體中文", value: "zh_TW" },
-                                { text: "Português", value: "pt_PT" }
-                            ]
-                        }
-
-                        Label {
-                            text: qsTr("Theme: ")
-                        }
-
-                        ComboBox {
-                            id: comboBoxPreferencesSystemTheme
-
-                            Layout.minimumWidth: 200
-                            Layout.fillWidth: true
-
-                            textRole: "text"
-                            valueRole: "value"
-
-                            model: [
-                                { text: qsTr("System"), value: "System" },
-                                { text: qsTr("Light"), value: "Light" },
-                                { text: qsTr("Dark"), value: "Dark" }
-                            ]
-                        }
-
-                        ToolSeparator {
-                            rightPadding: 0
-                            leftPadding: 0
-                            Layout.fillWidth: true
-                            Layout.columnSpan: 2
-                            orientation: Qt.Horizontal
-                        }
-
-                        RowLayout {
-                            Layout.fillWidth: true
-                            Layout.columnSpan: 2
-
-                            Image {
-                                Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-
-                                source: "qrc:/images/icons/info.svg"
-                                sourceSize.height: labelAttention.font.pointSize * 1.6
-                                sourceSize.width: labelAttention.font.pointSize * 1.6
-                            }
-
-                            Label {
-                                id: labelAttention
-                                text: qsTr("Changes will take effect after restart")
-                            }
-                        }
-                    }
-                }
+                Layout.minimumWidth: 480
+                Layout.minimumHeight: 360
 
                 Item {
-                    id: itemTabPreferencesFile
+                    id: itemPreferencesSystem
 
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
+                    ScrollView {
+                        id: scrollViewPreferencesSystem
 
-                    GridLayout {
-                        columnSpacing: 3
-                        rowSpacing: 0
+                        anchors.fill: parent
 
-                        anchors.right: parent.right
-                        anchors.left: parent.left
-                        anchors.top: parent.top
+                        ColumnLayout {
+                            width: Math.max(implicitWidth, scrollViewPreferencesSystem.width)
 
-                        columns: 2
-
-                        Label {
-                            text: qsTr("Filename Prefix Format: ")
-                        }
-
-                        TextField {
-                            id: textFieldPreferencesFileFilenamePrefixFormat
-
-                            implicitWidth: 200
-                            Layout.fillWidth: true
-
-                            placeholderText: "{id}_{year}_{author}_{title}"
-                            selectByMouse: true
-                        }
-
-                        Label {
-                            text: qsTr("Supported Keywords: ") + "<br/>" +
-                                  qsTr("{author}: Author, {year}: Year, {title}: Title, {id}: DOI or PMID")
-                            Layout.columnSpan: 2
-                        }
-
-                        Label {
-                            text: qsTr("Overwrite Existing File: ")
-                        }
-
-                        Switch {
-                            id: switchPreferencesFileOverwrite
-                            text: checked ? qsTr("Yes") : qsTr("No")
-                            display: AbstractButton.TextBesideIcon
-                        }
-                    }
-                }
-
-                Item {
-                    id: itemTabPreferencesNetwork
-
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-
-                    GridLayout {
-                        rowSpacing: 0
-                        columnSpacing: 3
-
-                        anchors.right: parent.right
-                        anchors.left: parent.left
-                        anchors.top: parent.top
-
-                        rows: 9
-                        columns: 2
-
-                        Label {
-                            text: qsTr("SciHub URL: ")
-                        }
-
-                        RowLayout {
-                            Layout.fillWidth: true
-
-                            ComboBox {
-                                id: comboBoxPreferencesNetworkSciHubURL
-
-                                Layout.minimumWidth: 160
+                            RowLayout {
+                                Layout.fillHeight: true
                                 Layout.fillWidth: true
-                            }
 
-                            RoundButton {
-                                id: roundButtonPreferencesNetworkSciHubURLAdd
-                                text: "+"
+                                Label {
+                                    text: qsTr("Language: ")
+                                }
 
-                                onClicked: {
-                                    showUIAddSciHubURL()
+                                ComboBox {
+                                    id: comboBoxPreferencesSystemLanguage
+
+                                    Layout.fillWidth: true
+
+                                    textRole: "text"
+                                    valueRole: "value"
+
+                                    model: [
+                                        { text: "English", value: "en" },
+                                        { text: "简体中文", value: "zh_CN" },
+                                        { text: "繁體中文", value: "zh_HK" },
+                                        { text: "正體中文", value: "zh_TW" },
+                                        { text: "Português", value: "pt_PT" }
+                                    ]
                                 }
                             }
 
-                            RoundButton {
-                                id: roundButtonPreferencesNetworkSciHubURLRemove
-                                text: "-"
+                            RowLayout {
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
 
-                                onClicked: {
-                                    if (comboBoxPreferencesNetworkSciHubURL.count <= 1) {
-                                        dialogPreferencesMessage.messageType = "error"
-                                        dialogPreferencesMessage.message = qsTr("Cannot remove the last Sci-Hub URL!")
-                                        dialogPreferencesMessage.open()
-                                    } else {
-                                        var message = qsTr("Delete Sci-Hub URL: ") + comboBoxPreferencesNetworkSciHubURL.currentText + " ?"
-                                        dialogPreferencesRemoveSciHubURLConfirmMessage.messageType = "question"
-                                        dialogPreferencesRemoveSciHubURLConfirmMessage.message = message
-                                        dialogPreferencesRemoveSciHubURLConfirmMessage.open()
+                                Label {
+                                    text: qsTr("Theme: ")
+                                }
+
+                                ComboBox {
+                                    id: comboBoxPreferencesSystemTheme
+
+                                    Layout.fillWidth: true
+
+                                    textRole: "text"
+                                    valueRole: "value"
+
+                                    model: [
+                                        { text: qsTr("System"), value: "System" },
+                                        { text: qsTr("Light"), value: "Light" },
+                                        { text: qsTr("Dark"), value: "Dark" }
+                                    ]
+                                }
+                            }
+
+                            ToolSeparator {
+                                Layout.fillWidth: true
+
+                                rightPadding: 0
+                                leftPadding: 0
+                                orientation: Qt.Horizontal
+                            }
+
+                            RowLayout {
+                                Layout.fillWidth: true
+
+                                Image {
+                                    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+
+                                    source: "qrc:/images/icons/info.svg"
+                                    sourceSize.height: labelAttention.font.pointSize * 1.6
+                                    sourceSize.width: labelAttention.font.pointSize * 1.6
+                                }
+
+                                Label {
+                                    id: labelAttention
+                                    text: qsTr("Changes will take effect after restart")
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Item {
+                    id: itemPreferencesFile
+
+                    ScrollView {
+                        id: scrollViewPreferencesFile
+
+                        anchors.fill: parent
+
+                        ColumnLayout {
+                            width: Math.max(implicitWidth, scrollViewPreferencesFile.width)
+
+                            RowLayout {
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
+
+                                Label {
+                                    text: qsTr("Overwrite Existing File: ")
+                                }
+
+                                Switch {
+                                    id: switchPreferencesFileOverwrite
+                                }
+                            }
+
+                            RowLayout {
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
+
+                                Label {
+                                    text: qsTr("Filename Prefix Format: ")
+                                }
+
+                                TextField {
+                                    id: textFieldPreferencesFileFilenamePrefixFormat
+
+                                    Layout.fillWidth: true
+
+                                    selectByMouse: true
+                                }
+                            }
+
+                            RowLayout {
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
+
+                                Label {
+                                    text: qsTr("Supported Keywords: ")
+
+                                    Layout.alignment: Qt.AlignTop
+                                }
+
+                                ColumnLayout {
+                                    Label {
+                                        text: qsTr("{author}: Author")
+                                    }
+
+                                    Label {
+                                        text: qsTr("{year}: Year")
+                                    }
+
+                                    Label {
+                                        text: qsTr("{title}: Title")
+                                    }
+
+                                    Label {
+                                        text: qsTr("{id}: DOI or PMID")
                                     }
                                 }
                             }
                         }
+                    }
+                }
 
-                        Label {
-                            text: qsTr("Timeout: ")
-                        }
+                Item {
+                    id: itemPreferencesNetwork
 
-                        RowLayout {
-                            width: 100
-                            height: 100
+                    ScrollView {
+                        id: scrollViewPreferencesNetwork
 
-                            TextField {
-                                id: textFieldPreferencesNetworkTimeout
+                        anchors.fill: parent
 
-                                implicitWidth: 60
-                                Layout.fillWidth: false
+                        ColumnLayout {
+                            width: Math.max(implicitWidth, scrollViewPreferencesNetwork.width)
 
-                                horizontalAlignment: Text.AlignHCenter
-                                selectByMouse: true
-                                validator: RegularExpressionValidator {
-                                    regularExpression: /[0-9]+/
+                            RowLayout {
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
+
+                                Label {
+                                    text: qsTr("SciHub URL: ")
+                                }
+
+                                ComboBox {
+                                    id: comboBoxPreferencesNetworkSciHubURL
+
+                                    Layout.fillWidth: true
+                                }
+
+                                RoundButton {
+                                    id: roundButtonPreferencesNetworkSciHubURLAdd
+                                    text: "+"
+
+                                    onClicked: {
+                                        showUIAddSciHubURL()
+                                    }
+                                }
+
+                                RoundButton {
+                                    id: roundButtonPreferencesNetworkSciHubURLRemove
+                                    text: "-"
+
+                                    onClicked: {
+                                        if (comboBoxPreferencesNetworkSciHubURL.count <= 1) {
+                                            dialogPreferencesMessage.messageType = "error"
+                                            dialogPreferencesMessage.message = qsTr("Cannot remove the last Sci-Hub URL!")
+                                            dialogPreferencesMessage.open()
+                                        } else {
+                                            var message = qsTr("Delete Sci-Hub URL: ") + comboBoxPreferencesNetworkSciHubURL.currentText + " ?"
+                                            dialogPreferencesRemoveSciHubURLConfirmMessage.messageType = "question"
+                                            dialogPreferencesRemoveSciHubURLConfirmMessage.message = message
+                                            dialogPreferencesRemoveSciHubURLConfirmMessage.open()
+                                        }
+                                    }
                                 }
                             }
 
-                            Label {
-                                text: "ms"
-                            }
-                        }
+                            RowLayout {
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
 
-                        Label {
-                            text: qsTr("Retry Times: ")
-                        }
 
-                        TextField {
-                            id: textFieldPreferencesNetworkRetryTimes
+                                Label {
+                                    text: qsTr("Timeout: ")
+                                }
 
-                            implicitWidth: 60
-                            Layout.fillWidth: false
+                                TextField {
+                                    id: textFieldPreferencesNetworkTimeout
 
-                            horizontalAlignment: Text.AlignHCenter
-                            selectByMouse: true
-                            validator: RegularExpressionValidator {
-                                regularExpression: /[0-9]+/
-                            }
-                        }
+                                    Layout.fillWidth: true
 
-                        Label {
-                            text: qsTr("Enable Proxy")
-                        }
+                                    horizontalAlignment: Text.AlignHCenter
+                                    selectByMouse: true
+                                    validator: RegularExpressionValidator {
+                                        regularExpression: /[0-9]+/
+                                    }
+                                }
 
-                        Switch {
-                            id: switchPreferencesNetworkEnableProxy
-                            text: checked ? qsTr("Yes") : qsTr("No")
-                        }
+                                Label {
+                                    text: "ms"
+                                }
 
-                        Label {
-                            text: qsTr("Proxy Type: ")
-                        }
+                                ToolSeparator {}
 
-                        RowLayout {
-                            width: 100
-                            height: 100
+                                Label {
+                                    text: qsTr("Retry Times: ")
+                                }
 
-                            RadioButton {
-                                id: radioButtonPreferencesNetworkProxyTypeHTTP
-                                text: "HTTP"
-                            }
+                                TextField {
+                                    id: textFieldPreferencesNetworkRetryTimes
 
-                            RadioButton {
-                                id: radioButtonPreferencesNetworkProxyTypeSocks5
-                                text: "SOCKS5"
+                                    Layout.fillWidth: true
+
+                                    horizontalAlignment: Text.AlignHCenter
+                                    selectByMouse: true
+                                    validator: RegularExpressionValidator {
+                                        regularExpression: /[0-9]+/
+                                    }
+                                }
                             }
 
-                        }
+                            RowLayout {
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
 
-                        Label {
-                            text: qsTr("Proxy Host: ")
-                        }
+                                Label {
+                                    text: qsTr("Enable Proxy")
+                                }
 
-                        TextField {
-                            id: textFieldPreferencesNetworkProxyHost
+                                Switch {
+                                    id: switchPreferencesNetworkEnableProxy
+                                }
 
-                            implicitWidth: 200
-                            Layout.fillWidth: true
+                                ToolSeparator {}
 
-                            selectByMouse: true
-                        }
+                                Label {
+                                    text: qsTr("Proxy Type: ")
+                                }
 
-                        Label {
-                            text: qsTr("Proxy Port: ")
-                        }
+                                RadioButton {
+                                    id: radioButtonPreferencesNetworkProxyTypeHTTP
+                                    text: "HTTP"
+                                }
 
-                        TextField {
-                            id: textFieldPreferencesNetworkProxyPort
-
-                            implicitWidth: 200
-                            Layout.fillWidth: true
-
-                            selectByMouse: true
-                            validator: RegularExpressionValidator {
-                                regularExpression: /[0-9]+/
+                                RadioButton {
+                                    id: radioButtonPreferencesNetworkProxyTypeSocks5
+                                    text: "SOCKS5"
+                                }
                             }
-                        }
 
-                        Label {
-                            text: qsTr("Proxy Username: ")
-                        }
+                            RowLayout {
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
 
-                        TextField {
-                            id: textFieldPreferencesNetworkProxyUsername
+                                Label {
+                                    text: qsTr("Proxy Host: ")
+                                }
 
-                            implicitWidth: 200
-                            Layout.fillWidth: true
+                                TextField {
+                                    id: textFieldPreferencesNetworkProxyHost
 
-                            selectByMouse: true
-                        }
+                                    Layout.fillWidth: true
 
-                        Label {
-                            text: qsTr("Proxy Password: ")
-                        }
+                                    selectByMouse: true
+                                }
+                            }
 
-                        TextField {
-                            id: textFieldPreferencesNetworkProxyPassword
+                            RowLayout {
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
 
-                            implicitWidth: 200
-                            Layout.fillWidth: true
+                                Label {
+                                    text: qsTr("Proxy Port: ")
+                                }
 
-                            echoMode: TextInput.Password
+                                TextField {
+                                    id: textFieldPreferencesNetworkProxyPort
+
+                                    Layout.fillWidth: true
+
+                                    selectByMouse: true
+                                    validator: RegularExpressionValidator {
+                                        regularExpression: /[0-9]+/
+                                    }
+                                }
+                            }
+
+                            RowLayout {
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
+
+                                Label {
+                                    text: qsTr("Proxy Username: ")
+                                }
+
+                                TextField {
+                                    id: textFieldPreferencesNetworkProxyUsername
+
+                                    Layout.fillWidth: true
+
+                                    selectByMouse: true
+                                }
+                            }
+
+                            RowLayout {
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
+
+                                Label {
+                                    text: qsTr("Proxy Password: ")
+                                }
+
+                                TextField {
+                                    id: textFieldPreferencesNetworkProxyPassword
+
+                                    Layout.fillWidth: true
+
+                                    echoMode: TextInput.Password
+                                }
+                            }
                         }
                     }
                 }
@@ -640,5 +670,3 @@ ApplicationWindow {
         }
     }
 }
-
-

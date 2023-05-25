@@ -41,11 +41,10 @@ pyinstaller app.py `
   --clean `
   --noupx
 
+Write-Output "Post process"
 python building/post_process.py dist-Windows-x64
 
 Write-Output "Package with Inno Setup"
-
 Invoke-WebRequest -Uri "https://github.com/jrsoftware/issrc/raw/main/Files/Languages/Unofficial/ChineseSimplified.isl" -OutFile "building\\Windows\\ChineseSimplified.isl"
 Invoke-WebRequest -Uri "https://github.com/jrsoftware/issrc/raw/main/Files/Languages/Unofficial/ChineseTraditional.isl" -OutFile "building\\Windows\\ChineseTraditional.isl"
-
 & "${Env:ProgramFiles(x86)}\\Inno Setup 6\\ISCC.exe" "building\\Windows\\SciHubEVA-x64.iss"

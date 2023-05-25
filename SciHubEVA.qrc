@@ -6,17 +6,19 @@
         <file>ui/Preferences.qml</file>
         <file>ui/SciHubEVA.qml</file>
         <file>ui/elements/IconButton.qml</file>
+        <file>ui/elements/ItemDelegate.qml</file>
         <file>ui/elements/Message.qml</file>
+        <file>ui/elements/ScrollBar.qml</file>
         <file>images/SciHubEVA-background-dark.png</file>
         <file>images/SciHubEVA-background-light.png</file>
         <file>images/SciHubEVA-icon.png</file>
         <file>images/icons/box_important.svg</file>
         <file>images/icons/cancel.svg</file>
+        <file>images/icons/edit_file.svg</file>
         <file>images/icons/ethernet_on.svg</file>
         <file>images/icons/help.svg</file>
         <file>images/icons/info.svg</file>
         <file>images/icons/monitor.svg</file>
         <file>images/icons/settings.svg</file>
-        <file>images/icons/edit_file.svg</file>
     </qresource>
 </RCC>

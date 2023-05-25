@@ -6,14 +6,29 @@ Button {
     id: button
 
     property string iconSource
-    property real iconSize: labelText.font.pointSize * 1.6
+    readonly property real iconSize: 20
+    readonly property bool hasIcon: iconSource.toString().length > 0
+    readonly property bool hasText: button.text.toString().length > 0
+    readonly property bool hasOnlyIcon: hasIcon && !hasText
 
-    implicitWidth: leftPadding + rightPadding + rowContent.implicitWidth
+    topInset: 6
+    bottomInset: 6
+    verticalPadding: 14
+    leftPadding: hasOnlyIcon ? 8 : hasIcon ? 16 : 24
+    rightPadding: hasOnlyIcon ? 8 : 24
+
+    implicitWidth: hasIcon ?
+                   Math.min(implicitBackgroundWidth + leftInset + rightInset,
+                            implicitContentWidth + leftPadding + rightPadding) :
+                   Math.max(implicitBackgroundWidth + leftInset + rightInset,
+                            implicitContentWidth + leftPadding + rightPadding)
+    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
+                             implicitContentHeight + topPadding + bottomPadding)
 
     contentItem: Row {
         id: rowContent
 
-        spacing: 6
+        spacing: 8
         anchors.horizontalCenter: parent.horizontalCenter
 
         AnimatedImage {
@@ -21,13 +36,13 @@ Button {
             playing: true
             source: iconSource
             height: iconSize
-            width: iconSize
+            width: hasIcon ? iconSize : 0
             anchors.verticalCenter: parent.verticalCenter
         }
 
         Label {
             id: labelText
-            text: parent.parent.text
+            text: button.text
             anchors.verticalCenter: parent.verticalCenter
         }
     }

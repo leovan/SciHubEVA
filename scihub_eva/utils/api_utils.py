@@ -10,7 +10,8 @@ from pdfminer.psparser import PSLiteral, PSKeyword
 
 
 RANGE_QUERY_PATTERN = re.compile(r'\{\d+\-\d+\}')
-DOI_PATTERN = re.compile(r'\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'])\S)+)\b')
+DOI_PATTERN = re.compile(
+    r'\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'])\S)+)\b')
 
 
 def is_range_query(query_input: str) -> bool:
@@ -29,11 +30,14 @@ def gen_range_query_list(query_input: str) -> List[str]:
     if len(range_from) == len(range_to):
         digit = len(range_from)
         range_item_pattern = '{:0>' + str(digit) + 'd}'
-        range_items = [range_item_pattern.format(i) for i in range(int(range_from), int(range_to) + 1)]
+        range_items = [range_item_pattern.format(i) \
+                       for i in range(int(range_from), int(range_to) + 1)]
     else:
-        range_items = [str(i) for i in range(int(range_from), int(range_to) + 1)]
+        range_items = [
+            str(i) for i in range(int(range_from), int(range_to) + 1)]
 
-    return [query_input.replace(range_pattern, range_item) for range_item in range_items]
+    return [query_input.replace(range_pattern, range_item) for range_item in
+            range_items]
 
 
 def guess_query_type(query):
@@ -76,7 +80,8 @@ def get_pdf_metadata(pdf) -> dict:
         if title and title != '':
             metadata['title'] = title
 
-        year = pdf_metadata_moddate_to_year(make_pdf_metadata_str(pdf_metadata.get('ModDate', '')))
+        year = pdf_metadata_moddate_to_year(
+            make_pdf_metadata_str(pdf_metadata.get('ModDate', '')))
         if year and year != '':
             metadata['year'] = year
     except Exception as e:

@@ -14,24 +14,31 @@ def get_session():
         'User-Agent':
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
             'AppleWebKit/537.36 (KHTML, like Gecko) '
-            'Chrome/94.0.4606.81 '
+            'Chrome/113.0.0.0 '
             'Safari/537.36'
     }
 
-    retry_times = Preferences.get_or_default(NETWORK_RETRY_TIMES_KEY, NETWORK_RETRY_TIMES_DEFAULT, type=int)
+    retry_times = Preferences.get_or_default(
+        NETWORK_RETRY_TIMES_KEY, NETWORK_RETRY_TIMES_DEFAULT, type=int)
     adapter = HTTPAdapter(max_retries=retry_times)
 
     sess.mount('http://', adapter)
     sess.mount('https://', adapter)
 
-    proxy_enabled = Preferences.get_or_default(NETWORK_PROXY_ENABLE_KEY, NETWORK_PROXY_ENABLE_DEFAULT, type=bool)
+    proxy_enabled = Preferences.get_or_default(
+        NETWORK_PROXY_ENABLE_KEY, NETWORK_PROXY_ENABLE_DEFAULT, type=bool)
 
     if proxy_enabled:
-        proxy_type = Preferences.get_or_default(NETWORK_PROXY_TYPE_KEY, NETWORK_PROXY_TYPE_DEFAULT)
-        proxy_host = Preferences.get_or_default(NETWORK_PROXY_HOST_KEY, NETWORK_PROXY_HOST_DEFAULT)
-        proxy_port = Preferences.get_or_default(NETWORK_PROXY_PORT_KEY, NETWORK_PROXY_PORT_DEFAULT)
-        proxy_username = Preferences.get_or_default(NETWORK_PROXY_USERNAME_KEY, NETWORK_PROXY_USERNAME_DEFAULT)
-        proxy_password = Preferences.get_or_default(NETWORK_PROXY_PASSWORD_KEY, NETWORK_PROXY_PASSWORD_DEFAULT)
+        proxy_type = Preferences.get_or_default(
+            NETWORK_PROXY_TYPE_KEY, NETWORK_PROXY_TYPE_DEFAULT)
+        proxy_host = Preferences.get_or_default(
+            NETWORK_PROXY_HOST_KEY, NETWORK_PROXY_HOST_DEFAULT)
+        proxy_port = Preferences.get_or_default(
+            NETWORK_PROXY_PORT_KEY, NETWORK_PROXY_PORT_DEFAULT)
+        proxy_username = Preferences.get_or_default(
+            NETWORK_PROXY_USERNAME_KEY, NETWORK_PROXY_USERNAME_DEFAULT)
+        proxy_password = Preferences.get_or_default(
+            NETWORK_PROXY_PASSWORD_KEY, NETWORK_PROXY_PASSWORD_DEFAULT)
 
         proxy = proxy_type + '://'
 

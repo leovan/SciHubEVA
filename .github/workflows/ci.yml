@@ -10,7 +10,7 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.10'
 
       - name: Install create-dmg
         run: brew install create-dmg
@@ -36,7 +36,7 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.10'
 
       - name: Build and package
         run: ./building/build_windows_x64.ps1

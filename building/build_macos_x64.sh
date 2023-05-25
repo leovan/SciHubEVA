@@ -33,10 +33,10 @@ pyinstaller app.py \
 
 cp building/macOS/Info.plist dist-macOS-x64/SciHubEVA.app/Contents
 
+echo "Post process"
 python building/post_process.py dist-macOS-x64
 
 echo "Package with create-dmg"
-
 create-dmg \
   --volname "Sci-Hub EVA" \
   --volicon "building/macOS/SciHubEVA-dmg.icns" \
@@ -49,6 +49,6 @@ create-dmg \
   --hide-extension "SciHubEVA.app" \
   --app-drop-link 300 150 \
   --eula "LICENSE" \
-  --format "UDBZ" \
+  --format "ULFO" \
   "dist-macOS-x64/SciHubEVA-x64-latest.dmg" \
   "dist-macOS-x64/SciHubEVA.app"

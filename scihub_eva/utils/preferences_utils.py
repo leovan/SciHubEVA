@@ -11,10 +11,18 @@ from scihub_eva.utils.sys_utils import *
 class Preferences(object):
     if is_macos():
         QSettings.setDefaultFormat(QSettings.Format.NativeFormat)
-        SETTINGS = QSettings(QSettings.NativeFormat, QSettings.UserScope, ORGANIZATION_DOMAIN, APPLICATION_NAME)
+        SETTINGS = QSettings(
+            QSettings.NativeFormat,
+            QSettings.UserScope,
+            ORGANIZATION_DOMAIN,
+            APPLICATION_NAME)
     else:
         QSettings.setDefaultFormat(QSettings.Format.IniFormat)
-        SETTINGS = QSettings(QSettings.IniFormat, QSettings.UserScope, ORGANIZATION_DOMAIN, APPLICATION_NAME)
+        SETTINGS = QSettings(
+            QSettings.IniFormat,
+            QSettings.UserScope,
+            ORGANIZATION_DOMAIN,
+            APPLICATION_NAME)
 
     def __init__(self):
         super(Preferences, self).__init__()
@@ -70,7 +78,8 @@ class Config(ConfigParser):
             self.write(f, space_around_delimiters=self._space_around_delimiters)
 
 
-QT_QUICK_CONTROLS2_CONFIG = Config((PREFERENCES_DIR / 'qtquickcontrols2.conf').resolve().as_posix())
+QT_QUICK_CONTROLS2_CONFIG = Config(
+    (PREFERENCES_DIR / 'qtquickcontrols2.conf').resolve().as_posix())
 
 
 def is_app_dark_theme():

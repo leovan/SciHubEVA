@@ -6,6 +6,8 @@ import QtQuick.Window
 Dialog {
     id: dialog
 
+    property int margin: 10
+
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
 
@@ -28,7 +30,7 @@ Dialog {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
 
-            spacing: 10
+            spacing: margin
 
             Image {
                 Layout.alignment: Qt.AlignLeft | Qt.AlignTop

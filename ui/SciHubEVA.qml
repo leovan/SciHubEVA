@@ -16,7 +16,7 @@ ApplicationWindow {
 
     visible: true
 
-    property int margin: 8
+    property int margin: 10
     property int theme: Material.theme
 
     width: columnLayoutApplication.implicitWidth + 2 * margin
@@ -151,7 +151,7 @@ ApplicationWindow {
 
             TextField {
                 id: textFieldQuery
-                placeholderText: qsTr("URL, PMID, DOI, Search String or Query List File")
+                placeholderText: qsTr("URL, PMID, DOI, Title or Query List File")
 
                 implicitWidth: 300
                 Layout.minimumWidth: 300
@@ -166,6 +166,7 @@ ApplicationWindow {
 
                 font.bold: false
                 Layout.minimumWidth: implicitWidth
+                Layout.minimumHeight: buttonAbout.implicitHeight
                 Layout.fillWidth: true
 
                 onClicked: {
@@ -189,6 +190,7 @@ ApplicationWindow {
 
                 font.bold: false
                 Layout.minimumWidth: implicitWidth
+                Layout.minimumHeight: buttonAbout.implicitHeight
                 Layout.fillWidth: true
 
                 onClicked: fileDialogQueryList.open()
@@ -224,6 +226,7 @@ ApplicationWindow {
 
                 font.bold: false
                 Layout.minimumWidth: implicitWidth
+                Layout.minimumHeight: buttonPreferences.implicitHeight
                 Layout.fillWidth: true
 
                 onClicked: folderDialogSaveTo.open()
@@ -235,6 +238,7 @@ ApplicationWindow {
 
                 font.bold: false
                 Layout.minimumWidth: implicitWidth
+                Layout.minimumHeight: buttonPreferences.implicitHeight
                 Layout.fillWidth: true
 
                 onClicked: systemOpenSaveToDir(textFieldSaveToDir.text.trim())

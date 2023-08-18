@@ -7,6 +7,8 @@ import QtQuick.Controls.Material
 Dialog {
     id: dialog
 
+    property int margin: 10
+
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
 
@@ -18,9 +20,9 @@ Dialog {
         anchors.fill: parent
 
         RowLayout {
-            Layout.fillWidth: true
+            spacing: margin
 
-            spacing: 8
+            Layout.fillWidth: true
 
             Image {
                 Layout.alignment: Qt.AlignTop
@@ -32,7 +34,7 @@ Dialog {
 
             Label {
                 text: "<style>a { color: " + Material.accent + "; }</style>" +
-                      "<p><b>Sci-Hub EVA</a> " + APPLICATION_VERSION + "</b></p>" +
+                      "<p style=\"font-size: 16px;\"><b>Sci-Hub EVA</a> " + APPLICATION_VERSION + "</b></p>" +
                       "<p>" + "<a href=\"https://github.com/leovan/SciHubEVA\">Sci-Hub EVA</a> " +
                       qsTr("is a cross-platform Sci-Hub GUI Application.") + "<br/>" +
                       "Powered By Python " + PYTHON_VERSION + " & Qt " + QT_VERSION + "</p>" +

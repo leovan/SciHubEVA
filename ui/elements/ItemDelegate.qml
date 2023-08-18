@@ -9,6 +9,7 @@ import QtQml.Models
 ItemDelegate {
     id: control
 
+    readonly property int margin: 10
     readonly property real iconSize: 20
 
     highlighted: ListView.isCurrentItem
@@ -26,7 +27,7 @@ ItemDelegate {
             sourceSize.height: iconSize
             sourceSize.width: iconSize
 
-            Layout.leftMargin: 8
+            Layout.leftMargin: margin
         }
 
         Label {
@@ -35,7 +36,7 @@ ItemDelegate {
             text: name
             font.weight: Font.Medium
 
-            Layout.rightMargin: 8
+            Layout.rightMargin: margin
             Layout.fillWidth: true
         }
     }

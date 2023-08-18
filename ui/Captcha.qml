@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Window
 
-ApplicationWindow {
+Window {
     title: qsTr("Captcha")
 
     modality: Qt.ApplicationModal

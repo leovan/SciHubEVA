@@ -10,7 +10,7 @@ import QtQuick.Window
 import "." as UI
 import "./elements" as UIElements
 
-ApplicationWindow {
+Window {
     id: applicationWindowPreferences
     title: qsTr("Preferences")
 
@@ -273,7 +273,7 @@ ApplicationWindow {
                 Layout.fillWidth: true
 
                 Layout.minimumWidth: 480
-                Layout.minimumHeight: 360
+                Layout.minimumHeight: 400
 
                 Item {
                     id: itemPreferencesSystem
@@ -284,6 +284,7 @@ ApplicationWindow {
                         anchors.fill: parent
 
                         ColumnLayout {
+                            spacing: margin
                             width: Math.max(implicitWidth, scrollViewPreferencesSystem.width)
 
                             RowLayout {
@@ -373,6 +374,7 @@ ApplicationWindow {
                         anchors.fill: parent
 
                         ColumnLayout {
+                            spacing: margin
                             width: Math.max(implicitWidth, scrollViewPreferencesFile.width)
 
                             RowLayout {
@@ -446,6 +448,7 @@ ApplicationWindow {
                         anchors.fill: parent
 
                         ColumnLayout {
+                            spacing: margin
                             width: Math.max(implicitWidth, scrollViewPreferencesNetwork.width)
 
                             RowLayout {

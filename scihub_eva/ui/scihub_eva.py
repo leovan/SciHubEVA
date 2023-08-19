@@ -187,9 +187,7 @@ class UISciHubEVA(QObject):
             None,
             logger=self._logger)
         _, captcha_img_url = scihub_api.get_captcha_info(pdf_captcha_response)
-        invert_color = True if is_app_dark_theme() == 1 else False
-        captcha_img_file_path = scihub_api.download_captcha_img(
-            captcha_img_url, invert_color=invert_color)
+        captcha_img_file_path = scihub_api.download_captcha_img(captcha_img_url)
         self._captcha_img_file_path = captcha_img_file_path.resolve().as_posix()
         captcha_img_local_uri = captcha_img_file_path.as_uri()
 

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Sci-Hub EVA
+Comment=A cross-platform Sci-Hub GUI application powered by Python and Qt
+Categories=Utility;
+Icon=tech.leovan.SciHubEVA
+Exec=SciHubEVA
+Terminal=false

@@ -1,5 +1,17 @@
 # Changelog
 
+## [6.2.0](https://github.com/leovan/SciHubEVA/compare/v6.2.0...v6.1.0) (2023-08-19)
+
+### Features
+
+- Add Linux building target with AppImage.
+- Add macOS arm64 building target.
+- Add Windows scoop install support.
+
+### Bug Fixes
+
+- Fix error opening downloaded file link in log on different OS.
+
 ## [6.1.0](https://github.com/leovan/SciHubEVA/compare/v6.1.0...v6.0.0) (2023-05-25)
 
 ### Bug Fixes
@@ -224,7 +236,7 @@ _This is a hotfix version._
 
 ### Features
 
-- Update Sci-Hub API which supports search string now.
+- Update Sci-Hub API which supports title searching now.
 
 ### Bug Fixes
 

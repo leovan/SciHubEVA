@@ -18,14 +18,11 @@ LOCAL_LOGS_DIR = BASE_DIR / 'logs'
 
 def logs_dir():
     if is_macos():
-        logs_dir_path = Path.home() / 'Library/Logs/' / \
-                        ORGANIZATION_NAME / APPLICATION_NAME
+        logs_dir_path = Path.home() / 'Library' / 'Logs/' / ORGANIZATION_DOMAIN / APPLICATION_NAME
     elif is_windows():
-        logs_dir_path = Path.home() / 'AppData/Local/' / \
-                        ORGANIZATION_NAME / APPLICATION_NAME / 'logs'
+        logs_dir_path = Path.home() / 'AppData' / 'Local/' / ORGANIZATION_DOMAIN / APPLICATION_NAME / 'logs'
     elif is_linux():
-        logs_dir_path = Path.home() / '/var/log/' / \
-                        ORGANIZATION_NAME / APPLICATION_NAME
+        logs_dir_path = Path.home() / '.local' / 'share/' / ORGANIZATION_DOMAIN / APPLICATION_NAME / 'logs'
     else:
         logs_dir_path = LOCAL_LOGS_DIR
 

@@ -12,13 +12,13 @@
         <file>images/SciHubEVA-background-dark.png</file>
         <file>images/SciHubEVA-background-light.png</file>
         <file>images/SciHubEVA-icon.png</file>
-        <file>images/icons/box_important.svg</file>
-        <file>images/icons/cancel.svg</file>
-        <file>images/icons/edit_file.svg</file>
-        <file>images/icons/ethernet_on.svg</file>
-        <file>images/icons/help.svg</file>
-        <file>images/icons/info.svg</file>
-        <file>images/icons/monitor.svg</file>
-        <file>images/icons/settings.svg</file>
+        <file>images/icons/appearance.svg</file>
+        <file>images/icons/error.svg</file>
+        <file>images/icons/file.svg</file>
+        <file>images/icons/information.svg</file>
+        <file>images/icons/network.svg</file>
+        <file>images/icons/preferences.svg</file>
+        <file>images/icons/question.svg</file>
+        <file>images/icons/warning.svg</file>
     </qresource>
 </RCC>

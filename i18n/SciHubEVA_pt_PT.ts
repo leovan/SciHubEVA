@@ -69,8 +69,8 @@
         <translation>Não</translation>
     </message>
     <message>
-        <source>System</source>
-        <translation>Sistema</translation>
+        <source>Appearance</source>
+        <translation>Aparência</translation>
     </message>
     <message>
         <source>File</source>
@@ -87,6 +87,10 @@
     <message>
         <source>Theme: </source>
         <translation>Tema: </translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>Sistema</translation>
     </message>
     <message>
         <source>Light</source>
@@ -149,8 +153,8 @@
         <translation>Tentativas: </translation>
     </message>
     <message>
-        <source>Enable Proxy</source>
-        <translation>Ativar Proxy</translation>
+        <source>Enable Proxy: </source>
+        <translation>Ativar Proxy: </translation>
     </message>
     <message>
         <source>Proxy Type: </source>
@@ -184,91 +188,66 @@
 <context>
     <name>SciHubAPI</name>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="204"/>
         <source>Angel [CAPTCHA] down!</source>
         <translation>Angel [CAPTCHA] caído！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="213"/>
         <source>Fetching PDF ...</source>
         <translation>Buscando PDF ...</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="233"/>
         <source>Angel [CAPTCHA] is coming!</source>
         <translation>Angel [CAPTCHA] à caminho！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="237"/>
         <source>Unknown PDF Content-Type!</source>
         <translation>Tipo de Conteúdo do PDF, Inválido!</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="242"/>
         <source>Failed to get PDF!</source>
         <translation>Falha ao obter PDF！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="75"/>
         <source>Using Sci-Hub URL: </source>
         <translation>Utilizando URL do Sci-Hub: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="78"/>
         <source>Query type: </source>
         <translation>Tipo de Consulta: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="85"/>
         <source>Fetching PDF URL ...</source>
         <translation>Buscando URL do PDF ...</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="95"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="199"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="226"/>
         <source>Error {}</source>
         <translation>Erro {}</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="123"/>
         <source>Got PDF URL: </source>
         <translation>URL do PDF Obtido: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="127"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="133"/>
         <source>Failed to get PDF URL!</source>
         <translation>Falha ao obter o URL do PDF！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="98"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="129"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="134"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="201"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="228"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="238"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="243"/>
         <source>You may need check it manually.</source>
         <translation>Você vai precisar lidar com isso manualmente.</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="274"/>
         <source>Unsupported filename keywords: </source>
         <translation>Palavras-chave de nome de arquivo não suportadas: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="285"/>
         <source>Saved PDF as: </source>
         <translation>PDF Salvo como: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="290"/>
         <source>Dealing with query: </source>
         <translation>Processando Consulta: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="312"/>
         <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
         <translation>Captcha errado, falhou em matar Angel [CAPTCHA]！</translation>
     </message>
@@ -284,8 +263,8 @@
         <translation>Consulta: </translation>
     </message>
     <message>
-        <source>URL, PMID, DOI, Search String or Query List File</source>
-        <translation>URL, PMID, DOI, String de Pesquisa ou Arquivo de lista de Consulta</translation>
+        <source>URL, PMID, DOI, Title or Query List File</source>
+        <translation>URL, PMID, DOI, Título ou Arquivo de lista de Consulta</translation>
     </message>
     <message>
         <source>Rampage</source>
@@ -331,7 +310,6 @@
 <context>
     <name>UICaptcha</name>
     <message>
-        <location filename="../scihub_eva/ui/captcha.py" line="35"/>
         <source>Battle canceled, rampage again?</source>
         <translation>Batalha cancelada，tumultuar novamente？</translation>
     </message>
@@ -339,12 +317,10 @@
 <context>
     <name>UISciHubEVA</name>
     <message>
-        <location filename="../scihub_eva/ui/scihub_eva.py" line="133"/>
         <source>Query list file is not a text file!</source>
         <translation>O arquivo da lista de consulta não é um arquivo de texto！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/ui/scihub_eva.py" line="144"/>
         <source>Dealing with {}/{} query ...</source>
         <translation>Lidando com {}/{} consulta ...</translation>
     </message>

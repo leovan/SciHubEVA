@@ -69,8 +69,8 @@
         <translation>否</translation>
     </message>
     <message>
-        <source>System</source>
-        <translation>系统</translation>
+        <source>Appearance</source>
+        <translation>外观</translation>
     </message>
     <message>
         <source>File</source>
@@ -87,6 +87,10 @@
     <message>
         <source>Theme: </source>
         <translation>主题: </translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation>系统</translation>
     </message>
     <message>
         <source>Light</source>
@@ -114,19 +118,19 @@
     </message>
     <message>
         <source>{author}: Author</source>
-        <translation>{author}：作者</translation>
+        <translation>{author}: 作者</translation>
     </message>
     <message>
         <source>{year}: Year</source>
-        <translation>{year}：年份</translation>
+        <translation>{year}: 年份</translation>
     </message>
     <message>
         <source>{title}: Title</source>
-        <translation>{title}：标题</translation>
+        <translation>{title}: 标题</translation>
     </message>
     <message>
         <source>{id}: DOI or PMID</source>
-        <translation>{id}：DOI 或 PMID</translation>
+        <translation>{id}: DOI 或 PMID</translation>
     </message>
     <message>
         <source>SciHub URL: </source>
@@ -149,8 +153,8 @@
         <translation>重试次数: </translation>
     </message>
     <message>
-        <source>Enable Proxy</source>
-        <translation>开启代理</translation>
+        <source>Enable Proxy: </source>
+        <translation>开启代理: </translation>
     </message>
     <message>
         <source>Proxy Type: </source>
@@ -184,91 +188,66 @@
 <context>
     <name>SciHubAPI</name>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="204"/>
         <source>Angel [CAPTCHA] down!</source>
         <translation>使徒 [CAPTCHA] 已消灭！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="213"/>
         <source>Fetching PDF ...</source>
         <translation>获取 PDF 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="233"/>
         <source>Angel [CAPTCHA] is coming!</source>
         <translation>使徒 [CAPTCHA] 来袭！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="237"/>
         <source>Unknown PDF Content-Type!</source>
         <translation>未知的 PDF 数据类型！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="242"/>
         <source>Failed to get PDF!</source>
         <translation>获取 PDF URL 失败！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="75"/>
         <source>Using Sci-Hub URL: </source>
         <translation>使用 Sci-Hub URL: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="78"/>
         <source>Query type: </source>
         <translation>搜索类型: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="85"/>
         <source>Fetching PDF URL ...</source>
         <translation>获取 PDF URL 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="95"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="199"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="226"/>
         <source>Error {}</source>
         <translation>错误 {}</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="123"/>
         <source>Got PDF URL: </source>
         <translation>获取到 PDF URL: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="127"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="133"/>
         <source>Failed to get PDF URL!</source>
         <translation>获取 PDF URL 失败！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="98"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="129"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="134"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="201"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="228"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="238"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="243"/>
         <source>You may need check it manually.</source>
         <translation>你可能需要手动处理本次查询。</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="274"/>
         <source>Unsupported filename keywords: </source>
         <translation>不支持的文件名关键字: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="285"/>
         <source>Saved PDF as: </source>
         <translation>保存 PDF 为: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="290"/>
         <source>Dealing with query: </source>
         <translation>正在处理搜索: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="312"/>
         <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
         <translation>验证码错误，使徒 [CAPTCHA] 消灭失败！</translation>
     </message>
@@ -284,7 +263,7 @@
         <translation>搜索: </translation>
     </message>
     <message>
-        <source>URL, PMID, DOI, Search String or Query List File</source>
+        <source>URL, PMID, DOI, Title or Query List File</source>
         <translation>URL, PMID, DOI, 标题或搜索列表文件</translation>
     </message>
     <message>
@@ -331,7 +310,6 @@
 <context>
     <name>UICaptcha</name>
     <message>
-        <location filename="../scihub_eva/ui/captcha.py" line="35"/>
         <source>Battle canceled, rampage again?</source>
         <translation>战斗取消，再次暴走？</translation>
     </message>
@@ -339,12 +317,10 @@
 <context>
     <name>UISciHubEVA</name>
     <message>
-        <location filename="../scihub_eva/ui/scihub_eva.py" line="133"/>
         <source>Query list file is not a text file!</source>
         <translation>搜索列表文件不是一个文本文件！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/ui/scihub_eva.py" line="144"/>
         <source>Dealing with {}/{} query ...</source>
         <translation>正在处理 {}/{} 查询 ...</translation>
     </message>

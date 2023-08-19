@@ -7,7 +7,7 @@ import QtQuick.Controls.Material
 Dialog {
     id: dialog
 
-    property int margin: 10
+    property int margin: 16
 
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
@@ -27,8 +27,8 @@ Dialog {
             Image {
                 Layout.alignment: Qt.AlignTop
 
-                sourceSize.height: 128
-                sourceSize.width: 128
+                sourceSize.height: 96
+                sourceSize.width: 96
                 source: "qrc:/images/SciHubEVA-icon.png"
             }
 

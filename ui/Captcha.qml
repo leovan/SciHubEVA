@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Window
 
-Window {
+ApplicationWindow {
     title: qsTr("Captcha")
 
     modality: Qt.ApplicationModal
@@ -29,6 +29,7 @@ Window {
 
         anchors.fill: parent
         anchors.margins: margin
+        spacing: margin
 
         focus: true
 
@@ -47,9 +48,14 @@ Window {
             TextField {
                 id: textFieldCaptcha
 
-                Layout.minimumWidth: 100
+                Layout.minimumWidth: 160
 
                 selectByMouse: true
+            }
+
+            Item {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
             }
 
             Button {

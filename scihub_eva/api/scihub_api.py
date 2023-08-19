@@ -8,7 +8,6 @@ from urllib.parse import urlparse
 from lxml import etree
 from tempfile import NamedTemporaryFile
 from pathlib import Path
-from PIL import Image, ImageOps
 from pathvalidate import sanitize_filename
 
 from PySide6.QtCore import QObject
@@ -18,6 +17,7 @@ from scihub_eva.utils.preferences_utils import *
 from scihub_eva.utils.network_utils import *
 from scihub_eva.utils.logging_utils import *
 from scihub_eva.utils.api_utils import *
+from scihub_eva.utils.sys_utils import *
 
 
 @unique
@@ -160,7 +160,7 @@ class SciHubAPI(QObject, threading.Thread):
 
         return captcha_id, captcha_img_url
 
-    def download_captcha_img(self, captcha_img_url, invert_color=False):
+    def download_captcha_img(self, captcha_img_url):
         captcha_img_file = NamedTemporaryFile(delete=False)
         captcha_img_file_path = Path(captcha_img_file.name)
 
@@ -172,12 +172,6 @@ class SciHubAPI(QObject, threading.Thread):
 
         captcha_img_file.flush()
         captcha_img_file.close()
-
-        if invert_color:
-            img = Image.open(captcha_img_file_path).convert('RGB')
-            invert_img = ImageOps.invert(img)
-            img.close()
-            invert_img.save(captcha_img_file_path, format='png')
 
         return captcha_img_file_path
 
@@ -275,12 +269,12 @@ class SciHubAPI(QObject, threading.Thread):
             return
 
         pdf_name = sanitize_filename(pdf_name, replacement_text='-')
-        pdf_path = str(Path(Preferences.get(FILE_SAVE_TO_DIR_KEY)) / pdf_name)
+        pdf_path = Path(Preferences.get(FILE_SAVE_TO_DIR_KEY)) / pdf_name
 
         with open(pdf_path, 'wb') as fp:
             fp.write(pdf)
 
-        pdf_link = f'<a href="file:///{pdf_path}">{pdf_path}</a>'
+        pdf_link = f'<a href="{pdf_path.as_uri()}">{pdf_path.as_posix()}</a>'
 
         self._logger.info(self.tr('Saved PDF as: ') + pdf_link)
 

@@ -14,6 +14,7 @@ from scihub_eva.globals.preferences import *
 from scihub_eva.utils.preferences_utils import *
 from scihub_eva.utils.sys_utils import *
 from scihub_eva.utils.path_utils import *
+from scihub_eva.utils.ui_utils import *
 from scihub_eva.ui.scihub_eva import UISciHubEVA
 
 
@@ -21,25 +22,14 @@ def main():
     multiprocessing.freeze_support()
 
     app_path = os.path.abspath(os.path.dirname(sys.argv[0]))
-    os.environ['QT_QUICK_CONTROLS_CONF'] = (
-            PREFERENCES_DIR / 'qtquickcontrols2.conf').resolve().as_posix()
+    argv = [app_path, '--ignore-gpu-blacklist', '--enable-gpu-rasterization']
 
-    if is_windows():
-        os.environ['QSG_RHI_BACKEND'] = 'opengl'
-
-    os.environ['QT_ENABLE_GLYPH_CACHE_WORKAROUND'] = '1'
-    os.environ['QML_USE_GLYPHCACHE_WORKAROUND'] = '1'
-
-    if is_app_dark_theme():
-        os.environ['QT_QUICK_CONTROLS_MATERIAL_BACKGROUND'] = '#3F3F3F'
-    else:
-        os.environ['QT_QUICK_CONTROLS_MATERIAL_BACKGROUND'] = '#FFFFFF'
+    set_ui_env()
 
     QCoreApplication.setOrganizationName(ORGANIZATION_NAME)
     QCoreApplication.setOrganizationDomain(ORGANIZATION_DOMAIN)
     QCoreApplication.setApplicationName(APPLICATION_NAME)
 
-    argv = [app_path, '--ignore-gpu-blacklist', '--enable-gpu-rasterization']
     app = QGuiApplication(argv)
 
     lang = Preferences.get_or_default(SYSTEM_LANGUAGE_KEY, SYSTEM_LANGUAGE)

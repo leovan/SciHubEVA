@@ -7,7 +7,7 @@ Button {
 
     property string iconSource
 
-    readonly property real iconSize: 20
+    readonly property real iconSize: 22
     readonly property bool hasIcon: iconSource.toString().length > 0
     readonly property bool hasText: button.text.toString().length > 0
     readonly property bool hasOnlyIcon: hasIcon && !hasText

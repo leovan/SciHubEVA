@@ -10,7 +10,7 @@ ItemDelegate {
     id: control
 
     readonly property int margin: 10
-    readonly property real iconSize: 20
+    readonly property real iconSize: 22
 
     highlighted: ListView.isCurrentItem
 
@@ -19,6 +19,10 @@ ItemDelegate {
         Layout.fillWidth: true
 
         anchors.fill: parent
+        anchors.leftMargin: margin
+        anchors.rightMargin: margin
+        spacing: margin
+
         Layout.alignment: Qt.AlignCenter | Qt.AlignVCenter
 
         Image {
@@ -26,8 +30,6 @@ ItemDelegate {
 
             sourceSize.height: iconSize
             sourceSize.width: iconSize
-
-            Layout.leftMargin: margin
         }
 
         Label {
@@ -36,7 +38,6 @@ ItemDelegate {
             text: name
             font.weight: Font.Medium
 
-            Layout.rightMargin: margin
             Layout.fillWidth: true
         }
     }

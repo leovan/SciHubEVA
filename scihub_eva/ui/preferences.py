@@ -96,8 +96,7 @@ class UIPreferences(QObject):
         self.set_system_language.emit(
             Preferences.get_or_default(SYSTEM_LANGUAGE_KEY, SYSTEM_LANGUAGE))
         self.set_system_theme.emit(
-            QT_QUICK_CONTROLS2_CONFIG.get_or_default(
-                'Material', 'Theme', SYSTEM_THEME_DEFAULT))
+            Preferences.get_or_default(SYSTEM_THEME_KEY, SYSTEM_THEME_DEFAULT))
         self.set_file_filename_prefix_format.emit(
             Preferences.get_or_default(
                 FILE_FILENAME_PREFIX_FORMAT_KEY,
@@ -168,7 +167,7 @@ class UIPreferences(QObject):
 
     @Slot(str)
     def save_system_theme(self, theme):
-        QT_QUICK_CONTROLS2_CONFIG.set('Material', 'Theme', theme)
+        Preferences.set(SYSTEM_THEME_KEY, theme)
 
     @Slot(str)
     def save_file_filename_prefix_format(self, filename_prefix_format):

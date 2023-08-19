@@ -10,7 +10,7 @@ import QtQuick.Window
 import "." as UI
 import "./elements" as UIElements
 
-Window {
+ApplicationWindow {
     id: applicationWindowPreferences
     title: qsTr("Preferences")
 
@@ -204,25 +204,25 @@ Window {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
 
-                Layout.minimumWidth: 120
-                Layout.maximumWidth: 120
+                Layout.minimumWidth: 140
+                Layout.maximumWidth: 160
 
                 ListModel {
                     id: listModelPreferencesTools
 
                     ListElement {
-                        property string name: qsTr("System")
-                        property string iconSource: "qrc:/images/icons/monitor.svg"
+                        property string name: qsTr("Appearance")
+                        property string iconSource: "qrc:/images/icons/appearance.svg"
                     }
 
                     ListElement {
                         property string name: qsTr("File")
-                        property string iconSource: "qrc:/images/icons/edit_file.svg"
+                        property string iconSource: "qrc:/images/icons/file.svg"
                     }
 
                     ListElement {
                         property string name: qsTr("Network")
-                        property string iconSource: "qrc:/images/icons/ethernet_on.svg"
+                        property string iconSource: "qrc:/images/icons/network.svg"
                     }
                 }
 
@@ -272,7 +272,7 @@ Window {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
 
-                Layout.minimumWidth: 480
+                Layout.minimumWidth: 500
                 Layout.minimumHeight: 400
 
                 Item {
@@ -284,14 +284,19 @@ Window {
                         anchors.fill: parent
 
                         ColumnLayout {
-                            spacing: margin
                             width: Math.max(implicitWidth, scrollViewPreferencesSystem.width)
 
-                            RowLayout {
+                            GridLayout {
                                 Layout.fillHeight: true
                                 Layout.fillWidth: true
 
+                                rows: 2
+                                columns: 2
+                                rowSpacing: margin
+
                                 Label {
+                                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+
                                     text: qsTr("Language: ")
                                 }
 
@@ -311,13 +316,10 @@ Window {
                                         { text: "Português", value: "pt_PT" }
                                     ]
                                 }
-                            }
-
-                            RowLayout {
-                                Layout.fillHeight: true
-                                Layout.fillWidth: true
 
                                 Label {
+                                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+
                                     text: qsTr("Theme: ")
                                 }
 
@@ -351,7 +353,7 @@ Window {
                                 Image {
                                     Layout.alignment: Qt.AlignLeft | Qt.AlignTop
 
-                                    source: "qrc:/images/icons/info.svg"
+                                    source: "qrc:/images/icons/warning.svg"
                                     sourceSize.height: labelAttention.font.pointSize * 1.6
                                     sourceSize.width: labelAttention.font.pointSize * 1.6
                                 }
@@ -374,27 +376,29 @@ Window {
                         anchors.fill: parent
 
                         ColumnLayout {
-                            spacing: margin
                             width: Math.max(implicitWidth, scrollViewPreferencesFile.width)
 
-                            RowLayout {
+                            GridLayout {
                                 Layout.fillHeight: true
                                 Layout.fillWidth: true
 
+                                rows: 3
+                                columns: 2
+                                rowSpacing: margin
+
                                 Label {
+                                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+
                                     text: qsTr("Overwrite Existing File: ")
                                 }
 
                                 Switch {
                                     id: switchPreferencesFileOverwrite
                                 }
-                            }
-
-                            RowLayout {
-                                Layout.fillHeight: true
-                                Layout.fillWidth: true
 
                                 Label {
+                                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+
                                     text: qsTr("Filename Prefix Format: ")
                                 }
 
@@ -405,16 +409,11 @@ Window {
 
                                     selectByMouse: true
                                 }
-                            }
-
-                            RowLayout {
-                                Layout.fillHeight: true
-                                Layout.fillWidth: true
 
                                 Label {
-                                    text: qsTr("Supported Keywords: ")
+                                    Layout.alignment: Qt.AlignTop | Qt.AlignRight
 
-                                    Layout.alignment: Qt.AlignTop
+                                    text: qsTr("Supported Keywords: ")
                                 }
 
                                 ColumnLayout {
@@ -448,192 +447,213 @@ Window {
                         anchors.fill: parent
 
                         ColumnLayout {
-                            spacing: margin
                             width: Math.max(implicitWidth, scrollViewPreferencesNetwork.width)
 
-                            RowLayout {
+                            GridLayout {
                                 Layout.fillHeight: true
                                 Layout.fillWidth: true
 
+                                rows: 7
+                                columns: 2
+                                rowSpacing: margin
+
                                 Label {
+                                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+
                                     text: qsTr("SciHub URL: ")
                                 }
 
-                                ComboBox {
-                                    id: comboBoxPreferencesNetworkSciHubURL
-
+                                RowLayout {
+                                    Layout.fillHeight: true
                                     Layout.fillWidth: true
-                                }
 
-                                RoundButton {
-                                    id: roundButtonPreferencesNetworkSciHubURLAdd
-                                    text: "+"
+                                    ComboBox {
+                                        id: comboBoxPreferencesNetworkSciHubURL
 
-                                    onClicked: {
-                                        showUIAddSciHubURL()
+                                        Layout.fillWidth: true
                                     }
-                                }
 
-                                RoundButton {
-                                    id: roundButtonPreferencesNetworkSciHubURLRemove
-                                    text: "-"
+                                    RoundButton {
+                                        id: roundButtonPreferencesNetworkSciHubURLAdd
+                                        text: "+"
 
-                                    onClicked: {
-                                        if (comboBoxPreferencesNetworkSciHubURL.count <= 1) {
-                                            dialogPreferencesMessage.messageType = "error"
-                                            dialogPreferencesMessage.message = qsTr("Cannot remove the last Sci-Hub URL!")
-                                            dialogPreferencesMessage.open()
-                                        } else {
-                                            var message = qsTr("Delete Sci-Hub URL: ") + comboBoxPreferencesNetworkSciHubURL.currentText + " ?"
-                                            dialogPreferencesRemoveSciHubURLConfirmMessage.messageType = "question"
-                                            dialogPreferencesRemoveSciHubURLConfirmMessage.message = message
-                                            dialogPreferencesRemoveSciHubURLConfirmMessage.open()
+                                        onClicked: {
+                                            showUIAddSciHubURL()
+                                        }
+                                    }
+
+                                    RoundButton {
+                                        id: roundButtonPreferencesNetworkSciHubURLRemove
+                                        text: "-"
+
+                                        onClicked: {
+                                            if (comboBoxPreferencesNetworkSciHubURL.count <= 1) {
+                                                dialogPreferencesMessage.messageType = "error"
+                                                dialogPreferencesMessage.message = qsTr("Cannot remove the last Sci-Hub URL!")
+                                                dialogPreferencesMessage.open()
+                                            } else {
+                                                var message = qsTr("Delete Sci-Hub URL: ") + comboBoxPreferencesNetworkSciHubURL.currentText + " ?"
+                                                dialogPreferencesRemoveSciHubURLConfirmMessage.messageType = "question"
+                                                dialogPreferencesRemoveSciHubURLConfirmMessage.message = message
+                                                dialogPreferencesRemoveSciHubURLConfirmMessage.open()
+                                            }
                                         }
                                     }
                                 }
-                            }
-
-                            RowLayout {
-                                Layout.fillHeight: true
-                                Layout.fillWidth: true
-
 
                                 Label {
+                                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+
                                     text: qsTr("Timeout: ")
                                 }
 
-                                TextField {
-                                    id: textFieldPreferencesNetworkTimeout
-
+                                RowLayout {
+                                    Layout.fillHeight: true
                                     Layout.fillWidth: true
 
-                                    horizontalAlignment: Text.AlignHCenter
-                                    selectByMouse: true
-                                    validator: RegularExpressionValidator {
-                                        regularExpression: /[0-9]+/
+                                    TextField {
+                                        id: textFieldPreferencesNetworkTimeout
+
+                                        Layout.fillWidth: true
+
+                                        horizontalAlignment: Text.AlignHCenter
+                                        selectByMouse: true
+                                        validator: RegularExpressionValidator {
+                                            regularExpression: /[0-9]+/
+                                        }
+                                    }
+
+                                    Label {
+                                        text: "ms"
+                                    }
+
+                                    ToolSeparator {}
+
+                                    Label {
+                                        text: qsTr("Retry Times: ")
+                                    }
+
+                                    TextField {
+                                        id: textFieldPreferencesNetworkRetryTimes
+
+                                        Layout.fillWidth: true
+
+                                        horizontalAlignment: Text.AlignHCenter
+                                        selectByMouse: true
+                                        validator: RegularExpressionValidator {
+                                            regularExpression: /[0-9]+/
+                                        }
                                     }
                                 }
 
                                 Label {
-                                    text: "ms"
+                                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+
+                                    text: qsTr("Enable Proxy: ")
                                 }
 
-                                ToolSeparator {}
-
-                                Label {
-                                    text: qsTr("Retry Times: ")
-                                }
-
-                                TextField {
-                                    id: textFieldPreferencesNetworkRetryTimes
-
+                                RowLayout {
+                                    Layout.fillHeight: true
                                     Layout.fillWidth: true
 
-                                    horizontalAlignment: Text.AlignHCenter
-                                    selectByMouse: true
-                                    validator: RegularExpressionValidator {
-                                        regularExpression: /[0-9]+/
+                                    Switch {
+                                        id: switchPreferencesNetworkEnableProxy
+                                    }
+
+                                    ToolSeparator {}
+
+                                    Label {
+                                        text: qsTr("Proxy Type: ")
+                                    }
+
+                                    RadioButton {
+                                        id: radioButtonPreferencesNetworkProxyTypeHTTP
+                                        text: "HTTP"
+                                    }
+
+                                    RadioButton {
+                                        id: radioButtonPreferencesNetworkProxyTypeSocks5
+                                        text: "SOCKS5"
                                     }
                                 }
-                            }
-
-                            RowLayout {
-                                Layout.fillHeight: true
-                                Layout.fillWidth: true
 
                                 Label {
-                                    text: qsTr("Enable Proxy")
-                                }
+                                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
 
-                                Switch {
-                                    id: switchPreferencesNetworkEnableProxy
-                                }
-
-                                ToolSeparator {}
-
-                                Label {
-                                    text: qsTr("Proxy Type: ")
-                                }
-
-                                RadioButton {
-                                    id: radioButtonPreferencesNetworkProxyTypeHTTP
-                                    text: "HTTP"
-                                }
-
-                                RadioButton {
-                                    id: radioButtonPreferencesNetworkProxyTypeSocks5
-                                    text: "SOCKS5"
-                                }
-                            }
-
-                            RowLayout {
-                                Layout.fillHeight: true
-                                Layout.fillWidth: true
-
-                                Label {
                                     text: qsTr("Proxy Host: ")
                                 }
 
-                                TextField {
-                                    id: textFieldPreferencesNetworkProxyHost
-
+                                RowLayout {
+                                    Layout.fillHeight: true
                                     Layout.fillWidth: true
 
-                                    selectByMouse: true
-                                }
-                            }
+                                    TextField {
+                                        id: textFieldPreferencesNetworkProxyHost
 
-                            RowLayout {
-                                Layout.fillHeight: true
-                                Layout.fillWidth: true
+                                        Layout.fillWidth: true
+
+                                        selectByMouse: true
+                                    }
+                                }
 
                                 Label {
+                                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+
                                     text: qsTr("Proxy Port: ")
                                 }
 
-                                TextField {
-                                    id: textFieldPreferencesNetworkProxyPort
-
+                                RowLayout {
+                                    Layout.fillHeight: true
                                     Layout.fillWidth: true
 
-                                    selectByMouse: true
-                                    validator: RegularExpressionValidator {
-                                        regularExpression: /[0-9]+/
+                                    TextField {
+                                        id: textFieldPreferencesNetworkProxyPort
+
+                                        Layout.fillWidth: true
+
+                                        selectByMouse: true
+                                        validator: RegularExpressionValidator {
+                                            regularExpression: /[0-9]+/
+                                        }
                                     }
                                 }
-                            }
-
-                            RowLayout {
-                                Layout.fillHeight: true
-                                Layout.fillWidth: true
 
                                 Label {
+                                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+
                                     text: qsTr("Proxy Username: ")
                                 }
 
-                                TextField {
-                                    id: textFieldPreferencesNetworkProxyUsername
-
+                                RowLayout {
+                                    Layout.fillHeight: true
                                     Layout.fillWidth: true
 
-                                    selectByMouse: true
-                                }
-                            }
+                                    TextField {
+                                        id: textFieldPreferencesNetworkProxyUsername
 
-                            RowLayout {
-                                Layout.fillHeight: true
-                                Layout.fillWidth: true
+                                        Layout.fillWidth: true
+
+                                        selectByMouse: true
+                                    }
+                                }
 
                                 Label {
+                                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+
                                     text: qsTr("Proxy Password: ")
                                 }
 
-                                TextField {
-                                    id: textFieldPreferencesNetworkProxyPassword
-
+                                RowLayout {
+                                    Layout.fillHeight: true
                                     Layout.fillWidth: true
 
-                                    echoMode: TextInput.Password
+                                    TextField {
+                                        id: textFieldPreferencesNetworkProxyPassword
+
+                                        Layout.fillWidth: true
+
+                                        echoMode: TextInput.Password
+                                    }
                                 }
                             }
                         }

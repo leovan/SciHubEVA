@@ -1,7 +1,7 @@
 name: Build latest version
 on: [push]
 jobs:
-  build-macos-x64:
+  build-macos-x86_64:
     runs-on: macOS-latest
     steps:
       - name: Check out code
@@ -17,17 +17,17 @@ jobs:
 
       - name: Build and package
         run: |
-          chmod +x ./building/build_macos_x64.sh
-          ./building/build_macos_x64.sh
+          chmod +x ./building/build_macos.sh
+          ./building/build_macos.sh x86_64
         shell: bash
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: SciHubEVA-macOS-x64-latest
-          path: dist-macOS-x64/SciHubEVA-x64-latest.dmg
+          name: SciHubEVA-macOS-x86_64-latest
+          path: dist-macOS-x86_64/SciHubEVA-x86_64-latest.dmg
 
-  build-windows-x64:
+  build-windows-x86_64:
     runs-on: windows-latest
     steps:
       - name: Check out code
@@ -39,11 +39,46 @@ jobs:
           python-version: '3.10'
 
       - name: Build and package
-        run: ./building/build_windows_x64.ps1
+        run: ./building/build_windows.ps1 x86_64
         shell: powershell
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: SciHubEVA-Windows-x64-latest
-          path: dist-Windows-x64/SciHubEVA-x64-latest.exe
+          name: SciHubEVA-Windows-x86_64-latest
+          path: dist-Windows-x86_64/SciHubEVA-x86_64-latest.exe
+
+  build-linux-x86_64:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install system packages
+        run: |
+          sudo apt update
+          sudo apt install -y curl librsvg2-bin libfuse2 libgl1-mesa-dev libxcb* libxau-dev liblzma-dev libegl-dev
+
+      - name: Install appimagetool
+        run: |
+          mkdir -p $HOME/.local/bin
+          curl -L https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -o $HOME/.local/bin/appimagetool-x86_64.AppImage
+          chmod +x $HOME/.local/bin/appimagetool-x86_64.AppImage
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Build and package
+        run: |
+          chmod +x ./building/build_linux.sh
+          ./building/build_linux.sh x86_64
+        shell: bash
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: SciHubEVA-Linux-x86_64-latest
+          path: dist-Linux-x86_64/SciHubEVA-x86_64-latest.AppImage

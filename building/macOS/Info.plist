@@ -5,23 +5,23 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleDisplayName</key>
-    <string>SciHubEVA</string>
+    <string>Sci-Hub EVA</string>
     <key>CFBundleExecutable</key>
-    <string>MacOS/SciHubEVA</string>
+    <string>MacOS/Sci-Hub EVA</string>
     <key>CFBundleShortVersionString</key>
-    <string>6.1.0</string>
+    <string>6.2.0</string>
     <key>LSBackgroundOnly</key>
     <string>0</string>
     <key>CFBundleName</key>
-    <string>SciHubEVA</string>
+    <string>Sci-Hub EVA</string>
     <key>CFBundleIdentifier</key>
-    <string>SciHubEVA</string>
+    <string>tech.leovan.SciHubEVA</string>
     <key>CFBundleIconFile</key>
     <string>SciHubEVA.icns</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>NSHumanReadableCopyright</key>
-    <string>Copyright 2018-2022 Leo Van</string>
+    <string>Copyright 2018-2023 Leo Van</string>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
     <key>NSHighResolutionCapable</key>

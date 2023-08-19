@@ -38,16 +38,16 @@ Dialog {
                 source: {
                     switch (messageType.toLowerCase()) {
                     case "question":
-                        "qrc:/images/icons/help.svg"
+                        "qrc:/images/icons/question.svg"
                         break
                     case "warn":
-                        "qrc:/images/icons/box_important.svg"
+                        "qrc:/images/icons/warning.svg"
                         break
                     case "error":
-                        "qrc:/images/icons/cancel.svg"
+                        "qrc:/images/icons/error.svg"
                         break
                     default:
-                        "qrc:/images/icons/info.svg"
+                        "qrc:/images/icons/information.svg"
                         break
                     }
                 }

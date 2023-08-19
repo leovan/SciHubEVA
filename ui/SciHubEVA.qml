@@ -198,7 +198,7 @@ ApplicationWindow {
 
             UIElements.IconButton {
                 id: buttonAbout
-                iconSource: "qrc:/images/icons/info.svg"
+                iconSource: "qrc:/images/icons/information.svg"
 
                 onClicked: dialogAbout.open()
             }
@@ -246,7 +246,7 @@ ApplicationWindow {
 
             UIElements.IconButton {
                 id: buttonPreferences
-                iconSource: "qrc:/images/icons/settings.svg"
+                iconSource: "qrc:/images/icons/preferences.svg"
 
                 onClicked: {
                     showUIPreference()

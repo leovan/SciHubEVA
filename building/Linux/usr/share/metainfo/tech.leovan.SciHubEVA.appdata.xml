@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2018-2023 Leo Van -->
+<component type="desktop-application">
+  <id>tech.leovan.SciHubEVA</id>
+
+  <name>Sci-Hub EVA</name>
+  <summary>A cross-platform Sci-Hub GUI application powered by Python and Qt</summary>
+  <summary xml:lang="zh">一个由 Python 和 Qt 驱动的跨平台的 Sci-Hub GUI 程序</summary>
+  <developer_name>Leo Van</developer_name>
+  <url type="homepage">https://github.com/leovan/SciHubEVA</url>
+
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+
+  <description>
+    <p>
+      Sci-Hub EVA is a cross-platform Sci-Hub GUI application powered by Python and Qt.
+    </p>
+    <p xml:lang="zh">
+      Sci-Hub EVA 一个由 Python 和 Qt 驱动的跨平台的 Sci-Hub GUI 程序。
+    </p>
+  </description>
+
+  <launchable type="desktop-id">tech.leovan.SciHubEVA.desktop</launchable>
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/leovan/SciHubEVA/main/docs/images/scihub-eva-application-linux-en-light-theme.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/leovan/SciHubEVA/main/docs/images/scihub-eva-application-linux-en-dark-theme.png</image>
+    </screenshot>
+  </screenshots>
+</component>

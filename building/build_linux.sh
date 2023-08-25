@@ -24,6 +24,7 @@ pyinstaller app.py \
   --distpath "dist-Linux-${arch}" \
   --hidden-import "socks" \
   --add-data "LICENSE:." \
+  --add-data "building/Linux/qtquickcontrols2.conf:confs" \
   --add-data "building/Linux/SciHubEVA-icon.png:images" \
   --add-data "i18n/*.qm:i18n" \
   --name "SciHubEVA" \

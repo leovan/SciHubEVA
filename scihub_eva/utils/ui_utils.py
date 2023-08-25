@@ -5,6 +5,7 @@ import darkdetect
 
 from scihub_eva.globals.preferences import *
 from scihub_eva.utils.sys_utils import *
+from scihub_eva.utils.path_utils import *
 from scihub_eva.utils.preferences_utils import *
 
 
@@ -34,12 +35,13 @@ def is_app_dark_theme():
 
 
 def set_ui_env():
-    os.environ['QT_QUICK_CONTROLS_STYLE'] = 'Material'
+    qtquickcontrols2_conf_path = CONFS_DIR / 'qtquickcontrols2.conf'
+    if qtquickcontrols2_conf_path.resolve().exists():
+        os.environ['QT_QUICK_CONTROLS_CONF'] = \
+            qtquickcontrols2_conf_path.resolve().as_posix()
+
     os.environ['QT_QUICK_CONTROLS_MATERIAL_THEME'] = \
         Preferences.get_or_default(SYSTEM_THEME_KEY, SYSTEM_THEME_DEFAULT)
-    os.environ['QT_QUICK_CONTROLS_MATERIAL_VARIANT'] = 'Dense'
-    os.environ['QT_QUICK_CONTROLS_MATERIAL_ACCENT'] = 'DeepPurple'
-    os.environ['QT_QUICK_CONTROLS_MATERIAL_PRIMARY'] = 'DeepPurple'
 
     if is_app_dark_theme():
         os.environ['QT_QUICK_CONTROLS_MATERIAL_BACKGROUND'] = '#3F3F3F'

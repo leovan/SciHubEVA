@@ -33,6 +33,7 @@ pyinstaller app.py `
   --distpath "dist-Windows-$($arch)" `
   --hidden-import "socks" `
   --add-data "LICENSE;." `
+  --add-data "building/Windows/qtquickcontrols2.conf;confs" `
   --add-data "building/Windows/SciHubEVA-icon.png;images" `
   --add-data "i18n/*.qm;i18n" `
   --name "SciHubEVA" `

@@ -10,7 +10,7 @@ from scihub_eva.utils.path_utils import *
 DEFAULT_LOGGER = logging.getLogger('default')
 DEFAULT_LOGGER.setLevel(logging.INFO)
 
-DEFAULT_LOG_DIRECTORY = logs_dir()
+DEFAULT_LOG_DIRECTORY = LOGS_DIR
 DEFAULT_LOG_FILE = DEFAULT_LOG_DIRECTORY / 'SciHubEVA.log'
 DEFAULT_LOG_HANDLER = TimedRotatingFileHandler(
     DEFAULT_LOG_FILE.resolve().as_posix(), when='d', encoding='utf-8')

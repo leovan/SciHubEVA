@@ -21,16 +21,13 @@ from scihub_eva.ui.scihub_eva import UISciHubEVA
 def main():
     multiprocessing.freeze_support()
 
-    app_path = os.path.abspath(os.path.dirname(sys.argv[0]))
-    argv = [app_path, '--ignore-gpu-blacklist', '--enable-gpu-rasterization']
-
     set_ui_env()
 
     QCoreApplication.setOrganizationName(ORGANIZATION_NAME)
     QCoreApplication.setOrganizationDomain(ORGANIZATION_DOMAIN)
     QCoreApplication.setApplicationName(APPLICATION_NAME)
 
-    app = QGuiApplication(argv)
+    app = QGuiApplication(sys.argv)
 
     lang = Preferences.get_or_default(SYSTEM_LANGUAGE_KEY, SYSTEM_LANGUAGE)
     lang_file_path = (I18N_DIR / 'SciHubEVA_{lang}.qm'.format(

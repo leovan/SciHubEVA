@@ -24,6 +24,7 @@ pyinstaller app.py \
   --distpath "dist-macOS-${arch}" \
   --hidden-import "socks" \
   --add-data "LICENSE:." \
+  --add-data "building/macOS/qtquickcontrols2.conf:confs" \
   --add-data "building/macOS/SciHubEVA-icon.png:images" \
   --add-data "i18n/*.qm:i18n" \
   --name "Sci-Hub EVA" \

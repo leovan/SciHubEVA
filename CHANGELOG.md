@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.2.1](https://github.com/leovan/SciHubEVA/compare/v6.2.1...v6.2.0) (2023-08-25)
+
+### Features
+
+- Optimize default font rendering on Windows.
+
 ## [6.2.0](https://github.com/leovan/SciHubEVA/compare/v6.2.0...v6.1.0) (2023-08-19)
 
 ### Features

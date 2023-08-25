@@ -104,7 +104,7 @@ Sometimes, you may need enter the captcha to continue.
 ### Windows
 
 - Install with [setup file](https://github.com/leovan/SciHubEVA/releases).
-- Install with scoop: `scoop bucket add extras && scoop install scihubeva`.
+- Install with scoop: `scoop bucket add scoopet https://github.com/ivaquero/scoopet && scoop install scihubeva`.
 
 ### Linux
 

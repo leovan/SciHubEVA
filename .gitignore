@@ -20,13 +20,12 @@ scihub_eva/resources.py
 
 # Others
 *.spec
+build-*/**
+confs/**
 design/**
 !design/*.psd
 !design/*.svg
-build-*/**
 dist-*/**
 i18n/*_zh_HK.ts
 i18n/*_zh_TW.ts
 *.bak
-building/macOS/scihubeva.rb
-building/Windows/scihubeva.json

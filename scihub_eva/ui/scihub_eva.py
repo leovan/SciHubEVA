@@ -3,7 +3,6 @@
 import os
 
 from collections import deque
-from logging import StreamHandler
 
 from PySide6.QtCore import QObject, Slot, Signal
 from PySide6.QtQml import QQmlApplicationEngine
@@ -13,23 +12,12 @@ from scihub_eva.globals.preferences import *
 from scihub_eva.utils.sys_utils import *
 from scihub_eva.utils.logging_utils import *
 from scihub_eva.utils.preferences_utils import *
+from scihub_eva.utils.network_utils import *
 from scihub_eva.utils.ui_utils import *
 from scihub_eva.utils.api_utils import *
 from scihub_eva.api.scihub_api import *
 from scihub_eva.ui.preferences import UIPreferences
 from scihub_eva.ui.captcha import UICaptcha
-
-
-class UISciHubEVALogHandler(StreamHandler):
-    def __init__(self, ui_scihub_eva):
-        super(UISciHubEVALogHandler, self).__init__()
-
-        self.formatter = DEFAULT_LOG_FORMATTER
-        self._ui_scihub_eva = ui_scihub_eva
-
-    def emit(self, record):
-        message = self.format(record)
-        self._ui_scihub_eva.append_log.emit(message)
 
 
 class UISciHubEVA(QObject):
@@ -58,9 +46,7 @@ class UISciHubEVA(QObject):
 
         self._ui_preferences = UIPreferences(self)
         self._ui_captcha = UICaptcha(self, self._logger)
-        self._captcha_query = None
 
-        self._query_input = None
         self._query_list = None
         self._query_list_length = 0
         self._captcha_img_file_path = None
@@ -68,6 +54,11 @@ class UISciHubEVA(QObject):
         self._save_to_dir = Preferences.get_or_default(
             FILE_SAVE_TO_DIR_KEY, FILE_SAVE_TO_DIR_DEFAULT)
         self.set_save_to_dir.emit(self._save_to_dir)
+
+        self._scihub_url = Preferences.get_or_default(
+            NETWORK_SCIHUB_URL_KEY, NETWORK_SCIHUB_URL_DEFAULT)
+        self._sess = get_session(self._scihub_url)
+        self._scihub_api = None
 
     @property
     def window(self):
@@ -100,8 +91,8 @@ class UISciHubEVA(QObject):
     @Slot()
     def show_ui_preference(self):
         self._ui_preferences.load_preferences()
-        center_window(self._ui_preferences.window, self._window)
         self._ui_preferences.show.emit()
+        center_window(self._ui_preferences.window, self._window)
 
     @Slot()
     def system_open_log_file(self):
@@ -112,14 +103,24 @@ class UISciHubEVA(QObject):
         open_directory(DEFAULT_LOG_DIRECTORY)
 
     @Slot(str)
-    def rampage(self, query_input):
-        self._query_input = query_input
+    def rampage(self, raw_query):
+        scihub_url = Preferences.get_or_default(
+            NETWORK_SCIHUB_URL_KEY, NETWORK_SCIHUB_URL_DEFAULT)
+        if self._scihub_url != scihub_url:
+            self._scihub_url = scihub_url
+            self._sess = get_session(self._scihub_url)
 
-        if os.path.exists(query_input):
-            if is_text_file(query_input):
+        self._scihub_api = SciHubAPI(
+            self._logger,
+            self.rampage_callback,
+            self._scihub_url,
+            self._sess)
+
+        if os.path.exists(raw_query):
+            if is_text_file(raw_query):
                 self._query_list = deque()
 
-                with open(query_input, 'rt') as f:
+                with open(raw_query, 'rt') as f:
                     for line in f:
                         cleaned_line = line.strip()
                         if cleaned_line != '':
@@ -131,12 +132,12 @@ class UISciHubEVA(QObject):
                 self._logger.error(LOGGER_SEP)
                 self._logger.error(
                     self.tr('Query list file is not a text file!'))
-        elif is_range_query(query_input):
-            self._query_list = deque(gen_range_query_list(query_input))
+        elif is_range_query(raw_query):
+            self._query_list = deque(gen_range_query_list(raw_query))
             self._query_list_length = len(self._query_list)
             self.rampage_query_list()
         else:
-            self.rampage_query(query_input)
+            self.rampage_query(raw_query)
 
     def rampage_query_list(self):
         if self._query_list and len(self._query_list) > 0:
@@ -148,28 +149,24 @@ class UISciHubEVA(QObject):
             self.rampage_query(self._query_list.popleft())
 
     def rampage_query(self, query):
-        scihub_api = SciHubAPI(
-            self._query_input,
-            query,
-            logger=self._logger,
-            callback=self.rampage_callback,
-            rampage_type=SciHubEVARampageType.ORIGINAL)
+        self._scihub_api = SciHubAPI(
+            self._logger,
+            self.rampage_callback,
+            self._scihub_url,
+            self._sess,
+            raw_query=query,
+            query=query,
+            rampage_type=SciHubAPIRampageType.RAW
+        )
+
         self.before_rampage.emit()
-        scihub_api.start()
+        self._scihub_api.start()
 
     def rampage_with_typed_captcha(self, captcha_answer):
+        self._scihub_api.captcha_answer = captcha_answer
         self.remove_captcha_img()
-
-        scihub_api = SciHubAPI(
-            self._query_input,
-            self._captcha_query,
-            logger=self._logger,
-            callback=self.rampage_callback,
-            rampage_type=SciHubEVARampageType.WITH_TYPED_CAPTCHA,
-            captcha_answer=captcha_answer)
-
         self.before_rampage.emit()
-        scihub_api.start()
+        self._scihub_api.start()
 
     def rampage_callback(self, res, err):
         if err == SciHubAPIError.BLOCKED_BY_CAPTCHA:
@@ -180,14 +177,18 @@ class UISciHubEVA(QObject):
             self.after_rampage.emit()
 
     def show_captcha(self, pdf_captcha_response):
-        self._captcha_query = pdf_captcha_response
+        self._scihub_api = SciHubAPI(
+            self._logger,
+            self.rampage_callback,
+            self._scihub_url,
+            self._sess,
+            raw_query=self._scihub_api.raw_query,
+            query=pdf_captcha_response,
+            rampage_type=SciHubAPIRampageType.WITH_CAPTCHA
+        )
 
-        scihub_api = SciHubAPI(
-            self._query_input,
-            None,
-            logger=self._logger)
-        _, captcha_img_url = scihub_api.get_captcha_info(pdf_captcha_response)
-        captcha_img_file_path = scihub_api.download_captcha_img(captcha_img_url)
+        _, captcha_img_url = self._scihub_api.get_captcha_info(pdf_captcha_response)
+        captcha_img_file_path = self._scihub_api.download_captcha_img(captcha_img_url)
         self._captcha_img_file_path = captcha_img_file_path.resolve().as_posix()
         captcha_img_local_uri = captcha_img_file_path.as_uri()
 

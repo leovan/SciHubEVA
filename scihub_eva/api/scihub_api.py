@@ -14,19 +14,17 @@ from PySide6.QtCore import QObject
 
 from scihub_eva.globals.preferences import *
 from scihub_eva.utils.preferences_utils import *
-from scihub_eva.utils.network_utils import *
 from scihub_eva.utils.logging_utils import *
 from scihub_eva.utils.api_utils import *
-from scihub_eva.utils.sys_utils import *
 
 
 @unique
-class SciHubEVARampageType(Enum):
-    # Original query
-    ORIGINAL = 0
+class SciHubAPIRampageType(Enum):
+    # Raw query
+    RAW = 0
 
-    # Query with typed captcha
-    WITH_TYPED_CAPTCHA = 1
+    # Query with captcha
+    WITH_CAPTCHA = 1
 
 
 @unique
@@ -47,32 +45,66 @@ class SciHubAPIError(Enum):
 class SciHubAPI(QObject, threading.Thread):
     def __init__(
             self,
-            query_input,
-            query,
             logger,
-            callback=None,
-            rampage_type=None,
-            **kwargs):
+            callback,
+            scihub_url,
+            sess,
+            raw_query=None,
+            query=None,
+            rampage_type=None
+    ):
         QObject.__init__(self)
         threading.Thread.__init__(self)
 
-        self._query_input = query_input
-        self._query = query
         self._logger = logger
         self._callback = callback
+
+        self._scihub_url = scihub_url
+        self._sess = sess
+        self._raw_query = raw_query
+        self._query = query
+        self._rampage_type = rampage_type
+        self._captcha_answer = None
+
+    def __del__(self):
+        self._sess.close()
+
+    @property
+    def raw_query(self):
+        return self._raw_query
+
+    @raw_query.setter
+    def raw_query(self, raw_query):
+        self._raw_query = raw_query
+
+    @property
+    def query(self):
+        return self._query
+
+    @query.setter
+    def query(self, query):
+        self._query = query
+
+    @property
+    def rampage_type(self):
+        return self._rampage_type
+
+    @rampage_type.setter
+    def rampage_type(self, rampage_type):
         self._rampage_type = rampage_type
 
-        if 'captcha_answer' in kwargs:
-            self._captcha_answer = kwargs['captcha_answer']
+    @property
+    def captcha_answer(self):
+        return self._captcha_answer
 
-        self._sess = get_session()
+    @captcha_answer.setter
+    def captcha_answer(self, captcha_answer):
+        self._captcha_answer = captcha_answer
 
     def fetch_pdf_url(self, query):
-        scihub_url = Preferences.get_or_default(
-            NETWORK_SCIHUB_URL_KEY, NETWORK_SCIHUB_URL_DEFAULT)
         self._logger.info(
             self.tr('Using Sci-Hub URL: ') +
-            f'<a href="{scihub_url}">{scihub_url}</a>')
+            f'<a href="{self._scihub_url}">{self._scihub_url}</a>')
 
         query_type = guess_query_type(query)
         self._logger.info(self.tr('Query type: ') + query_type.upper())
@@ -85,7 +117,7 @@ class SciHubAPI(QObject, threading.Thread):
                 self._logger.info(self.tr('Fetching PDF URL ...'))
 
                 pdf_url_response = self._sess.post(
-                    scihub_url, data={'request': query}, verify=False,
+                    self._scihub_url, data={'request': query}, verify=False,
                     timeout=Preferences.get_or_default(
                         NETWORK_TIMEOUT_KEY,
                         NETWORK_RETRY_TIMES_DEFAULT,
@@ -251,10 +283,10 @@ class SciHubAPI(QObject, threading.Thread):
             pdf_name_formatter += '_' + str(round(time.time() * 1000000))
 
         pdf_metadata = get_pdf_metadata(pdf)
-        query_type = guess_query_type(self._query_input)
+        query_type = guess_query_type(self._raw_query)
 
         if query_type in ['doi', 'pmid']:
-            pdf_metadata['id'] = self._query_input
+            pdf_metadata['id'] = self._raw_query
         else:
             for patten in ['_{id}', '{id}_', '{id}']:
                 pdf_name_formatter = pdf_name_formatter.replace(patten, '')
@@ -279,7 +311,7 @@ class SciHubAPI(QObject, threading.Thread):
         self._logger.info(self.tr('Saved PDF as: ') + pdf_link)
 
     def rampage(self, query, rampage_type):
-        if rampage_type == SciHubEVARampageType.ORIGINAL:
+        if rampage_type == SciHubAPIRampageType.RAW:
             self._logger.info(LOGGER_SEP)
             self._logger.info(self.tr('Dealing with query: ') + query)
 
@@ -298,7 +330,7 @@ class SciHubAPI(QObject, threading.Thread):
             # Save PDF
             filename = urlparse(pdf_url).path[1:].split('/')[-1]
             self.save_pdf(pdf, filename)
-        elif rampage_type == SciHubEVARampageType.WITH_TYPED_CAPTCHA:
+        elif rampage_type == SciHubAPIRampageType.WITH_CAPTCHA:
             # Fetch PDF with Captcha
             pdf, err = self.fetch_pdf_with_captcha(query)
             if err == SciHubAPIError.WRONG_CAPTCHA:
@@ -318,7 +350,7 @@ class SciHubAPI(QObject, threading.Thread):
 
 
 __all__ = [
-    'SciHubEVARampageType',
+    'SciHubAPIRampageType',
     'SciHubAPIError',
     'SciHubAPI'
 ]

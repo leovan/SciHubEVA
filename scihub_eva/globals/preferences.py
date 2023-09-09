@@ -33,6 +33,14 @@ NETWORK_TIMEOUT_DEFAULT = 3000
 NETWORK_RETRY_TIMES_KEY = 'Network/RetryTimes'
 NETWORK_RETRY_TIMES_DEFAULT = 3
 
+NETWORK_USER_AGENT_KEY = 'Network/UserAgent'
+NETWORK_USER_AGENT_DEFAULT = (
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ' +
+        'AppleWebKit/537.36 (KHTML, like Gecko) ' +
+        'Chrome/116.0.0.0 ' +
+        'Safari/537.36'
+)
+
 NETWORK_PROXY_ENABLE_KEY = 'Network/ProxyEnable'
 NETWORK_PROXY_ENABLE_DEFAULT = False
 

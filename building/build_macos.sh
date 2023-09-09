@@ -26,6 +26,7 @@ pyinstaller app.py \
   --add-data "LICENSE:." \
   --add-data "building/macOS/qtquickcontrols2.conf:confs" \
   --add-data "building/macOS/SciHubEVA-icon.png:images" \
+  --add-data "confs/ddos-guard-fake-mark.json:confs" \
   --add-data "i18n/*.qm:i18n" \
   --name "Sci-Hub EVA" \
   --icon "building/macOS/SciHubEVA.icns" \

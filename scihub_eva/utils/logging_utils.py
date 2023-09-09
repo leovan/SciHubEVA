@@ -25,8 +25,16 @@ DEFAULT_LOGGER.addHandler(DEFAULT_LOG_HANDLER)
 LOGGER_SEP = '–' * 30
 
 
-def format_log_message(message):
-    return DEFAULT_LOG_FORMATTER.format(message)
+class UISciHubEVALogHandler(logging.StreamHandler):
+    def __init__(self, ui_scihub_eva):
+        super(UISciHubEVALogHandler, self).__init__()
+
+        self.formatter = DEFAULT_LOG_FORMATTER
+        self._ui_scihub_eva = ui_scihub_eva
+
+    def emit(self, record):
+        message = self.format(record)
+        self._ui_scihub_eva.append_log.emit(message)
 
 
 __all__ = [
@@ -35,5 +43,6 @@ __all__ = [
     'DEFAULT_LOG_HANDLER',
     'DEFAULT_LOG_FORMATTER',
     'DEFAULT_LOGGER',
-    'LOGGER_SEP'
+    'LOGGER_SEP',
+    'UISciHubEVALogHandler'
 ]

@@ -14,15 +14,15 @@ DOI_PATTERN = re.compile(
     r'\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'])\S)+)\b')
 
 
-def is_range_query(query_input: str) -> bool:
-    if len(RANGE_QUERY_PATTERN.findall(query_input)) == 1:
+def is_range_query(raw_query: str) -> bool:
+    if len(RANGE_QUERY_PATTERN.findall(raw_query)) == 1:
         return True
     else:
         return False
 
 
-def gen_range_query_list(query_input: str) -> List[str]:
-    range_pattern = RANGE_QUERY_PATTERN.findall(query_input)[0]
+def gen_range_query_list(raw_query: str) -> List[str]:
+    range_pattern = RANGE_QUERY_PATTERN.findall(raw_query)[0]
     range_from_to = range_pattern.replace('{', '').replace('}', '').split('-')
     range_from = range_from_to[0]
     range_to = range_from_to[1]
@@ -36,7 +36,7 @@ def gen_range_query_list(query_input: str) -> List[str]:
         range_items = [
             str(i) for i in range(int(range_from), int(range_to) + 1)]
 
-    return [query_input.replace(range_pattern, range_item) for range_item in
+    return [raw_query.replace(range_pattern, range_item) for range_item in
             range_items]
 
 

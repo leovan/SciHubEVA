@@ -1,12 +1,19 @@
 # Changelog
 
-## [6.2.1](https://github.com/leovan/SciHubEVA/compare/v6.2.1...v6.2.0) (2023-08-25)
+## [6.2.2](https://github.com/leovan/SciHubEVA/compare/v6.2.1...v6.2.2) (2023-09-09)
+
+### Features
+
+- Add DDos-Guard bypass (not fully tested).
+- Reuse network session to speed up downloading.
+
+## [6.2.1](https://github.com/leovan/SciHubEVA/compare/v6.2.0...v6.2.1) (2023-08-25)
 
 ### Features
 
 - Optimize default font rendering on Windows.
 
-## [6.2.0](https://github.com/leovan/SciHubEVA/compare/v6.2.0...v6.1.0) (2023-08-19)
+## [6.2.0](https://github.com/leovan/SciHubEVA/compare/v6.1.0...v6.2.0) (2023-08-19)
 
 ### Features
 
@@ -18,7 +25,7 @@
 
 - Fix error opening downloaded file link in log on different OS.
 
-## [6.1.0](https://github.com/leovan/SciHubEVA/compare/v6.1.0...v6.0.0) (2023-05-25)
+## [6.1.0](https://github.com/leovan/SciHubEVA/compare/v6.0.0...v6.1.0) (2023-05-25)
 
 ### Bug Fixes
 

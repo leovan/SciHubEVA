@@ -35,6 +35,7 @@ pyinstaller app.py `
   --add-data "LICENSE;." `
   --add-data "building/Windows/qtquickcontrols2.conf;confs" `
   --add-data "building/Windows/SciHubEVA-icon.png;images" `
+  --add-data "confs/ddos-guard-fake-mark.json;confs" `
   --add-data "i18n/*.qm;i18n" `
   --name "SciHubEVA" `
   --icon "building/Windows/SciHubEVA.ico" `

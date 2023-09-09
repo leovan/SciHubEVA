@@ -21,7 +21,7 @@ scihub_eva/resources.py
 # Others
 *.spec
 build-*/**
-confs/**
+confs/qtquickcontrols2.conf
 design/**
 !design/*.psd
 !design/*.svg

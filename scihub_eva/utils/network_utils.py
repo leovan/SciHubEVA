@@ -13,7 +13,7 @@ from scihub_eva.globals.preferences import *
 
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-    
+
 
 def get_adapter():
     retry_times = Preferences.get_or_default(
@@ -77,17 +77,17 @@ def ddos_guard_bypass(url, sess: Session):
     url = re.sub('/+$', '', url)
     check_resp = sess.get(url)
 
-    if (check_resp.status_code != 403
-            or check_resp.headers.get('server', None) != 'ddos-guard'):
-        return
-    else:
+    if (check_resp.status_code == 403
+            or check_resp.headers.get('server', '').lower() == 'ddos-guard'):
         set_cookies(sess, check_resp)
+    else:
+        return
 
     guard_resp = sess.get(f'{url}/.well-known/ddos-guard/check?context=free_splash')
     if guard_resp.status_code != 200:
         return
     else:
-        set_cookies(sess, check_resp)
+        set_cookies(sess, guard_resp)
 
     with open((CONFS_DIR / 'ddos-guard-fake-mark.json').resolve().as_posix()) as f:
         fake_mark = json.load(f)
@@ -96,7 +96,7 @@ def ddos_guard_bypass(url, sess: Session):
     if mark_resp != 200:
         return
     else:
-        set_cookies(sess, check_resp)
+        set_cookies(sess, mark_resp)
 
     url = re.sub('/+$', '', url)
     check_resp = sess.get(url)

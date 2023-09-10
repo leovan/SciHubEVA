@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.2.3](https://github.com/leovan/SciHubEVA/compare/v6.2.2...v6.2.3) (2023-09-10)
+
+### Bug Fixes
+
+- Fix DDos-Guard bypass cookies handling.
+
 ## [6.2.2](https://github.com/leovan/SciHubEVA/compare/v6.2.1...v6.2.2) (2023-09-09)
 
 ### Features

@@ -120,12 +120,3 @@ See [`building/README.md`](building/README.md)
 ## Licenses
 
 The MIT License (MIT)
-
-## Acknowledgement
-
-Supported by JetBrains Free License Programs for Open Source Development.
-
-<div>
-  <a href="https://www.jetbrains.com/?from=SciHubEVA" target="_blank"><img src="docs/images/jetbrains.svg" width=100 height=100></a>
-  <a href="https://www.jetbrains.com/?from=SciHubEVA" target="_blank"><img src="docs/images/icon-pycharm.svg" width=100 height=100></a>
-</div>

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import gc
 
 from collections import deque
 
@@ -110,12 +111,6 @@ class UISciHubEVA(QObject):
             self._scihub_url = scihub_url
             self._sess = get_session(self._scihub_url)
 
-        self._scihub_api = SciHubAPI(
-            self._logger,
-            self.rampage_callback,
-            self._scihub_url,
-            self._sess)
-
         if os.path.exists(raw_query):
             if is_text_file(raw_query):
                 self._query_list = deque()
@@ -149,6 +144,9 @@ class UISciHubEVA(QObject):
             self.rampage_query(self._query_list.popleft())
 
     def rampage_query(self, query):
+        del self._scihub_api
+        gc.collect()
+
         self._scihub_api = SciHubAPI(
             self._logger,
             self.rampage_callback,
@@ -177,6 +175,9 @@ class UISciHubEVA(QObject):
             self.after_rampage.emit()
 
     def show_captcha(self, pdf_captcha_response):
+        del self._scihub_api
+        gc.collect()
+        
         self._scihub_api = SciHubAPI(
             self._logger,
             self.rampage_callback,

@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.2.4](https://github.com/leovan/SciHubEVA/compare/v6.2.3...v6.2.4) (2023-11-12)
+
+### Bug Fixes
+
+- Close PDFParser and manual gc to avoid memory leak.
+
 ## [6.2.3](https://github.com/leovan/SciHubEVA/compare/v6.2.2...v6.2.3) (2023-09-10)
 
 ### Bug Fixes

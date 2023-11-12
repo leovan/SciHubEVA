@@ -1,4 +1,4 @@
 docopt==0.6.2
-flask==2.3.3
+flask==3.0.0
 opencc-python-reimplemented==0.1.7
-pyinstaller==5.13.2
+pyinstaller==6.2.0

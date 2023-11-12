@@ -9,7 +9,7 @@
     <key>CFBundleExecutable</key>
     <string>MacOS/Sci-Hub EVA</string>
     <key>CFBundleShortVersionString</key>
-    <string>6.2.2</string>
+    <string>6.2.4</string>
     <key>LSBackgroundOnly</key>
     <string>0</string>
     <key>CFBundleName</key>

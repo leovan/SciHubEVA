@@ -59,6 +59,7 @@ def guess_query_type(query):
 def get_pdf_metadata(pdf) -> dict:
     temp_pdf_file = tempfile.TemporaryFile()
     temp_pdf_file.write(pdf)
+    temp_pdf_file.flush()
 
     metadata = {
         'author': 'UNKNOWN_AUTHOR',
@@ -87,7 +88,11 @@ def get_pdf_metadata(pdf) -> dict:
     except Exception as e:
         pass
 
-    temp_pdf_file.close()
+    if pdf_parser:
+        pdf_parser.close()
+
+    if temp_pdf_file:
+        temp_pdf_file.close()
 
     return metadata
 

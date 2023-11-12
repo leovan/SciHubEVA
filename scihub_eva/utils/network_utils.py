@@ -75,7 +75,11 @@ def set_cookies(sess: Session, resp: Response):
 
 def ddos_guard_bypass(url, sess: Session):
     url = re.sub('/+$', '', url)
-    check_resp = sess.get(url)
+
+    try:
+        check_resp = sess.get(url)
+    except Exception as e:
+        return
 
     if (check_resp.status_code == 403
             or check_resp.headers.get('server', '').lower() == 'ddos-guard'):

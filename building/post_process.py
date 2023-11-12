@@ -256,6 +256,8 @@ def post_process_linux(dist_folder):
 
     path_func = lambda lib: os.path.join(linux_app_path, '_internal', 'lib{}.so.6'.format(lib.replace('Qt', 'Qt6')))
     remove_files(USELESS_QT_LIBS, path_func)
+    path_func = lambda lib: os.path.join(linux_app_path, '_internal', 'PySide6', 'Qt', 'lib', 'lib{}.so.6'.format(lib.replace('Qt', 'Qt6')))
+    remove_files(USELESS_QT_LIBS, path_func)
     path_func = lambda lib: os.path.join(linux_app_path, '_internal', 'PySide6', 'Qt', 'qml', lib)
     remove_dirs(USELESS_QT_LIBS, path_func)
 

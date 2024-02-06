@@ -2,7 +2,7 @@
 
 ## macOS
 
-> **Note**  
+> [!NOTE]
 > Require macOS 10.15+, x86_64 and arm64 arch are tested.
 
 1. Create a python environment.
@@ -44,7 +44,7 @@
 
 ## Windows
 
-> **Note**  
+> [!NOTE]
 > Require Windows 10+, x86_64 arch is tested.
 
 1. See step 1 in [macOS](#macos).
@@ -61,7 +61,7 @@
 
 ## Linux
 
-> **Note**  
+> [!NOTE]
 > Require Ubuntu 20.04+, x86_64 arch is tested.
 
 1. See step 1 in [macOS](#macos).

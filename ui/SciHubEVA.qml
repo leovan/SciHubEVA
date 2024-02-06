@@ -176,7 +176,7 @@ ApplicationWindow {
                         dialogMessage.open()
                     } else if (textFieldQuery.text.trim() === "") {
                         dialogMessage.messageType = "error"
-                        dialogMessage.message = qsTr("Please specify query!")
+                        dialogMessage.message = qsTr("Please set the query!")
                         dialogMessage.open()
                     } else {
                         rampage(textFieldQuery.text.trim())

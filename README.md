@@ -110,7 +110,7 @@ Sometimes, you may need enter the captcha to continue.
 
 - Run the [AppImage file](https://github.com/leovan/SciHubEVA/releases). Using [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher) is recommended.
 
-> **Note**  
+> [!NOTE]
 > Tested only on Ubuntu 20.04 and Ubuntu 22.04.
 
 ## Building

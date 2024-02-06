@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.2.5](https://github.com/leovan/SciHubEVA/compare/v6.2.4...v6.2.5) (2024-02-06)
+
+### Tests
+
+- Add arm64 arch macOS Github Actions building.
+
 ## [6.2.4](https://github.com/leovan/SciHubEVA/compare/v6.2.3...v6.2.4) (2023-11-12)
 
 ### Bug Fixes

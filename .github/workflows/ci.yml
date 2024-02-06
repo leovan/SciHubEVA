@@ -1,8 +1,34 @@
 name: Build latest version
 on: [push]
 jobs:
+  build-macos-arm64:
+    runs-on: macos-14
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install create-dmg
+        run: brew install create-dmg
+
+      - name: Build and package
+        run: |
+          chmod +x ./building/build_macos.sh
+          ./building/build_macos.sh arm64
+        shell: bash
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: SciHubEVA-macOS-arm64-latest
+          path: dist-macOS-arm64/SciHubEVA-arm64-latest.dmg
+
   build-macos-x86_64:
-    runs-on: macOS-latest
+    runs-on: macos-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v3

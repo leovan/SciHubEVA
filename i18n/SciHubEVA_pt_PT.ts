@@ -275,8 +275,8 @@
         <translation>Por favor primeiro selecione aonde salvar！</translation>
     </message>
     <message>
-        <source>Please specify query!</source>
-        <translation>Por favor especifique o valor da consulta！</translation>
+        <source>Please set the query!</source>
+        <translation>Por favor defina a consulta！</translation>
     </message>
     <message>
         <source>Load</source>

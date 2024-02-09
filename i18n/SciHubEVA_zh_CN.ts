@@ -275,7 +275,7 @@
         <translation>请先选择保存路径！</translation>
     </message>
     <message>
-        <source>Please set query!</source>
+        <source>Please set the query!</source>
         <translation>请设置搜索内容！</translation>
     </message>
     <message>

@@ -120,3 +120,5 @@ See [`building/README.md`](building/README.md)
 ## Licenses
 
 The MIT License (MIT)
+
+Copyright &copy; 2018-2024, <a href="https://leovan.me" target="_blank">范叶亮 | Leo Van</a>

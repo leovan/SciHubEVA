@@ -213,7 +213,7 @@
     </message>
     <message>
         <source>Query type: </source>
-        <translation>搜索类型: </translation>
+        <translation>查询类型: </translation>
     </message>
     <message>
         <source>Fetching PDF URL ...</source>
@@ -245,7 +245,7 @@
     </message>
     <message>
         <source>Dealing with query: </source>
-        <translation>正在处理搜索: </translation>
+        <translation>正在处理查询: </translation>
     </message>
     <message>
         <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
@@ -260,11 +260,11 @@
     </message>
     <message>
         <source>Query: </source>
-        <translation>搜索: </translation>
+        <translation>查询: </translation>
     </message>
     <message>
         <source>URL, PMID, DOI, Title or Query List File</source>
-        <translation>URL, PMID, DOI, 标题或搜索列表文件</translation>
+        <translation>URL, PMID, DOI, 标题或查询列表文件</translation>
     </message>
     <message>
         <source>Rampage</source>
@@ -276,7 +276,7 @@
     </message>
     <message>
         <source>Please set the query!</source>
-        <translation>请设置搜索内容！</translation>
+        <translation>请设置查询内容！</translation>
     </message>
     <message>
         <source>Load</source>
@@ -299,12 +299,16 @@
         <translation>日志: </translation>
     </message>
     <message>
-        <source>Open Log File</source>
+        <source>Open log file</source>
         <translation>打开日志文件</translation>
     </message>
     <message>
-        <source>Open Log Directory</source>
+        <source>Open log directory</source>
         <translation>打开日志目录</translation>
+    </message>
+    <message>
+        <source>Export failed queries</source>
+        <translation>导出失败查询</translation>
     </message>
 </context>
 <context>
@@ -318,7 +322,7 @@
     <name>UISciHubEVA</name>
     <message>
         <source>Query list file is not a text file!</source>
-        <translation>搜索列表文件不是一个文本文件！</translation>
+        <translation>查询列表文件不是一个文本文件！</translation>
     </message>
     <message>
         <source>Dealing with {}/{} query ...</source>

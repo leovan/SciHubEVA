@@ -299,12 +299,16 @@
         <translation>Registros: </translation>
     </message>
     <message>
-        <source>Open Log File</source>
-        <translation>Abrir Ficheiro de Registro</translation>
+        <source>Open log file</source>
+        <translation>Abrir ficheiro de registro</translation>
     </message>
     <message>
-        <source>Open Log Directory</source>
-        <translation>Abrir Localização do Registro</translation>
+        <source>Open log directory</source>
+        <translation>Abrir localização do registro</translation>
+    </message>
+    <message>
+        <source>Export failed queries</source>
+        <translation>Exportar consultas com falha</translation>
     </message>
 </context>
 <context>

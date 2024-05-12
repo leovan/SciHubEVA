@@ -1,8 +1,8 @@
 darkdetect==0.8.0
-lxml==5.1.0
+lxml==5.2.1
 pathvalidate==3.2.0
 pdfminer.six==20231228
-PySide6==6.6.1
+PySide6==6.7.0
 PySocks==1.7.1
 requests==2.31.0
-urllib3==2.2.0
+urllib3==2.2.1

@@ -31,6 +31,7 @@ ApplicationWindow {
     signal showUIPreference()
     signal systemOpenLogFile()
     signal systemOpenLogDirectory()
+    signal exportFailedQueries(string path)
     signal rampage(string query)
 
     function setSaveToDir(directory) {
@@ -109,6 +110,28 @@ ApplicationWindow {
 
             textFieldSaveToDir.text = saveToURI
             openSaveToDir(saveToURI)
+        }
+    }
+
+    Platform.FileDialog {
+        id: fileDialogExportFailedQueries
+
+        fileMode: Platform.FileDialog.SaveFile
+        defaultSuffix: "txt"
+
+        onAccepted: {
+            var failedQueriesURI = fileDialogExportFailedQueries.file.toString()
+
+            switch (Qt.platform.os) {
+            case "windows":
+                failedQueriesURI = failedQueriesURI.replace(/^(file:\/{3})/, "")
+                break
+            default:
+                failedQueriesURI = failedQueriesURI.replace(/^(file:\/{2})/, "")
+                break
+            }
+
+            exportFailedQueries(failedQueriesURI)
         }
     }
 
@@ -308,13 +331,18 @@ ApplicationWindow {
                         id: menuLogs
 
                         Platform.MenuItem {
-                            text: qsTr("Open Log File")
+                            text: qsTr("Open log file")
                             onTriggered: systemOpenLogFile()
                         }
 
                         Platform.MenuItem {
-                            text: qsTr("Open Log Directory")
+                            text: qsTr("Open log directory")
                             onTriggered: systemOpenLogDirectory()
+                        }
+
+                        Platform.MenuItem {
+                            text: qsTr("Export failed queries")
+                            onTriggered: fileDialogExportFailedQueries.open()
                         }
                     }
                 }

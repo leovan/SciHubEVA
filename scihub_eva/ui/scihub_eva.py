@@ -51,6 +51,7 @@ class UISciHubEVA(QObject):
         self._query_list = None
         self._query_list_length = 0
         self._captcha_img_file_path = None
+        self._failed_queries = set()
 
         self._save_to_dir = Preferences.get_or_default(
             FILE_SAVE_TO_DIR_KEY, FILE_SAVE_TO_DIR_DEFAULT)
@@ -72,6 +73,7 @@ class UISciHubEVA(QObject):
         self._window.systemOpenLogFile.connect(self.system_open_log_file)
         self._window.systemOpenLogDirectory.connect(
             self.system_open_log_directory)
+        self._window.exportFailedQueries.connect(self.export_failed_queries)
         self._window.rampage.connect(self.rampage)
 
         self.set_save_to_dir.connect(self._window.setSaveToDir)
@@ -102,6 +104,14 @@ class UISciHubEVA(QObject):
     @Slot()
     def system_open_log_directory(self):
         open_directory(DEFAULT_LOG_DIRECTORY)
+
+    @Slot(str)
+    def export_failed_queries(self, path):
+        with open(path, 'wt') as f:
+            for failed_query in self._failed_queries:
+                f.write(failed_query + '\n')
+
+        self._failed_queries.clear()
 
     @Slot(str)
     def rampage(self, raw_query):
@@ -166,7 +176,14 @@ class UISciHubEVA(QObject):
         self.before_rampage.emit()
         self._scihub_api.start()
 
-    def rampage_callback(self, res, err):
+    def rampage_callback(self, raw_query, res, err):
+        if (err == SciHubAPIError.UNKNOWN or
+                err == SciHubAPIError.WRONG_CAPTCHA or
+                err == SciHubAPIError.NO_VALID_PDF):
+            self._failed_queries.add(raw_query)
+        elif err is None:
+            self._failed_queries.discard(raw_query)
+
         if err == SciHubAPIError.BLOCKED_BY_CAPTCHA:
             self.show_captcha(res)
         elif self._query_list:

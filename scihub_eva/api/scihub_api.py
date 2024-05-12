@@ -346,7 +346,7 @@ class SciHubAPI(QObject, threading.Thread):
 
     def run(self):
         res, err = self.rampage(self._query, self._rampage_type)
-        self._callback(res, err)
+        self._callback(self._raw_query, res, err)
 
 
 __all__ = [

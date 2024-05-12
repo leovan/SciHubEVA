@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.3.0](https://github.com/leovan/SciHubEVA/compare/v6.2.5...v6.3.0) (2024-05-12)
+
+### Features
+
+- Add failed queries exporting.
+
 ## [6.2.5](https://github.com/leovan/SciHubEVA/compare/v6.2.4...v6.2.5) (2024-02-06)
 
 ### Tests

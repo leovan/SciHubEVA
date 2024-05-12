@@ -22,7 +22,9 @@ Range pattern in query is supported, e.g. `00.000/{1-99}` will download `00.000/
 
 Also you can download with a query list file, in which each line represents a query. Click `Load` button to load the query list file.
 
-Right clicking the log area will popup menu, you can open the log file or log directory.
+Right clicking the `Logs` area will popup menu, you can open the log file or log directory and export failed queries.
+
+![](docs/images/scihub-eva-log-area-popup-menu-en.png)
 
 Click <img style="width: 24px; vertical-align: middle;" src="images/icons/information.svg"> will show the `About` dialog.
 

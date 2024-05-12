@@ -22,9 +22,9 @@ NETWORK_SCIHUB_URL_DEFAULT = 'https://www.sci-hub.se'
 
 NETWORK_SCIHUB_URLS_KEY = 'Network/SciHubURLs'
 NETWORK_SCIHUB_URLS_DEFAULT = [
-    'https://www.sci-hub.se',
-    'https://sci-hub.ren',
-    'https://www.sci-hub.ru',
+    'https://sci-hub.se',
+    'https://sci-hub.st',
+    'https://sci-hub.ru',
 ]
 
 NETWORK_TIMEOUT_KEY = 'Network/Timeout'
@@ -37,7 +37,7 @@ NETWORK_USER_AGENT_KEY = 'Network/UserAgent'
 NETWORK_USER_AGENT_DEFAULT = (
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ' +
         'AppleWebKit/537.36 (KHTML, like Gecko) ' +
-        'Chrome/121.0.0.0 ' +
+        'Chrome/124.0.0.0 ' +
         'Safari/537.36'
 )
 

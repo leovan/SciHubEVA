@@ -38,7 +38,7 @@ Dialog {
                       "<p>" + "<a href=\"https://github.com/leovan/SciHubEVA\">Sci-Hub EVA</a> " +
                       qsTr("is a cross-platform Sci-Hub GUI Application.") + "<br/>" +
                       "Powered By Python " + PYTHON_VERSION + " & Qt " + QT_VERSION + "</p>" +
-                      "<p>Copyright (c) 2018-2024 <a href=\"https://leovan.me\">" + qsTr("Leo Van") +
+                      "<p>Copyright (c) 2018-2025 <a href=\"https://leovan.me\">" + qsTr("Leo Van") +
                       "</a> The MIT License</p>"
 
                 Layout.fillWidth: true

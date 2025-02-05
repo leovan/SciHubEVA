@@ -5,10 +5,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -22,7 +22,7 @@ jobs:
         shell: bash
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: SciHubEVA-macOS-arm64-latest
           path: dist-macOS-arm64/SciHubEVA-arm64-latest.dmg
@@ -31,10 +31,10 @@ jobs:
     runs-on: macos-13
     steps:
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -48,7 +48,7 @@ jobs:
         shell: bash
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: SciHubEVA-macOS-x86_64-latest
           path: dist-macOS-x86_64/SciHubEVA-x86_64-latest.dmg
@@ -57,10 +57,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -69,26 +69,26 @@ jobs:
         shell: powershell
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: SciHubEVA-Windows-x86_64-latest
           path: dist-Windows-x86_64/SciHubEVA-x86_64-latest.exe
 
   build-linux-x86_64:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: '3.10'
 
       - name: Install system packages
         run: |
           sudo apt update
-          sudo apt install -y curl librsvg2-bin libfuse2 libgl1-mesa-dev libxcb* libxau-dev liblzma-dev libegl-dev
+          sudo apt install -y binutils curl librsvg2-bin libfuse2 libgl1-mesa-dev libxcb* libxau-dev liblzma-dev libegl-dev
 
       - name: Install appimagetool
         run: |
@@ -104,7 +104,7 @@ jobs:
         shell: bash
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: SciHubEVA-Linux-x86_64-latest
           path: dist-Linux-x86_64/SciHubEVA-x86_64-latest.AppImage

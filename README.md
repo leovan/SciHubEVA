@@ -113,7 +113,7 @@ Sometimes, you may need enter the captcha to continue.
 - Run the [AppImage file](https://github.com/leovan/SciHubEVA/releases). Using [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher) is recommended.
 
 > [!NOTE]
-> Tested only on Ubuntu 20.04 and Ubuntu 22.04.
+> Tested only on Ubuntu 22.04 and Ubuntu 24.04.
 
 ## Building
 
@@ -123,4 +123,4 @@ See [`building/README.md`](building/README.md)
 
 The MIT License (MIT)
 
-Copyright &copy; 2018-2024, <a href="https://leovan.me" target="_blank">范叶亮 | Leo Van</a>
+Copyright &copy; 2018-2025, <a href="https://leovan.me" target="_blank">范叶亮 | Leo Van</a>

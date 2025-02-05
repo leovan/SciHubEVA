@@ -2,7 +2,4 @@
 
 APP_DIR=$(dirname $0)
 
-export LD_LIBRARY_PATH=${APP_DIR}:$LD_LIBRARY_PATH
-export LD_PRELOAD="/lib/x86_64-linux-gnu/libstdc++.so.6"
-
 ${APP_DIR}/SciHubEVA

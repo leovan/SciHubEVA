@@ -24,8 +24,6 @@
      scihub_eva/api/*.py \
      scihub_eva/ui/*.py \
      -ts i18n/SciHubEVA_zh_CN.ts
-
-   # Do translations manually.
    ```
 
 4. Install [create-dmg](https://github.com/create-dmg/create-dmg).
@@ -62,7 +60,7 @@
 ## Linux
 
 > [!NOTE]
-> Require Ubuntu 20.04+, x86_64 arch is tested.
+> Require Ubuntu 22.04+, x86_64 arch is tested.
 
 1. See step 1 in [macOS](#macos).
 2. See step 2 in [macOS](#macos).
@@ -70,7 +68,7 @@
 4. Install system packages.
 
    ```shell
-   sudo apt install -y librsvg2-bin libfuse2 libgl1-mesa-dev libxcb* libxau-dev liblzma-dev libegl-dev
+   sudo apt install -y binutils librsvg2-bin libfuse2 libgl1-mesa-dev libxcb* libxau-dev liblzma-dev libegl-dev
    ```
 
 5. Install [appimagetool](https://appimage.github.io/appimagetool/) and make sure `appimagetool-x86_64.AppImage` is in your `PATH`.

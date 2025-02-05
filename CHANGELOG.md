@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.3.1](https://github.com/leovan/SciHubEVA/compare/v6.3.0...v6.3.1) (2025-02-05)
+
+### Bug Fixes
+
+- Fix building on Ubuntu.
+
 ## [6.3.0](https://github.com/leovan/SciHubEVA/compare/v6.2.5...v6.3.0) (2024-05-12)
 
 ### Features

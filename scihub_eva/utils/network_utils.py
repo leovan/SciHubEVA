@@ -1,37 +1,40 @@
-# -*- coding: utf-8 -*-
-
-import re
 import json
-import urllib3
+import re
 
+import urllib3
 from requests import Response, Session, cookies
 from requests.adapters import HTTPAdapter
 
-from scihub_eva.utils.preferences_utils import Preferences
-from scihub_eva.utils.path_utils import *
 from scihub_eva.globals.preferences import *
-
+from scihub_eva.utils.path_utils import *
+from scihub_eva.utils.preferences_utils import Preferences
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-def get_adapter():
+def get_adapter() -> HTTPAdapter:
     retry_times = Preferences.get_or_default(
-        NETWORK_RETRY_TIMES_KEY, NETWORK_RETRY_TIMES_DEFAULT, type=int)
+        NETWORK_RETRY_TIMES_KEY, NETWORK_RETRY_TIMES_DEFAULT, value_type=int
+    )
     return HTTPAdapter(max_retries=retry_times)
 
 
-def get_proxies():
+def get_proxies() -> dict[str, str]:
     proxy_type = Preferences.get_or_default(
-        NETWORK_PROXY_TYPE_KEY, NETWORK_PROXY_TYPE_DEFAULT)
+        NETWORK_PROXY_TYPE_KEY, NETWORK_PROXY_TYPE_DEFAULT
+    )
     proxy_host = Preferences.get_or_default(
-        NETWORK_PROXY_HOST_KEY, NETWORK_PROXY_HOST_DEFAULT)
+        NETWORK_PROXY_HOST_KEY, NETWORK_PROXY_HOST_DEFAULT
+    )
     proxy_port = Preferences.get_or_default(
-        NETWORK_PROXY_PORT_KEY, NETWORK_PROXY_PORT_DEFAULT)
+        NETWORK_PROXY_PORT_KEY, NETWORK_PROXY_PORT_DEFAULT
+    )
     proxy_username = Preferences.get_or_default(
-        NETWORK_PROXY_USERNAME_KEY, NETWORK_PROXY_USERNAME_DEFAULT)
+        NETWORK_PROXY_USERNAME_KEY, NETWORK_PROXY_USERNAME_DEFAULT
+    )
     proxy_password = Preferences.get_or_default(
-        NETWORK_PROXY_PASSWORD_KEY, NETWORK_PROXY_PASSWORD_DEFAULT)
+        NETWORK_PROXY_PASSWORD_KEY, NETWORK_PROXY_PASSWORD_DEFAULT
+    )
 
     proxy = proxy_type + '://'
 
@@ -52,10 +55,9 @@ def get_proxies():
     return {'http': proxy, 'https': proxy}
 
 
-def get_default_headers(ua):
+def get_default_headers(ua: str) -> dict[str, str]:
     return {
-        'User-Agent': Preferences.get_or_default(
-            NETWORK_USER_AGENT_KEY, NETWORK_USER_AGENT_DEFAULT),
+        'User-Agent': ua,
         'Accept': 'text/html',
         'Accept-Language': 'en-US',
         'Connection': 'keep-alive',
@@ -64,25 +66,27 @@ def get_default_headers(ua):
         'Sec-Fetch-Site': 'same-origin',
         'Sec-Fetch-User': '?1',
         'TE': 'trailers',
-        'DNT': '1'
+        'DNT': '1',
     }
 
 
-def set_cookies(sess: Session, resp: Response):
+def set_cookies(sess: Session, resp: Response) -> None:
     for k, v in resp.cookies.items():
         sess.cookies.set_cookie(cookies.create_cookie(k, v))
 
 
-def ddos_guard_bypass(url, sess: Session):
+def ddos_guard_bypass(url: str, sess: Session) -> None:
     url = re.sub('/+$', '', url)
 
     try:
         check_resp = sess.get(url)
-    except Exception as e:
+    except Exception:
         return
 
-    if (check_resp.status_code == 403
-            or check_resp.headers.get('server', '').lower() == 'ddos-guard'):
+    if (
+        check_resp.status_code == 403
+        or check_resp.headers.get('server', '').lower() == 'ddos-guard'
+    ):
         set_cookies(sess, check_resp)
     else:
         return
@@ -108,7 +112,7 @@ def ddos_guard_bypass(url, sess: Session):
         set_cookies(sess, check_resp)
 
 
-def get_session(scihub_url):
+def get_session(scihub_url: str) -> Session:
     sess = Session()
 
     adapter = get_adapter()
@@ -116,13 +120,13 @@ def get_session(scihub_url):
     sess.mount(prefix='https://', adapter=adapter)
 
     proxy_enabled = Preferences.get_or_default(
-        NETWORK_PROXY_ENABLE_KEY, NETWORK_PROXY_ENABLE_DEFAULT, type=bool)
+        NETWORK_PROXY_ENABLE_KEY, NETWORK_PROXY_ENABLE_DEFAULT, value_type=bool
+    )
 
     if proxy_enabled:
         sess.proxies = get_proxies()
 
-    ua = Preferences.get_or_default(
-        NETWORK_USER_AGENT_KEY, NETWORK_USER_AGENT_DEFAULT)
+    ua = Preferences.get_or_default(NETWORK_USER_AGENT_KEY, NETWORK_USER_AGENT_DEFAULT)
     sess.headers = get_default_headers(ua)
 
     ddos_guard_bypass(scihub_url, sess)
@@ -130,6 +134,4 @@ def get_session(scihub_url):
     return sess
 
 
-__all__ = [
-    'get_session'
-]
+__all__ = ['get_session']

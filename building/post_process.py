@@ -1,27 +1,17 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
-"""
-Post Process
-Usage:
-    post_process.py <dist-folder>
-    post_process.py (-h | --help)
-Options:
-    -h --help    Show this help
-"""
-
-import os
-import sys
 import glob
+import os
 import shutil
+import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir))
 
-from docopt import docopt
+from optparse import OptionParser
 from pathlib import Path
+from typing import Callable
 
 from scihub_eva.utils.sys_utils import *
-
 
 USELESS_QT_LIBS = [
     'Qt3D',
@@ -34,8 +24,10 @@ USELESS_QT_LIBS = [
     'Qt3DQuickAnimation',
     'Qt3DQuickExtras',
     'Qt3DQuickInput',
+    'Qt3DQuickLogic',
     'Qt3DQuickRender',
     'Qt3DQuickScene2D',
+    'Qt3DQuickScene3D',
     'Qt3DRender',
     'Qt5Compat',
     'QtBluetooth',
@@ -64,10 +56,13 @@ USELESS_QT_LIBS = [
     'QtQuick3DAssetUtils',
     'QtQuick3DEffects',
     'QtQuick3DHelpers',
+    'QtQuick3DHelpersImpl',
     'QtQuick3DParticleEffects',
     'QtQuick3DParticles',
     'QtQuick3DRuntimeRender',
+    'QtQuick3DSpatialAudio',
     'QtQuick3DUtils',
+    'QtQuick3DXr',
     'QtQuickTest',
     'QtQuickTimeline',
     'QtRemoteObjects',
@@ -87,6 +82,8 @@ USELESS_QT_LIBS = [
     'QtTextToSpeech',
     'QtUiTools',
     'QtVirtualKeyboard',
+    'QtVirtualKeyboardQml',
+    'QtVirtualKeyboardSettings',
     'QtWebChannel',
     'QtWebChannelQuick',
     'QtWebEngine',
@@ -146,48 +143,49 @@ USELESS_LIBS = [
     'tk',
 ]
 
-DIST_INFO_DIRS_SUFFIX = [
-    '.egg-info',
-    '.dist-info'
-]
+DIST_INFO_DIRS_SUFFIX = ['.egg-info', '.dist-info']
 
 
-def change_cwd():
+def change_cwd() -> None:
     cwd = os.getcwd()
 
     if os.path.split(cwd)[1] == 'building':
         os.chdir(os.path.join(cwd, os.pardir))
 
 
-def remove_files(files, path_func):
+def remove_files(files: list[str], path_func: Callable[[str], str]) -> None:
     for file in files:
         file_path = path_func(file)
         if os.path.isfile(file_path) or os.path.islink(file_path):
             os.remove(file_path)
 
 
-def remove_pattern_files(files_pattern, path_func, recursive=False):
+def remove_pattern_files(
+    files_pattern: list[str], path_func: Callable[[str], str], recursive: bool = False
+) -> None:
     for file_pattern in files_pattern:
         for file_path in glob.glob(path_func(file_pattern), recursive=recursive):
             if os.path.isfile(file_path) or os.path.islink(file_path):
                 os.remove(file_path)
 
 
-def remove_dirs(dirs, path_func):
+def remove_dirs(dirs: list[str], path_func: Callable[[str], str]) -> None:
     for dir_ in dirs:
         dir_path = path_func(dir_)
         if os.path.isdir(dir_path):
             shutil.rmtree(dir_path, ignore_errors=True)
 
 
-def remove_pattern_dirs(dirs_pattern, path_func, recursive=False):
+def remove_pattern_dirs(
+    dirs_pattern: list[str], path_func: Callable[[str], str], recursive: bool = False
+) -> None:
     for dir_pattern in dirs_pattern:
         for dir_path in glob.glob(path_func(dir_pattern), recursive=recursive):
             if os.path.isdir(dir_path):
                 shutil.rmtree(dir_path, ignore_errors=True)
 
 
-def remove_dead_links(dir_path):
+def remove_dead_links(dir_path: str) -> None:
     for root, dirs, files in os.walk(dir_path):
         for file in files:
             file_path = os.path.join(root, file)
@@ -197,92 +195,162 @@ def remove_dead_links(dir_path):
                     os.remove(file_path)
 
 
-def post_process_win(dist_folder):
+def post_process_win(dist_folder: str) -> None:
     windows_app_path = os.path.join(dist_folder, 'SciHubEVA')
 
-    path_func = lambda lib: os.path.join(windows_app_path, '_internal', 'PySide6', '{}.dll'.format(lib.replace('Qt', 'Qt6')))
+    path_func = lambda lib: os.path.join(
+        windows_app_path,
+        '_internal',
+        'PySide6',
+        '{}.dll'.format(lib.replace('Qt', 'Qt6')),
+    )
     remove_files(USELESS_QT_LIBS, path_func)
-    path_func = lambda lib: os.path.join(windows_app_path, '_internal', 'PySide6', 'qml', lib)
+    path_func = lambda lib: os.path.join(
+        windows_app_path, '_internal', 'PySide6', 'qml', lib
+    )
     remove_dirs(USELESS_QT_LIBS, path_func)
 
-    path_func = lambda dir_prefix: os.path.join(windows_app_path, '_internal', 'PySide6', dir_prefix.replace('Qt/', ''))
+    path_func = lambda dir_prefix: os.path.join(
+        windows_app_path, '_internal', 'PySide6', dir_prefix.replace('Qt/', '')
+    )
     remove_dirs(USELESS_QT_DIRS, path_func)
 
     path_func = lambda package: os.path.join(windows_app_path, '_internal', package)
     remove_dirs(USELESS_PACKAGES, path_func)
 
-    path_func = lambda library: os.path.join(windows_app_path, '_internal', 'lib{}*.dll'.format(library))
+    path_func = lambda library: os.path.join(
+        windows_app_path, '_internal', 'lib{}*.dll'.format(library)
+    )
     remove_pattern_files(USELESS_LIBS, path_func)
 
-    path_func = lambda dir_suffix:  os.path.join(windows_app_path, '_internal', '*{}'.format(dir_suffix))
+    path_func = lambda dir_suffix: os.path.join(
+        windows_app_path, '_internal', '*{}'.format(dir_suffix)
+    )
     remove_pattern_dirs(DIST_INFO_DIRS_SUFFIX, path_func)
 
 
-def post_process_macos(dist_folder):
+def post_process_macos(dist_folder: str) -> None:
     macos_app_path = os.path.join(dist_folder, 'Sci-Hub EVA.app')
 
-    path_func = lambda lib: os.path.join(macos_app_path, 'Contents', 'Frameworks', 'PySide6', 'Qt', 'lib', '{}.framework'.format(lib))
+    path_func = lambda lib: os.path.join(
+        macos_app_path,
+        'Contents',
+        'Frameworks',
+        'PySide6',
+        'Qt',
+        'lib',
+        '{}.framework'.format(lib),
+    )
     remove_dirs(USELESS_QT_LIBS, path_func)
-    path_func = lambda lib: os.path.join(macos_app_path, 'Contents', 'Frameworks', 'PySide6', 'Qt', 'qml', lib)
+    path_func = lambda lib: os.path.join(
+        macos_app_path, 'Contents', 'Frameworks', 'PySide6', 'Qt', 'qml', lib
+    )
     remove_dirs(USELESS_QT_LIBS, path_func)
-    path_func = lambda lib: os.path.join(macos_app_path, 'Contents', 'Resources', 'PySide6', 'Qt', 'qml', lib)
+    path_func = lambda lib: os.path.join(
+        macos_app_path, 'Contents', 'Resources', 'PySide6', 'Qt', 'qml', lib
+    )
     remove_dirs(USELESS_QT_LIBS, path_func)
 
-    path_func = lambda dir_prefix: os.path.join(macos_app_path, 'Contents', 'Frameworks', 'PySide6', dir_prefix)
+    path_func = lambda dir_prefix: os.path.join(
+        macos_app_path, 'Contents', 'Frameworks', 'PySide6', dir_prefix
+    )
     remove_dirs(USELESS_QT_DIRS, path_func)
-    path_func = lambda dir_prefix: os.path.join(macos_app_path, 'Contents', 'Resources', 'PySide6', dir_prefix)
+    path_func = lambda dir_prefix: os.path.join(
+        macos_app_path, 'Contents', 'Resources', 'PySide6', dir_prefix
+    )
     remove_dirs(USELESS_QT_DIRS, path_func)
 
-    path_func = lambda package: os.path.join(macos_app_path, 'Contents', 'Frameworks', package)
+    path_func = lambda package: os.path.join(
+        macos_app_path, 'Contents', 'Frameworks', package
+    )
     remove_dirs(USELESS_PACKAGES, path_func)
-    path_func = lambda package: os.path.join(macos_app_path, 'Contents', 'Resources', package)
+    path_func = lambda package: os.path.join(
+        macos_app_path, 'Contents', 'Resources', package
+    )
     remove_dirs(USELESS_PACKAGES, path_func)
 
-    path_func = lambda library: os.path.join(macos_app_path, 'Contents', 'Frameworks', 'lib{}*.dylib'.format(library))
+    path_func = lambda library: os.path.join(
+        macos_app_path, 'Contents', 'Frameworks', 'lib{}*.dylib'.format(library)
+    )
     remove_pattern_files(USELESS_LIBS, path_func)
-    path_func = lambda library: os.path.join(macos_app_path, 'Contents', 'Resources', 'lib{}*.dylib'.format(library))
+    path_func = lambda library: os.path.join(
+        macos_app_path, 'Contents', 'Resources', 'lib{}*.dylib'.format(library)
+    )
     remove_pattern_files(USELESS_LIBS, path_func)
 
-    path_func = lambda dir_suffix:  os.path.join(macos_app_path, 'Contents', 'Frameworks', '*{}'.format(dir_suffix))
+    path_func = lambda dir_suffix: os.path.join(
+        macos_app_path, 'Contents', 'Frameworks', '*{}'.format(dir_suffix)
+    )
     remove_pattern_dirs(DIST_INFO_DIRS_SUFFIX, path_func)
-    path_func = lambda dir_suffix:  os.path.join(macos_app_path, 'Contents', 'Resources', '*{}'.format(dir_suffix))
+    path_func = lambda dir_suffix: os.path.join(
+        macos_app_path, 'Contents', 'Resources', '*{}'.format(dir_suffix)
+    )
     remove_pattern_files(DIST_INFO_DIRS_SUFFIX, path_func)
 
     remove_dead_links(os.path.join(macos_app_path, 'Contents'))
 
 
-def post_process_linux(dist_folder):
+def post_process_linux(dist_folder: str) -> None:
     linux_app_path = os.path.join(dist_folder, 'SciHubEVA')
 
-    path_func = lambda lib: os.path.join(linux_app_path, '_internal', 'lib{}.so.6'.format(lib.replace('Qt', 'Qt6')))
+    path_func = lambda lib: os.path.join(
+        linux_app_path, '_internal', 'lib{}.so.6'.format(lib.replace('Qt', 'Qt6'))
+    )
     remove_files(USELESS_QT_LIBS, path_func)
-    path_func = lambda lib: os.path.join(linux_app_path, '_internal', 'PySide6', 'Qt', 'lib', 'lib{}.so.6'.format(lib.replace('Qt', 'Qt6')))
+    path_func = lambda lib: os.path.join(
+        linux_app_path,
+        '_internal',
+        'PySide6',
+        'Qt',
+        'lib',
+        'lib{}.so.6'.format(lib.replace('Qt', 'Qt6')),
+    )
     remove_files(USELESS_QT_LIBS, path_func)
-    path_func = lambda lib: os.path.join(linux_app_path, '_internal', 'PySide6', 'Qt', 'qml', lib)
+    path_func = lambda lib: os.path.join(
+        linux_app_path, '_internal', 'PySide6', 'Qt', 'qml', lib
+    )
     remove_dirs(USELESS_QT_LIBS, path_func)
 
-    path_func = lambda dir_prefix: os.path.join(linux_app_path, '_internal', 'PySide6', dir_prefix)
+    path_func = lambda dir_prefix: os.path.join(
+        linux_app_path, '_internal', 'PySide6', dir_prefix
+    )
     remove_dirs(USELESS_QT_DIRS, path_func)
 
     path_func = lambda package: os.path.join(linux_app_path, '_internal', package)
     remove_dirs(USELESS_PACKAGES, path_func)
 
-    path_func = lambda library: os.path.join(linux_app_path, '_internal', 'lib{}*.so*'.format(library))
+    path_func = lambda library: os.path.join(
+        linux_app_path, '_internal', 'lib{}*.so*'.format(library)
+    )
     remove_pattern_files(USELESS_LIBS, path_func)
 
-    path_func = lambda dir_suffix:  os.path.join(linux_app_path, '_internal', '*{}'.format(dir_suffix))
+    path_func = lambda dir_suffix: os.path.join(
+        linux_app_path, '_internal', '*{}'.format(dir_suffix)
+    )
     remove_pattern_dirs(DIST_INFO_DIRS_SUFFIX, path_func)
 
     remove_dead_links(os.path.join(linux_app_path, '_internal'))
 
 
 if __name__ == '__main__':
-    args = docopt(__doc__)
+    parser = OptionParser()
+    parser.add_option(
+        '-d',
+        '--dist_folder',
+        dest='dist_folder',
+        help='dist folder',
+        metavar='DIST_FOLDER',
+        type='string',
+        action='store',
+    )
+
+    options, args = parser.parse_args()
+
     change_cwd()
 
     if is_windows():
-        post_process_win(args['<dist-folder>'])
+        post_process_win(options.dist_folder)
     elif is_macos():
-        post_process_macos(args['<dist-folder>'])
+        post_process_macos(options.dist_folder)
     elif is_linux():
-        post_process_linux(args['<dist-folder>'])
+        post_process_linux(options.dist_folder)

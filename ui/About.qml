@@ -5,7 +5,7 @@ import QtQuick.Controls.Material
 import QtQuick.Window
 
 Dialog {
-    id: dialog
+    id: dialogAbout
 
     property int margin: 16
 

@@ -35,7 +35,7 @@ pyinstaller app.py \
   --target-arch ${arch}
 
 echo "Post processing ..."
-python building/post_process.py dist-Linux-${arch}
+python building/post_process.py --dist_folder dist-Linux-${arch}
 
 echo "Packaging with appimagetool ..."
 

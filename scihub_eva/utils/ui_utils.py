@@ -1,15 +1,15 @@
-# -*- coding: utf-8 -*-
-
 import os
+
 import darkdetect
+from PySide6.QtGui import QWindow
 
 from scihub_eva.globals.preferences import *
-from scihub_eva.utils.sys_utils import *
 from scihub_eva.utils.path_utils import *
 from scihub_eva.utils.preferences_utils import *
+from scihub_eva.utils.sys_utils import *
 
 
-def center_window(window, parent_window):
+def center_window(window: QWindow, parent_window: QWindow) -> None:
     parent_window_center_x = parent_window.x() + int(parent_window.width() / 2)
     parent_window_center_y = parent_window.y() + int(parent_window.height() / 2)
 
@@ -19,11 +19,11 @@ def center_window(window, parent_window):
     window.setPosition(window_x, window_y)
 
 
-def is_system_dark_theme():
+def is_system_dark_theme() -> bool:
     return darkdetect.isDark() or False
 
 
-def is_app_dark_theme():
+def is_app_dark_theme() -> bool:
     if os.environ['QT_QUICK_CONTROLS_MATERIAL_THEME'] == 'Dark':
         return True
     elif os.environ['QT_QUICK_CONTROLS_MATERIAL_THEME'] == 'Light':
@@ -34,14 +34,16 @@ def is_app_dark_theme():
         return False
 
 
-def set_ui_env():
+def set_ui_env() -> None:
     qtquickcontrols2_conf_path = CONFS_DIR / 'qtquickcontrols2.conf'
     if qtquickcontrols2_conf_path.resolve().exists():
-        os.environ['QT_QUICK_CONTROLS_CONF'] = \
+        os.environ['QT_QUICK_CONTROLS_CONF'] = (
             qtquickcontrols2_conf_path.resolve().as_posix()
+        )
 
-    os.environ['QT_QUICK_CONTROLS_MATERIAL_THEME'] = \
-        Preferences.get_or_default(SYSTEM_THEME_KEY, SYSTEM_THEME_DEFAULT)
+    os.environ['QT_QUICK_CONTROLS_MATERIAL_THEME'] = Preferences.get_or_default(
+        APPEARANCE_THEME_KEY, APPEARANCE_THEME_DEFAULT
+    )
 
     if is_app_dark_theme():
         os.environ['QT_QUICK_CONTROLS_MATERIAL_BACKGROUND'] = '#3F3F3F'
@@ -59,9 +61,4 @@ def set_ui_env():
     os.environ['QML_USE_GLYPHCACHE_WORKAROUND'] = '1'
 
 
-__all__ = [
-    'center_window',
-    'is_system_dark_theme',
-    'is_app_dark_theme',
-    'set_ui_env'
-]
+__all__ = ['center_window', 'is_system_dark_theme', 'is_app_dark_theme', 'set_ui_env']

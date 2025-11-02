@@ -16,14 +16,15 @@
 3. Update the translations.
 
    ```shell
-   # Generate translations source of QML files.
-   lupdate SciHubEVA.pro
-
-   # Generate translations source of Python files.
    pyside6-lupdate \
      scihub_eva/api/*.py \
      scihub_eva/ui/*.py \
-     -ts i18n/SciHubEVA_zh_CN.ts
+     ui/*.qml \
+     ui/elements/*.qml \
+     -ts i18n/SciHubEVA_zh_CN.ts \
+     -ts i18n/SciHubEVA_pt_PT.ts
+
+   pyside6-lrelease i18n/SciHubEVA_*.ts
    ```
 
 4. Install [create-dmg](https://github.com/create-dmg/create-dmg).

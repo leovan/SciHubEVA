@@ -46,7 +46,7 @@ pyinstaller app.py `
   --target-arch $($arch)
 
 Write-Output "Post processing ..."
-python building/post_process.py dist-Windows-$($arch)
+python building/post_process.py --dist_folder dist-Windows-$($arch)
 
 Write-Output "Packaging with Inno Setup ..."
 Invoke-WebRequest -Uri "https://github.com/jrsoftware/issrc/raw/main/Files/Languages/Unofficial/ChineseSimplified.isl" -OutFile "building\\Windows\\ChineseSimplified.isl"

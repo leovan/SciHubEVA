@@ -5,6 +5,7 @@ import QtQuick.Controls.Material
 import QtQuick.Window
 
 ApplicationWindow {
+    id: applicationWindowAddSciHubURL
     title: qsTr("Add Sci-Hub URL")
 
     modality: Qt.ApplicationModal

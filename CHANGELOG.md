@@ -1,5 +1,15 @@
 # Changelog
 
+## [6.4.0](https://github.com/leovan/SciHubEVA/compare/v6.3.1...v6.4.0) (2025-11-02)
+
+### Features
+
+- Add custom PDF, captcha id and captcha image XPath support.
+
+### Bug Fixes
+
+- Fix captcha display bug. ([#65](https://github.com/leovan/SciHubEVA/issues/65))
+
 ## [6.3.1](https://github.com/leovan/SciHubEVA/compare/v6.3.0...v6.3.1) (2025-02-05)
 
 ### Bug Fixes
@@ -16,7 +26,7 @@
 
 ### Tests
 
-- Add arm64 arch macOS Github Actions building.
+- Add arm64 arch macOS GitHub Actions building.
 
 ## [6.2.4](https://github.com/leovan/SciHubEVA/compare/v6.2.3...v6.2.4) (2023-11-12)
 
@@ -142,7 +152,7 @@
 
 ### Features
 
-- Add log file, right clicking log area can popup menu to open log file or log directory. ([#21](https://github.com/leovan/SciHubEVA/issues/21))
+- Add log file, right clicking log area can pop up menu to open log file or log directory. ([#21](https://github.com/leovan/SciHubEVA/issues/21))
 
 ### Bug Fixes
 

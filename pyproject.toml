@@ -1,0 +1,26 @@
+[tool.ruff]
+
+[tool.ruff.lint]
+select = [
+    "I",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+docstring-code-format = true
+quote-style = "single"
+
+[tool.mypy]
+disallow_any_generics = true
+disallow_untyped_defs = true
+exclude = [
+    ".pyi$",
+    "tests/",
+]
+follow_imports = "silent"
+follow_untyped_imports = true
+no_implicit_reexport = true
+warn_redundant_casts = true
+warn_unused_ignores = true

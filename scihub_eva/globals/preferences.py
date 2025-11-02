@@ -1,10 +1,36 @@
-# -*- coding: utf-8 -*-
+# API
+API_SCIHUB_URL_KEY = 'Api/SciHubURL'
+API_SCIHUB_URL_DEFAULT = 'https://www.sci-hub.se'
 
-# System
-SYSTEM_LANGUAGE_KEY = 'System/Language'
+API_SCIHUB_URLS_KEY = 'Api/SciHubURLs'
+API_SCIHUB_URLS_DEFAULT = [
+    'https://sci-hub.se',
+    'https://sci-hub.st',
+    'https://sci-hub.ru',
+]
 
-SYSTEM_THEME_KEY = 'System/Theme'
-SYSTEM_THEME_DEFAULT = 'System'
+API_PDF_XPATHS_KEY = 'Api/PDFXPaths'
+API_PDF_XPATHS_DEFAULT = [
+    '//div[@id="article"]/embed[1]',
+    '//div[@id="article"]/iframe[1]',
+    '//embed[@id="pdf"]',
+]
+
+API_CAPTCHA_ID_XPATHS_KEY = 'Api/CaptchaIdXPath'
+API_CAPTCHA_ID_XPATHS_DEFAULT = [
+    '//input[@name="id"]',
+]
+
+API_CAPTCHA_IMAGE_XPATHS_KEY = 'Api/CaptchaImageXPaths'
+API_CAPTCHA_IMAGE_XPATHS_DEFAULT = [
+    '//img[@id="captcha"]',
+]
+
+# Appearance
+APPEARANCE_LANGUAGE_KEY = 'Appearance/Language'
+
+APPEARANCE_THEME_KEY = 'Appearance/Theme'
+APPEARANCE_THEME_DEFAULT = 'System'
 
 # File
 FILE_SAVE_TO_DIR_KEY = 'File/SaveToDir'
@@ -17,16 +43,6 @@ FILE_OVERWRITE_EXISTING_FILE_KEY = 'File/OverwriteExistingFile'
 FILE_OVERWRITE_EXISTING_FILE_DEFAULT = False
 
 # Network
-NETWORK_SCIHUB_URL_KEY = 'Network/SciHubURL'
-NETWORK_SCIHUB_URL_DEFAULT = 'https://www.sci-hub.se'
-
-NETWORK_SCIHUB_URLS_KEY = 'Network/SciHubURLs'
-NETWORK_SCIHUB_URLS_DEFAULT = [
-    'https://sci-hub.se',
-    'https://sci-hub.st',
-    'https://sci-hub.ru',
-]
-
 NETWORK_TIMEOUT_KEY = 'Network/Timeout'
 NETWORK_TIMEOUT_DEFAULT = 3000
 
@@ -35,10 +51,10 @@ NETWORK_RETRY_TIMES_DEFAULT = 3
 
 NETWORK_USER_AGENT_KEY = 'Network/UserAgent'
 NETWORK_USER_AGENT_DEFAULT = (
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ' +
-        'AppleWebKit/537.36 (KHTML, like Gecko) ' +
-        'Chrome/124.0.0.0 ' +
-        'Safari/537.36'
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+    + 'AppleWebKit/537.36 (KHTML, like Gecko) '
+    + 'Chrome/142.0.0.0 '
+    + 'Safari/537.36'
 )
 
 NETWORK_PROXY_ENABLE_KEY = 'Network/ProxyEnable'

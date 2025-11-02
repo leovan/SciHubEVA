@@ -5,12 +5,14 @@ import QtQuick.Controls.Material
 import QtQuick.Window
 
 ApplicationWindow {
+    id: applicationWindowCaptcha
     title: qsTr("Captcha")
 
     modality: Qt.ApplicationModal
     flags: Qt.Dialog
 
     property int margin: 10
+    property bool kill: false
 
     width: columnLayoutCaptcha.implicitWidth + 2 * margin
     height: columnLayoutCaptcha.implicitHeight + 2 * margin
@@ -64,8 +66,8 @@ ApplicationWindow {
                 text: qsTr("Confirm")
 
                 onClicked: {
+                    applicationWindowCaptcha.kill = true
                     close()
-                    killCaptcha(true, textFieldCaptcha.text.trim())
                 }
             }
 
@@ -74,8 +76,8 @@ ApplicationWindow {
                 text: qsTr("Cancel")
 
                 onClicked: {
+                    applicationWindowCaptcha.kill = false
                     close()
-                    killCaptcha(false, "")
                 }
             }
         }
@@ -90,6 +92,6 @@ ApplicationWindow {
     }
 
     onClosing: {
-        killCaptcha(false, "")
+        killCaptcha(kill, textFieldCaptcha.text.trim())
     }
 }

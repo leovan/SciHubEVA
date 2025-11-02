@@ -38,7 +38,7 @@ pyinstaller app.py \
 cp building/macOS/Info.plist "dist-macOS-${arch}/Sci-Hub EVA.app/Contents"
 
 echo "Post processing ..."
-python building/post_process.py dist-macOS-${arch}
+python building/post_process.py --dist_folder dist-macOS-${arch}
 
 echo "Packaging with create-dmg ..."
 create-dmg \

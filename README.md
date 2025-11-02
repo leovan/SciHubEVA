@@ -10,43 +10,61 @@
 
 **Sci-Hub EVA** is a cross-platform [Sci-Hub](https://en.wikipedia.org/wiki/Sci-Hub) GUI application powered by Python and Qt.
 
-## Usage
+## Query
 
-![](docs/images/scihub-eva-application-macos-en-light-theme.png)
+![](docs/images/scihub-eva-application-macos-en.png)
 
-Click `Open` button to choose where to save the downloaded files. Click `Show` button will open the directory where you set.
+Click `Open` button to choose where to save the downloaded files. Click `Show` button will open the directory where you set. Click <img style="width: 24px; vertical-align: middle;" src="images/icons/information.svg"> will show the `About` dialog.
+
+### Single Query
 
 Fill the `Query` and click `Rampage` button, then it will search and download the file. Currently, you can fill the query with `URL`, `PMID`, `DOI` or title.
 
+### Range Query
+
 Range pattern in query is supported, e.g. `00.000/{1-99}` will download `00.000/1`, `00.000/2`, ... `00.000/99`. Zero padded format range pattern is allowed, e.g. `00.000/{01-99}` will download `00.000/01`, `00.000/02`, ... `00.000/99`.
+
+### File Query
 
 Also you can download with a query list file, in which each line represents a query. Click `Load` button to load the query list file.
 
 Right clicking the `Logs` area will popup menu, you can open the log file or log directory and export failed queries.
 
-![](docs/images/scihub-eva-log-area-popup-menu-en.png)
-
-Click <img style="width: 24px; vertical-align: middle;" src="images/icons/information.svg"> will show the `About` dialog.
+## Preferences
 
 Click <img style="width: 24px; vertical-align: middle;" src="images/icons/preferences.svg"> will open the `Preferences` dialog.
+
+### API
+
+![](docs/images/scihub-eva-preferences-api-macos-en.png)
+
+Due to the unstable Sci-Hub host accessibility, it may fail to download PDFs sometimes, you can change and add other Sci-Hub URLs. Sometimes, Sci-Hub webpage may change, you need set the PDF, captcha ID, captcha image XPath correctly.
+
+### Appearance
 
 ![](docs/images/scihub-eva-preferences-appearance-macos-en.png)
 
 You can change language manually. Light and dark theme are supported, also you can choose `System` to fit system theme automatically. Changes will take effect after restart.
 
+### File
+
 ![](docs/images/scihub-eva-preferences-file-macos-en.png)
 
 You can change filename prefix format with supported keywords. Setting overwrite existing file to `No` will add a timestamp suffix in filename to avoid overwriting previous downloaded files.
 
+### Network
+
 ![](docs/images/scihub-eva-preferences-network-macos-en.png)
 
-Due to the unstable Sci-Hub host accessibility, it may fail to download PDFs sometimes, you can change and add other Sci-Hub URLs, or set a proxy server.
+You can set timeout and retry times. Also you can add a proxy server.
+
+## Captcha
 
 ![](docs/images/scihub-eva-captcha-macos-en.png)
 
 Sometimes, you may need enter the captcha to continue.
 
-## Internationalization Support
+## Languages
 
 - English
 - Simplified Chinese (简体中文)

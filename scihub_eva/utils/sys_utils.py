@@ -1,14 +1,11 @@
-# -*- coding: utf-8 -*-
-
-import os
-import sys
 import locale
+import os
 import platform
 import subprocess
-
+import sys
 from pathlib import Path
-from PySide6.QtCore import qVersion
 
+from PySide6.QtCore import qVersion
 
 DEFAULT_ENCODING = 'utf-8'
 SYSTEM_LANGUAGE = locale.getdefaultlocale()[0]
@@ -17,19 +14,19 @@ PYTHON_VERSION = '.'.join(str(v) for v in sys.version_info[:3])
 QT_VERSION = qVersion()
 
 
-def is_windows():
+def is_windows() -> bool:
     return platform.system() == 'Windows'
 
 
-def is_macos():
+def is_macos() -> bool:
     return platform.system() == 'Darwin'
 
 
-def is_linux():
+def is_linux() -> bool:
     return platform.system() == 'Linux'
 
 
-def open_file(file_path, timeout=3):
+def open_file(file_path: str, timeout: int = 3) -> None:
     if is_windows():
         os.startfile(file_path)
     elif is_macos():
@@ -40,7 +37,7 @@ def open_file(file_path, timeout=3):
         return
 
 
-def open_directory(directory, timeout=3):
+def open_directory(directory: str, timeout: int = 3) -> None:
     if is_windows():
         subprocess.call(['explorer', str(Path(directory))], timeout=timeout)
     elif is_macos():
@@ -71,5 +68,5 @@ __all__ = [
     'is_linux',
     'open_file',
     'open_directory',
-    'is_text_file'
+    'is_text_file',
 ]

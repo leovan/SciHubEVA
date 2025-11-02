@@ -1,4 +1,4 @@
-QT += core quick quickcontrols2
+QT += core widgets quick quickcontrols2
 
 CONFIG += c++11
 

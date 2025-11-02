@@ -221,7 +221,7 @@ ApplicationWindow {
 
             UIElements.IconButton {
                 id: buttonAbout
-                iconSource: "qrc:/images/icons/information.svg"
+                iconSource: "qrc:/images/icons/about.svg"
 
                 onClicked: dialogAbout.open()
             }

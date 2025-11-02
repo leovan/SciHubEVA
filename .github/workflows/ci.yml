@@ -28,7 +28,7 @@ jobs:
           path: dist-macOS-arm64/SciHubEVA-arm64-latest.dmg
 
   build-macos-x86_64:
-    runs-on: macos-13
+    runs-on: macos-15-intel
     steps:
       - name: Check out code
         uses: actions/checkout@v4

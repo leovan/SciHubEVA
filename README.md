@@ -119,12 +119,21 @@ Sometimes, you may need enter the captcha to continue.
 ### macOS
 
 - Install with [dmg file](https://github.com/leovan/SciHubEVA/releases).
-- Install with brew: `brew install --cask scihubeva`.
+- Install with brew.
+
+  ```
+  brew install --cask scihubeva
+  ```
 
 ### Windows
 
 - Install with [setup file](https://github.com/leovan/SciHubEVA/releases).
-- Install with scoop: `scoop bucket add scoopet https://github.com/ivaquero/scoopet && scoop install scihubeva`.
+- Install with scoop.
+
+  ```
+  scoop bucket add extras-plus https://github.com/Scoopforge/Extras-Plus
+  scoop install scihubeva
+  ```
 
 ### Linux
 

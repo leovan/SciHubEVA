@@ -6,13 +6,17 @@ from PySide6.QtCore import QCoreApplication, QTranslator
 from PySide6.QtGui import QGuiApplication, QIcon
 
 import scihub_eva.resources
-from scihub_eva.globals.preferences import *
-from scihub_eva.globals.versions import *
-from scihub_eva.ui.scihub_eva import UISciHubEVA
-from scihub_eva.utils.path_utils import *
-from scihub_eva.utils.preferences_utils import *
-from scihub_eva.utils.sys_utils import *
-from scihub_eva.utils.ui_utils import *
+from scihub_eva.globals.preferences import APPEARANCE_LANGUAGE_KEY
+from scihub_eva.globals.versions import (
+    APPLICATION_NAME,
+    ORGANIZATION_DOMAIN,
+    ORGANIZATION_NAME,
+)
+from scihub_eva.ui.main import UISciHubEVA
+from scihub_eva.utils.path_utils import I18N_DIR, IMAGES_DIR
+from scihub_eva.utils.preferences_utils import Preferences
+from scihub_eva.utils.sys_utils import SYSTEM_LANGUAGE
+from scihub_eva.utils.ui_utils import set_ui_env
 
 
 def main() -> None:

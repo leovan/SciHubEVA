@@ -75,7 +75,7 @@ jobs:
           path: dist-Windows-x86_64/SciHubEVA-x86_64-latest.exe
 
   build-linux-x86_64:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v6

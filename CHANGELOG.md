@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.5.0](https://github.com/leovan/SciHubEVA/compare/v6.4.1...v6.5.0) (2026-03-07)
+
+### Features
+
+- Remove DDoS-Guard bypass.
+- Add more clear log when downloading is blocked by DDos-Guard.
+
 ## [6.4.1](https://github.com/leovan/SciHubEVA/compare/v6.4.0...v6.4.1) (2026-01-10)
 
 ### Bug Fixes

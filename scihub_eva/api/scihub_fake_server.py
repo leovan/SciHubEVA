@@ -2,7 +2,7 @@ from tempfile import TemporaryFile
 
 from flask import Flask, Response, make_response, request, send_file
 
-from scihub_eva.utils.path_utils import *
+from scihub_eva.utils.path_utils import IMAGES_DIR
 
 app = Flask(__name__)
 

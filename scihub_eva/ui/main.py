@@ -7,17 +7,34 @@ from PySide6.QtCore import QObject, Signal, Slot
 from PySide6.QtGui import QWindow
 from PySide6.QtQml import QQmlApplicationEngine
 
-from scihub_eva.api.scihub_api import *
-from scihub_eva.globals.preferences import *
-from scihub_eva.globals.versions import *
+from scihub_eva.api.scihub_api import SciHubAPI, SciHubAPIError, SciHubAPIRampageType
+from scihub_eva.globals.preferences import (
+    API_SCIHUB_URL_DEFAULT,
+    API_SCIHUB_URL_KEY,
+    FILE_SAVE_TO_DIR_DEFAULT,
+    FILE_SAVE_TO_DIR_KEY,
+)
+from scihub_eva.globals.versions import APPLICATION_VERSION
 from scihub_eva.ui.captcha import UICaptcha
 from scihub_eva.ui.preferences import UIPreferences
-from scihub_eva.utils.api_utils import *
-from scihub_eva.utils.logging_utils import *
-from scihub_eva.utils.network_utils import *
-from scihub_eva.utils.preferences_utils import *
-from scihub_eva.utils.sys_utils import *
-from scihub_eva.utils.ui_utils import *
+from scihub_eva.utils.api_utils import gen_range_query_list, is_range_query
+from scihub_eva.utils.logging_utils import (
+    DEFAULT_LOG_DIRECTORY,
+    DEFAULT_LOG_FILE,
+    DEFAULT_LOGGER,
+    LOGGER_SEP,
+    UISciHubEVALogHandler,
+)
+from scihub_eva.utils.network_utils import get_session
+from scihub_eva.utils.preferences_utils import Preferences
+from scihub_eva.utils.sys_utils import (
+    PYTHON_VERSION,
+    QT_VERSION,
+    is_text_file,
+    open_directory,
+    open_file,
+)
+from scihub_eva.utils.ui_utils import center_window
 
 
 class UISciHubEVA(QObject):
@@ -48,7 +65,7 @@ class UISciHubEVA(QObject):
 
         self._query_list = deque()
         self._query_list_length = 0
-        self._captcha_img_file_path: str | None = None
+        self._captcha_img_file_path: str = ''
         self._failed_queries = set()
 
         self._save_to_dir = Preferences.get_or_default(
@@ -60,25 +77,30 @@ class UISciHubEVA(QObject):
             API_SCIHUB_URL_KEY, API_SCIHUB_URL_DEFAULT
         )
         self._sess = get_session(self._scihub_url)
-        self._scihub_api: SciHubAPI | None = None
+        self._scihub_api = SciHubAPI(
+            self._logger,
+            self.rampage_callback,
+            self._scihub_url,
+            self._sess,
+        )
 
     @property
     def window(self) -> QWindow:
         return cast(QWindow, self._window)
 
     def _connect(self) -> None:
-        self.window.openSaveToDir.connect(self.open_save_to_dir)
-        self.window.systemOpenSaveToDir.connect(self.system_open_save_to_dir)
-        self.window.showUIPreference.connect(self.show_ui_preference)
-        self.window.systemOpenLogFile.connect(self.system_open_log_file)
-        self.window.systemOpenLogDirectory.connect(self.system_open_log_directory)
-        self.window.exportFailedQueries.connect(self.export_failed_queries)
-        self.window.rampage.connect(self.rampage)
+        self.window.openSaveToDir.connect(self.open_save_to_dir)  # type: ignore
+        self.window.systemOpenSaveToDir.connect(self.system_open_save_to_dir)  # type: ignore
+        self.window.showUIPreference.connect(self.show_ui_preference)  # type: ignore
+        self.window.systemOpenLogFile.connect(self.system_open_log_file)  # type: ignore
+        self.window.systemOpenLogDirectory.connect(self.system_open_log_directory)  # type: ignore
+        self.window.exportFailedQueries.connect(self.export_failed_queries)  # type: ignore
+        self.window.rampage.connect(self.rampage)  # type: ignore
 
-        self.set_save_to_dir.connect(self.window.setSaveToDir)
-        self.append_log.connect(self.window.appendLog)
-        self.before_rampage.connect(self.window.beforeRampage)
-        self.after_rampage.connect(self.window.afterRampage)
+        self.set_save_to_dir.connect(self.window.setSaveToDir)  # type: ignore
+        self.append_log.connect(self.window.appendLog)  # type: ignore
+        self.before_rampage.connect(self.window.beforeRampage)  # type: ignore
+        self.after_rampage.connect(self.window.afterRampage)  # type: ignore
 
     @Slot(str)
     def open_save_to_dir(self, directory: str) -> None:

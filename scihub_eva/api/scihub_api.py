@@ -7,15 +7,15 @@ from tempfile import NamedTemporaryFile
 from typing import Any, Callable
 from urllib.parse import urlparse
 
-from lxml import etree
+from lxml.etree import HTML
 from pathvalidate import sanitize_filename
 from PySide6.QtCore import QObject
-from requests import Session
+from requests import Response, Session
 
 from scihub_eva.globals.preferences import *
-from scihub_eva.utils.api_utils import *
-from scihub_eva.utils.logging_utils import *
-from scihub_eva.utils.preferences_utils import *
+from scihub_eva.utils.api_utils import get_pdf_metadata, guess_query_type
+from scihub_eva.utils.logging_utils import LOGGER_SEP
+from scihub_eva.utils.preferences_utils import Preferences
 
 
 @unique
@@ -41,17 +41,20 @@ class SciHubAPIError(Enum):
     # Wrong captcha
     WRONG_CAPTCHA = 3
 
+    # DDoS-Guard
+    DDOS_GUARD = 4
+
 
 class SciHubAPI(QObject, threading.Thread):
     def __init__(
         self,
         logger: logging.Logger,
-        callback: Callable[[str, Any, Any], None],
+        callback: Callable[[Any, Any, Any], None],
         scihub_url: str,
         sess: Session,
         raw_query: str | None = None,
         query: str | None = None,
-        rampage_type: Any | None = None,
+        rampage_type: SciHubAPIRampageType = SciHubAPIRampageType.RAW,
     ) -> None:
         QObject.__init__(self)
         threading.Thread.__init__(self, daemon=True)
@@ -86,11 +89,11 @@ class SciHubAPI(QObject, threading.Thread):
         self._query = query
 
     @property
-    def rampage_type(self) -> str | None:
+    def rampage_type(self) -> SciHubAPIRampageType:
         return self._rampage_type
 
     @rampage_type.setter
-    def rampage_type(self, rampage_type: str) -> None:
+    def rampage_type(self, rampage_type: SciHubAPIRampageType) -> None:
         self._rampage_type = rampage_type
 
     @property
@@ -100,6 +103,55 @@ class SciHubAPI(QObject, threading.Thread):
     @captcha_answer.setter
     def captcha_answer(self, captcha_answer: str | None) -> None:
         self._captcha_answer = captcha_answer
+
+    def query_pdf_url(self, query: str) -> Response:
+        return self._sess.post(
+            self._scihub_url,
+            data={'request': query},
+            verify=False,
+            timeout=Preferences.get_or_default(
+                NETWORK_TIMEOUT_KEY, NETWORK_TIMEOUT_DEFAULT, value_type=int
+            )
+            / 1000.0,
+        )
+
+    def extract_pdf_url(self, pdf_url_response: Response) -> tuple[Any, Any]:
+        pdf_url = None
+        err = None
+
+        html = HTML(pdf_url_response.content)
+        pdf_xpath_list = Preferences.get_or_default(
+            API_PDF_XPATHS_KEY, API_PDF_XPATHS_DEFAULT, value_type=list
+        )
+
+        pdfs = []
+        for pdf_xpath in pdf_xpath_list:
+            results = html.xpath(pdf_xpath) if html is not None else None
+
+            if results and len(results) > 0:
+                pdfs.extend(results)
+
+        if pdfs and len(pdfs) > 0:
+            pdf_url = urlparse(pdfs[0].attrib['src'])
+            response_url = urlparse(pdf_url_response.url)
+
+            if pdf_url.scheme == '':
+                pdf_url = pdf_url._replace(scheme=response_url.scheme)
+
+            if pdf_url.netloc == '':
+                pdf_url = pdf_url._replace(netloc=response_url.netloc)
+
+            pdf_url = pdf_url.geturl()
+            pdf_url_html = f'<a href="{pdf_url}">{pdf_url}</a>'
+
+            self._logger.info(self.tr('Got PDF URL: ') + pdf_url_html)
+        else:
+            err = SciHubAPIError.NO_VALID_PDF
+
+            self._logger.error(self.tr('Failed to get PDF URL!'))
+            self._logger.error(self.tr('You need to check it manually.'))
+
+        return pdf_url, err
 
     def fetch_pdf_url(self, query: str) -> tuple[Any, Any]:
         self._logger.info(
@@ -117,59 +169,38 @@ class SciHubAPI(QObject, threading.Thread):
             try:
                 self._logger.info(self.tr('Fetching PDF URL ...'))
 
-                pdf_url_response = self._sess.post(
-                    self._scihub_url,
-                    data={'request': query},
-                    verify=False,
-                    timeout=Preferences.get_or_default(
-                        NETWORK_TIMEOUT_KEY, NETWORK_RETRY_TIMES_DEFAULT, value_type=int
-                    )
-                    / 1000.0,
-                )
+                pdf_url_response = self.query_pdf_url(query)
 
                 if pdf_url_response.status_code != 200:
-                    self._logger.error(
-                        self.tr('Error {}').format(pdf_url_response.status_code)
-                    )
-                    self._logger.info(self.tr('You may need check it manually.'))
-                    err = SciHubAPIError.UNKNOWN
-                else:
-                    html = etree.HTML(pdf_url_response.content)
-                    pdf_xpath_list = Preferences.get_or_default(
-                        API_PDF_XPATHS_KEY, API_PDF_XPATHS_DEFAULT, value_type=list
-                    )
+                    content = pdf_url_response.content.decode('utf-8')
 
-                    pdfs = []
-                    for pdf_xpath in pdf_xpath_list:
-                        results = html.xpath(pdf_xpath) if html is not None else None
-
-                        if results and len(results) > 0:
-                            pdfs.extend(results)
-
-                    if pdfs and len(pdfs) > 0:
-                        pdf_url = urlparse(pdfs[0].attrib['src'])
-                        response_url = urlparse(pdf_url_response.url)
-
-                        if pdf_url.scheme == '':
-                            pdf_url = pdf_url._replace(scheme=response_url.scheme)
-
-                        if pdf_url.netloc == '':
-                            pdf_url = pdf_url._replace(netloc=response_url.netloc)
-
-                        pdf_url = pdf_url.geturl()
-                        pdf_url_html = f'<a href="{pdf_url}">{pdf_url}</a>'
-
-                        self._logger.info(self.tr('Got PDF URL: ') + pdf_url_html)
+                    if (
+                        pdf_url_response.status_code == 403
+                        and 'ddos-guard' in content.lower()
+                    ):
+                        err = SciHubAPIError.DDOS_GUARD
+                        self._logger.error(
+                            self.tr('Downloading is blocked by DDoS-Guard!')
+                        )
+                        self._logger.error(self.tr('You need to change a clean IP.'))
+                        self._logger.error(
+                            self.tr(
+                                'Or use <a href="https://github.com/FlareSolverr/FlareSolverr">FlareSolverr</a> to bypass it.'
+                            )
+                        )
                     else:
-                        err = SciHubAPIError.NO_VALID_PDF
-
-                        self._logger.error(self.tr('Failed to get PDF URL!'))
-                        self._logger.info(self.tr('You may need check it manually.'))
+                        err = SciHubAPIError.UNKNOWN
+                        self._logger.error(
+                            self.tr('Error {}').format(pdf_url_response.status_code)
+                        )
+                        self._logger.error(self.tr('You need to check it manually.'))
+                else:
+                    pdf_url, err = self.extract_pdf_url(pdf_url_response)
             except Exception as e:
                 err = SciHubAPIError.UNKNOWN
 
                 self._logger.error(self.tr('Failed to get PDF URL!'))
-                self._logger.info(self.tr('You may need check it manually.'))
+                self._logger.error(self.tr('You need to check it manually.'))
                 self._logger.error(str(e))
 
         return pdf_url, err
@@ -177,7 +208,7 @@ class SciHubAPI(QObject, threading.Thread):
     def get_captcha_info(self, pdf_captcha_response: Any) -> tuple[Any, Any]:
         captcha_id, captcha_img_url = None, None
 
-        html = etree.HTML(pdf_captcha_response.content)
+        html = HTML(pdf_captcha_response.content)
 
         captcha_id_xpath_list = Preferences.get_or_default(
             API_CAPTCHA_ID_XPATHS_KEY, API_CAPTCHA_ID_XPATHS_DEFAULT, value_type=list
@@ -249,7 +280,7 @@ class SciHubAPI(QObject, threading.Thread):
 
         if pdf_response.status_code != 200:
             self._logger.error(self.tr('Error {}').format(pdf_response.status_code))
-            self._logger.info(self.tr('You may need check it manually.'))
+            self._logger.info(self.tr('You need to check it manually.'))
             err = SciHubAPIError.UNKNOWN
         elif pdf_response.headers['Content-Type'] == 'application/pdf':
             self._logger.info(self.tr('Angel [CAPTCHA] down!'))
@@ -277,22 +308,22 @@ class SciHubAPI(QObject, threading.Thread):
 
             if pdf_response.status_code != 200:
                 self._logger.error(self.tr('Error {}').format(pdf_response.status_code))
-                self._logger.info(self.tr('You may need check it manually.'))
+                self._logger.error(self.tr('You need to check it manually.'))
                 err = SciHubAPIError.UNKNOWN
             elif pdf_response.headers['Content-Type'] == 'application/pdf':
                 pdf = pdf_response.content
             elif pdf_response.headers['Content-Type'].startswith('text/html'):
-                self._logger.warn(self.tr('Angel [CAPTCHA] is coming!'))
+                self._logger.warning(self.tr('Angel [CAPTCHA] is coming!'))
                 err = SciHubAPIError.BLOCKED_BY_CAPTCHA
                 pdf = pdf_response
             else:
                 self._logger.error(self.tr('Unknown PDF Content-Type!'))
-                self._logger.info(self.tr('You may need check it manually.'))
+                self._logger.error(self.tr('You need to check it manually.'))
         except Exception as e:
             err = SciHubAPIError.UNKNOWN
 
             self._logger.error(self.tr('Failed to get PDF!'))
-            self._logger.info(self.tr('You may need check it manually.'))
+            self._logger.error(self.tr('You need to check it manually.'))
             self._logger.error(str(e))
 
         return pdf, err
@@ -338,7 +369,9 @@ class SciHubAPI(QObject, threading.Thread):
 
         self._logger.info(self.tr('Saved PDF as: ') + pdf_link)
 
-    def rampage(self, query: str, rampage_type: str) -> tuple[Any, Any]:
+    def rampage(
+        self, query: Any, rampage_type: SciHubAPIRampageType
+    ) -> tuple[Any, Any]:
         if rampage_type == SciHubAPIRampageType.RAW:
             self._logger.info(LOGGER_SEP)
             self._logger.info(self.tr('Dealing with query: ') + query)

@@ -16,6 +16,7 @@ __pycache__/
 *$py.class
 .hypothesis
 .pytest_cache
+.venv
 scihub_eva/resources.py
 
 # Others

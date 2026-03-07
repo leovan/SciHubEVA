@@ -3,7 +3,7 @@ from logging import LogRecord, StreamHandler
 from logging.handlers import TimedRotatingFileHandler
 from typing import Any
 
-from scihub_eva.utils.path_utils import *
+from scihub_eva.utils.path_utils import LOGS_DIR
 
 DEFAULT_LOGGER = logging.getLogger('default')
 DEFAULT_LOGGER.setLevel(logging.INFO)

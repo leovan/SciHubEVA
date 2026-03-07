@@ -3,10 +3,13 @@ import os
 import darkdetect
 from PySide6.QtGui import QWindow
 
-from scihub_eva.globals.preferences import *
-from scihub_eva.utils.path_utils import *
-from scihub_eva.utils.preferences_utils import *
-from scihub_eva.utils.sys_utils import *
+from scihub_eva.globals.preferences import (
+    APPEARANCE_THEME_DEFAULT,
+    APPEARANCE_THEME_KEY,
+)
+from scihub_eva.utils.path_utils import CONFS_DIR
+from scihub_eva.utils.preferences_utils import Preferences
+from scihub_eva.utils.sys_utils import is_linux, is_windows
 
 
 def center_window(window: QWindow, parent_window: QWindow) -> None:

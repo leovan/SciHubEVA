@@ -28,7 +28,7 @@ def is_linux() -> bool:
 
 def open_file(file_path: str, timeout: int = 3) -> None:
     if is_windows():
-        os.startfile(file_path)
+        os.startfile(file_path)  # type: ignore
     elif is_macos():
         subprocess.call(['open', file_path], timeout=timeout)
     elif is_linux():

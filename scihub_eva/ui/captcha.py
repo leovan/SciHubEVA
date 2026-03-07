@@ -25,9 +25,9 @@ class UICaptcha(QObject):
         return cast(QWindow, self._window)
 
     def _connect(self) -> None:
-        self.window.killCaptcha.connect(self.kill_captcha)
+        self.window.killCaptcha.connect(self.kill_captcha)  # type: ignore
 
-        self.show_ui_captcha.connect(self.window.showUICaptcha)
+        self.show_ui_captcha.connect(self.window.showUICaptcha)  # type: ignore
 
     @Slot(bool, str)
     def kill_captcha(self, kill: bool, captcha: str) -> None:

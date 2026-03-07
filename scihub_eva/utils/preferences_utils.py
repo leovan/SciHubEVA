@@ -2,8 +2,8 @@ from typing import Any
 
 from PySide6.QtCore import QSettings
 
-from scihub_eva.globals.versions import *
-from scihub_eva.utils.sys_utils import *
+from scihub_eva.globals.versions import APPLICATION_NAME, ORGANIZATION_DOMAIN
+from scihub_eva.utils.sys_utils import is_macos
 
 
 class Preferences(object):

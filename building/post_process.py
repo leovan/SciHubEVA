@@ -65,6 +65,7 @@ USELESS_QT_LIBS = [
     'QtQuick3DXr',
     'QtQuickTest',
     'QtQuickTimeline',
+    'QtQuickTimelineBlendTrees',
     'QtRemoteObjects',
     'QtRemoteObjectsQml',
     'QtScxml',

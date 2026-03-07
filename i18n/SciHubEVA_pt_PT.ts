@@ -190,7 +190,7 @@
     <message>
         <location filename="../ui/Preferences.qml" line="356"/>
         <source>Cannot remove the last Sci-Hub URL!</source>
-        <translation>Não foi possível remover o último URL do Sci-Hub！</translation>
+        <translation>Não foi possível remover o último URL do Sci-Hub!</translation>
     </message>
     <message>
         <location filename="../ui/Preferences.qml" line="359"/>
@@ -251,93 +251,108 @@
 <context>
     <name>SciHubAPI</name>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="255"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="282"/>
         <source>Angel [CAPTCHA] down!</source>
-        <translation>Angel [CAPTCHA] caído！</translation>
+        <translation>Angel [CAPTCHA] caído!</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="264"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="291"/>
         <source>Fetching PDF ...</source>
         <translation>Buscando PDF ...</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="285"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="312"/>
         <source>Angel [CAPTCHA] is coming!</source>
-        <translation>Angel [CAPTCHA] à caminho！</translation>
+        <translation>Angel [CAPTCHA] à caminho!</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="289"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="316"/>
         <source>Unknown PDF Content-Type!</source>
         <translation>Tipo de Conteúdo do PDF, Inválido!</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="294"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="321"/>
         <source>Failed to get PDF!</source>
-        <translation>Falha ao obter PDF！</translation>
+        <translation>Falha ao obter PDF!</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="106"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="158"/>
         <source>Using Sci-Hub URL: </source>
         <translation>Utilizando URL do Sci-Hub: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="111"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="163"/>
         <source>Query type: </source>
         <translation>Tipo de Consulta: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="118"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="170"/>
         <source>Fetching PDF URL ...</source>
         <translation>Buscando URL do PDF ...</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="132"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="251"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="279"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="190"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="278"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="306"/>
         <source>Error {}</source>
         <translation>Erro {}</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="162"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="147"/>
         <source>Got PDF URL: </source>
         <translation>URL do PDF Obtido: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="166"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="171"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="151"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="198"/>
         <source>Failed to get PDF URL!</source>
-        <translation>Falha ao obter o URL do PDF！</translation>
+        <translation>Falha ao obter o URL do PDF!</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="134"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="167"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="172"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="252"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="280"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="290"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="295"/>
-        <source>You may need check it manually.</source>
+        <location filename="../scihub_eva/api/scihub_api.py" line="152"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="192"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="199"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="279"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="307"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="317"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="322"/>
+        <source>You need to check it manually.</source>
         <translation>Você vai precisar lidar com isso manualmente.</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="327"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="183"/>
+        <source>Downloading is blocked by DDoS-Guard!</source>
+        <translation>O download está bloqueado pelo DDoS-Guard!</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="185"/>
+        <source>You need to change a clean IP.</source>
+        <translation>Você precisa alterar para um IP limpo.</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="186"/>
+        <source>Or use &lt;a href=&quot;https://github.com/FlareSolverr/FlareSolverr&quot;&gt;FlareSolverr&lt;/a&gt; to bypass it.</source>
+        <translation>Ou use o &lt;a href=&quot;https://github.com/FlareSolverr/FlareSolverr&quot;&gt;FlareSolverr&lt;/a&gt; para contornar isso.</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="354"/>
         <source>Unsupported filename keywords: </source>
         <translation>Palavras-chave de nome de arquivo não suportadas: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="339"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="366"/>
         <source>Saved PDF as: </source>
         <translation>PDF Salvo como: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="344"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="373"/>
         <source>Dealing with query: </source>
         <translation>Processando Consulta: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="366"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="395"/>
         <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
-        <translation>Captcha errado, falhou em matar Angel [CAPTCHA]！</translation>
+        <translation>Captcha errado, falhou em matar Angel [CAPTCHA]!</translation>
     </message>
 </context>
 <context>
@@ -365,12 +380,12 @@
     <message>
         <location filename="../ui/SciHubEVA.qml" line="198"/>
         <source>Please choose save to directory first!</source>
-        <translation>Por favor primeiro selecione aonde salvar！</translation>
+        <translation>Por favor primeiro selecione aonde salvar!</translation>
     </message>
     <message>
         <location filename="../ui/SciHubEVA.qml" line="202"/>
         <source>Please set the query!</source>
-        <translation>Por favor defina a consulta！</translation>
+        <translation>Por favor defina a consulta!</translation>
     </message>
     <message>
         <location filename="../ui/SciHubEVA.qml" line="212"/>
@@ -418,18 +433,18 @@
     <message>
         <location filename="../scihub_eva/ui/captcha.py" line="37"/>
         <source>Battle canceled, rampage again?</source>
-        <translation>Batalha cancelada，tumultuar novamente？</translation>
+        <translation>Batalha cancelada, tumultuar novamente?</translation>
     </message>
 </context>
 <context>
     <name>UISciHubEVA</name>
     <message>
-        <location filename="../scihub_eva/ui/scihub_eva.py" line="138"/>
+        <location filename="../scihub_eva/ui/main.py" line="160"/>
         <source>Query list file is not a text file!</source>
-        <translation>O arquivo da lista de consulta não é um arquivo de texto！</translation>
+        <translation>O arquivo da lista de consulta não é um arquivo de texto!</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/ui/scihub_eva.py" line="150"/>
+        <location filename="../scihub_eva/ui/main.py" line="172"/>
         <source>Dealing with {}/{} query ...</source>
         <translation>Lidando com {}/{} consulta ...</translation>
     </message>

@@ -4,7 +4,7 @@ API_SCIHUB_URL_DEFAULT = 'https://www.sci-hub.se'
 
 API_SCIHUB_URLS_KEY = 'Api/SciHubURLs'
 API_SCIHUB_URLS_DEFAULT = [
-    'https://sci-hub.se',
+    'https://sci-hub.su',
     'https://sci-hub.st',
     'https://sci-hub.ru',
 ]

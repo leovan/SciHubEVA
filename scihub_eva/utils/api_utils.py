@@ -1,5 +1,6 @@
 import re
 import tempfile
+from typing import Any
 
 from pdfminer.pdfdocument import PDFDocument
 from pdfminer.pdfparser import PDFParser
@@ -35,8 +36,10 @@ def gen_range_query_list(raw_query: str) -> list[str]:
     return [raw_query.replace(range_pattern, range_item) for range_item in range_items]
 
 
-def guess_query_type(query: str) -> str:
-    if query.startswith('http') or query.startswith('https'):
+def guess_query_type(query: str | None) -> str:
+    if query is None:
+        query_type = 'string'
+    elif query.startswith('http') or query.startswith('https'):
         if query.endswith('pdf'):
             query_type = 'pdf'
         else:
@@ -51,7 +54,7 @@ def guess_query_type(query: str) -> str:
     return query_type
 
 
-def get_pdf_metadata(pdf) -> dict[str, str]:
+def get_pdf_metadata(pdf) -> dict[str, Any]:
     temp_pdf_file = tempfile.TemporaryFile()
     temp_pdf_file.write(pdf)
     temp_pdf_file.flush()
@@ -83,9 +86,6 @@ def get_pdf_metadata(pdf) -> dict[str, str]:
             metadata['year'] = year
     except Exception:
         pass
-
-    if pdf_parser:
-        pdf_parser.close()
 
     if temp_pdf_file:
         temp_pdf_file.close()

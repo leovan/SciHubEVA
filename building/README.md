@@ -9,8 +9,9 @@
 2. Install requirements.
 
    ```shell
-   pip install -r requirements.txt
-   pip install -r requirements-dev.txt
+   pip install uv
+   uv pip install -r pyproject.toml --system
+   uv pip install -r pyproject.toml --group dev --system
    ```
 
 3. Update the translations.

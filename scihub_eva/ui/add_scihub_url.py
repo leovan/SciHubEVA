@@ -4,8 +4,8 @@ from PySide6.QtCore import QObject, Signal, Slot
 from PySide6.QtGui import QWindow
 from PySide6.QtQml import QQmlApplicationEngine
 
-from scihub_eva.globals.preferences import *
-from scihub_eva.utils.preferences_utils import *
+from scihub_eva.globals.preferences import API_SCIHUB_URLS_DEFAULT, API_SCIHUB_URLS_KEY
+from scihub_eva.utils.preferences_utils import Preferences
 
 
 class UIAddSciHubURL(QObject):
@@ -26,9 +26,9 @@ class UIAddSciHubURL(QObject):
         return cast(QWindow, self._window)
 
     def _connect(self) -> None:
-        self.window.addSciHubURL.connect(self.add_scihub_url)
+        self.window.addSciHubURL.connect(self.add_scihub_url)  # type: ignore
 
-        self.show.connect(self.window.showUIAddSciHubURL)
+        self.show.connect(self.window.showUIAddSciHubURL)  # type: ignore
 
     @Slot(str)
     def add_scihub_url(self, url: str) -> None:

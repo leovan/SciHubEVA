@@ -3,6 +3,7 @@ Write-Output "Building Windows $($arch) target ..."
 
 Write-Output "Installing requirements ..."
 pip install uv
+uv pip install charset-normalizer --no-binary :all: --system
 uv pip install -r pyproject.toml --system
 uv pip install -r pyproject.toml --group dev --system
 

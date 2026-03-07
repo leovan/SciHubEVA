@@ -11,6 +11,9 @@
 
 **Sci-Hub EVA** is a cross-platform [Sci-Hub](https://en.wikipedia.org/wiki/Sci-Hub) GUI application powered by Python and Qt.
 
+> [!TIP]
+> Sci-Hub is protected by DDos-Guard. You need a clean IP to use SciHubEVA or use [FlareSolverr](https://github.com/FlareSolverr/FlareSolverr) to bypass it.
+
 ## Query
 
 ![](docs/images/scihub-eva-application-macos-en.png)
@@ -139,9 +142,6 @@ Sometimes, you may need enter the captcha to continue.
 ### Linux
 
 - Run the [AppImage file](https://github.com/leovan/SciHubEVA/releases). Using [AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher) is recommended.
-
-> [!NOTE]
-> Tested only on Ubuntu 22.04 and Ubuntu 24.04.
 
 ## Building
 

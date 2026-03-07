@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 
-from scihub_eva.globals.versions import *
-from scihub_eva.utils.sys_utils import *
+from scihub_eva.globals.versions import APPLICATION_NAME, ORGANIZATION_DOMAIN
+from scihub_eva.utils.sys_utils import is_linux, is_macos, is_windows
 
 
 def _logs_dir():

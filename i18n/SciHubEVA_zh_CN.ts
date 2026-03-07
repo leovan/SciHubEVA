@@ -251,91 +251,106 @@
 <context>
     <name>SciHubAPI</name>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="255"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="282"/>
         <source>Angel [CAPTCHA] down!</source>
         <translation>使徒 [CAPTCHA] 已消灭！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="264"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="291"/>
         <source>Fetching PDF ...</source>
         <translation>获取 PDF 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="285"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="312"/>
         <source>Angel [CAPTCHA] is coming!</source>
         <translation>使徒 [CAPTCHA] 来袭！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="289"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="316"/>
         <source>Unknown PDF Content-Type!</source>
         <translation>未知的 PDF 数据类型！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="294"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="321"/>
         <source>Failed to get PDF!</source>
         <translation>获取 PDF URL 失败！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="106"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="158"/>
         <source>Using Sci-Hub URL: </source>
         <translation>使用 Sci-Hub URL: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="111"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="163"/>
         <source>Query type: </source>
         <translation>查询类型: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="118"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="170"/>
         <source>Fetching PDF URL ...</source>
         <translation>获取 PDF URL 中 ...</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="132"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="251"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="279"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="190"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="278"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="306"/>
         <source>Error {}</source>
         <translation>错误 {}</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="162"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="147"/>
         <source>Got PDF URL: </source>
         <translation>获取到 PDF URL: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="166"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="171"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="151"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="198"/>
         <source>Failed to get PDF URL!</source>
         <translation>获取 PDF URL 失败！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="134"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="167"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="172"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="252"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="280"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="290"/>
-        <location filename="../scihub_eva/api/scihub_api.py" line="295"/>
-        <source>You may need check it manually.</source>
+        <location filename="../scihub_eva/api/scihub_api.py" line="152"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="192"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="199"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="279"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="307"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="317"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="322"/>
+        <source>You need to check it manually.</source>
         <translation>你可能需要手动处理本次查询。</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="327"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="183"/>
+        <source>Downloading is blocked by DDoS-Guard!</source>
+        <translation>下载已被 DDoS-Guard 阻止！</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="185"/>
+        <source>You need to change a clean IP.</source>
+        <translation>你需要更换一个干净的IP地址。</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="186"/>
+        <source>Or use &lt;a href=&quot;https://github.com/FlareSolverr/FlareSolverr&quot;&gt;FlareSolverr&lt;/a&gt; to bypass it.</source>
+        <translation>或者使用 &lt;a href=&quot;https://github.com/FlareSolverr/FlareSolverr&quot;&gt;FlareSolverr&lt;/a&gt; 来绕过它。</translation>
+    </message>
+    <message>
+        <location filename="../scihub_eva/api/scihub_api.py" line="354"/>
         <source>Unsupported filename keywords: </source>
         <translation>不支持的文件名关键字: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="339"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="366"/>
         <source>Saved PDF as: </source>
         <translation>保存 PDF 为: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="344"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="373"/>
         <source>Dealing with query: </source>
         <translation>正在处理查询: </translation>
     </message>
     <message>
-        <location filename="../scihub_eva/api/scihub_api.py" line="366"/>
+        <location filename="../scihub_eva/api/scihub_api.py" line="395"/>
         <source>Wrong captcha, failed to kill Angel [CAPTCHA]!</source>
         <translation>验证码错误，使徒 [CAPTCHA] 消灭失败！</translation>
     </message>
@@ -424,12 +439,12 @@
 <context>
     <name>UISciHubEVA</name>
     <message>
-        <location filename="../scihub_eva/ui/scihub_eva.py" line="138"/>
+        <location filename="../scihub_eva/ui/main.py" line="160"/>
         <source>Query list file is not a text file!</source>
         <translation>查询列表文件不是一个文本文件！</translation>
     </message>
     <message>
-        <location filename="../scihub_eva/ui/scihub_eva.py" line="150"/>
+        <location filename="../scihub_eva/ui/main.py" line="172"/>
         <source>Dealing with {}/{} query ...</source>
         <translation>正在处理 {}/{} 查询 ...</translation>
     </message>

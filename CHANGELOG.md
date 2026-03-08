@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.5.1](https://github.com/leovan/SciHubEVA/compare/v6.5.0...v6.5.1) (2026-03-08)
+
+### Bug Fixes
+
+- Fix preference reading bug on Windows.
+
 ## [6.5.0](https://github.com/leovan/SciHubEVA/compare/v6.4.1...v6.5.0) (2026-03-07)
 
 ### Features

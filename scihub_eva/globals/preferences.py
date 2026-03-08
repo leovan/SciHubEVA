@@ -16,7 +16,7 @@ API_PDF_XPATHS_DEFAULT = [
     '//embed[@id="pdf"]',
 ]
 
-API_CAPTCHA_ID_XPATHS_KEY = 'Api/CaptchaIdXPath'
+API_CAPTCHA_ID_XPATHS_KEY = 'Api/CaptchaIdXPaths'
 API_CAPTCHA_ID_XPATHS_DEFAULT = [
     '//input[@name="id"]',
 ]

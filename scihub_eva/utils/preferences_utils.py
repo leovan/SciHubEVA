@@ -39,6 +39,9 @@ class Preferences(object):
     def get_or_default(
         cls, key: str, default: Any, value_type: type | None = None
     ) -> Any:
+        if default is not None and value_type is None:
+            value_type = type(default)
+
         if value_type is None:
             return cls.SETTINGS.value(key, default)
         else:
